@@ -43,3 +43,5 @@ next-env.d.ts
 
 # Assets de origem (não vão pro repo público — você baixa do Drive se precisar)
 _assets-drive/
+
+.vercel

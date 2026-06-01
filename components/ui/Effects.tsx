@@ -83,11 +83,14 @@ export function GlitchText({
     return () => cancelAnimationFrame(raf);
   }, [inView, started, trigger, text, duration, delay]);
 
-  // @ts-expect-error dynamic tag
+  // Wrap externo carrega o ref (genérico HTMLSpanElement). Tag interno
+  // só renderiza o conteúdo. Evita problema de typing genérico do React.
   return (
-    <Tag ref={ref} className={className} aria-label={text}>
-      {display}
-    </Tag>
+    <span ref={ref} className="contents">
+      <Tag className={className} aria-label={text}>
+        {display}
+      </Tag>
+    </span>
   );
 }
 
