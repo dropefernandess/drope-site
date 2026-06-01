@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   THEME TOKENS — dual-mode (light cream / dark ink), clean agency
+   Sem grain noise, sem editorial flourish. Tipografia trabalha
+   em pesos próximos (Medium 500 ↔ SemiBold 600).
+   ============================================================ */
+:root {
+  /* — Light mode (default, paper-feel SEM grain) — */
+  --bg:           242 242 235;
+  --bg-soft:      255 255 255;
+  --surface:      16 16 16;
+  --surface-a:    0.04;
+  --surface-b:    0.07;
+  --border:       16 16 16;
+  --border-a:     0.10;
+
+  --fg-strong:    16 16 16;
+  --fg-body:      16 16 16;
+  --fg-body-a:    0.78;
+  --fg-mute:      16 16 16;
+  --fg-mute-a:    0.60;
+  --fg-faint:     16 16 16;
+  --fg-faint-a:   0.42;
+
+  --brand:        222 40 40;
+  --brand-fg:     242 242 235;
+
+  --status:       58 142 78;
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg:           16 16 16;
+  --bg-soft:      10 10 10;
+  --surface:      255 255 255;
+  --surface-a:    0.04;
+  --surface-b:    0.07;
+  --border:       255 255 255;
+  --border-a:     0.10;
+
+  --fg-strong:    242 242 235;
+  --fg-body:      255 255 255;
+  --fg-body-a:    0.74;
+  --fg-mute:      255 255 255;
+  --fg-mute-a:    0.58;
+  --fg-faint:     255 255 255;
+  --fg-faint-a:   0.40;
+
+  --brand:        222 40 40;
+  --brand-fg:     242 242 235;
+
+  --status:       134 239 172;
+
+  color-scheme: dark;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-bg text-fg-strong font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgb(var(--brand));
+    color: rgb(var(--brand-fg));
+  }
+}
+
+@layer components {
+  /* ---- Tipografia clean agency (pesos próximos 500/600) ---- */
+
+  .text-display {
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+  }
+  .text-h-1 {
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+  }
+  .text-h-2 {
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+  }
+  .text-h-3 {
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    font-size: 1.125rem;
+  }
+  .text-lead {
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-weight: 400;
+    color: rgb(var(--fg-body) / var(--fg-body-a));
+  }
+  .text-body {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    font-weight: 400;
+    color: rgb(var(--fg-body) / var(--fg-body-a));
+  }
+  .text-body-sm {
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    font-weight: 400;
+    color: rgb(var(--fg-mute) / var(--fg-mute-a));
+  }
+
+  /* Label tipo "01 ── Introducing Drope" (MakeBuild-style) */
+  .label-mono {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgb(var(--fg-mute) / var(--fg-mute-a));
+  }
+
+  /* Section padding (mantido) */
+  .section-padding {
+    @apply px-6 py-24 md:px-12 md:py-32;
+  }
+  .section-padding-tight {
+    @apply px-6 py-16 md:px-12;
+  }
+}
+
+/* ============================================================
+   ANIMATIONS — sweep, marquee, blur reveal
+   ============================================================ */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Blur reveal helper — usado com Framer Motion onScroll */
+.blur-reveal-init {
+  filter: blur(12px);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
