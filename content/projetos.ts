@@ -30,7 +30,7 @@ export type CaseSection = {
   title?: string;         // título da seção
   body: string;           // parágrafo (pode ter \n\n pra quebras)
   image?: {
-    src: string;          // ex: /projetos/bada-bing/03.jpg
+    src: string;          // ex: /projetos/bada-bing/03.png
     alt: string;
     aspect?: "video" | "square" | "portrait" | "wide";
   };
@@ -110,11 +110,11 @@ export const projetos: Projeto[] = [
         { value: "72h", label: "Tempo de fermentação valorizado em copy" },
       ],
       gallery: [
-        { src: "/projetos/bada-bing/01.jpg", alt: "Logo principal Bada Bing", aspect: "square" },
-        { src: "/projetos/bada-bing/02.jpg", alt: "Aplicação em cardápio", aspect: "portrait" },
-        { src: "/projetos/bada-bing/03.jpg", alt: "Sistema de cores e tipografia", aspect: "wide" },
-        { src: "/projetos/bada-bing/04.jpg", alt: "Home do e-commerce", aspect: "video" },
-        { src: "/projetos/bada-bing/05.jpg", alt: "Página de produto", aspect: "video" },
+        { src: "/projetos/bada-bing/01.png", alt: "Logo principal Bada Bing", aspect: "square" },
+        { src: "/projetos/bada-bing/02.png", alt: "Aplicação em cardápio", aspect: "portrait" },
+        { src: "/projetos/bada-bing/03.png", alt: "Sistema de cores e tipografia", aspect: "wide" },
+        { src: "/projetos/bada-bing/04.png", alt: "Home do e-commerce", aspect: "video" },
+        { src: "/projetos/bada-bing/05.png", alt: "Página de produto", aspect: "video" },
       ],
       sections: [
         {
@@ -127,7 +127,7 @@ export const projetos: Projeto[] = [
           title: "Do estudo de tipografia romana ao e-commerce com copy de menu autoral.",
           body: "Comecei pela pesquisa: estudei tipografia tradicional italiana, vi como pizzarias premium em Milão e Nápoles posicionam o ofício, e mapeei o que faltava no mercado de Dubai. A direção visual nasceu daí: uma identidade que respira tradição mas usa códigos visuais contemporâneos.\n\nA copy foi co-construída comigo escrevendo cada descrição de pizza como pequeno texto autoral — não lista de ingredientes, mas micro-narrativa que valoriza o processo.",
           image: {
-            src: "/projetos/bada-bing/06.jpg",
+            src: "/projetos/bada-bing/06.png",
             alt: "Aplicação da identidade em embalagens",
             aspect: "wide",
           },
@@ -137,7 +137,7 @@ export const projetos: Projeto[] = [
           title: "Marca consistente do digital ao impresso, com tráfego dobrado em 30 dias.",
           body: "O e-commerce foi lançado com cardápio em duas línguas, sistema de pedidos via WhatsApp integrado, e estética alinhada ao físico do restaurante. No primeiro mês de operação, o tráfego cresceu 128% e a Bada Bing entrou na lista do TimeOut Dubai entre as melhores pizzarias da cidade.",
           image: {
-            src: "/projetos/bada-bing/07.jpg",
+            src: "/projetos/bada-bing/07.png",
             alt: "Identidade aplicada em uniformes e ambiente",
             aspect: "wide",
           },
@@ -178,11 +178,11 @@ export const projetos: Projeto[] = [
         { value: "3", label: "Coleções lançadas com o novo sistema" },
       ],
       gallery: [
-        { src: "/projetos/use-duali/01.jpg", alt: "Logo e wordmark", aspect: "square" },
-        { src: "/projetos/use-duali/02.jpg", alt: "Paleta dual cool/warm", aspect: "wide" },
-        { src: "/projetos/use-duali/03.jpg", alt: "Aplicação em embalagens", aspect: "portrait" },
-        { src: "/projetos/use-duali/04.jpg", alt: "Campanha lookbook", aspect: "video" },
-        { src: "/projetos/use-duali/05.jpg", alt: "Sistema tipográfico aplicado", aspect: "wide" },
+        { src: "/projetos/use-duali/01.png", alt: "Logo e wordmark", aspect: "square" },
+        { src: "/projetos/use-duali/02.png", alt: "Paleta dual cool/warm", aspect: "wide" },
+        { src: "/projetos/use-duali/03.png", alt: "Aplicação em embalagens", aspect: "portrait" },
+        { src: "/projetos/use-duali/04.png", alt: "Campanha lookbook", aspect: "video" },
+        { src: "/projetos/use-duali/05.png", alt: "Sistema tipográfico aplicado", aspect: "wide" },
       ],
       sections: [
         {
@@ -195,7 +195,7 @@ export const projetos: Projeto[] = [
           title: "Sistema visual com duas temperaturas que coexistem no mesmo frame.",
           body: "Construí uma paleta com dois conjuntos (cool e warm) que podem ser usados isoladamente ou combinados em gradientes suaves. A tipografia usa duas famílias — uma com mais peso e geometria (pra contexto fitness), outra com curvas mais orgânicas (pra contexto íntimo) — que dialogam em hierarquias específicas.",
           image: {
-            src: "/projetos/use-duali/06.jpg",
+            src: "/projetos/use-duali/06.png",
             alt: "Estudo de paletas dual",
             aspect: "wide",
           },
@@ -240,10 +240,10 @@ export const projetos: Projeto[] = [
         { value: "100%", label: "Aplicações em embalagem recicláveis" },
       ],
       gallery: [
-        { src: "/projetos/myko/01.jpg", alt: "Logo MYKO principal", aspect: "square" },
-        { src: "/projetos/myko/02.jpg", alt: "Paleta azul Egeu", aspect: "wide" },
-        { src: "/projetos/myko/03.jpg", alt: "Aplicação em sacola de tecido", aspect: "portrait" },
-        { src: "/projetos/myko/04.jpg", alt: "Etiqueta de peça", aspect: "square" },
+        { src: "/projetos/myko/01.png", alt: "Logo MYKO principal", aspect: "square" },
+        { src: "/projetos/myko/02.png", alt: "Paleta azul Egeu", aspect: "wide" },
+        { src: "/projetos/myko/03.png", alt: "Aplicação em sacola de tecido", aspect: "portrait" },
+        { src: "/projetos/myko/04.png", alt: "Etiqueta de peça", aspect: "square" },
       ],
       sections: [
         {
@@ -256,7 +256,7 @@ export const projetos: Projeto[] = [
           title: "Mediterrâneo como referência, não como tema.",
           body: "Em vez de usar elementos óbvios (ondas, conchas, sol), trabalhei com a sensação do mar Egeu: azuis profundos, brancos calcários, tipografia inspirada em sinalização grega. A marca evoca o lugar sem ser literal.",
           image: {
-            src: "/projetos/myko/05.jpg",
+            src: "/projetos/myko/05.png",
             alt: "Aplicação em cartão",
             aspect: "wide",
           },
@@ -364,11 +364,11 @@ export const projetos: Projeto[] = [
         { value: "+45%", label: "Novos contratos no trimestre pós-rebrand" },
       ],
       gallery: [
-        { src: "/projetos/sirius/01.jpg", alt: "Logo principal Sirius", aspect: "square" },
-        { src: "/projetos/sirius/02.jpg", alt: "Sistema tipográfico", aspect: "wide" },
-        { src: "/projetos/sirius/03.jpg", alt: "Aplicação em fachada", aspect: "video" },
-        { src: "/projetos/sirius/04.jpg", alt: "Frames do motion reveal", aspect: "wide" },
-        { src: "/projetos/sirius/05.jpg", alt: "Templates editoriais", aspect: "portrait" },
+        { src: "/projetos/sirius/01.png", alt: "Logo principal Sirius", aspect: "square" },
+        { src: "/projetos/sirius/02.png", alt: "Sistema tipográfico", aspect: "wide" },
+        { src: "/projetos/sirius/03.png", alt: "Aplicação em fachada", aspect: "video" },
+        { src: "/projetos/sirius/04.png", alt: "Frames do motion reveal", aspect: "wide" },
+        { src: "/projetos/sirius/05.png", alt: "Templates editoriais", aspect: "portrait" },
       ],
       sections: [
         {
@@ -381,7 +381,7 @@ export const projetos: Projeto[] = [
           title: "Evolução visual ancorada no significado do nome.",
           body: "Sirius é a estrela mais brilhante do céu noturno. Usei essa referência pra construir um sistema visual que respira leveza e ambição: tipografia editorial com peso variável, símbolo geométrico minimalista, paleta com 1 accent intenso.\n\nO motion brand reveal sintetiza a transição: do ponto brilhante até o nome completo, em 3 segundos.",
           image: {
-            src: "/projetos/sirius/06.jpg",
+            src: "/projetos/sirius/06.png",
             alt: "Aplicação em materiais impressos",
             aspect: "wide",
           },
@@ -490,10 +490,10 @@ export const projetos: Projeto[] = [
         { value: "iOS+Android", label: "Design unificado nas duas plataformas" },
       ],
       gallery: [
-        { src: "/projetos/financas-ja/01.jpg", alt: "Tela home do app", aspect: "portrait" },
-        { src: "/projetos/financas-ja/02.jpg", alt: "Categorias e tags", aspect: "portrait" },
-        { src: "/projetos/financas-ja/03.jpg", alt: "Gráfico mensal", aspect: "portrait" },
-        { src: "/projetos/financas-ja/04.jpg", alt: "Onboarding em 4 telas", aspect: "wide" },
+        { src: "/projetos/financas-ja/01.png", alt: "Tela home do app", aspect: "portrait" },
+        { src: "/projetos/financas-ja/02.png", alt: "Categorias e tags", aspect: "portrait" },
+        { src: "/projetos/financas-ja/03.png", alt: "Gráfico mensal", aspect: "portrait" },
+        { src: "/projetos/financas-ja/04.png", alt: "Onboarding em 4 telas", aspect: "wide" },
       ],
       sections: [
         {
@@ -506,7 +506,7 @@ export const projetos: Projeto[] = [
           title: "Linguagem humana, microcopy auxiliar e onboarding gradual.",
           body: "Substituí termos técnicos por linguagem coloquial (\"gastei\" ao invés de \"débito\", \"sobrou\" ao invés de \"saldo positivo\"). O onboarding foi dividido em quatro telas, cada uma introduzindo uma noção por vez. Adicionei microcopy contextual que aparece quando o usuário hesita.",
           image: {
-            src: "/projetos/financas-ja/05.jpg",
+            src: "/projetos/financas-ja/05.png",
             alt: "Microcopy contextual em tooltip",
             aspect: "wide",
           },
@@ -615,10 +615,10 @@ export const projetos: Projeto[] = [
         { value: "MG", label: "Senador Firmino, interior de Minas" },
       ],
       gallery: [
-        { src: "/projetos/bosque-do-sol/01.jpg", alt: "Logo Bosque do Sol", aspect: "square" },
-        { src: "/projetos/bosque-do-sol/02.jpg", alt: "Sistema de cores naturais", aspect: "wide" },
-        { src: "/projetos/bosque-do-sol/03.jpg", alt: "Sinalização no terreno", aspect: "video" },
-        { src: "/projetos/bosque-do-sol/04.jpg", alt: "Material impresso de venda", aspect: "portrait" },
+        { src: "/projetos/bosque-do-sol/01.png", alt: "Logo Bosque do Sol", aspect: "square" },
+        { src: "/projetos/bosque-do-sol/02.png", alt: "Sistema de cores naturais", aspect: "wide" },
+        { src: "/projetos/bosque-do-sol/03.png", alt: "Sinalização no terreno", aspect: "video" },
+        { src: "/projetos/bosque-do-sol/04.png", alt: "Material impresso de venda", aspect: "portrait" },
       ],
       sections: [
         {
@@ -631,7 +631,7 @@ export const projetos: Projeto[] = [
           title: "Estudo de paisagem local e referências de identidades agrícolas modernas.",
           body: "Passei tempo estudando a paisagem real do terreno: as cores que aparecem ao amanhecer, a vegetação típica, os materiais de construção da região. A paleta nasceu daí — tons quentes derivados de terra batida, dourado de fim de tarde, verde profundo de mata.\n\nA tipografia mistura uma família com peso (pro logotipo) com uma família mais leve (pro corpo), criando hierarquia clara sem perder caráter.",
           image: {
-            src: "/projetos/bosque-do-sol/05.jpg",
+            src: "/projetos/bosque-do-sol/05.png",
             alt: "Aplicação em totem físico",
             aspect: "wide",
           },
@@ -739,10 +739,10 @@ export const projetos: Projeto[] = [
         { value: "MG", label: "Atende todo Brasil, sede em Minas" },
       ],
       gallery: [
-        { src: "/projetos/gisto-xavier/01.jpg", alt: "Logo principal", aspect: "square" },
-        { src: "/projetos/gisto-xavier/02.jpg", alt: "Sistema tipográfico", aspect: "wide" },
-        { src: "/projetos/gisto-xavier/03.jpg", alt: "Cartão de visita", aspect: "portrait" },
-        { src: "/projetos/gisto-xavier/04.jpg", alt: "Templates de processos", aspect: "video" },
+        { src: "/projetos/gisto-xavier/01.png", alt: "Logo principal", aspect: "square" },
+        { src: "/projetos/gisto-xavier/02.png", alt: "Sistema tipográfico", aspect: "wide" },
+        { src: "/projetos/gisto-xavier/03.png", alt: "Cartão de visita", aspect: "portrait" },
+        { src: "/projetos/gisto-xavier/04.png", alt: "Templates de processos", aspect: "video" },
       ],
       sections: [
         {
@@ -755,7 +755,7 @@ export const projetos: Projeto[] = [
           title: "Tipografia editorial robusta + paleta sóbria com 1 accent vivo.",
           body: "Construí a identidade em torno de tipografia editorial firme (com peso variável pra hierarquia), paleta sóbria de cinza-grafite + branco, com um accent vermelho-vinho que aparece em momentos específicos pra criar pontuação visual. O sistema é severo o suficiente pra parecer jurídico, com personalidade suficiente pra não passar despercebido.",
           image: {
-            src: "/projetos/gisto-xavier/05.jpg",
+            src: "/projetos/gisto-xavier/05.png",
             alt: "Material processual aplicado",
             aspect: "wide",
           },
