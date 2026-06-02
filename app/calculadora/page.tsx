@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 
 type Servico = { id: string; label: string; price: number; desc: string };
 const SERVICOS: Servico[] = [
-  { id: "branding",  label: "Brand system",  price: 4900, desc: "Logo, paleta, tipografia, manual." },
+  { id: "branding",  label: "Brand system",  price: 3500, desc: "Logo, paleta, tipografia, manual." },
   { id: "ui",        label: "UI/UX Design",  price: 4100, desc: "Wireframes, protótipo, design final." },
   { id: "web",       label: "Web design",    price: 3400, desc: "Landing ou site institucional." },
   { id: "dev",       label: "Front-end",     price: 3600, desc: "Implementação em Next.js + Tailwind." },

@@ -38,7 +38,7 @@ export function CTA() {
           />
 
           {/* Conteúdo */}
-          <div className="relative p-8 md:p-16 lg:p-20 grid gap-12 lg:grid-cols-12 items-end min-h-[560px] md:min-h-[640px]">
+          <div className="relative p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 grid gap-8 md:gap-12 lg:grid-cols-12 items-end min-h-[520px] md:min-h-[640px]">
 
             <div className="lg:col-span-7 flex flex-col gap-6 justify-end">
               <Reveal delay={0.05} className="inline-flex items-center gap-2 self-start rounded-pill bg-ink-50/15 backdrop-blur border border-ink-50/20 px-3.5 py-1.5">
@@ -48,11 +48,11 @@ export function CTA() {
                 </span>
               </Reveal>
 
-              <h2 className="text-[clamp(2.25rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.025em] text-ink-50 text-balance">
+              <h2 className="text-[clamp(1.875rem,5vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.025em] text-ink-50 text-balance">
                 Vamos construir algo do seu jeito?
               </h2>
 
-              <Reveal delay={0.25} className="text-lg leading-relaxed text-ink-50/85 max-w-prose">
+              <Reveal delay={0.25} className="text-base md:text-lg leading-relaxed text-ink-50/85 max-w-prose">
                 Conta o que você precisa: identidade, site, motion, ou os três.
                 Volto em até 24h com perguntas. Sem chatbot, sem formulário
                 burocrático.
@@ -60,11 +60,11 @@ export function CTA() {
 
               <Reveal delay={0.35} className="flex flex-wrap items-center gap-3 pt-3">
                 <Link
-                  href="mailto:contato@dropefernandes.com?subject=Novo%20projeto"
-                  className="group inline-flex items-center gap-2 rounded-pill bg-ink-50 px-6 py-3.5 text-sm font-semibold text-ink-900 hover:bg-bg transition shadow-lg"
+                  href="/agendar"
+                  className="group inline-flex items-center gap-2 rounded-pill bg-ink-50 px-5 sm:px-6 py-3.5 text-sm font-semibold text-ink-900 hover:bg-bg transition shadow-lg"
                 >
                   <Mail className="size-4" strokeWidth={2.5} />
-                  contato@dropefernandes.com
+                  <span className="truncate max-w-[200px] sm:max-w-none">contato@dropefernandes.com</span>
                   <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
                 </Link>
                 <Link

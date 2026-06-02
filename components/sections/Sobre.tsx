@@ -27,7 +27,7 @@ export function Sobre() {
                 <span>Quem é o Drope</span>
               </p>
               <h2 className="text-h-1 text-fg-strong text-balance">
-                Designer multidisciplinar com time pontual de confiança.
+                Por trás de cada projeto.
               </h2>
             </div>
             <p className="lg:col-span-5 text-body max-w-prose">
@@ -65,7 +65,7 @@ export function Sobre() {
             </div>
             <div className="absolute bottom-5 left-5 right-5">
               <p className="text-ink-50 text-xl md:text-2xl font-semibold leading-tight text-balance max-w-md">
-                Drope é como me chamam. Designer multidisciplinar desde 2018.
+                Drope é como me chamam. Trabalho com design desde 2018.
               </p>
             </div>
           </Reveal>
@@ -75,9 +75,9 @@ export function Sobre() {
             <p className="label-mono">MANIFESTO</p>
             <p className="text-base md:text-lg leading-snug text-fg-strong max-w-prose">
               Pego o briefing, projeto a marca, monto o site, escrevo a
-              copy e faço o motion. Tudo na mesma cabeça.{" "}
+              copy e cuido do motion da launch.{" "}
               <span className="text-fg-mute">
-                Sim, dá trabalho. Mas é como eu gosto.
+                Cada detalhe pensado com a marca.
               </span>
             </p>
           </Reveal>

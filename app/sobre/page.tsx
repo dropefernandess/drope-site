@@ -27,7 +27,7 @@ const skillGroups = [
 
 const timeline = [
   { ano: "2018", evento: "Primeira identidade visual paga", ctx: "Sirius Agência" },
-  { ano: "2020", evento: "Decisão de virar solo full-time",  ctx: "Saí do estúdio onde trabalhava" },
+  { ano: "2020", evento: "Dedicação full-time a projetos próprios", ctx: "Saí do estúdio onde trabalhava" },
   { ano: "2022", evento: "Primeiro projeto fora do Brasil",  ctx: "Bada Bing — Dubai" },
   { ano: "2024", evento: "Atendimento internacional remoto", ctx: "Senador Firmino, MG · Hoje" },
 ];
@@ -117,7 +117,7 @@ export default function SobrePage() {
             <p>
               A vida toda gostei de duas coisas. Construir e contar histórias.
               Comecei a desenhar marca pra banda do colégio em 2018 e nunca
-              mais parei. Hoje atuo solo: pego o briefing, projeto a identidade,
+              mais parei. Pego o briefing, projeto a identidade,
               monto o site, escrevo a copy, faço o motion da launch.
             </p>
             <p>

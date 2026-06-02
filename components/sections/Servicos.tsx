@@ -101,14 +101,13 @@ export function Servicos() {
                 <span>O que entrego</span>
               </p>
               <h2 className="text-h-1 text-fg-strong text-balance">
-                Cinco frentes. Uma cabeça só do briefing ao último pixel.
+                Cinco frentes de criação. Da estratégia ao último pixel.
               </h2>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-4 items-start">
               <p className="text-body max-w-prose">
-                Conduzo cada etapa pessoalmente. Quando o projeto pede,
-                conto com parceiros de confiança em frentes específicas,
-                sempre com transparência total.
+                Da primeira conversa à entrega final, cada etapa do projeto
+                é conduzida com transparência sobre escopo, prazo e processo.
               </p>
               <Link
                 href="/proposta"

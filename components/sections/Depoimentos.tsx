@@ -32,7 +32,7 @@ const testimonials: { quote: string; name: string; role: string; company: string
     tone: "cream",
   },
   {
-    quote: "Identidade, site e motion na mesma cabeça mudou nosso ritmo. Sem ping-pong entre fornecedores.",
+    quote: "Identidade, site e motion conduzidos com a mesma direção mudaram nosso ritmo. Sem ping-pong entre fornecedores.",
     name: "Renata C.",
     role: "Head of Design",
     company: "GO Trace",
@@ -158,8 +158,8 @@ export function Depoimentos() {
 
       {/* MARQUEE ROW A — esquerda → direita */}
       <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-64 md:w-80 lg:w-96 bg-gradient-to-r from-bg from-30% via-bg/60 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-64 md:w-80 lg:w-96 bg-gradient-to-l from-bg from-30% via-bg/60 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 sm:w-32 md:w-64 lg:w-96 bg-gradient-to-r from-bg via-bg/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 sm:w-32 md:w-64 lg:w-96 bg-gradient-to-l from-bg via-bg/70 to-transparent" />
         <div className="marquee-track">
           {rowA.map((t, i) => <Card key={`a-${i}`} t={t} />)}
         </div>
@@ -167,8 +167,8 @@ export function Depoimentos() {
 
       {/* MARQUEE ROW B — direção oposta (reverse) */}
       <div className="relative overflow-hidden mt-4">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-64 md:w-80 lg:w-96 bg-gradient-to-r from-bg from-30% via-bg/60 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-64 md:w-80 lg:w-96 bg-gradient-to-l from-bg from-30% via-bg/60 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 sm:w-32 md:w-64 lg:w-96 bg-gradient-to-r from-bg via-bg/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 sm:w-32 md:w-64 lg:w-96 bg-gradient-to-l from-bg via-bg/70 to-transparent" />
         <div className="marquee-track" style={{ animationDirection: "reverse", animationDuration: "60s" }}>
           {rowB.map((t, i) => <Card key={`b-${i}`} t={t} />)}
         </div>

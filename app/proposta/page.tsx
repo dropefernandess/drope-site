@@ -75,7 +75,7 @@ const planos = [
   {
     label: "Lean",
     sub: "Essencial bem-feito",
-    price: "a partir de R$ 4.9K",
+    price: "a partir de R$ 3.5K",
     desc: "Pra quem tá começando e precisa estruturar o essencial sem sacrificar qualidade.",
     items: ["1 serviço principal", "1 rodada de revisão", "Entrega em 2–3 semanas", "Suporte por 15 dias"],
     cta: "Quero o Lean",

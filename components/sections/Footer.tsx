@@ -54,20 +54,13 @@ export function Footer() {
 
         {/* Brand block */}
         <Reveal className="md:col-span-4 flex flex-col gap-5">
-          <Link href="/" aria-label="Dropê — home" className="flex items-center gap-3">
-            <Image
-              src="/brand/icone-dark.svg"
-              alt="Dropê"
-              width={40}
-              height={40}
-              className="size-10"
-            />
+          <Link href="/" aria-label="Dropê — home" className="inline-flex">
             <Image
               src="/brand/drope-dark.svg"
               alt="Dropê"
-              width={120}
-              height={42}
-              className="h-9 w-auto"
+              width={160}
+              height={56}
+              className="h-12 w-auto"
             />
           </Link>
           <p className="text-sm text-bg/70 max-w-xs leading-relaxed">

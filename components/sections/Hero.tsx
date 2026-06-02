@@ -36,7 +36,7 @@ export function Hero() {
         <Reveal className="flex items-center justify-between gap-4 flex-wrap" delay={0.05}>
           <p className="label-mono flex items-center gap-2">
             <span className="size-1 rounded-full bg-brand" />
-            Pedro Fernandes · Designer desde 2018
+            Pedro Fernandes · Designer multidisciplinar
           </p>
           <div className="flex items-center gap-2 flex-wrap">
             <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3 py-1.5 text-xs font-medium text-fg-strong">
@@ -69,11 +69,10 @@ export function Hero() {
                 duration={900}
                 delay={400}
               />
-              . Atuo entre identidade visual, interface, motion e código,
-              do briefing à launch. Quando o projeto pede mais profundidade em
-              alguma frente, conto com{" "}
-              <span className="text-fg-strong">parceiros de confiança</span>{" "}
-              em motion e dev pra fechar o time.
+              . Atuo entre identidade visual, interface, motion e código.
+              Do briefing à launch, com{" "}
+              <span className="text-fg-strong">cuidado em cada detalhe</span>{" "}
+              e processo claro do começo ao fim.
             </Reveal>
 
             <Reveal delay={0.4} className="flex flex-wrap items-center gap-3">

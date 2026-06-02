@@ -49,7 +49,7 @@ export function Projetos() {
                 <span>Trabalhos selecionados</span>
               </p>
               <h2 className="text-h-1 text-fg-strong text-balance">
-                Onze projetos. Cada um pensado do briefing à entrega final.
+                Cada projeto pensado do briefing à entrega final.
               </h2>
             </div>
             <p className="lg:col-span-5 text-body max-w-prose">
@@ -166,7 +166,7 @@ export function Projetos() {
               className="group inline-flex items-center gap-2 rounded-pill border border-line bg-bg px-6 py-3.5 text-sm font-semibold text-fg-strong hover:bg-surface transition"
             >
               <Plus className="size-4 transition group-hover:rotate-90" strokeWidth={2.5} />
-              Ver os outros {filtered.length - visible.length}
+              Ver mais
             </button>
           </Reveal>
         )}

@@ -21,7 +21,7 @@ const items = [
   {
     cat: "Equipe",
     q: "Você trabalha sozinho mesmo?",
-    a: "Conduzo cada projeto pessoalmente do briefing ao deploy. Quando o escopo pede mais profundidade em frentes específicas (motion complexo, dev avançado, fotografia, produção), trago parceiros de confiança com transparência total sobre quem está envolvido. Você sempre fala com a mesma cabeça responsável pelo projeto.",
+    a: "Conduzo cada projeto pessoalmente do briefing ao deploy. Quando o escopo pede profundidade em frentes específicas (motion complexo, dev avançado, fotografia, produção), trago parceiros de confiança com transparência total. Você sempre tem uma referência clara sobre quem está responsável por cada etapa.",
   },
   {
     cat: "Investimento",
