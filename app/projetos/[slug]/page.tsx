@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { ArrowUpRight, ArrowLeft, ExternalLink } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
+import { CaseImage } from "@/components/projetos/CaseImage";
 import { getProjeto, projetos, categorias } from "@/content/projetos";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -173,7 +174,6 @@ export default async function CaseStudyPage({ params }: Props) {
       <Container as="section" className="mt-20 md:mt-28">
         <Reveal className="grid gap-3 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)]">
           {c.gallery.map((img, i) => {
-            // Distribui spans alternados: 1ª img 4, 2ª img 2; depois 3 + 3; etc
             const colSpan = [
               "md:col-span-4",
               "md:col-span-2",
@@ -188,13 +188,12 @@ export default async function CaseStudyPage({ params }: Props) {
                 key={i}
                 className={`relative ${colSpan} ${aspect} overflow-hidden rounded-section bg-surface`}
               >
-                <Image
+                <CaseImage
                   src={img.src}
                   alt={img.alt}
-                  fill
-                  quality={90}
+                  index={i}
+                  total={c.gallery.length}
                   sizes="(min-width:768px) 50vw, 100vw"
-                  className="object-cover"
                 />
               </div>
             );
@@ -227,13 +226,10 @@ export default async function CaseStudyPage({ params }: Props) {
                 </p>
                 {section.image && (
                   <div className={`relative ${section.image.aspect ? aspectClasses[section.image.aspect] : "aspect-video"} w-full overflow-hidden rounded-section bg-surface mt-3`}>
-                    <Image
+                    <CaseImage
                       src={section.image.src}
                       alt={section.image.alt}
-                      fill
-                      quality={90}
                       sizes="(min-width:1024px) 60vw, 100vw"
-                      className="object-cover"
                     />
                   </div>
                 )}

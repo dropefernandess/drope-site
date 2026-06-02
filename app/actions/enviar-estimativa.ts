@@ -110,7 +110,7 @@ export async function enviarEstimativa(
 
   try {
     const { data, error } = await resend.emails.send({
-      from: `Calculadora Dropê <onboarding@resend.dev>`, // ⚠ trocar pra noreply@dropefernandes.com após verificar domínio
+      from: `Calculadora Dropê <noreply@dropefernandes.com>`, // domínio verificado no Resend
       to: [SITE.contactEmail],
       replyTo: payload.email,
       subject: `Nova estimativa — ${payload.nome} (${fmtMoeda(payload.faixaMin)}–${fmtMoeda(payload.faixaMax)})`,

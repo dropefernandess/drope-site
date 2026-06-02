@@ -7,7 +7,7 @@ export const SITE = {
   contactEmail: "contato@dropefernandes.com",
 
   /** WhatsApp em formato internacional (55 + DDD + número), sem espaços */
-  whatsapp: "5532999999999", // ⚠ TROCAR pelo número real do Drope
+  whatsapp: "5532998057750",
 
   /** Cal.com handle pra agendamento */
   calLink: "drope/30min",
