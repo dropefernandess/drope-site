@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/`,            lastModified, changeFrequency: "monthly", priority: 1.0 },
     { url: `${baseUrl}/sobre`,       lastModified, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/projetos`,    lastModified, changeFrequency: "monthly", priority: 0.95 },
     { url: `${baseUrl}/proposta`,    lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/calculadora`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/agendar`,     lastModified, changeFrequency: "yearly",  priority: 0.7 },

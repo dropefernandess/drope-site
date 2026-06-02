@@ -10,7 +10,7 @@ import { Reveal } from "@/components/ui/Motion";
 const nav = [
   { href: "/",            label: "Início" },
   { href: "/sobre",       label: "Sobre" },
-  { href: "/#projetos",   label: "Trabalhos" },
+  { href: "/projetos",    label: "Trabalhos" },
   { href: "/proposta",    label: "Método" },
   { href: "/calculadora", label: "Calculadora" },
   { href: "/agendar",     label: "Agendar" },

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Plus } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { projetos, categorias, type CategoriaSlug } from "@/content/projetos";
@@ -158,18 +158,16 @@ export function Projetos() {
           </div>
         )}
 
-        {/* Botão Ver mais */}
-        {hasMore && (
-          <Reveal className="flex justify-center pt-4">
-            <button
-              onClick={() => setShowAll(true)}
-              className="group inline-flex items-center gap-2 rounded-pill border border-line bg-bg px-6 py-3.5 text-sm font-semibold text-fg-strong hover:bg-surface transition"
-            >
-              <Plus className="size-4 transition group-hover:rotate-90" strokeWidth={2.5} />
-              Ver mais
-            </button>
-          </Reveal>
-        )}
+        {/* CTA pra portfólio completo */}
+        <Reveal className="flex justify-center pt-4">
+          <Link
+            href="/projetos"
+            className="group inline-flex items-center gap-2 rounded-pill bg-fg-strong px-6 py-3.5 text-sm font-semibold text-bg hover:opacity-90 transition"
+          >
+            Ver portfólio completo
+            <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
+          </Link>
+        </Reveal>
       </Container>
     </section>
   );
