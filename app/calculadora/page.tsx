@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
-import { ArrowUpRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { EstimativaForm } from "@/components/calculadora/EstimativaForm";
 import { cn } from "@/lib/utils";
 
 /**
@@ -206,21 +206,27 @@ export default function CalculadoraPage() {
               </div>
             </div>
 
-            <Link
-              href={
+            <EstimativaForm
+              canSubmit={canCalc}
+              payload={{
+                servicos: servicos.map((id) => SERVICOS.find((s) => s.id === id)?.label ?? "").filter(Boolean),
+                escopo: ESCOPOS.find((e) => e.id === escopo)?.label ?? "",
+                prazo: PRAZOS.find((p) => p.id === prazo)?.label ?? "",
+                addons: addons.map((id) => ADDONS.find((a) => a.id === id)?.label ?? "").filter(Boolean),
+                faixaMin: calc.min,
+                faixaMax: calc.max,
+              }}
+              resumoWhatsapp={
                 canCalc
-                  ? `mailto:contato@dropefernandes.com?subject=${encodeURIComponent("Novo projeto — estimativa via calculadora")}&body=${encodeURIComponent(
-                      `Oi Drope,\n\nFiz uma estimativa no site:\n\n• Serviços: ${servicos.map((id) => SERVICOS.find((s) => s.id === id)?.label).join(", ")}\n• Escopo: ${ESCOPOS.find((e) => e.id === escopo)?.label}\n• Prazo: ${PRAZOS.find((p) => p.id === prazo)?.label}${addons.length ? `\n• Adicionais: ${addons.map((id) => ADDONS.find((a) => a.id === id)?.label).join(", ")}` : ""}\n• Faixa estimada: ${fmt(calc.min)} – ${fmt(calc.max)}\n\nSobre o projeto:\n[descreva aqui]`,
-                    )}`
-                  : "mailto:contato@dropefernandes.com"
+                  ? `Oi Drope! Vim da calculadora do site.\n\n` +
+                    `Serviços: ${servicos.map((id) => SERVICOS.find((s) => s.id === id)?.label).join(", ")}\n` +
+                    `Escopo: ${ESCOPOS.find((e) => e.id === escopo)?.label}\n` +
+                    `Prazo: ${PRAZOS.find((p) => p.id === prazo)?.label}\n` +
+                    (addons.length ? `Adicionais: ${addons.map((id) => ADDONS.find((a) => a.id === id)?.label).join(", ")}\n` : "") +
+                    `\nFaixa estimada: ${fmt(calc.min)} – ${fmt(calc.max)}\n\nQuero conversar sobre o projeto.`
+                  : "Oi Drope! Vim da calculadora do site e quero conversar sobre um projeto."
               }
-              className={cn(
-                "flex w-full items-center justify-center gap-2 rounded-pill px-5 py-4 text-value transition",
-                canCalc ? "bg-ink-50 text-ink-900 hover:bg-white" : "bg-surface-2 text-fg-mute pointer-events-none"
-              )}
-            >
-              Enviar estimativa <ArrowUpRight className="size-4" strokeWidth={2.5} />
-            </Link>
+            />
           </div>
         </aside>
         </div>
