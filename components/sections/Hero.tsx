@@ -112,7 +112,7 @@ export function Hero() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               >
                 <Image
-                  src="/sobre.png"
+                  src="/hero-portrait.jpg"
                   alt="Pedro Fernandes (Drope)"
                   fill
                   sizes="(min-width:1024px) 340px, 80vw"
@@ -120,11 +120,13 @@ export function Hero() {
                   className="object-cover"
                   priority
                 />
+                {/* gradiente sutil pra dar contraste à pill em foto escura */}
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink-900/60 to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
-                  <span className="rounded-pill bg-bg/90 backdrop-blur border border-line px-3 py-1.5 text-xs font-semibold text-fg-strong">
+                  <span className="rounded-pill bg-ink-900/55 backdrop-blur-md border border-ink-50/15 px-3 py-1.5 text-xs font-semibold text-ink-50">
                     Drope · 2026
                   </span>
-                  <span className="inline-flex size-9 items-center justify-center rounded-full bg-brand">
+                  <span className="inline-flex size-9 items-center justify-center rounded-full bg-brand shadow-lg shadow-brand/30">
                     <ArrowUpRight className="size-4 text-brand-fg" strokeWidth={2.5} />
                   </span>
                 </div>

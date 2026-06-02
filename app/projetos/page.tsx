@@ -1,24 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
+import { ProjectCard } from "@/components/projetos/ProjectCard";
 import { projetos, categorias, type CategoriaSlug } from "@/content/projetos";
 import { cn } from "@/lib/utils";
 
 type Filter = "all" | CategoriaSlug;
-
-const catColor: Record<CategoriaSlug, string> = {
-  "branding":      "bg-brand text-brand-fg",
-  "ui-ux-design":  "bg-ink-50 text-ink-900",
-  "web-design":    "bg-brand-coral text-ink-900",
-  "graphic-design":"bg-brand-wine text-ink-50",
-  "motion-design": "bg-ink-700 text-ink-50",
-};
 
 /**
  * /projetos — Index completo de todos os trabalhos.
@@ -42,11 +33,11 @@ export default function ProjetosIndexPage() {
   // Stats agregadas
   const stats = useMemo(() => {
     const total = projetos.length;
-    const anos = new Set(projetos.map((p) => p.year).filter(Boolean)).size;
     const oldest = Math.min(...(projetos.map((p) => p.year).filter(Boolean) as number[]));
+    const anosOficio = new Date().getFullYear() - oldest; // 8+
     return {
       total,
-      anos,
+      anosOficio,
       desde: oldest,
     };
   }, []);
@@ -93,8 +84,10 @@ export default function ProjetosIndexPage() {
               <p className="text-sm text-fg-mute">áreas de criação</p>
             </div>
             <div className="rounded-section bg-brand p-5 md:p-6 flex items-baseline gap-3">
-              <p className="text-4xl md:text-5xl font-semibold tabular-nums text-brand-fg">{stats.desde}</p>
-              <p className="text-sm text-brand-fg/85">primeira marca paga</p>
+              <p className="text-4xl md:text-5xl font-semibold tabular-nums text-brand-fg">
+                {stats.anosOficio}+
+              </p>
+              <p className="text-sm text-brand-fg/85">anos dedicados ao ofício</p>
             </div>
           </Reveal>
         </section>
@@ -118,75 +111,11 @@ export default function ProjetosIndexPage() {
 
         {/* ===== GRID ===== */}
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((p) => {
-            const primaryCat = p.categorias[0];
-            const catLabel = categorias.find((c) => c.slug === primaryCat)?.label;
-            return (
-              <li key={p.slug}>
-                <Link
-                  href={`/projetos/${p.slug}`}
-                  className="group relative block aspect-[4/5] overflow-hidden rounded-section bg-surface"
-                >
-                  <Image
-                    src={p.image}
-                    alt={p.title}
-                    fill
-                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                    quality={90}
-                    className="object-cover transition duration-700 group-hover:scale-105 group-hover:blur-sm"
-                  />
-
-                  {/* Badge categoria */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className={cn(
-                      "inline-block rounded-pill px-3 py-1 text-[11px] font-semibold uppercase tracking-wider",
-                      catColor[primaryCat]
-                    )}>
-                      {catLabel}
-                    </span>
-                  </div>
-
-                  {/* Ano */}
-                  {p.year && (
-                    <span className="absolute top-4 right-4 z-10 rounded-pill bg-ink-900/40 backdrop-blur-sm border border-ink-50/15 px-2.5 py-1 text-[11px] font-medium text-ink-50 tabular-nums">
-                      © {p.year}
-                    </span>
-                  )}
-
-                  {/* Overlay hover */}
-                  <div className="absolute inset-0 flex items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/85 to-transparent" />
-                    <div className="relative p-6 flex flex-col gap-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="text-xl md:text-2xl font-semibold text-ink-50 leading-tight">
-                        {p.title}
-                      </h3>
-                      <p className="text-sm text-ink-50/80 leading-snug line-clamp-3">
-                        {p.description}
-                      </p>
-                      <div className="flex items-center justify-between mt-2">
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink-50">
-                          Ver case completo
-                          <ArrowUpRight className="size-3.5" strokeWidth={2.5} />
-                        </span>
-                        <div className="size-9 rounded-full bg-brand flex items-center justify-center">
-                          <ArrowUpRight className="size-4 text-brand-fg" strokeWidth={2.5} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Pill com título — idle */}
-                  <div className="absolute bottom-4 left-4 right-4 z-[1] opacity-100 group-hover:opacity-0 transition-opacity duration-200">
-                    <div className="inline-block rounded-pill bg-bg/95 backdrop-blur-sm border border-line px-3 py-1.5">
-                      <p className="text-xs font-semibold text-fg-strong">
-                        {p.title}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
+          {filtered.map((p) => (
+            <li key={p.slug}>
+              <ProjectCard project={p} />
+            </li>
+          ))}
         </ul>
 
         {filtered.length === 0 && (

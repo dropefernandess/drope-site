@@ -43,8 +43,8 @@ export function Sobre() {
           {/* FOTO GRANDE — 5 cols × 3 rows */}
           <Reveal delay={0.05} className="lg:col-span-5 lg:row-span-3 relative rounded-section overflow-hidden bg-surface min-h-[420px]">
             <Image
-              src="/sobre.png"
-              alt="Pedro Fernandes (Drope)"
+              src="/sobre-trabalho.png"
+              alt="Pedro Fernandes (Drope) trabalhando no MacBook"
               fill
               sizes="(min-width:1024px) 45vw, 100vw"
               quality={90}
@@ -70,14 +70,13 @@ export function Sobre() {
             </div>
           </Reveal>
 
-          {/* CARD BIO TEXT — 7 cols × 1 row */}
+          {/* CARD BIO TEXT — 7 cols × 1 row (texto mais punchy) */}
           <Reveal delay={0.1} className="lg:col-span-7 lg:row-span-1 rounded-section border border-line bg-bg p-6 md:p-7 flex flex-col gap-3 justify-center">
             <p className="label-mono">MANIFESTO</p>
-            <p className="text-base md:text-lg leading-snug text-fg-strong max-w-prose">
-              Pego o briefing, projeto a marca, monto o site, escrevo a
-              copy e cuido do motion da launch.{" "}
+            <p className="text-lg md:text-xl leading-snug text-fg-strong max-w-prose font-medium">
+              Branding, web, UI e motion.{" "}
               <span className="text-fg-mute">
-                Cada detalhe pensado com a marca.
+                Tudo da mesma cabeça, do briefing à launch.
               </span>
             </p>
           </Reveal>
@@ -117,11 +116,10 @@ export function Sobre() {
             </p>
           </Reveal>
 
-          {/* SPOTIFY — substitui o STATUS, 4 cols × 1 row,
-             tamanho exato pra UM track caber sem cortar */}
-          <Reveal delay={0.3} className="lg:col-span-4 lg:row-span-1 rounded-section border border-line bg-bg p-5 flex flex-col gap-3">
+          {/* SPOTIFY — 4 cols × 1 row, player compacto Spotify */}
+          <Reveal delay={0.3} className="lg:col-span-4 lg:row-span-1 rounded-section border border-line bg-bg p-4 flex flex-col gap-2.5 overflow-hidden">
             <div className="flex items-center justify-between gap-3">
-              <p className="label-mono">OUVINDO AGORA</p>
+              <p className="label-mono">OUVINDO ENQUANTO CRIO</p>
               <span className="inline-flex items-center gap-1.5 rounded-pill bg-[#1ed760]/15 px-2.5 py-1 text-[10px] font-semibold text-[#178a44]">
                 <span className="size-1.5 rounded-full bg-[#1ed760] animate-pulse" />
                 Spotify
@@ -129,7 +127,7 @@ export function Sobre() {
             </div>
             <iframe
               title="Saudade do Mar — Don L"
-              src="https://open.spotify.com/embed/track/74ZZCnIZETJKxU4poj7vtB?utm_source=generator"
+              src="https://open.spotify.com/embed/track/74ZZCnIZETJKxU4poj7vtB?utm_source=generator&theme=0"
               width="100%"
               height="80"
               frameBorder={0}

@@ -52,11 +52,50 @@ const themeScript = `
 })();
 `;
 
+// JSON-LD Person schema — Google enriquece resultados com nome,
+// alternateName (Drope), profissão, sameAs links sociais.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Pedro Fernandes",
+  alternateName: "Drope",
+  url: "https://dropefernandes.com",
+  image: "https://dropefernandes.com/sobre-fullbody.png",
+  jobTitle: "Designer multidisciplinar",
+  description:
+    "Designer multidisciplinar atuando entre identidade visual, interface, motion e código. Atende marcas no Brasil e internacionalmente desde 2018.",
+  email: "contato@dropefernandes.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Senador Firmino",
+    addressRegion: "MG",
+    addressCountry: "BR",
+  },
+  sameAs: [
+    "https://instagram.com/dropefernandes",
+    "https://linkedin.com/in/dropefernandes",
+    "https://behance.net/dropefernandes",
+    "https://dribbble.com/dropefernandes",
+  ],
+  knowsAbout: [
+    "Branding",
+    "Identidade visual",
+    "UI/UX Design",
+    "Web Design",
+    "Motion Design",
+    "Front-end development",
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
       </head>
       <body>
         <ScrollProgressBar />

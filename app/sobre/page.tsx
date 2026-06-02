@@ -86,8 +86,8 @@ export default function SobrePage() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               >
                 <Image
-                  src="/sobre.png"
-                  alt="Pedro Fernandes (Drope)"
+                  src="/sobre-fullbody.png"
+                  alt="Pedro Fernandes (Drope) — retrato editorial"
                   fill
                   priority
                   sizes="(min-width:1024px) 33vw, 100vw"
