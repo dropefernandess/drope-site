@@ -1,0 +1,38 @@
+Copyright (c) 2026 Pedro Fernandes (Drope)
+
+ESTRUTURA DE CÓDIGO (MIT-style)
+================================
+Permission is granted, free of charge, to any person obtaining a copy
+of the SOURCE CODE STRUCTURE of this project, to use, copy, modify, and
+distribute it as a learning reference or starting point for personal or
+commercial projects, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED.
+
+CONTEÚDO, IDENTIDADE E ASSETS (Proprietário, todos os direitos reservados)
+=========================================================================
+Os seguintes elementos NÃO são cobertos pela licença MIT acima e
+permanecem propriedade exclusiva de Pedro Fernandes:
+
+  1. Identidade visual: logo, ícone, paleta de cores aplicada, nome
+     "Dropê" / "Drope Fernandes".
+  2. Conteúdo textual: copy, manifesto, biografia, descrições de
+     projetos, FAQ, depoimentos, posts do blog.
+  3. Imagens de portfólio em public/projetos/* (covers de case studies).
+  4. Foto pessoal em public/sobre.png.
+  5. Logos de clientes em public/logos/* (propriedade dos respectivos
+     clientes, exibidos sob autorização para fins de portfólio).
+
+Reprodução, clonagem ou distribuição desses elementos sem autorização
+prévia por escrito de Pedro Fernandes constitui violação de direitos
+autorais e de marca, sujeita às sanções da Lei nº 9.610/1998 e da Lei
+nº 9.279/1996 (Brasil), além das normas internacionais aplicáveis.
+
+CONTATO
+=======
+Para licenciamento, parcerias ou questões legais:
+contato@dropefernandes.com

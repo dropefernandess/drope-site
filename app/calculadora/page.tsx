@@ -19,12 +19,12 @@ import { cn } from "@/lib/utils";
 
 type Servico = { id: string; label: string; price: number; desc: string };
 const SERVICOS: Servico[] = [
-  { id: "branding",  label: "Brand system",  price: 6500, desc: "Logo, paleta, tipografia, manual." },
-  { id: "ui",        label: "UI/UX Design",  price: 5500, desc: "Wireframes, protótipo, design final." },
-  { id: "web",       label: "Web design",    price: 4500, desc: "Landing ou site institucional." },
-  { id: "dev",       label: "Front-end",     price: 4800, desc: "Implementação em Next.js + Tailwind." },
-  { id: "motion",    label: "Motion design", price: 3200, desc: "Logo reveal, microinterações." },
-  { id: "social",    label: "Social media",  price: 2400, desc: "Kit de templates + 1 mês de posts." },
+  { id: "branding",  label: "Brand system",  price: 4900, desc: "Logo, paleta, tipografia, manual." },
+  { id: "ui",        label: "UI/UX Design",  price: 4100, desc: "Wireframes, protótipo, design final." },
+  { id: "web",       label: "Web design",    price: 3400, desc: "Landing ou site institucional." },
+  { id: "dev",       label: "Front-end",     price: 3600, desc: "Implementação em Next.js + Tailwind." },
+  { id: "motion",    label: "Motion design", price: 2400, desc: "Logo reveal, microinterações." },
+  { id: "social",    label: "Social media",  price: 1800, desc: "Kit de templates + 1 mês de posts." },
 ];
 
 type Escopo = "lean" | "completo" | "premium";
@@ -43,9 +43,9 @@ const PRAZOS: { id: Prazo; label: string; mult: number; desc: string }[] = [
 
 type Addon = { id: string; label: string; price: number };
 const ADDONS: Addon[] = [
-  { id: "copy",      label: "Copywriting estratégico", price: 1200 },
-  { id: "extra-rev", label: "Rodada extra de revisão", price: 600 },
-  { id: "handoff",   label: "Handoff dev completo",    price: 900 },
+  { id: "copy",      label: "Copywriting estratégico", price: 900 },
+  { id: "extra-rev", label: "Rodada extra de revisão", price: 450 },
+  { id: "handoff",   label: "Handoff dev completo",    price: 700 },
 ];
 
 const fmt = (n: number) =>

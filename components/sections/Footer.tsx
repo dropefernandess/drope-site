@@ -8,13 +8,13 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 
 const nav = [
-  { href: "/",            label: "Index" },
+  { href: "/",            label: "Início" },
   { href: "/sobre",       label: "Sobre" },
   { href: "/#projetos",   label: "Trabalhos" },
   { href: "/proposta",    label: "Método" },
   { href: "/calculadora", label: "Calculadora" },
   { href: "/agendar",     label: "Agendar" },
-  { href: "/blog",        label: "Notas" },
+  { href: "/blog",        label: "Blog" },
 ];
 
 const social = [

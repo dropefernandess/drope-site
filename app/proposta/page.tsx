@@ -75,7 +75,7 @@ const planos = [
   {
     label: "Lean",
     sub: "Essencial bem-feito",
-    price: "a partir de R$ 6.5K",
+    price: "a partir de R$ 4.9K",
     desc: "Pra quem tá começando e precisa estruturar o essencial sem sacrificar qualidade.",
     items: ["1 serviço principal", "1 rodada de revisão", "Entrega em 2–3 semanas", "Suporte por 15 dias"],
     cta: "Quero o Lean",
@@ -83,7 +83,7 @@ const planos = [
   {
     label: "Completo",
     sub: "O padrão",
-    price: "a partir de R$ 12K",
+    price: "a partir de R$ 9K",
     desc: "Pacote padrão. Profundidade real, mais iterações, escopo amplo. É o que a maioria escolhe.",
     items: ["Até 3 serviços combinados", "2 rodadas de revisão", "Entrega em 4–6 semanas", "Suporte por 30 dias"],
     cta: "Quero o Completo",
@@ -295,7 +295,7 @@ export default function PropostaPage() {
                   ))}
                 </ul>
                 <Link
-                  href="mailto:contato@dropefernandes.com"
+                  href="/calculadora"
                   className={`mt-auto inline-flex items-center justify-between gap-2 rounded-pill px-5 py-3 text-sm font-semibold transition ${
                     p.featured
                       ? "bg-brand-fg text-brand hover:opacity-90"
@@ -332,10 +332,10 @@ export default function PropostaPage() {
                 <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
               </Link>
               <Link
-                href="mailto:contato@dropefernandes.com"
+                href="/agendar"
                 className="inline-flex items-center justify-between gap-3 rounded-pill border border-bg/20 bg-bg/5 px-5 py-4 text-sm font-semibold text-bg hover:bg-bg/15 transition"
               >
-                contato@dropefernandes.com
+                Agendar conversa
                 <ArrowUpRight className="size-4" strokeWidth={2.5} />
               </Link>
             </div>

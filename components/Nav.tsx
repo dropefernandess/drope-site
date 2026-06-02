@@ -9,13 +9,12 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const links = [
-  { href: "/",            label: "Index"       },
+  { href: "/",            label: "Início"      },
   { href: "/sobre",       label: "Sobre"       },
   { href: "/#projetos",   label: "Trabalhos"   },
   { href: "/proposta",    label: "Método"      },
   { href: "/calculadora", label: "Calculadora" },
-  { href: "/agendar",     label: "Agendar"     },
-  { href: "/blog",        label: "Notas"       },
+  { href: "/blog",        label: "Blog"        },
 ];
 
 /**

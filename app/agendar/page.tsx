@@ -143,12 +143,11 @@ export default function AgendarPage() {
             </div>
           </Reveal>
 
-          {/* Cal.com embed inline */}
-          <Reveal delay={0.1} className="lg:col-span-8 lg:order-1 rounded-section border border-line bg-bg-soft p-3 overflow-hidden">
+          {/* Cal.com embed — sem padding extra, deixa o widget respirar com margens nativas */}
+          <Reveal delay={0.1} className="lg:col-span-8 lg:order-1 rounded-section overflow-hidden">
             <div
               id="cal-inline"
               className="min-h-[640px] w-full"
-              style={{ overflow: "hidden", borderRadius: "16px" }}
             />
           </Reveal>
         </div>
