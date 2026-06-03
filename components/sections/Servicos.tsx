@@ -158,10 +158,10 @@ export function Servicos() {
                   </pre>
                 )}
 
-                {/* Top: num + price + arrow */}
-                <div className="flex items-start justify-between gap-3 relative">
-                  <div className="flex flex-col gap-1.5">
-                    <span className={`text-sm font-medium ${st.muted}`}>
+                {/* Top: num + price LADO A LADO + arrow */}
+                <div className="flex items-center justify-between gap-3 relative">
+                  <div className="flex items-center gap-2.5 flex-wrap min-w-0">
+                    <span className={`text-sm font-medium ${st.muted} shrink-0`}>
                       {s.num} ── {t("servicos.label_suffix")}
                     </span>
                     {s.priceKey && (
@@ -171,7 +171,7 @@ export function Servicos() {
                     )}
                   </div>
                   <ArrowUpRight
-                    className={`size-5 ${st.fg} opacity-50 transition group-hover:opacity-100 group-hover:-translate-y-0.5 group-hover:translate-x-0.5`}
+                    className={`size-5 ${st.fg} opacity-50 transition group-hover:opacity-100 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 shrink-0`}
                     strokeWidth={2}
                   />
                 </div>

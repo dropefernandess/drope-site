@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUpRight, Clock, Mail, Video } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 /**
  * /agendar — Cal.com embed inline.
@@ -23,6 +24,7 @@ import { Reveal } from "@/components/ui/Motion";
 const CAL_LINK = "drope/30min";
 
 export default function AgendarPage() {
+  const { t } = useLocale();
   useEffect(() => {
     // Cal.com embed snippet (loader oficial)
     (function (C: typeof window, A: string, L: string) {
@@ -82,25 +84,23 @@ export default function AgendarPage() {
           <Reveal className="flex items-center justify-between gap-4 flex-wrap">
             <p className="label-mono flex items-center gap-2">
               <span className="size-1 rounded-full bg-brand" />
-              Agendar uma conversa
+              {t("agendar.eyebrow")}
             </p>
             <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3 py-1.5 text-xs font-medium text-fg-strong">
               <Clock className="size-3 text-fg-mute" strokeWidth={2.5} />
-              30 minutos · Sem custo
+              {t("agendar.badge")}
             </span>
           </Reveal>
 
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 items-end">
             <Reveal delay={0.1} className="lg:col-span-8">
               <h1 className="text-display text-fg-strong text-balance">
-                Vamos conversar.
+                {t("agendar.title")}
               </h1>
             </Reveal>
             <Reveal delay={0.2} className="lg:col-span-4">
               <p className="text-body max-w-prose">
-                Escolha um horário que funciona pra você. Conversa de
-                30 minutos pra entender seu projeto e ver se faz sentido
-                a gente trabalhar junto.
+                {t("agendar.lead")}
               </p>
             </Reveal>
           </div>
@@ -113,25 +113,23 @@ export default function AgendarPage() {
           <Reveal className="lg:col-span-4 lg:order-2 flex flex-col gap-3">
             <div className="rounded-section border border-line bg-bg-soft p-6 flex flex-col gap-3">
               <Video className="size-5 text-brand" strokeWidth={2} />
-              <p className="text-h-3 text-fg-strong">Reunião por vídeo</p>
+              <p className="text-h-3 text-fg-strong">{t("agendar.video_title")}</p>
               <p className="text-body-sm">
-                Google Meet ou Zoom (sua escolha). Link enviado por email
-                após a confirmação.
+                {t("agendar.video_desc")}
               </p>
             </div>
             <div className="rounded-section border border-line bg-bg-soft p-6 flex flex-col gap-3">
               <Clock className="size-5 text-brand" strokeWidth={2} />
-              <p className="text-h-3 text-fg-strong">30 minutos</p>
+              <p className="text-h-3 text-fg-strong">{t("agendar.time_title")}</p>
               <p className="text-body-sm">
-                Tempo suficiente pra entender seu contexto, alinhar
-                expectativas e ver se faz sentido continuar.
+                {t("agendar.time_desc")}
               </p>
             </div>
             <div className="rounded-section bg-fg-strong text-bg p-6 flex flex-col gap-3">
               <Mail className="size-5 text-brand" strokeWidth={2} />
-              <p className="text-h-3 text-bg">Prefere por escrito?</p>
+              <p className="text-h-3 text-bg">{t("agendar.email_title")}</p>
               <p className="text-sm text-bg/70">
-                Manda os detalhes no email. Respondo em até 24h.
+                {t("agendar.email_desc")}
               </p>
               <Link
                 href="mailto:contato@dropefernandes.com"

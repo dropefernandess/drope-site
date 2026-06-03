@@ -4,54 +4,55 @@ import { useMemo, useState } from "react";
 import { Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { EstimativaForm } from "@/components/calculadora/EstimativaForm";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 import { cn } from "@/lib/utils";
 
 /**
- * Calculadora de orçamento — referência visual: athos2/calculator.
+ * Calculadora de orçamento — i18n via dictionaries.
  * Lógica real com state. Valores são FAIXAS estimadas (não preço fechado).
- *
- * Modelo:
- *   total = (serviços somados) × multiplicador(escopo) × multiplicador(prazo)
- *   + add-ons fixos
- *
- * Ajustar números abaixo conforme seu pricing real.
  */
 
-type Servico = { id: string; label: string; price: number; desc: string };
+type Servico = { id: string; labelKey: DictionaryKey; price: number; descKey: DictionaryKey };
 const SERVICOS: Servico[] = [
-  { id: "branding",  label: "Brand system",  price: 3500, desc: "Logo, paleta, tipografia, manual." },
-  { id: "ui",        label: "UI/UX Design",  price: 4100, desc: "Wireframes, protótipo, design final." },
-  { id: "web",       label: "Web design",    price: 3400, desc: "Landing ou site institucional." },
-  { id: "dev",       label: "Front-end",     price: 3600, desc: "Implementação em Next.js + Tailwind." },
-  { id: "motion",    label: "Motion design", price: 2400, desc: "Logo reveal, microinterações." },
-  { id: "social",    label: "Social media",  price: 1800, desc: "Kit de templates + 1 mês de posts." },
+  { id: "branding",  labelKey: "calc.serv_branding_label",  price: 3500, descKey: "calc.serv_branding_desc" },
+  { id: "ui",        labelKey: "calc.serv_ui_label",        price: 4100, descKey: "calc.serv_ui_desc" },
+  { id: "web",       labelKey: "calc.serv_web_label",       price: 3400, descKey: "calc.serv_web_desc" },
+  { id: "dev",       labelKey: "calc.serv_dev_label",       price: 3600, descKey: "calc.serv_dev_desc" },
+  { id: "motion",    labelKey: "calc.serv_motion_label",    price: 2400, descKey: "calc.serv_motion_desc" },
+  { id: "social",    labelKey: "calc.serv_social_label",    price: 1800, descKey: "calc.serv_social_desc" },
 ];
 
 type Escopo = "lean" | "completo" | "premium";
-const ESCOPOS: { id: Escopo; label: string; mult: number; desc: string }[] = [
-  { id: "lean",     label: "Lean",     mult: 1.0,  desc: "Essencial. 2–3 semanas." },
-  { id: "completo", label: "Completo", mult: 1.35, desc: "Padrão. Mais iterações. 4–6 semanas." },
-  { id: "premium",  label: "Premium",  mult: 1.7,  desc: "Estendido. Suporte prolongado. 6–10 semanas." },
+const ESCOPOS: { id: Escopo; labelKey: DictionaryKey; mult: number; descKey: DictionaryKey }[] = [
+  { id: "lean",     labelKey: "calc.escopo_lean_label",     mult: 1.0,  descKey: "calc.escopo_lean_desc" },
+  { id: "completo", labelKey: "calc.escopo_completo_label", mult: 1.35, descKey: "calc.escopo_completo_desc" },
+  { id: "premium",  labelKey: "calc.escopo_premium_label",  mult: 1.7,  descKey: "calc.escopo_premium_desc" },
 ];
 
 type Prazo = "flex" | "normal" | "express";
-const PRAZOS: { id: Prazo; label: string; mult: number; desc: string }[] = [
-  { id: "flex",    label: "Flexível", mult: 0.92, desc: "Sem prazo apertado. Desconto pequeno." },
-  { id: "normal",  label: "Normal",   mult: 1.0,  desc: "Cronograma padrão." },
-  { id: "express", label: "Express",  mult: 1.3,  desc: "Prioridade máxima. Fila reduzida." },
+const PRAZOS: { id: Prazo; labelKey: DictionaryKey; mult: number; descKey: DictionaryKey }[] = [
+  { id: "flex",    labelKey: "calc.prazo_flex_label",    mult: 0.92, descKey: "calc.prazo_flex_desc" },
+  { id: "normal",  labelKey: "calc.prazo_normal_label",  mult: 1.0,  descKey: "calc.prazo_normal_desc" },
+  { id: "express", labelKey: "calc.prazo_express_label", mult: 1.3,  descKey: "calc.prazo_express_desc" },
 ];
 
-type Addon = { id: string; label: string; price: number };
+type Addon = { id: string; labelKey: DictionaryKey; price: number };
 const ADDONS: Addon[] = [
-  { id: "copy",      label: "Copywriting estratégico", price: 900 },
-  { id: "extra-rev", label: "Rodada extra de revisão", price: 450 },
-  { id: "handoff",   label: "Handoff dev completo",    price: 700 },
+  { id: "copy",      labelKey: "calc.addon_copy_label",      price: 900 },
+  { id: "extra-rev", labelKey: "calc.addon_extra_rev_label", price: 450 },
+  { id: "handoff",   labelKey: "calc.addon_handoff_label",   price: 700 },
 ];
-
-const fmt = (n: number) =>
-  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(n);
 
 export default function CalculadoraPage() {
+  const { t, locale } = useLocale();
+  const fmt = (n: number) =>
+    new Intl.NumberFormat(locale === "pt" ? "pt-BR" : "en-US", {
+      style: "currency",
+      currency: "BRL",
+      maximumFractionDigits: 0,
+    }).format(n);
+
   const [servicos, setServicos] = useState<string[]>(["branding"]);
   const [escopo, setEscopo]     = useState<Escopo>("completo");
   const [prazo, setPrazo]       = useState<Prazo>("normal");
@@ -76,29 +77,30 @@ export default function CalculadoraPage() {
 
   const canCalc = servicos.length > 0;
 
+  const escopoLabel = t(ESCOPOS.find((e) => e.id === escopo)!.labelKey);
+  const prazoLabel  = t(PRAZOS.find((p) => p.id === prazo)!.labelKey);
+
   return (
     <div className="pt-24 md:pt-32 pb-24">
       <Container as="div" className="flex flex-col gap-12">
-        {/* ===== HEADER CLEAN ===== */}
+        {/* ===== HEADER ===== */}
         <header className="flex flex-col gap-10">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <p className="label-mono flex items-center gap-2">
               <span className="size-1 rounded-full bg-brand" />
-              Calculadora · Estimativa rápida
+              {t("calc.eyebrow")}
             </p>
             <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3 py-1.5 text-xs font-medium text-fg-strong">
-              Faixa de ±10%. Não é preço fechado
+              {t("calc.badge")}
             </span>
           </div>
 
           <div className="grid gap-10 md:grid-cols-12 md:gap-12 items-end">
             <h1 className="md:col-span-8 text-display text-fg-strong text-balance">
-              Quanto custa o seu projeto?
+              {t("calc.title")}
             </h1>
             <p className="md:col-span-4 text-body max-w-prose">
-              Marque o que precisa, escolha o ritmo e o escopo.
-              A faixa aparece ao lado em tempo real. Pra cotação
-              fechada, me manda os detalhes. Respondo em até 24h.
+              {t("calc.lead")}
             </p>
           </div>
         </header>
@@ -108,34 +110,31 @@ export default function CalculadoraPage() {
         <div className="lg:col-span-7 space-y-12">
 
           {/* SERVIÇOS */}
-          <Section number="01" title="Quais serviços você precisa?" helper="Selecione um ou mais.">
+          <Section number="01" title={t("calc.s1_title")} helper={t("calc.s1_helper")}>
             <div className="grid gap-3 sm:grid-cols-2">
-              {SERVICOS.map((s) => {
-                const active = servicos.includes(s.id);
-                return (
-                  <Option
-                    key={s.id}
-                    active={active}
-                    onClick={() => toggle(setServicos)(s.id)}
-                    title={s.label}
-                    desc={s.desc}
-                    meta={`a partir de ${fmt(s.price)}`}
-                  />
-                );
-              })}
+              {SERVICOS.map((s) => (
+                <Option
+                  key={s.id}
+                  active={servicos.includes(s.id)}
+                  onClick={() => toggle(setServicos)(s.id)}
+                  title={t(s.labelKey)}
+                  desc={t(s.descKey)}
+                  meta={`${t("calc.meta_a_partir")} ${fmt(s.price)}`}
+                />
+              ))}
             </div>
           </Section>
 
           {/* ESCOPO */}
-          <Section number="02" title="Qual o escopo?" helper="Define profundidade e duração.">
+          <Section number="02" title={t("calc.s2_title")} helper={t("calc.s2_helper")}>
             <div className="grid gap-3 sm:grid-cols-3">
               {ESCOPOS.map((e) => (
                 <Option
                   key={e.id}
                   active={escopo === e.id}
                   onClick={() => setEscopo(e.id)}
-                  title={e.label}
-                  desc={e.desc}
+                  title={t(e.labelKey)}
+                  desc={t(e.descKey)}
                   meta={`${Math.round((e.mult - 1) * 100) >= 0 ? "+" : ""}${Math.round((e.mult - 1) * 100)}%`}
                 />
               ))}
@@ -143,15 +142,15 @@ export default function CalculadoraPage() {
           </Section>
 
           {/* PRAZO */}
-          <Section number="03" title="Qual a urgência?" helper="Express prioriza sua fila.">
+          <Section number="03" title={t("calc.s3_title")} helper={t("calc.s3_helper")}>
             <div className="grid gap-3 sm:grid-cols-3">
               {PRAZOS.map((p) => (
                 <Option
                   key={p.id}
                   active={prazo === p.id}
                   onClick={() => setPrazo(p.id)}
-                  title={p.label}
-                  desc={p.desc}
+                  title={t(p.labelKey)}
+                  desc={t(p.descKey)}
                   meta={`${Math.round((p.mult - 1) * 100) >= 0 ? "+" : ""}${Math.round((p.mult - 1) * 100)}%`}
                 />
               ))}
@@ -159,14 +158,14 @@ export default function CalculadoraPage() {
           </Section>
 
           {/* ADD-ONS */}
-          <Section number="04" title="Adicionais (opcional)" helper="Coisinhas que somam ao escopo.">
+          <Section number="04" title={t("calc.s4_title")} helper={t("calc.s4_helper")}>
             <div className="grid gap-3 sm:grid-cols-2">
               {ADDONS.map((a) => (
                 <Option
                   key={a.id}
                   active={addons.includes(a.id)}
                   onClick={() => toggle(setAddons)(a.id)}
-                  title={a.label}
+                  title={t(a.labelKey)}
                   meta={`+ ${fmt(a.price)}`}
                 />
               ))}
@@ -178,30 +177,30 @@ export default function CalculadoraPage() {
         <aside className="lg:col-span-5">
           <div className="lg:sticky lg:top-28 rounded-section border border-line bg-surface-2 p-8 md:p-10 space-y-6">
             <header className="space-y-2">
-              <p className="label-mono text-fg-faint">Faixa estimada</p>
+              <p className="label-mono text-fg-faint">{t("calc.faixa_label")}</p>
               <p className="text-display !text-[clamp(2.5rem,5vw,4rem)] !leading-none text-fg-strong">
                 {canCalc ? fmt(calc.min) : "—"}
                 <span className="text-fg-mute"> – </span>
                 {canCalc ? fmt(calc.max) : "—"}
               </p>
               <p className="text-body-sm text-fg-mute">
-                Faixa de ±10% pra absorver variações de escopo. Não é preço fechado.
+                {t("calc.faixa_desc")}
               </p>
             </header>
 
             <div className="space-y-2 border-t border-line pt-6 text-body-sm">
-              <Row label="Serviços" value={canCalc ? fmt(calc.subtotal - 0) : "—"} />
+              <Row label={t("calc.row_servicos")} value={canCalc ? fmt(calc.subtotal - 0) : "—"} />
               <Row
-                label={`Escopo (${ESCOPOS.find((e) => e.id === escopo)?.label})`}
+                label={`${t("calc.row_escopo")} (${escopoLabel})`}
                 value={`× ${ESCOPOS.find((e) => e.id === escopo)?.mult.toFixed(2)}`}
               />
               <Row
-                label={`Prazo (${PRAZOS.find((p) => p.id === prazo)?.label})`}
+                label={`${t("calc.row_prazo")} (${prazoLabel})`}
                 value={`× ${PRAZOS.find((p) => p.id === prazo)?.mult.toFixed(2)}`}
               />
-              {calc.baseAddons > 0 && <Row label="Adicionais" value={`+ ${fmt(calc.baseAddons)}`} />}
+              {calc.baseAddons > 0 && <Row label={t("calc.row_adicionais")} value={`+ ${fmt(calc.baseAddons)}`} />}
               <div className="flex items-center justify-between pt-3 mt-3 border-t border-line">
-                <span className="text-fg-body">Total estimado</span>
+                <span className="text-fg-body">{t("calc.row_total")}</span>
                 <span className="font-semibold text-fg-strong">{canCalc ? fmt(calc.total) : "—"}</span>
               </div>
             </div>
@@ -209,21 +208,27 @@ export default function CalculadoraPage() {
             <EstimativaForm
               canSubmit={canCalc}
               payload={{
-                servicos: servicos.map((id) => SERVICOS.find((s) => s.id === id)?.label ?? "").filter(Boolean),
-                escopo: ESCOPOS.find((e) => e.id === escopo)?.label ?? "",
-                prazo: PRAZOS.find((p) => p.id === prazo)?.label ?? "",
-                addons: addons.map((id) => ADDONS.find((a) => a.id === id)?.label ?? "").filter(Boolean),
+                servicos: servicos.map((id) => {
+                  const s = SERVICOS.find((sv) => sv.id === id);
+                  return s ? t(s.labelKey) : "";
+                }).filter(Boolean),
+                escopo: escopoLabel,
+                prazo: prazoLabel,
+                addons: addons.map((id) => {
+                  const a = ADDONS.find((ad) => ad.id === id);
+                  return a ? t(a.labelKey) : "";
+                }).filter(Boolean),
                 faixaMin: calc.min,
                 faixaMax: calc.max,
               }}
               resumoWhatsapp={
                 canCalc
                   ? `Oi Drope! Vim da calculadora do site.\n\n` +
-                    `Serviços: ${servicos.map((id) => SERVICOS.find((s) => s.id === id)?.label).join(", ")}\n` +
-                    `Escopo: ${ESCOPOS.find((e) => e.id === escopo)?.label}\n` +
-                    `Prazo: ${PRAZOS.find((p) => p.id === prazo)?.label}\n` +
-                    (addons.length ? `Adicionais: ${addons.map((id) => ADDONS.find((a) => a.id === id)?.label).join(", ")}\n` : "") +
-                    `\nFaixa estimada: ${fmt(calc.min)} – ${fmt(calc.max)}\n\nQuero conversar sobre o projeto.`
+                    `${t("calc.row_servicos")}: ${servicos.map((id) => t(SERVICOS.find((s) => s.id === id)!.labelKey)).join(", ")}\n` +
+                    `${t("calc.row_escopo")}: ${escopoLabel}\n` +
+                    `${t("calc.row_prazo")}: ${prazoLabel}\n` +
+                    (addons.length ? `${t("calc.row_adicionais")}: ${addons.map((id) => t(ADDONS.find((a) => a.id === id)!.labelKey)).join(", ")}\n` : "") +
+                    `\n${t("calc.faixa_label")}: ${fmt(calc.min)} – ${fmt(calc.max)}\n\nQuero conversar sobre o projeto.`
                   : "Oi Drope! Vim da calculadora do site e quero conversar sobre um projeto."
               }
             />

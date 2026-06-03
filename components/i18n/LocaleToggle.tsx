@@ -62,8 +62,8 @@ export function LocaleToggle({ className }: { className?: string }) {
           open && "bg-surface"
         )}
       >
-        <span className="relative inline-block w-6 h-[18px] overflow-hidden rounded-[3px] shadow-sm ring-1 ring-ink-900/10">
-          <Image src={active.src} alt="" fill sizes="24px" />
+        <span className="relative inline-block w-[15px] h-[11px] overflow-hidden rounded-[3px] shadow-sm ring-1 ring-ink-900/10">
+          <Image src={active.src} alt="" fill sizes="15px" />
         </span>
         <ChevronDown
           className={cn(
@@ -104,8 +104,8 @@ export function LocaleToggle({ className }: { className?: string }) {
                       : "text-fg-body hover:bg-surface hover:text-fg-strong"
                   )}
                 >
-                  <span className="relative inline-block w-6 h-[18px] overflow-hidden rounded-[3px] shadow-sm ring-1 ring-ink-900/10 shrink-0">
-                    <Image src={f.src} alt="" fill sizes="24px" />
+                  <span className="relative inline-block w-[15px] h-[11px] overflow-hidden rounded-[3px] shadow-sm ring-1 ring-ink-900/10 shrink-0">
+                    <Image src={f.src} alt="" fill sizes="15px" />
                   </span>
                   <span className="flex-1">{f.label}</span>
                   <span className="text-[10px] uppercase tracking-wider font-semibold text-fg-mute tabular-nums">
