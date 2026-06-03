@@ -6,6 +6,7 @@ import { ArrowUpRight, MapPin, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { AnimatedCounter } from "@/components/ui/Effects";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 /**
  * Sobre — bento. Foto grande à esquerda + cards de meta à direita.
@@ -13,6 +14,7 @@ import { AnimatedCounter } from "@/components/ui/Effects";
  */
 
 export function Sobre() {
+  const { t } = useLocale();
   return (
     <section id="sobre" className="bg-bg-soft section-padding overflow-hidden">
       <Container className="flex flex-col gap-12">
@@ -24,15 +26,14 @@ export function Sobre() {
               <p className="label-mono">
                 <span className="text-fg-strong">04</span>
                 <span className="mx-3 text-fg-faint">──</span>
-                <span>Quem é o Drope</span>
+                <span>{t("sobre.eyebrow")}</span>
               </p>
               <h2 className="text-h-1 text-fg-strong text-balance">
-                Por trás de cada projeto.
+                {t("sobre.title")}
               </h2>
             </div>
             <p className="lg:col-span-5 text-body max-w-prose">
-              Atuo na intersecção entre arte e técnica. Cada projeto é tratado
-              como um organismo vivo que precisa de forma, função e sentido.
+              {t("sobre.desc")}
             </p>
           </div>
         </Reveal>
@@ -53,11 +54,11 @@ export function Sobre() {
             <div className="absolute inset-0 bg-gradient-to-t from-ink-900/85 via-ink-900/20 to-transparent" />
             <div className="absolute top-5 left-5 right-5 flex items-center justify-between gap-3">
               <span className="rounded-pill bg-bg/90 backdrop-blur border border-line px-3 py-1.5 text-xs font-semibold text-fg-strong">
-                Pedro Fernandes
+                {t("sobre.foto_pill")}
               </span>
               <Link
                 href="/sobre"
-                aria-label="Conhecer a história completa"
+                aria-label={t("sobre.foto_aria")}
                 className="size-10 rounded-full bg-brand flex items-center justify-center transition hover:scale-105"
               >
                 <ArrowUpRight className="size-4 text-brand-fg" strokeWidth={2.5} />
@@ -65,18 +66,18 @@ export function Sobre() {
             </div>
             <div className="absolute bottom-5 left-5 right-5">
               <p className="text-ink-50 text-xl md:text-2xl font-semibold leading-tight text-balance max-w-md">
-                Drope é como me chamam. Trabalho com design desde 2018.
+                {t("sobre.foto_quote")}
               </p>
             </div>
           </Reveal>
 
           {/* CARD BIO TEXT — 7 cols × 1 row (texto mais punchy) */}
           <Reveal delay={0.1} className="lg:col-span-7 lg:row-span-1 rounded-section border border-line bg-bg p-6 md:p-7 flex flex-col gap-3 justify-center">
-            <p className="label-mono">MANIFESTO</p>
+            <p className="label-mono">{t("sobre.manifesto_label")}</p>
             <p className="text-lg md:text-xl leading-snug text-fg-strong max-w-prose font-medium">
-              Branding, web, UI e motion.{" "}
+              {t("sobre.manifesto_text_strong")}{" "}
               <span className="text-fg-mute">
-                Tudo da mesma cabeça, do briefing à launch.
+                {t("sobre.manifesto_text_mute")}
               </span>
             </p>
           </Reveal>
@@ -84,7 +85,7 @@ export function Sobre() {
           {/* STAT — anos no ofício — 3 cols × 1 row */}
           <Reveal delay={0.15} className="lg:col-span-3 lg:row-span-1 rounded-section bg-brand p-6 md:p-7 flex flex-col justify-between gap-3">
             <p className="text-[11px] uppercase tracking-wider font-medium text-brand-fg/80">
-              ANOS NO OFÍCIO
+              {t("sobre.anos_label")}
             </p>
             <p className="text-5xl md:text-6xl font-semibold tabular-nums text-brand-fg tracking-tight leading-none">
               <AnimatedCounter value={8} suffix="+" />
@@ -94,7 +95,7 @@ export function Sobre() {
           {/* STAT — projetos — 4 cols × 1 row */}
           <Reveal delay={0.2} className="lg:col-span-4 lg:row-span-1 rounded-section border border-line bg-bg p-6 md:p-7 flex flex-col justify-between gap-3">
             <p className="text-[11px] uppercase tracking-wider font-medium text-fg-mute">
-              PROJETOS ENTREGUES
+              {t("sobre.projetos_label")}
             </p>
             <div className="flex items-baseline gap-2">
               <p className="text-5xl md:text-6xl font-semibold tabular-nums text-fg-strong tracking-tight leading-none">
@@ -107,19 +108,19 @@ export function Sobre() {
           {/* CARD LOCATION — 3 cols × 1 row */}
           <Reveal delay={0.25} className="lg:col-span-3 lg:row-span-1 rounded-section border border-line bg-bg-soft p-6 md:p-7 flex flex-col justify-between gap-3">
             <div className="flex items-center justify-between">
-              <p className="label-mono">LOCALIZAÇÃO</p>
+              <p className="label-mono">{t("sobre.localizacao_label")}</p>
               <MapPin className="size-4 text-brand" strokeWidth={2} />
             </div>
             <p className="text-base md:text-lg font-semibold text-fg-strong leading-snug">
-              Senador Firmino<br />
-              <span className="text-fg-mute font-normal text-sm">Minas Gerais, BR</span>
+              {t("sobre.localizacao_city")}<br />
+              <span className="text-fg-mute font-normal text-sm">{t("sobre.localizacao_state")}</span>
             </p>
           </Reveal>
 
           {/* SPOTIFY — 4 cols × 1 row, player compacto Spotify */}
           <Reveal delay={0.3} className="lg:col-span-4 lg:row-span-1 rounded-section border border-line bg-bg p-4 flex flex-col gap-2.5 overflow-hidden">
             <div className="flex items-center justify-between gap-3">
-              <p className="label-mono">OUVINDO ENQUANTO CRIO</p>
+              <p className="label-mono">{t("sobre.spotify_label")}</p>
               <span className="inline-flex items-center gap-1.5 rounded-pill bg-[#1ed760]/15 px-2.5 py-1 text-[10px] font-semibold text-[#178a44]">
                 <span className="size-1.5 rounded-full bg-[#1ed760] animate-pulse" />
                 Spotify

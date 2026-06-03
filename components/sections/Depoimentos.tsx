@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Quote, Star } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 import { cn } from "@/lib/utils";
 
 /**
@@ -23,10 +25,10 @@ type Tone = "brand" | "cream" | "dark" | "soft";
 
 type Testimonial = {
   slug: string;          // pra /public/depoimentos/{slug}.jpg
-  quote: string;
-  name: string;
-  role: string;
-  company: string;
+  quoteKey: DictionaryKey;
+  name: string;          // nomes ficam universais
+  roleKey: DictionaryKey;
+  company: string;       // marcas universais
   rating: number;
   tone: Tone;
 };
@@ -34,40 +36,36 @@ type Testimonial = {
 const testimonials: Testimonial[] = [
   {
     slug: "isabela-silveira",
-    quote:
-      "Drope entrega o que combinou — e ainda traz uma opinião sobre por que aquilo é o melhor caminho. Direção, não só execução.",
+    quoteKey: "depoimentos.q1",
     name: "Isabela Silveira",
-    role: "Sócia & Diretora",
+    roleKey: "depoimentos.q1_role",
     company: "Aroeira Studio",
     rating: 5,
     tone: "brand",
   },
   {
     slug: "marcelo-lavinas",
-    quote:
-      "Pegou identidade, UI e ainda nos guiou na arquitetura do produto. Achei que ia precisar de três fornecedores — precisei de um.",
+    quoteKey: "depoimentos.q2",
     name: "Marcelo Lavinas",
-    role: "Founder",
+    roleKey: "depoimentos.q2_role",
     company: "MoneyFy",
     rating: 5,
     tone: "cream",
   },
   {
     slug: "rafael-andrade",
-    quote:
-      "Conheço o Drope desde o início. Cada projeto que passa por ele volta com uma camada a mais que eu não tinha pedido — e que faz diferença.",
+    quoteKey: "depoimentos.q3",
     name: "Rafael Andrade",
-    role: "CEO",
+    roleKey: "depoimentos.q3_role",
     company: "Sirius Agência",
     rating: 5,
     tone: "dark",
   },
   {
     slug: "poliana-carolina",
-    quote:
-      "Site, social e papelaria conduzidos com a mesma direção. Sem ruído, sem retrabalho. Profissional fora da curva pro nosso segmento.",
+    quoteKey: "depoimentos.q4",
     name: "Poliana Carolina",
-    role: "Sócia",
+    roleKey: "depoimentos.q4_role",
     company: "Vizir Contabilidade",
     rating: 5,
     tone: "soft",
@@ -81,10 +79,10 @@ const tones: Record<Tone, { bg: string; fg: string; muted: string; border: strin
   soft:   { bg: "bg-bg-soft",    fg: "text-fg-strong", muted: "text-fg-mute",     border: "border-line",       avatarBg: "bg-brand text-brand-fg" },
 };
 
-const stats = [
-  { v: "30+", l: "Projetos completos\nentregues desde 2018" },
-  { v: "4.9", l: "Avaliação média\nem 32 reviews" },
-  { v: "82%", l: "Voltam pra um\nsegundo round" },
+const stats: { vKey: DictionaryKey; lKey: DictionaryKey }[] = [
+  { vKey: "depoimentos.stat1_v", lKey: "depoimentos.stat1_l" },
+  { vKey: "depoimentos.stat2_v", lKey: "depoimentos.stat2_l" },
+  { vKey: "depoimentos.stat3_v", lKey: "depoimentos.stat3_l" },
 ];
 
 /** Avatar — tenta carregar foto, fallback elegante pra iniciais se não existir.
@@ -122,8 +120,9 @@ function Avatar({ t, toneStyle }: { t: Testimonial; toneStyle: typeof tones[Tone
   );
 }
 
-function TestimonialCard({ t }: { t: Testimonial }) {
-  const st = tones[t.tone];
+function TestimonialCard({ data }: { data: Testimonial }) {
+  const { t } = useLocale();
+  const st = tones[data.tone];
   return (
     <article className={cn(
       "h-full rounded-section p-6 md:p-7 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
@@ -132,19 +131,19 @@ function TestimonialCard({ t }: { t: Testimonial }) {
       <Quote className={cn("size-7", st.muted)} strokeWidth={1.5} fill="currentColor" />
 
       <p className={cn("text-base md:text-lg leading-snug flex-1", st.fg)}>
-        {t.quote}
+        {t(data.quoteKey)}
       </p>
 
       <div className={cn("flex items-center gap-3 pt-4 border-t", st.border)}>
-        <Avatar t={t} toneStyle={st} />
+        <Avatar t={data} toneStyle={st} />
         <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-          <p className={cn("text-sm font-semibold truncate", st.fg)}>{t.name}</p>
+          <p className={cn("text-sm font-semibold truncate", st.fg)}>{data.name}</p>
           <p className={cn("text-[11px] truncate", st.muted)}>
-            {t.role} · {t.company}
+            {t(data.roleKey)} · {data.company}
           </p>
         </div>
         <div className="flex items-center gap-0.5 shrink-0">
-          {Array.from({ length: t.rating }).map((_, j) => (
+          {Array.from({ length: data.rating }).map((_, j) => (
             <Star key={j} className={cn("size-3.5", st.fg)} fill="currentColor" strokeWidth={0} />
           ))}
         </div>
@@ -154,6 +153,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 }
 
 export function Depoimentos() {
+  const { t } = useLocale();
   return (
     <section id="depoimentos" className="bg-bg section-padding overflow-hidden">
       <Container className="flex flex-col gap-12">
@@ -165,20 +165,20 @@ export function Depoimentos() {
               <p className="label-mono">
                 <span className="text-fg-strong">05</span>
                 <span className="mx-3 text-fg-faint">──</span>
-                <span>O que dizem por aí</span>
+                <span>{t("depoimentos.eyebrow")}</span>
               </p>
               <h2 className="text-h-1 text-fg-strong text-balance">
-                Os clientes contam melhor que eu.
+                {t("depoimentos.title")}
               </h2>
             </div>
             <div className="lg:col-span-5 grid grid-cols-3 gap-4">
               {stats.map((s) => (
-                <div key={s.v} className="flex flex-col gap-1.5">
+                <div key={s.vKey} className="flex flex-col gap-1.5">
                   <p className="text-3xl md:text-4xl font-semibold tabular-nums text-fg-strong tracking-tight">
-                    {s.v}
+                    {t(s.vKey)}
                   </p>
                   <p className="text-[11px] leading-snug whitespace-pre-line text-fg-mute">
-                    {s.l}
+                    {t(s.lKey)}
                   </p>
                 </div>
               ))}
@@ -188,9 +188,9 @@ export function Depoimentos() {
 
         {/* GRID DE 4 DEPOIMENTOS */}
         <Stagger as="ul" className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-          {testimonials.map((t) => (
-            <StaggerItem as="li" key={t.slug}>
-              <TestimonialCard t={t} />
+          {testimonials.map((data) => (
+            <StaggerItem as="li" key={data.slug}>
+              <TestimonialCard data={data} />
             </StaggerItem>
           ))}
         </Stagger>

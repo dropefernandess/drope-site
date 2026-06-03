@@ -6,35 +6,45 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 
-const steps = [
+type Step = {
+  num: string;
+  titleKey: DictionaryKey;
+  durationKey: DictionaryKey;
+  descKey: DictionaryKey;
+  deliverableKeys: DictionaryKey[];
+};
+
+const steps: Step[] = [
   {
     num: "01",
-    title: "Brief & Discovery",
-    duration: "Semana 01",
-    desc: "Conversa inicial pra entender o problema, o público e o objetivo. Reunião sem PowerPoint.",
-    deliverables: ["Brief consolidado", "Análise de referências", "Definição de KPIs"],
+    titleKey: "processo.step1_title",
+    durationKey: "processo.step1_duration",
+    descKey: "processo.step1_desc",
+    deliverableKeys: ["processo.step1_d1", "processo.step1_d2", "processo.step1_d3"],
   },
   {
     num: "02",
-    title: "Conceito & Direção",
-    duration: "Semanas 02-03",
-    desc: "Exploração de referências, definição de direção visual e validação dos primeiros conceitos.",
-    deliverables: ["Moodboards", "Princípios de design", "1 direção + 1 alternativa"],
+    titleKey: "processo.step2_title",
+    durationKey: "processo.step2_duration",
+    descKey: "processo.step2_desc",
+    deliverableKeys: ["processo.step2_d1", "processo.step2_d2", "processo.step2_d3"],
   },
   {
     num: "03",
-    title: "Execução",
-    duration: "Semanas 03-06",
-    desc: "Design, código e motion sendo construídos em iterações curtas com feedback contínuo.",
-    deliverables: ["Sistema completo", "Iterações ao vivo", "2 rodadas de revisão"],
+    titleKey: "processo.step3_title",
+    durationKey: "processo.step3_duration",
+    descKey: "processo.step3_desc",
+    deliverableKeys: ["processo.step3_d1", "processo.step3_d2", "processo.step3_d3"],
   },
   {
     num: "04",
-    title: "Entrega & Refinamento",
-    duration: "Semana 06+",
-    desc: "Refinos finais, deploy, documentação e suporte pra próximos passos.",
-    deliverables: ["Arquivos fonte", "Manual em PDF", "30 dias de suporte"],
+    titleKey: "processo.step4_title",
+    durationKey: "processo.step4_duration",
+    descKey: "processo.step4_desc",
+    deliverableKeys: ["processo.step4_d1", "processo.step4_d2", "processo.step4_d3"],
   },
 ];
 
@@ -44,6 +54,7 @@ const steps = [
  * cresce com scrollYProgress da seção.
  */
 export function Processo() {
+  const { t } = useLocale();
   const timelineRef = useRef<HTMLOListElement>(null);
   const [lineHeight, setLineHeight] = useState<number | null>(null);
 
@@ -89,15 +100,14 @@ export function Processo() {
               <p className="label-mono">
                 <span className="text-fg-strong">03</span>
                 <span className="mx-3 text-fg-faint">──</span>
-                <span>Como conduzo</span>
+                <span>{t("processo.eyebrow")}</span>
               </p>
               <h2 className="text-h-1 text-fg-strong text-balance">
-                Quatro etapas. Sempre nessa ordem.
+                {t("processo.title")}
               </h2>
             </div>
             <p className="lg:col-span-5 text-body max-w-prose">
-              Da primeira conversa à entrega final. Sem suspense, sem desvio.
-              Você recebe o cronograma na primeira reunião.
+              {t("processo.desc")}
             </p>
           </div>
         </Reveal>
@@ -107,45 +117,44 @@ export function Processo() {
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-28 flex flex-col gap-6">
               <div className="flex flex-col gap-3">
-                <p className="label-mono">PROCESSO ATUAL</p>
+                <p className="label-mono">{t("processo.cronograma_label")}</p>
                 <p className="text-h-2 text-fg-strong">
-                  Cronograma médio
+                  {t("processo.cronograma_title")}
                   <br />
-                  <span className="text-brand tabular-nums">6 semanas</span>
+                  <span className="text-brand tabular-nums">{t("processo.cronograma_weeks")}</span>
                 </p>
                 <p className="text-body max-w-prose">
-                  Vai mais rápido se for escopo enxuto. Vai mais devagar se
-                  envolver dev complexo ou rodada extra de pesquisa.
+                  {t("processo.cronograma_desc")}
                 </p>
               </div>
 
               {/* CTA FORTE — card dark com 3 mini-pontos + botão */}
               <div className="rounded-section bg-fg-strong text-bg p-6 flex flex-col gap-4">
                 <p className="text-[11px] uppercase tracking-wider font-medium text-bg/60">
-                  Pronto pra começar?
+                  {t("processo.cta_eyebrow")}
                 </p>
                 <p className="text-h-3 text-bg leading-snug">
-                  Aplico esse processo no seu projeto. Resposta em até 24h.
+                  {t("processo.cta_title")}
                 </p>
                 <ul className="flex flex-col gap-1.5 text-sm text-bg/75">
                   <li className="flex items-center gap-2">
                     <span className="size-1 rounded-full bg-brand" />
-                    Primeira reunião sem custo
+                    {t("processo.cta_b1")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="size-1 rounded-full bg-brand" />
-                    Brief consolidado por escrito
+                    {t("processo.cta_b2")}
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="size-1 rounded-full bg-brand" />
-                    Cronograma combinado antes
+                    {t("processo.cta_b3")}
                   </li>
                 </ul>
                 <Link
                   href="mailto:contato@dropefernandes.com?subject=Quero%20aplicar%20esse%20processo%20no%20meu%20projeto"
                   className="group inline-flex items-center justify-between gap-2 rounded-pill bg-brand px-5 py-3 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition mt-1"
                 >
-                  Aplicar no meu projeto
+                  {t("processo.cta_button")}
                   <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
                 </Link>
               </div>
@@ -189,17 +198,17 @@ export function Processo() {
 
                 <div className="flex flex-col gap-3 pt-1.5">
                   <div className="flex items-baseline justify-between gap-3 flex-wrap">
-                    <h3 className="text-h-2 text-fg-strong">{s.title}</h3>
-                    <span className="label-mono">{s.duration}</span>
+                    <h3 className="text-h-2 text-fg-strong">{t(s.titleKey)}</h3>
+                    <span className="label-mono">{t(s.durationKey)}</span>
                   </div>
-                  <p className="text-body max-w-prose">{s.desc}</p>
+                  <p className="text-body max-w-prose">{t(s.descKey)}</p>
                   <ul className="flex flex-wrap gap-1.5 mt-1">
-                    {s.deliverables.map((d) => (
+                    {s.deliverableKeys.map((dKey) => (
                       <li
-                        key={d}
+                        key={dKey}
                         className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-line bg-bg-soft text-fg-mute"
                       >
-                        {d}
+                        {t(dKey)}
                       </li>
                     ))}
                   </ul>

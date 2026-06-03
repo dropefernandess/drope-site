@@ -6,15 +6,17 @@ import { ArrowUpRight, Mail, Instagram, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 
-const nav = [
-  { href: "/",            label: "Início" },
-  { href: "/sobre",       label: "Sobre" },
-  { href: "/projetos",    label: "Trabalhos" },
-  { href: "/proposta",    label: "Método" },
-  { href: "/calculadora", label: "Calculadora" },
-  { href: "/agendar",     label: "Agendar" },
-  { href: "/blog",        label: "Blog" },
+const nav: { href: string; key: DictionaryKey }[] = [
+  { href: "/",            key: "nav.inicio"      },
+  { href: "/sobre",       key: "nav.sobre"       },
+  { href: "/projetos",    key: "nav.trabalhos"   },
+  { href: "/proposta",    key: "nav.metodo"      },
+  { href: "/calculadora", key: "nav.calculadora" },
+  { href: "/agendar",     key: "nav.cta"         },
+  { href: "/blog",        key: "nav.blog"        },
 ];
 
 const social = [
@@ -24,12 +26,12 @@ const social = [
   { href: "https://dribbble.com/dropefernandes", label: "Dribbble" },
 ];
 
-const cidades = [
-  { city: "Senador Firmino, MG", time: "Onde eu moro" },
-  { city: "Atendo o mundo", time: "Remoto · BRT" },
-];
-
 export function Footer() {
+  const { t } = useLocale();
+  const cidades = [
+    { city: "Senador Firmino, MG", time: t("footer.cidade_aqui") },
+    { city: t("footer.cidade_remoto"),     time: t("footer.fuso") },
+  ];
   return (
     <footer className="relative bg-fg-strong text-bg overflow-hidden">
 
@@ -64,9 +66,7 @@ export function Footer() {
             />
           </Link>
           <p className="text-sm text-bg/70 max-w-xs leading-relaxed">
-            Pedro Fernandes. Designer multidisciplinar, atendendo marcas no
-            Brasil e internacionalmente desde 2018. Identidade visual,
-            interface, motion e código com time pontual de confiança.
+            {t("footer.bio")}
           </p>
 
           {/* Email CTA */}
@@ -83,12 +83,12 @@ export function Footer() {
         {/* Navegação */}
         <Reveal delay={0.1} className="md:col-span-3 flex flex-col gap-4">
           <p className="text-[11px] uppercase tracking-wider font-medium text-bg/40">
-            Navegação
+            {t("footer.nav_label")}
           </p>
           <ul className="flex flex-col gap-2.5">
             {nav.map((l) => (
               <li key={l.href}>
-                <FooterLink href={l.href}>{l.label}</FooterLink>
+                <FooterLink href={l.href}>{t(l.key)}</FooterLink>
               </li>
             ))}
           </ul>
@@ -97,7 +97,7 @@ export function Footer() {
         {/* Social */}
         <Reveal delay={0.2} className="md:col-span-3 flex flex-col gap-4">
           <p className="text-[11px] uppercase tracking-wider font-medium text-bg/40">
-            Em outros lugares
+            {t("footer.social_label")}
           </p>
           <ul className="flex flex-col gap-2.5">
             {social.map((s) => (
@@ -119,7 +119,7 @@ export function Footer() {
         {/* Clock / status */}
         <Reveal delay={0.3} className="md:col-span-2 flex flex-col gap-4">
           <p className="text-[11px] uppercase tracking-wider font-medium text-bg/40">
-            Horários
+            {t("footer.horarios_label")}
           </p>
           <ul className="flex flex-col gap-3">
             {cidades.map((c) => (
@@ -131,7 +131,7 @@ export function Footer() {
           </ul>
           <div className="mt-2 inline-flex items-center gap-2 self-start rounded-pill border border-bg/20 px-3 py-1.5">
             <span className="size-1.5 rounded-full bg-status animate-pulse" />
-            <span className="text-[11px] font-medium text-bg/80">Aceitando Q3 2026</span>
+            <span className="text-[11px] font-medium text-bg/80">{t("footer.status")}</span>
           </div>
         </Reveal>
       </Container>
@@ -139,18 +139,17 @@ export function Footer() {
       {/* === FOOTER BOTTOM === */}
       <Container className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between py-6 border-t border-bg/10 text-xs text-bg/55">
         <p>
-          © {new Date().getFullYear()} Dropê · Pedro Fernandes ·
-          Todos os direitos reservados
+          © {new Date().getFullYear()} Dropê {t("footer.copyright_suffix")}
         </p>
         <div className="flex gap-5">
           <Link href="/legal/privacy" className="hover:text-bg transition">
-            Privacidade
+            {t("footer.privacy")}
           </Link>
           <Link href="/legal/terms" className="hover:text-bg transition">
-            Termos
+            {t("footer.terms")}
           </Link>
           <span className="hidden md:inline">
-            Feito com cuidado em MG
+            {t("footer.made_in")}
           </span>
         </div>
       </Container>

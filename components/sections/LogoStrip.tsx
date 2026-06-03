@@ -1,15 +1,14 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 // Logos SVG são leves (<5KB cada). Usando <img> nativo dentro do marquee
-// pra evitar lazy-loading do next/image em conteúdo duplicado off-viewport
-// (o segundo Row sempre nasce fora da tela, então lazy=false não basta).
+// pra evitar lazy-loading do next/image em conteúdo duplicado off-viewport.
+
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 /**
- * Logos reais dos clientes em /public/logos/*.svg
- * Fontes são todos #3D3D3D → brightness-0 invert pra virar branco.
- *
- * Marquee infinito: 2 trilhas com `aria-hidden` no clone. CSS animation
- * em translateX(-50%) — funciona porque a flex track tem width:max-content
- * e o conteúdo é EXATAMENTE duplicado.
+ * Logos reais dos clientes em /public/logos/*.svg.
+ * Marquee infinito: 2 trilhas com aria-hidden no clone.
  */
 const clients = [
   { name: "Aroeira",        src: "/logos/aroeira.svg" },
@@ -46,10 +45,11 @@ function Row() {
 }
 
 export function LogoStrip() {
+  const { t } = useLocale();
   return (
     <section className="relative border-y border-line py-14">
       <p className="label-mono text-fg-faint text-center mb-10">
-        Marcas que confiaram no processo
+        {t("logostrip.label")}
       </p>
 
       {/* Fade nas bordas pro infinito parecer natural */}

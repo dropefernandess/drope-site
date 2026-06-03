@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { ProjectCard } from "@/components/projetos/ProjectCard";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { projetos, categorias, type CategoriaSlug } from "@/content/projetos";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +20,7 @@ const INITIAL_LIMIT = 6;
  * Sem texto embaixo dos cards (era informação perdida).
  */
 export function Projetos() {
+  const { t } = useLocale();
   const [filter, setFilter] = useState<Filter>("all");
   const [showAll, setShowAll] = useState(false);
 
@@ -38,24 +40,23 @@ export function Projetos() {
               <p className="label-mono">
                 <span className="text-fg-strong">01</span>
                 <span className="mx-3 text-fg-faint">──</span>
-                <span>Trabalhos selecionados</span>
+                <span>{t("projetos.eyebrow")}</span>
               </p>
               <h2 className="text-h-1 text-fg-strong text-balance">
-                Cada projeto pensado do briefing à entrega final.
+                {t("projetos.title")}
               </h2>
             </div>
             <p className="lg:col-span-5 text-body max-w-prose">
-              Branding, web, UI e motion. Use os filtros pra ver apenas
-              uma frente. Passe o mouse pra ler sobre o projeto.
+              {t("projetos.desc")}
             </p>
           </div>
         </Reveal>
 
         {/* FILTROS */}
         <Reveal delay={0.1} className="flex flex-wrap items-center gap-2 border-y border-line py-4">
-          <span className="label-mono mr-2">Filtrar:</span>
+          <span className="label-mono mr-2">{t("projetos.filter_label")}</span>
           <FilterChip active={filter === "all"} onClick={() => { setFilter("all"); setShowAll(false); }}>
-            Tudo
+            {t("projetos.filter_all")}
           </FilterChip>
           {categorias.map((c) => (
             <FilterChip
@@ -79,7 +80,7 @@ export function Projetos() {
 
         {visible.length === 0 && (
           <div className="rounded-section border border-line bg-bg p-12 text-center">
-            <p className="text-body">Nenhum projeto nessa categoria ainda.</p>
+            <p className="text-body">{t("projetos.empty")}</p>
           </div>
         )}
 
@@ -89,7 +90,7 @@ export function Projetos() {
             href="/projetos"
             className="group inline-flex items-center gap-2 rounded-pill bg-fg-strong px-6 py-3.5 text-sm font-semibold text-bg hover:opacity-90 transition"
           >
-            Ver portfólio completo
+            {t("projetos.cta_portfolio")}
             <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
           </Link>
         </Reveal>

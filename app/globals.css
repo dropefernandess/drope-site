@@ -145,6 +145,12 @@
   to   { transform: translateX(-50%); }
 }
 
+/* Drop-down fade + slide from top — usado pelo LocaleToggle */
+@keyframes drope-fade-down {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .marquee-track {
   display: flex;
   width: max-content;

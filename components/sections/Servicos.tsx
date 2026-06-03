@@ -4,6 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 
 /**
  * Servicos — bento clean. Apenas Branding em vermelho protagonista;
@@ -16,50 +18,61 @@ const ascii = `· · · · · · · · · · · · · · · · ·
 + + + + + + + + + + + + + + + + +
 · · · · · · · · · · · · · · · · ·`;
 
-const servicos = [
+type ServiceItem = {
+  num: string;
+  titleKey: DictionaryKey;
+  descKey: DictionaryKey;
+  bullets: string[];           // tags curtas, mantidas como labels universais
+  priceKey: DictionaryKey;
+  variant: string;
+  span: string;
+  big?: boolean;
+};
+
+const servicos: ServiceItem[] = [
   {
     num: "01",
-    title: "Branding",
-    desc: "Marcas que respiram propósito. Da estratégia ao manual final.",
-    bullets: ["Naming", "Identidade", "Brand book", "Aplicações"],
-    price: "A partir de R$ 3.500",
-    variant: "brand",  // vermelho protagonista
+    titleKey: "servicos.s1_title",
+    descKey: "servicos.s1_desc",
+    bullets: ["Naming", "Identity", "Brand book", "Applications"],
+    priceKey: "servicos.price_branding",
+    variant: "brand",
     span: "md:col-span-8 md:row-span-2",
     big: true,
   },
   {
     num: "02",
-    title: "UI/UX",
-    desc: "Interfaces funcionais, alinhadas ao usuário real.",
-    bullets: ["Wireframes", "Protótipo", "Design final"],
-    price: "Sob escopo",
+    titleKey: "servicos.s2_title",
+    descKey: "servicos.s2_desc",
+    bullets: ["Wireframes", "Prototype", "Final design"],
+    priceKey: "servicos.price_other",
     variant: "soft",
     span: "md:col-span-4",
   },
   {
     num: "03",
-    title: "Web",
-    desc: "Sites institucionais, landings e portfólios.",
-    bullets: ["Landing", "Institucional", "Portfólio"],
-    price: "Sob escopo",
+    titleKey: "servicos.s3_title",
+    descKey: "servicos.s3_desc",
+    bullets: ["Landing", "Corporate", "Portfolio"],
+    priceKey: "servicos.price_other",
     variant: "surface",
     span: "md:col-span-4",
   },
   {
     num: "04",
-    title: "Motion",
-    desc: "Animações que dão vida à identidade. De logo reveal a launch reels.",
-    bullets: ["Logo reveal", "Reels", "Apresentações", "Microinterações"],
-    price: "Sob escopo",
+    titleKey: "servicos.s4_title",
+    descKey: "servicos.s4_desc",
+    bullets: ["Logo reveal", "Reels", "Slides", "Microinteractions"],
+    priceKey: "servicos.price_other",
     variant: "dark",
     span: "md:col-span-6",
   },
   {
     num: "05",
-    title: "Gráfico",
-    desc: "Materiais de apoio, social e print. Da arte ao arquivo final pra gráfica.",
-    bullets: ["Social media", "Editorial", "Print", "Apresentações"],
-    price: "Sob escopo",
+    titleKey: "servicos.s5_title",
+    descKey: "servicos.s5_desc",
+    bullets: ["Social", "Editorial", "Print", "Slides"],
+    priceKey: "servicos.price_other",
     variant: "soft",
     span: "md:col-span-6",
   },
@@ -93,6 +106,7 @@ const variantStyles: Record<string, { bg: string; fg: string; muted: string; chi
 };
 
 export function Servicos() {
+  const { t } = useLocale();
   return (
     <section id="servicos" className="bg-bg section-padding">
       <Container className="flex flex-col gap-12">
@@ -103,22 +117,21 @@ export function Servicos() {
               <p className="label-mono">
                 <span className="text-fg-strong">02</span>
                 <span className="mx-3 text-fg-faint">──</span>
-                <span>O que entrego</span>
+                <span>{t("servicos.eyebrow")}</span>
               </p>
               <h2 className="text-h-1 text-fg-strong text-balance">
-                Cinco frentes de criação. Da estratégia ao último pixel.
+                {t("servicos.title")}
               </h2>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-4 items-start">
               <p className="text-body max-w-prose">
-                Da primeira conversa à entrega final, cada etapa do projeto
-                é conduzida com transparência sobre escopo, prazo e processo.
+                {t("servicos.desc")}
               </p>
               <Link
                 href="/proposta"
                 className="group inline-flex items-center gap-2 rounded-pill bg-fg-strong px-5 py-3 text-sm font-semibold text-bg hover:opacity-90 transition"
               >
-                Ver método e investimento
+                {t("servicos.cta")}
                 <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
               </Link>
             </div>
@@ -149,11 +162,11 @@ export function Servicos() {
                 <div className="flex items-start justify-between gap-3 relative">
                   <div className="flex flex-col gap-1.5">
                     <span className={`text-sm font-medium ${st.muted}`}>
-                      {s.num} ── Serviço
+                      {s.num} ── {t("servicos.label_suffix")}
                     </span>
-                    {s.price && (
+                    {s.priceKey && (
                       <span className={`inline-flex w-fit items-center rounded-pill px-2.5 py-0.5 text-[11px] font-semibold border ${st.chip} ${s.big ? "bg-brand-fg/10" : "bg-bg/40"}`}>
-                        {s.price}
+                        {t(s.priceKey)}
                       </span>
                     )}
                   </div>
@@ -168,10 +181,10 @@ export function Servicos() {
                   <h3 className={`font-semibold tracking-tight leading-[1.05] ${st.fg} ${
                     s.big ? "text-[clamp(2rem,3.5vw,3rem)]" : "text-[clamp(1.5rem,2vw,1.875rem)]"
                   }`}>
-                    {s.title}
+                    {t(s.titleKey)}
                   </h3>
                   <p className={`text-sm leading-relaxed ${st.muted} max-w-prose`}>
-                    {s.desc}
+                    {t(s.descKey)}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mt-2">
                     {s.bullets.map((b) => (

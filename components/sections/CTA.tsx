@@ -5,12 +5,14 @@ import Link from "next/link";
 import { ArrowUpRight, Clock, Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 /**
  * CTA Final — foto Unsplash dark/moody como background + overlay vermelho
  * sutil + texto sobre. Bem mais cinematográfico que o gradient anterior.
  */
 export function CTA() {
+  const { t } = useLocale();
   return (
     <section id="contato" className="bg-bg px-6 pb-24 md:pb-32 md:px-12">
       <Container>
@@ -44,18 +46,16 @@ export function CTA() {
               <Reveal delay={0.05} className="inline-flex items-center gap-2 self-start rounded-pill bg-ink-50/15 backdrop-blur border border-ink-50/20 px-3.5 py-1.5">
                 <Clock className="size-3 text-ink-50" strokeWidth={2.5} />
                 <span className="text-xs font-medium text-ink-50">
-                  Aceitando 2 vagas pra Q3 2026
+                  {t("cta.badge_vagas")}
                 </span>
               </Reveal>
 
               <h2 className="text-[clamp(1.875rem,5vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.025em] text-ink-50 text-balance">
-                Vamos construir algo do seu jeito?
+                {t("cta.headline")}
               </h2>
 
               <Reveal delay={0.25} className="text-base md:text-lg leading-relaxed text-ink-50/85 max-w-prose">
-                Conta o que você precisa: identidade, site, motion, ou os três.
-                Volto em até 24h com perguntas. Sem chatbot, sem formulário
-                burocrático.
+                {t("cta.subhead")}
               </Reveal>
 
               <Reveal delay={0.35} className="flex flex-wrap items-center gap-3 pt-3">
@@ -71,7 +71,7 @@ export function CTA() {
                   href="/calculadora"
                   className="inline-flex items-center gap-2 rounded-pill border border-ink-50/30 bg-ink-50/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-ink-50 hover:bg-ink-50/20 transition"
                 >
-                  Calcular estimativa
+                  {t("cta.button_calc")}
                 </Link>
               </Reveal>
             </div>
@@ -81,25 +81,25 @@ export function CTA() {
               <Reveal delay={0.3} className="rounded-card bg-ink-50/10 backdrop-blur border border-ink-50/15 p-5 flex items-center justify-between">
                 <div className="flex flex-col gap-1">
                   <p className="text-[11px] uppercase tracking-wider text-ink-50/70 font-medium">
-                    Tempo de resposta
+                    {t("cta.meta1_label")}
                   </p>
-                  <p className="text-h-3 text-ink-50">Até 24h úteis</p>
+                  <p className="text-h-3 text-ink-50">{t("cta.meta1_value")}</p>
                 </div>
                 <span className="size-2 rounded-full bg-status animate-pulse" />
               </Reveal>
 
               <Reveal delay={0.4} className="rounded-card bg-ink-50/10 backdrop-blur border border-ink-50/15 p-5 flex flex-col gap-1">
                 <p className="text-[11px] uppercase tracking-wider text-ink-50/70 font-medium">
-                  Primeira conversa
+                  {t("cta.meta2_label")}
                 </p>
-                <p className="text-h-3 text-ink-50">Sem custo · 30 min</p>
+                <p className="text-h-3 text-ink-50">{t("cta.meta2_value")}</p>
               </Reveal>
 
               <Reveal delay={0.5} className="rounded-card bg-ink-50/10 backdrop-blur border border-ink-50/15 p-5 flex flex-col gap-1">
                 <p className="text-[11px] uppercase tracking-wider text-ink-50/70 font-medium">
-                  Localização
+                  {t("cta.meta3_label")}
                 </p>
-                <p className="text-h-3 text-ink-50">Senador Firmino, MG · remoto</p>
+                <p className="text-h-3 text-ink-50">{t("cta.meta3_value")}</p>
               </Reveal>
             </div>
 

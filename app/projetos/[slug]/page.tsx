@@ -6,6 +6,7 @@ import { ArrowUpRight, ArrowLeft, ExternalLink } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { CaseImage } from "@/components/projetos/CaseImage";
+import { GalleryImage } from "@/components/projetos/GalleryImage";
 import { VideoPlaceholder } from "@/components/projetos/VideoPlaceholder";
 import { getProjeto, projetos, categorias } from "@/content/projetos";
 
@@ -181,29 +182,26 @@ export default async function CaseStudyPage({ params }: Props) {
       )}
 
       {/* ===== GALLERY — masonry CSS columns ===== */}
-      {/* Layout fluido: 1 col mobile / 2 sm / 3 lg. Cada imagem respeita seu
-          aspect natural sem deixar buracos. break-inside-avoid garante que
-          a imagem não quebra entre colunas. */}
+      {/* Layout fluido: 1 col mobile / 2 sm / 3 lg. Cada imagem mantém seu
+          aspect intrinsic (sem cortar wide pra portrait nem vice-versa).
+          break-inside-avoid garante que não quebra entre colunas. */}
       <Container as="section" className="mt-20 md:mt-28">
         <Reveal>
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
-            {c.gallery.map((img, i) => {
-              const aspect = img.aspect ? aspectClasses[img.aspect] : "aspect-video";
-              return (
-                <div
-                  key={i}
-                  className={`break-inside-avoid mb-3 relative ${aspect} overflow-hidden rounded-section bg-surface`}
-                >
-                  <CaseImage
-                    src={img.src}
-                    alt={img.alt}
-                    index={i}
-                    total={c.gallery.length}
-                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                  />
-                </div>
-              );
-            })}
+            {c.gallery.map((img, i) => (
+              <div
+                key={i}
+                className="break-inside-avoid mb-3 overflow-hidden rounded-section"
+              >
+                <GalleryImage
+                  src={img.src}
+                  alt={img.alt}
+                  index={i}
+                  total={c.gallery.length}
+                  loading={i < 2 ? "eager" : "lazy"}
+                />
+              </div>
+            ))}
           </div>
         </Reveal>
       </Container>
