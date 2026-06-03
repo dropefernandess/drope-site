@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Quote, Star } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
@@ -85,12 +84,10 @@ const stats: { vKey: DictionaryKey; lKey: DictionaryKey }[] = [
   { vKey: "depoimentos.stat3_v", lKey: "depoimentos.stat3_l" },
 ];
 
-/** Avatar — tenta carregar foto, fallback elegante pra iniciais se não existir.
- *  Usa <img> nativo (não next/image) pra não exigir file no build. Performance
- *  irrelevante em avatar 48px. Quando subir as fotos em /public/depoimentos/{slug}.jpg
- *  o componente carrega automaticamente. */
+/** Avatar — iniciais sobre cor da marca. Versão pré-fotos.
+ *  Quando o Drope subir as fotos em /public/depoimentos/{slug}.jpg, basta
+ *  reverter pra versão com <img> + onError fallback (commit ad2d1d0). */
 function Avatar({ t, toneStyle }: { t: Testimonial; toneStyle: typeof tones[Tone] }) {
-  const [errored, setErrored] = useState(false);
   const initials = t.name
     .split(" ")
     .map((p) => p[0])
@@ -98,25 +95,10 @@ function Avatar({ t, toneStyle }: { t: Testimonial; toneStyle: typeof tones[Tone
     .join("")
     .toUpperCase();
 
-  if (errored) {
-    return (
-      <div className={cn("size-12 rounded-full flex items-center justify-center text-sm font-semibold shrink-0", toneStyle.avatarBg)}>
-        {initials}
-      </div>
-    );
-  }
-
   return (
-    /* eslint-disable-next-line @next/next/no-img-element */
-    <img
-      src={`/depoimentos/${t.slug}.jpg`}
-      alt={t.name}
-      width={48}
-      height={48}
-      loading="lazy"
-      onError={() => setErrored(true)}
-      className="size-12 rounded-full object-cover shrink-0 bg-surface"
-    />
+    <div className={cn("size-12 rounded-full flex items-center justify-center text-sm font-semibold shrink-0", toneStyle.avatarBg)}>
+      {initials}
+    </div>
   );
 }
 
