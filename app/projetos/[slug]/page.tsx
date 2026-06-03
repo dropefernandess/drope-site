@@ -6,7 +6,7 @@ import { ArrowUpRight, ArrowLeft, ExternalLink } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { CaseImage } from "@/components/projetos/CaseImage";
-import { BentoGallery } from "@/components/projetos/BentoGallery";
+import { GalleryImage } from "@/components/projetos/GalleryImage";
 import { VideoPlaceholder } from "@/components/projetos/VideoPlaceholder";
 import { getProjeto, projetos, categorias } from "@/content/projetos";
 
@@ -181,12 +181,27 @@ export default async function CaseStudyPage({ params }: Props) {
         </Container>
       )}
 
-      {/* ===== GALLERY — bento 6 cards com detecção de orientation ===== */}
-      {/* JS detecta wide/portrait/square via probing dimensions e aplica
-          col-span-2 / row-span-2 em CSS Grid dense. Sem buracos. */}
+      {/* ===== GALLERY — masonry CSS columns (até 6 imagens) ===== */}
+      {/* CSS columns respeita aspect intrinsic SEM cortar nem deixar buracos.
+          column-fill: balance distribui de forma equilibrada entre as colunas. */}
       <Container as="section" className="mt-20 md:mt-28">
         <Reveal>
-          <BentoGallery images={c.gallery} />
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
+            {c.gallery.slice(0, 6).map((img, i) => (
+              <div
+                key={i}
+                className="break-inside-avoid mb-3 overflow-hidden rounded-section"
+              >
+                <GalleryImage
+                  src={img.src}
+                  alt={img.alt}
+                  index={i}
+                  total={Math.min(c.gallery.length, 6)}
+                  loading={i < 2 ? "eager" : "lazy"}
+                />
+              </div>
+            ))}
+          </div>
         </Reveal>
       </Container>
 

@@ -50,7 +50,7 @@ export function LocaleToggle({ className }: { className?: string }) {
 
   return (
     <div ref={rootRef} className={cn("relative", className)}>
-      {/* Trigger */}
+      {/* Trigger — padding generoso pra bandeira respirar */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -58,12 +58,12 @@ export function LocaleToggle({ className }: { className?: string }) {
         aria-expanded={open}
         aria-label={t("nav.toggle_lang_aria")}
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-pill border border-line bg-bg-soft pl-1 pr-2 py-1 transition hover:bg-surface",
+          "inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-2.5 py-1.5 transition hover:bg-surface",
           open && "bg-surface"
         )}
       >
-        <span className="relative inline-block w-[15px] h-[11px] overflow-hidden rounded-[3px] shadow-sm ring-1 ring-ink-900/10">
-          <Image src={active.src} alt="" fill sizes="15px" />
+        <span className="relative inline-block w-6 h-[18px] overflow-hidden rounded-[3px] shadow-sm ring-1 ring-ink-900/10">
+          <Image src={active.src} alt="" fill sizes="24px" />
         </span>
         <ChevronDown
           className={cn(
@@ -104,8 +104,8 @@ export function LocaleToggle({ className }: { className?: string }) {
                       : "text-fg-body hover:bg-surface hover:text-fg-strong"
                   )}
                 >
-                  <span className="relative inline-block w-[15px] h-[11px] overflow-hidden rounded-[3px] shadow-sm ring-1 ring-ink-900/10 shrink-0">
-                    <Image src={f.src} alt="" fill sizes="15px" />
+                  <span className="relative inline-block w-6 h-[18px] overflow-hidden rounded-[3px] shadow-sm ring-1 ring-ink-900/10 shrink-0">
+                    <Image src={f.src} alt="" fill sizes="24px" />
                   </span>
                   <span className="flex-1">{f.label}</span>
                   <span className="text-[10px] uppercase tracking-wider font-semibold text-fg-mute tabular-nums">
