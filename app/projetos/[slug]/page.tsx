@@ -6,7 +6,11 @@ import { ArrowUpRight, ArrowLeft, ExternalLink } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { CaseImage } from "@/components/projetos/CaseImage";
+import { VideoPlaceholder } from "@/components/projetos/VideoPlaceholder";
 import { getProjeto, projetos, categorias } from "@/content/projetos";
+
+/** Cases UI/UX e Web ganham vídeo (ou placeholder) antes do hero image. */
+const VIDEO_CATEGORIES = ["ui-ux-design", "web-design"] as const;
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -130,18 +134,24 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </Container>
 
-      {/* ===== HERO IMAGE — full bleed ===== */}
+      {/* ===== HERO MEDIA — full bleed ===== */}
+      {/* Cases UI/UX e Web abrem com vídeo (ou placeholder pra trocar depois).
+          Outros abrem com hero image regular. */}
       <Reveal delay={0.2} className="mt-14 md:mt-20 px-6 md:px-12">
         <div className="relative mx-auto aspect-[16/9] w-full max-w-container overflow-hidden rounded-section bg-surface">
-          <Image
-            src={c.hero.src}
-            alt={c.hero.alt}
-            fill
-            priority
-            quality={90}
-            sizes="(min-width: 1400px) 1400px, 100vw"
-            className="object-cover"
-          />
+          {projeto.categorias.some((cat) => VIDEO_CATEGORIES.includes(cat as (typeof VIDEO_CATEGORIES)[number])) ? (
+            <VideoPlaceholder slug={projeto.slug} alt={c.hero.alt} poster={c.hero.src} />
+          ) : (
+            <Image
+              src={c.hero.src}
+              alt={c.hero.alt}
+              fill
+              priority
+              quality={90}
+              sizes="(min-width: 1400px) 1400px, 100vw"
+              className="object-cover"
+            />
+          )}
         </div>
       </Reveal>
 
@@ -170,34 +180,31 @@ export default async function CaseStudyPage({ params }: Props) {
         </Container>
       )}
 
-      {/* ===== GALLERY — grid masonry-like ===== */}
+      {/* ===== GALLERY — masonry CSS columns ===== */}
+      {/* Layout fluido: 1 col mobile / 2 sm / 3 lg. Cada imagem respeita seu
+          aspect natural sem deixar buracos. break-inside-avoid garante que
+          a imagem não quebra entre colunas. */}
       <Container as="section" className="mt-20 md:mt-28">
-        <Reveal className="grid gap-3 md:grid-cols-6 md:auto-rows-[minmax(220px,auto)]">
-          {c.gallery.map((img, i) => {
-            const colSpan = [
-              "md:col-span-4",
-              "md:col-span-2",
-              "md:col-span-3",
-              "md:col-span-3",
-              "md:col-span-6",
-              "md:col-span-3",
-            ][i % 6];
-            const aspect = img.aspect ? aspectClasses[img.aspect] : "aspect-video";
-            return (
-              <div
-                key={i}
-                className={`relative ${colSpan} ${aspect} overflow-hidden rounded-section bg-surface`}
-              >
-                <CaseImage
-                  src={img.src}
-                  alt={img.alt}
-                  index={i}
-                  total={c.gallery.length}
-                  sizes="(min-width:768px) 50vw, 100vw"
-                />
-              </div>
-            );
-          })}
+        <Reveal>
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
+            {c.gallery.map((img, i) => {
+              const aspect = img.aspect ? aspectClasses[img.aspect] : "aspect-video";
+              return (
+                <div
+                  key={i}
+                  className={`break-inside-avoid mb-3 relative ${aspect} overflow-hidden rounded-section bg-surface`}
+                >
+                  <CaseImage
+                    src={img.src}
+                    alt={img.alt}
+                    index={i}
+                    total={c.gallery.length}
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                  />
+                </div>
+              );
+            })}
+          </div>
         </Reveal>
       </Container>
 

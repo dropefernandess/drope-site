@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/sections/Footer";
 import { ScrollProgressBar } from "@/components/ui/Effects";
+import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import "./globals.css";
 
 // Inter em TODOS os pesos — Thin 100 ao Black 900.
@@ -98,10 +99,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <ScrollProgressBar />
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <LocaleProvider>
+          <ScrollProgressBar />
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+        </LocaleProvider>
       </body>
     </html>
   );

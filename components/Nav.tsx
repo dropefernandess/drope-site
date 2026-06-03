@@ -7,14 +7,17 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { LocaleToggle } from "@/components/i18n/LocaleToggle";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 
-const links = [
-  { href: "/",            label: "Início"      },
-  { href: "/sobre",       label: "Sobre"       },
-  { href: "/projetos",    label: "Trabalhos"   },
-  { href: "/proposta",    label: "Método"      },
-  { href: "/calculadora", label: "Calculadora" },
-  { href: "/blog",        label: "Blog"        },
+const links: { href: string; key: DictionaryKey }[] = [
+  { href: "/",            key: "nav.inicio"      },
+  { href: "/sobre",       key: "nav.sobre"       },
+  { href: "/projetos",    key: "nav.trabalhos"   },
+  { href: "/proposta",    key: "nav.metodo"      },
+  { href: "/calculadora", key: "nav.calculadora" },
+  { href: "/blog",        key: "nav.blog"        },
 ];
 
 /**
@@ -25,6 +28,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { t } = useLocale();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -92,21 +96,24 @@ export function Nav() {
                       : "text-fg-mute hover:text-fg-strong hover:bg-surface"
                   )}
                 >
-                  {l.label}
+                  {t(l.key)}
                 </Link>
               );
             })}
           </nav>
 
+          {/* Locale toggle (PT/EN) */}
+          <LocaleToggle className="ml-1" />
+
           {/* Theme toggle */}
-          <ThemeToggle className="ml-1" />
+          <ThemeToggle className="ml-0.5" />
 
           {/* CTA */}
           <Link
             href="/agendar"
             className="ml-1 inline-flex items-center gap-1.5 rounded-pill bg-fg-strong px-4 py-2 text-sm font-semibold text-bg transition hover:opacity-90"
           >
-            Agendar
+            {t("nav.cta")}
             <ArrowUpRight className="size-3.5" strokeWidth={2.5} />
           </Link>
         </div>
@@ -120,6 +127,7 @@ export function Nav() {
             <Image src="/brand/drope-dark.svg" alt="Dropê" width={92} height={32} priority className="hidden dark:block" />
           </Link>
           <div className="flex items-center gap-2">
+            <LocaleToggle />
             <ThemeToggle />
             <button
               type="button"
@@ -156,7 +164,7 @@ export function Nav() {
                     active ? "text-fg-strong" : "text-fg-body"
                   )}
                 >
-                  <span className="text-3xl font-extrabold tracking-tight">{l.label}</span>
+                  <span className="text-3xl font-extrabold tracking-tight">{t(l.key)}</span>
                   <ArrowUpRight className="size-5 text-fg-mute" />
                 </Link>
               );
@@ -167,7 +175,7 @@ export function Nav() {
             href="/agendar"
             className="mt-6 inline-flex items-center justify-center gap-2 rounded-pill bg-fg-strong px-6 py-4 text-base font-semibold text-bg"
           >
-            Agendar conversa
+            {t("nav.cta_long")}
             <ArrowUpRight className="size-4" strokeWidth={2.5} />
           </Link>
         </div>

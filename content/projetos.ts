@@ -87,7 +87,7 @@ export const projetos: Projeto[] = [
       "E-commerce e copy para pizzaria de fermentação natural em Dubai Marina.",
     categorias: ["branding", "web-design", "ui-ux-design"],
     image: "/projetos/bada-bing.png",
-    year: 2025,
+    year: 2026,
     featured: true,
     case: {
       subtitle: "Pizzaria romana de 72h de fermentação chega ao Dubai Marina com identidade e e-commerce completos.",
@@ -281,7 +281,7 @@ export const projetos: Projeto[] = [
       "Site institucional e social media para escritório contábil em ascensão.",
     categorias: ["web-design", "graphic-design"],
     image: "/projetos/vizir.jpg",
-    year: 2023,
+    year: 2025,
     case: {
       subtitle: "Escritório contábil tradicional ganha presença digital moderna sem perder credibilidade do segmento.",
       meta: {
@@ -406,7 +406,7 @@ export const projetos: Projeto[] = [
       "SaaS de rastreamento de pedidos e gestão pós-venda para e-commerces.",
     categorias: ["ui-ux-design", "web-design"],
     image: "/projetos/go-trace.jpg",
-    year: 2024,
+    year: 2025,
     case: {
       subtitle: "Plataforma de rastreamento ganha redesign completo de dashboard e fluxo de onboarding pra lojistas.",
       meta: {
@@ -469,7 +469,7 @@ export const projetos: Projeto[] = [
       "App de gestão financeira pessoal com foco em clareza e usabilidade.",
     categorias: ["ui-ux-design"],
     image: "/projetos/financas-ja.png",
-    year: 2023,
+    year: 2025,
     case: {
       subtitle: "App de finanças pessoais elimina jargão e simplifica controle mensal pra quem nunca usou apps do tipo.",
       meta: {
@@ -531,7 +531,7 @@ export const projetos: Projeto[] = [
       "Gestão financeira via WhatsApp com categorização automática por IA.",
     categorias: ["ui-ux-design", "branding"],
     image: "/projetos/moneyfy.jpg",
-    year: 2024,
+    year: 2026,
     case: {
       subtitle: "Plataforma de finanças via WhatsApp ganha identidade visual coesa e design das interfaces de configuração.",
       meta: {
@@ -594,7 +594,7 @@ export const projetos: Projeto[] = [
       "Identidade visual para loteamento residencial em Senador Firmino, MG.",
     categorias: ["branding"],
     image: "/projetos/bosque-do-sol.png",
-    year: 2023,
+    year: 2025,
     case: {
       subtitle: "Loteamento em zona rural ganha identidade que reflete o ritmo da terra sem cair em clichês imobiliários.",
       meta: {
@@ -656,7 +656,7 @@ export const projetos: Projeto[] = [
       "Brand system para consultório psicológico com identidade humanista.",
     categorias: ["branding"],
     image: "/projetos/katia-assis.jpg",
-    year: 2022,
+    year: 2026,
     case: {
       subtitle: "Consultório psicológico ganha identidade que transmite acolhimento sem cair em estereótipos visuais da área.",
       meta: {
@@ -718,7 +718,7 @@ export const projetos: Projeto[] = [
       "Brand system para escritório de advocacia previdenciária feminino.",
     categorias: ["branding"],
     image: "/projetos/gisto-xavier.png",
-    year: 2022,
+    year: 2026,
     case: {
       subtitle: "Escritório de advocacia previdenciária liderado por mulheres ganha identidade firme, sem cair na sobriedade exagerada do segmento.",
       meta: {

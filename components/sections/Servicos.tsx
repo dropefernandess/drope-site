@@ -22,6 +22,7 @@ const servicos = [
     title: "Branding",
     desc: "Marcas que respiram propósito. Da estratégia ao manual final.",
     bullets: ["Naming", "Identidade", "Brand book", "Aplicações"],
+    price: "A partir de R$ 3.500",
     variant: "brand",  // vermelho protagonista
     span: "md:col-span-8 md:row-span-2",
     big: true,
@@ -31,6 +32,7 @@ const servicos = [
     title: "UI/UX",
     desc: "Interfaces funcionais, alinhadas ao usuário real.",
     bullets: ["Wireframes", "Protótipo", "Design final"],
+    price: "Sob escopo",
     variant: "soft",
     span: "md:col-span-4",
   },
@@ -39,6 +41,7 @@ const servicos = [
     title: "Web",
     desc: "Sites institucionais, landings e portfólios.",
     bullets: ["Landing", "Institucional", "Portfólio"],
+    price: "Sob escopo",
     variant: "surface",
     span: "md:col-span-4",
   },
@@ -47,6 +50,7 @@ const servicos = [
     title: "Motion",
     desc: "Animações que dão vida à identidade. De logo reveal a launch reels.",
     bullets: ["Logo reveal", "Reels", "Apresentações", "Microinterações"],
+    price: "Sob escopo",
     variant: "dark",
     span: "md:col-span-6",
   },
@@ -55,6 +59,7 @@ const servicos = [
     title: "Gráfico",
     desc: "Materiais de apoio, social e print. Da arte ao arquivo final pra gráfica.",
     bullets: ["Social media", "Editorial", "Print", "Apresentações"],
+    price: "Sob escopo",
     variant: "soft",
     span: "md:col-span-6",
   },
@@ -140,11 +145,18 @@ export function Servicos() {
                   </pre>
                 )}
 
-                {/* Top: num + arrow */}
-                <div className="flex items-start justify-between relative">
-                  <span className={`text-sm font-medium ${st.muted}`}>
-                    {s.num} ── Serviço
-                  </span>
+                {/* Top: num + price + arrow */}
+                <div className="flex items-start justify-between gap-3 relative">
+                  <div className="flex flex-col gap-1.5">
+                    <span className={`text-sm font-medium ${st.muted}`}>
+                      {s.num} ── Serviço
+                    </span>
+                    {s.price && (
+                      <span className={`inline-flex w-fit items-center rounded-pill px-2.5 py-0.5 text-[11px] font-semibold border ${st.chip} ${s.big ? "bg-brand-fg/10" : "bg-bg/40"}`}>
+                        {s.price}
+                      </span>
+                    )}
+                  </div>
                   <ArrowUpRight
                     className={`size-5 ${st.fg} opacity-50 transition group-hover:opacity-100 group-hover:-translate-y-0.5 group-hover:translate-x-0.5`}
                     strokeWidth={2}
