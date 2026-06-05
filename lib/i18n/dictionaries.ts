@@ -33,9 +33,8 @@ export const dictionaries = {
     "hero.location": "Senador Firmino · MG",
     "hero.headline_1": "Crio marcas pra",
     "hero.headline_2": "durar e entrego elas funcionando.",
-    "hero.subhead_prefix": "Sou ",
-    "hero.subhead_suffix":
-      ". Branding, UI/UX e desenvolvimento na mesma cabeça, do briefing à launch. Sem ping-pong entre fornecedores, sem perder a direção no caminho.",
+    "hero.subhead":
+      "Branding, UI/UX e desenvolvimento na mesma cabeça, do briefing à launch. Sem ping-pong entre fornecedores, sem perder a direção no caminho.",
     "hero.cta_primary": "Ver trabalhos",
     "hero.cta_secondary": "ou agenda 30 min direto",
 
@@ -67,6 +66,25 @@ export const dictionaries = {
     "servicos.s4_desc": "Animações que dão vida à identidade. De logo reveal a launch reels.",
     "servicos.s5_title": "Gráfico",
     "servicos.s5_desc": "Materiais de apoio, social e print. Da arte ao arquivo final pra gráfica.",
+    // bullets/tags por serviço
+    "servicos.s1_b1": "Naming",
+    "servicos.s1_b2": "Identidade",
+    "servicos.s1_b3": "Manual da marca",
+    "servicos.s1_b4": "Aplicações",
+    "servicos.s2_b1": "Wireframes",
+    "servicos.s2_b2": "Protótipo",
+    "servicos.s2_b3": "Design final",
+    "servicos.s3_b1": "Landing",
+    "servicos.s3_b2": "Institucional",
+    "servicos.s3_b3": "Portfólio",
+    "servicos.s4_b1": "Logo reveal",
+    "servicos.s4_b2": "Reels",
+    "servicos.s4_b3": "Apresentações",
+    "servicos.s4_b4": "Microinterações",
+    "servicos.s5_b1": "Social media",
+    "servicos.s5_b2": "Editorial",
+    "servicos.s5_b3": "Print",
+    "servicos.s5_b4": "Apresentações",
 
     // === PROJETOS (HOME) ===
     "projetos.eyebrow": "Trabalhos selecionados",
@@ -449,9 +467,8 @@ export const dictionaries = {
     "hero.location": "Senador Firmino · Brazil",
     "hero.headline_1": "I build brands",
     "hero.headline_2": "that last and ship them working.",
-    "hero.subhead_prefix": "I'm ",
-    "hero.subhead_suffix":
-      ". Branding, UI/UX and development in the same head, from brief to launch. No ping-pong between vendors, no direction lost along the way.",
+    "hero.subhead":
+      "Branding, UI/UX and development in the same head, from brief to launch. No ping-pong between vendors, no direction lost along the way.",
     "hero.cta_primary": "See work",
     "hero.cta_secondary": "or book a 30 min call",
 
@@ -483,6 +500,25 @@ export const dictionaries = {
     "servicos.s4_desc": "Animation that brings identity to life. From logo reveal to launch reels.",
     "servicos.s5_title": "Print",
     "servicos.s5_desc": "Support, social and print materials. From artwork to final print-ready file.",
+    // bullets/tags per service
+    "servicos.s1_b1": "Naming",
+    "servicos.s1_b2": "Identity",
+    "servicos.s1_b3": "Brand book",
+    "servicos.s1_b4": "Applications",
+    "servicos.s2_b1": "Wireframes",
+    "servicos.s2_b2": "Prototype",
+    "servicos.s2_b3": "Final design",
+    "servicos.s3_b1": "Landing",
+    "servicos.s3_b2": "Corporate",
+    "servicos.s3_b3": "Portfolio",
+    "servicos.s4_b1": "Logo reveal",
+    "servicos.s4_b2": "Reels",
+    "servicos.s4_b3": "Slides",
+    "servicos.s4_b4": "Microinteractions",
+    "servicos.s5_b1": "Social",
+    "servicos.s5_b2": "Editorial",
+    "servicos.s5_b3": "Print",
+    "servicos.s5_b4": "Slides",
 
     // === PROJETOS (HOME) ===
     "projetos.eyebrow": "Selected work",

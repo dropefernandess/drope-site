@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import {
-  GlitchText,
   Magnetic,
   AnimatedCounter,
   Parallax,
@@ -64,15 +63,7 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={0.3} className="text-lead max-w-prose">
-              {t("hero.subhead_prefix")}
-              <GlitchText
-                text="Drope"
-                className="font-semibold text-fg-strong"
-                trigger="mount"
-                duration={900}
-                delay={400}
-              />
-              {t("hero.subhead_suffix")}
+              {t("hero.subhead")}
             </Reveal>
 
             <Reveal delay={0.4} className="flex flex-wrap items-center gap-4">

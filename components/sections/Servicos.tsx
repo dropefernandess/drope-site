@@ -22,7 +22,7 @@ type ServiceItem = {
   num: string;
   titleKey: DictionaryKey;
   descKey: DictionaryKey;
-  bullets: string[];           // tags curtas, mantidas como labels universais
+  bulletKeys: DictionaryKey[];     // tags traduzidas via i18n
   priceKey: DictionaryKey;
   variant: string;
   span: string;
@@ -34,7 +34,7 @@ const servicos: ServiceItem[] = [
     num: "01",
     titleKey: "servicos.s1_title",
     descKey: "servicos.s1_desc",
-    bullets: ["Naming", "Identity", "Brand book", "Applications"],
+    bulletKeys: ["servicos.s1_b1", "servicos.s1_b2", "servicos.s1_b3", "servicos.s1_b4"],
     priceKey: "servicos.price_branding",
     variant: "brand",
     span: "md:col-span-8 md:row-span-2",
@@ -44,7 +44,7 @@ const servicos: ServiceItem[] = [
     num: "02",
     titleKey: "servicos.s2_title",
     descKey: "servicos.s2_desc",
-    bullets: ["Wireframes", "Prototype", "Final design"],
+    bulletKeys: ["servicos.s2_b1", "servicos.s2_b2", "servicos.s2_b3"],
     priceKey: "servicos.price_other",
     variant: "soft",
     span: "md:col-span-4",
@@ -53,7 +53,7 @@ const servicos: ServiceItem[] = [
     num: "03",
     titleKey: "servicos.s3_title",
     descKey: "servicos.s3_desc",
-    bullets: ["Landing", "Corporate", "Portfolio"],
+    bulletKeys: ["servicos.s3_b1", "servicos.s3_b2", "servicos.s3_b3"],
     priceKey: "servicos.price_other",
     variant: "surface",
     span: "md:col-span-4",
@@ -62,7 +62,7 @@ const servicos: ServiceItem[] = [
     num: "04",
     titleKey: "servicos.s4_title",
     descKey: "servicos.s4_desc",
-    bullets: ["Logo reveal", "Reels", "Slides", "Microinteractions"],
+    bulletKeys: ["servicos.s4_b1", "servicos.s4_b2", "servicos.s4_b3", "servicos.s4_b4"],
     priceKey: "servicos.price_other",
     variant: "dark",
     span: "md:col-span-6",
@@ -71,7 +71,7 @@ const servicos: ServiceItem[] = [
     num: "05",
     titleKey: "servicos.s5_title",
     descKey: "servicos.s5_desc",
-    bullets: ["Social", "Editorial", "Print", "Slides"],
+    bulletKeys: ["servicos.s5_b1", "servicos.s5_b2", "servicos.s5_b3", "servicos.s5_b4"],
     priceKey: "servicos.price_other",
     variant: "soft",
     span: "md:col-span-6",
@@ -187,12 +187,12 @@ export function Servicos() {
                     {t(s.descKey)}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mt-2">
-                    {s.bullets.map((b) => (
+                    {s.bulletKeys.map((bKey) => (
                       <span
-                        key={b}
+                        key={bKey}
                         className={`text-[11px] font-medium px-2.5 py-1 rounded-full border ${st.chip}`}
                       >
-                        {b}
+                        {t(bKey)}
                       </span>
                     ))}
                   </div>

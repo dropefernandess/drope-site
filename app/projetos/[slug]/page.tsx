@@ -6,7 +6,6 @@ import { ArrowUpRight, ArrowLeft, ExternalLink } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { CaseImage } from "@/components/projetos/CaseImage";
-import { GalleryImage } from "@/components/projetos/GalleryImage";
 import { VideoPlaceholder } from "@/components/projetos/VideoPlaceholder";
 import { getProjeto, projetos, categorias } from "@/content/projetos";
 
@@ -181,23 +180,23 @@ export default async function CaseStudyPage({ params }: Props) {
         </Container>
       )}
 
-      {/* ===== GALLERY — masonry CSS columns (até 6 imagens) ===== */}
-      {/* CSS columns respeita aspect intrinsic SEM cortar nem deixar buracos.
-          column-fill: balance distribui de forma equilibrada entre as colunas. */}
+      {/* ===== GALLERY — 6 cards 16:9 iguais ao hero (object-cover) ===== */}
+      {/* Mesmo aspect-ratio do hero pra ritmo visual consistente:
+            mobile: 1 col / sm: 2 cols / lg: 3 cols (2 fileiras de 3). */}
       <Container as="section" className="mt-20 md:mt-28">
         <Reveal>
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {c.gallery.slice(0, 6).map((img, i) => (
               <div
                 key={i}
-                className="break-inside-avoid mb-3 overflow-hidden rounded-section"
+                className="relative aspect-video overflow-hidden rounded-section bg-surface"
               >
-                <GalleryImage
+                <CaseImage
                   src={img.src}
                   alt={img.alt}
                   index={i}
                   total={Math.min(c.gallery.length, 6)}
-                  loading={i < 2 ? "eager" : "lazy"}
+                  sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
                 />
               </div>
             ))}

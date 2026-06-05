@@ -8,8 +8,8 @@
    em pesos próximos (Medium 500 ↔ SemiBold 600).
    ============================================================ */
 :root {
-  /* — Light mode (default, paper-feel SEM grain) — */
-  --bg:           242 242 235;
+  /* — Light mode (default, surface neutra clean — sem amarelado cream) — */
+  --bg:           246 246 246;
   --bg-soft:      255 255 255;
   --surface:      16 16 16;
   --surface-a:    0.04;
@@ -65,6 +65,13 @@
     @apply bg-bg text-fg-strong font-sans antialiased;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Reset padding default do browser pra listas (corrige deslocamento
+     do grid de depoimentos quando usado <motion.ul>). */
+  ul, ol {
+    padding-inline-start: 0;
+    margin-block: 0;
   }
 
   ::selection {
