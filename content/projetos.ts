@@ -178,11 +178,15 @@ export const projetos: Projeto[] = [
         { value: "3", label: "Coleções lançadas com o novo sistema" },
       ],
       gallery: [
-        { src: "/projetos/use-duali/01.png", alt: "Logo e wordmark", aspect: "square" },
-        { src: "/projetos/use-duali/02.png", alt: "Paleta dual cool/warm", aspect: "wide" },
-        { src: "/projetos/use-duali/03.png", alt: "Aplicação em embalagens", aspect: "portrait" },
+        { src: "/projetos/use-duali/01.png", alt: "Logo e wordmark", aspect: "video" },
+        { src: "/projetos/use-duali/02.png", alt: "Paleta dual cool/warm", aspect: "square" },
+        { src: "/projetos/use-duali/03.png", alt: "Aplicação em embalagens", aspect: "square" },
         { src: "/projetos/use-duali/04.png", alt: "Campanha lookbook", aspect: "video" },
-        { src: "/projetos/use-duali/05.png", alt: "Sistema tipográfico aplicado", aspect: "wide" },
+        { src: "/projetos/use-duali/05.png", alt: "Sistema tipográfico aplicado", aspect: "square" },
+        { src: "/projetos/use-duali/06.png", alt: "Etiquetas e tags", aspect: "square" },
+        { src: "/projetos/use-duali/07.png", alt: "Sacolas e packaging", aspect: "square" },
+        { src: "/projetos/use-duali/08.png", alt: "Aplicação em redes sociais", aspect: "square" },
+        { src: "/projetos/use-duali/09.png", alt: "Lookbook completo", aspect: "video" },
       ],
       sections: [
         {
@@ -240,10 +244,14 @@ export const projetos: Projeto[] = [
         { value: "100%", label: "Aplicações em embalagem recicláveis" },
       ],
       gallery: [
-        { src: "/projetos/myko/01.png", alt: "Logo MYKO principal", aspect: "square" },
-        { src: "/projetos/myko/02.png", alt: "Paleta azul Egeu", aspect: "wide" },
-        { src: "/projetos/myko/03.png", alt: "Aplicação em sacola de tecido", aspect: "portrait" },
-        { src: "/projetos/myko/04.png", alt: "Etiqueta de peça", aspect: "square" },
+        { src: "/projetos/myko/01.png", alt: "Logo MYKO principal", aspect: "video" },
+        { src: "/projetos/myko/02.png", alt: "Paleta azul Egeu", aspect: "square" },
+        { src: "/projetos/myko/03.png", alt: "Aplicação em sacola de tecido", aspect: "square" },
+        { src: "/projetos/myko/04.png", alt: "Etiqueta de peça", aspect: "video" },
+        { src: "/projetos/myko/05.png", alt: "Lookbook campanha verão", aspect: "square" },
+        { src: "/projetos/myko/06.png", alt: "Aplicação em embalagem", aspect: "square" },
+        { src: "/projetos/myko/07.png", alt: "Stationery completa", aspect: "square" },
+        { src: "/projetos/myko/08.png", alt: "Templates de redes sociais", aspect: "square" },
       ],
       sections: [
         {
@@ -364,11 +372,15 @@ export const projetos: Projeto[] = [
         { value: "+45%", label: "Novos contratos no trimestre pós-rebrand" },
       ],
       gallery: [
-        { src: "/projetos/sirius/01.png", alt: "Logo principal Sirius", aspect: "square" },
-        { src: "/projetos/sirius/02.png", alt: "Sistema tipográfico", aspect: "wide" },
-        { src: "/projetos/sirius/03.png", alt: "Aplicação em fachada", aspect: "video" },
-        { src: "/projetos/sirius/04.png", alt: "Frames do motion reveal", aspect: "wide" },
-        { src: "/projetos/sirius/05.png", alt: "Templates editoriais", aspect: "portrait" },
+        { src: "/projetos/sirius/01.png", alt: "Logo principal Sirius", aspect: "video" },
+        { src: "/projetos/sirius/02.png", alt: "Sistema tipográfico", aspect: "square" },
+        { src: "/projetos/sirius/03.png", alt: "Aplicação em fachada", aspect: "square" },
+        { src: "/projetos/sirius/04.png", alt: "Frames do motion reveal", aspect: "video" },
+        { src: "/projetos/sirius/05.png", alt: "Templates editoriais", aspect: "square" },
+        { src: "/projetos/sirius/06.png", alt: "Papelaria institucional", aspect: "square" },
+        { src: "/projetos/sirius/07.png", alt: "Aplicação em mídia digital", aspect: "square" },
+        { src: "/projetos/sirius/08.png", alt: "Variações do símbolo", aspect: "square" },
+        { src: "/projetos/sirius/09.png", alt: "Identidade aplicada em campanha", aspect: "video" },
       ],
       sections: [
         {
@@ -428,10 +440,14 @@ export const projetos: Projeto[] = [
       ],
       gallery: [
         { src: "/projetos/go-trace/01.jpg", alt: "Dashboard principal", aspect: "video" },
-        { src: "/projetos/go-trace/02.jpg", alt: "Tela de detalhe de pedido", aspect: "video" },
-        { src: "/projetos/go-trace/03.jpg", alt: "Mobile responsivo", aspect: "portrait" },
+        { src: "/projetos/go-trace/02.jpg", alt: "Tela de detalhe de pedido", aspect: "square" },
+        { src: "/projetos/go-trace/03.jpg", alt: "Mobile responsivo", aspect: "square" },
         { src: "/projetos/go-trace/04.jpg", alt: "Site institucional", aspect: "video" },
-        { src: "/projetos/go-trace/05.jpg", alt: "Design system tokens", aspect: "wide" },
+        { src: "/projetos/go-trace/05.jpg", alt: "Design system tokens", aspect: "square" },
+        { src: "/projetos/go-trace/06.jpg", alt: "Componentes de UI", aspect: "square" },
+        { src: "/projetos/go-trace/07.jpg", alt: "Fluxo de onboarding", aspect: "square" },
+        { src: "/projetos/go-trace/08.jpg", alt: "Filtros e estados vazios", aspect: "square" },
+        { src: "/projetos/go-trace/09.jpg", alt: "Landing page completa", aspect: "video" },
       ],
       sections: [
         {
@@ -490,10 +506,14 @@ export const projetos: Projeto[] = [
         { value: "iOS+Android", label: "Design unificado nas duas plataformas" },
       ],
       gallery: [
-        { src: "/projetos/financas-ja/01.png", alt: "Tela home do app", aspect: "portrait" },
-        { src: "/projetos/financas-ja/02.png", alt: "Categorias e tags", aspect: "portrait" },
-        { src: "/projetos/financas-ja/03.png", alt: "Gráfico mensal", aspect: "portrait" },
-        { src: "/projetos/financas-ja/04.png", alt: "Onboarding em 4 telas", aspect: "wide" },
+        { src: "/projetos/financas-ja/01.png", alt: "Tela home do app", aspect: "video" },
+        { src: "/projetos/financas-ja/02.png", alt: "Categorias e tags", aspect: "square" },
+        { src: "/projetos/financas-ja/03.png", alt: "Gráfico mensal", aspect: "square" },
+        { src: "/projetos/financas-ja/04.png", alt: "Onboarding em 4 telas", aspect: "video" },
+        { src: "/projetos/financas-ja/05.png", alt: "Histórico de transações", aspect: "square" },
+        { src: "/projetos/financas-ja/06.png", alt: "Tela de adicionar despesa", aspect: "square" },
+        { src: "/projetos/financas-ja/07.png", alt: "Resumo mensal interativo", aspect: "square" },
+        { src: "/projetos/financas-ja/08.png", alt: "Tela de metas e progressos", aspect: "square" },
       ],
       sections: [
         {
@@ -552,11 +572,13 @@ export const projetos: Projeto[] = [
         { value: "92%", label: "Categorização automática correta" },
       ],
       gallery: [
-        { src: "/projetos/moneyfy/01.jpg", alt: "Logo MoneyFy", aspect: "square" },
-        { src: "/projetos/moneyfy/02.jpg", alt: "Templates de mensagem WhatsApp", aspect: "portrait" },
-        { src: "/projetos/moneyfy/03.jpg", alt: "Dashboard web companion", aspect: "video" },
-        { src: "/projetos/moneyfy/04.jpg", alt: "Visual da IA — chat", aspect: "wide" },
+        { src: "/projetos/moneyfy/01.jpg", alt: "Logo MoneyFy", aspect: "video" },
+        { src: "/projetos/moneyfy/02.jpg", alt: "Templates de mensagem WhatsApp", aspect: "square" },
+        { src: "/projetos/moneyfy/03.jpg", alt: "Dashboard web companion", aspect: "square" },
+        { src: "/projetos/moneyfy/04.jpg", alt: "Visual da IA — chat", aspect: "video" },
         { src: "/projetos/moneyfy/05.jpg", alt: "Aplicações em redes sociais", aspect: "square" },
+        { src: "/projetos/moneyfy/06.jpg", alt: "Mockup interface mobile", aspect: "square" },
+        { src: "/projetos/moneyfy/07.jpg", alt: "Identidade aplicada em campanha", aspect: "square" },
       ],
       sections: [
         {
@@ -615,10 +637,15 @@ export const projetos: Projeto[] = [
         { value: "MG", label: "Senador Firmino, interior de Minas" },
       ],
       gallery: [
-        { src: "/projetos/bosque-do-sol/01.png", alt: "Logo Bosque do Sol", aspect: "square" },
-        { src: "/projetos/bosque-do-sol/02.png", alt: "Sistema de cores naturais", aspect: "wide" },
-        { src: "/projetos/bosque-do-sol/03.png", alt: "Sinalização no terreno", aspect: "video" },
-        { src: "/projetos/bosque-do-sol/04.png", alt: "Material impresso de venda", aspect: "portrait" },
+        { src: "/projetos/bosque-do-sol/01.png", alt: "Logo Bosque do Sol", aspect: "video" },
+        { src: "/projetos/bosque-do-sol/02.png", alt: "Sistema de cores naturais", aspect: "square" },
+        { src: "/projetos/bosque-do-sol/03.png", alt: "Sinalização no terreno", aspect: "square" },
+        { src: "/projetos/bosque-do-sol/04.png", alt: "Material impresso de venda", aspect: "video" },
+        { src: "/projetos/bosque-do-sol/05.png", alt: "Folder institucional", aspect: "square" },
+        { src: "/projetos/bosque-do-sol/06.png", alt: "Aplicação em fachada", aspect: "square" },
+        { src: "/projetos/bosque-do-sol/07.png", alt: "Identidade aplicada em uniformes", aspect: "square" },
+        { src: "/projetos/bosque-do-sol/08.png", alt: "Cartilha de boas-vindas", aspect: "square" },
+        { src: "/projetos/bosque-do-sol/09.png", alt: "Vista aérea do loteamento com brand aplicada", aspect: "video" },
       ],
       sections: [
         {
@@ -677,10 +704,14 @@ export const projetos: Projeto[] = [
         { value: "Acolher", label: "Palavra-chave central da marca" },
       ],
       gallery: [
-        { src: "/projetos/katia-assis/01.jpg", alt: "Logo principal", aspect: "square" },
-        { src: "/projetos/katia-assis/02.jpg", alt: "Sistema de cores acolhedor", aspect: "wide" },
-        { src: "/projetos/katia-assis/03.jpg", alt: "Cartão de visita", aspect: "portrait" },
-        { src: "/projetos/katia-assis/04.jpg", alt: "Templates Instagram", aspect: "square" },
+        { src: "/projetos/katia-assis/01.jpg", alt: "Logo principal", aspect: "video" },
+        { src: "/projetos/katia-assis/02.jpg", alt: "Sistema de cores acolhedor", aspect: "square" },
+        { src: "/projetos/katia-assis/03.jpg", alt: "Cartão de visita", aspect: "square" },
+        { src: "/projetos/katia-assis/04.jpg", alt: "Templates Instagram", aspect: "video" },
+        { src: "/projetos/katia-assis/05.jpg", alt: "Papelaria do consultório", aspect: "square" },
+        { src: "/projetos/katia-assis/06.jpg", alt: "Aplicação em fachada", aspect: "square" },
+        { src: "/projetos/katia-assis/07.jpg", alt: "Material de orientação ao paciente", aspect: "square" },
+        { src: "/projetos/katia-assis/08.jpg", alt: "Composição com símbolo gráfico", aspect: "square" },
       ],
       sections: [
         {
@@ -739,10 +770,14 @@ export const projetos: Projeto[] = [
         { value: "MG", label: "Atende todo Brasil, sede em Minas" },
       ],
       gallery: [
-        { src: "/projetos/gisto-xavier/01.png", alt: "Logo principal", aspect: "square" },
-        { src: "/projetos/gisto-xavier/02.png", alt: "Sistema tipográfico", aspect: "wide" },
-        { src: "/projetos/gisto-xavier/03.png", alt: "Cartão de visita", aspect: "portrait" },
+        { src: "/projetos/gisto-xavier/01.png", alt: "Logo principal", aspect: "video" },
+        { src: "/projetos/gisto-xavier/02.png", alt: "Sistema tipográfico", aspect: "square" },
+        { src: "/projetos/gisto-xavier/03.png", alt: "Cartão de visita", aspect: "square" },
         { src: "/projetos/gisto-xavier/04.png", alt: "Templates de processos", aspect: "video" },
+        { src: "/projetos/gisto-xavier/05.png", alt: "Mockup notebook com site", aspect: "square" },
+        { src: "/projetos/gisto-xavier/06.png", alt: "Brand book aberto", aspect: "square" },
+        { src: "/projetos/gisto-xavier/07.jpg", alt: "Pasta institucional fechada", aspect: "square" },
+        { src: "/projetos/gisto-xavier/08.jpg", alt: "Stationery dark sobre clean", aspect: "square" },
       ],
       sections: [
         {
