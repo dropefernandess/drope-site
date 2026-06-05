@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Clock } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { AnimatedClock } from "@/components/ui/AnimatedIcons";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
@@ -42,7 +43,7 @@ export function Hero() {
           </p>
           <div className="flex items-center gap-2 flex-wrap">
             <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3 py-1.5 text-xs font-medium text-fg-strong">
-              <Clock className="size-3 text-fg-mute" strokeWidth={2.5} />
+              <AnimatedClock className="size-3 text-fg-mute" strokeWidth={2.5} />
               {t("hero.status_q3")}
             </span>
             <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3 py-1.5 text-xs font-medium text-fg-strong">

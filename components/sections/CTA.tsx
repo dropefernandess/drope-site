@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Clock, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { AnimatedClock, AnimatedMail } from "@/components/ui/AnimatedIcons";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
@@ -85,7 +86,7 @@ export function CTA() {
             {/* Coluna esquerda — headline + sub + CTAs */}
             <div className="lg:col-span-7 flex flex-col gap-6">
               <Reveal delay={0.05} direction="left" className="inline-flex items-center gap-2 self-start rounded-pill bg-ink-50/10 backdrop-blur border border-ink-50/15 px-3.5 py-1.5">
-                <Clock className="size-3 text-ink-50" strokeWidth={2.5} />
+                <AnimatedClock className="size-3 text-ink-50" strokeWidth={2.5} />
                 <span className="text-xs font-medium text-ink-50">
                   {t("cta.badge_vagas")}
                 </span>
@@ -107,7 +108,7 @@ export function CTA() {
                   href="/agendar"
                   className="group inline-flex items-center gap-2 rounded-pill bg-brand px-6 py-3.5 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition shadow-lg shadow-brand/30"
                 >
-                  <Mail className="size-4" strokeWidth={2.5} />
+                  <AnimatedMail className="size-4" strokeWidth={2.5} />
                   <span>{t("cta.button_primary")}</span>
                   <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
                 </Link>

@@ -1,8 +1,9 @@
 "use client";
 
-import { Quote, Star } from "lucide-react";
+import { Quote } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { AnimatedStarRow } from "@/components/ui/AnimatedIcons";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 import { cn } from "@/lib/utils";
@@ -125,11 +126,7 @@ function TestimonialCard({ data }: { data: Testimonial }) {
             {t(data.roleKey)} · {data.company}
           </p>
         </div>
-        <div className="flex items-center gap-0.5 shrink-0">
-          {Array.from({ length: data.rating }).map((_, j) => (
-            <Star key={j} className={cn("size-3.5", st.fg)} fill="currentColor" strokeWidth={0} />
-          ))}
-        </div>
+        <AnimatedStarRow count={data.rating} starClassName={st.fg} className="shrink-0" />
       </div>
     </article>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Sun, Moon } from "lucide-react";
+import { AnimatedThemeIcon } from "@/components/ui/AnimatedIcons";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "drope-theme";
@@ -42,11 +42,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
         className
       )}
     >
-      {theme === "dark" ? (
-        <Sun className="size-4" strokeWidth={2} />
-      ) : (
-        <Moon className="size-4" strokeWidth={2} />
-      )}
+      <AnimatedThemeIcon isDark={theme === "dark"} size={16} strokeWidth={2} />
     </button>
   );
 }
