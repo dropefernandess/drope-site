@@ -17,22 +17,25 @@ export function DropeLogoMotion({
   className,
   width,
   height,
+  style,
 }: {
   textColor?: string;
   className?: string;
   width?: number | string;
   height?: number | string;
+  style?: React.CSSProperties;
 }) {
   return (
     <svg
       className={`drope-logo-svg ${className ?? ""}`}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 291 100"
+      preserveAspectRatio="xMidYMid meet"
       width={width}
       height={height}
       role="img"
       aria-label="DROPE FERNANDES"
-      style={{ display: "block" }}
+      style={{ display: "block", overflow: "visible", ...style }}
     >
       {/* MARCA DROPE — fill + stroke draw + spin + scale + shift */}
       <g className="mk-shift">

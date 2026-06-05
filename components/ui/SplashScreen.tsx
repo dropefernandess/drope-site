@@ -109,10 +109,14 @@ export function SplashScreen() {
           />
 
           {/* === LOGO motion oficial (SVG embed JSX direto) === */}
-          {/* Wrapper com aspect-[291/100] (proporção do viewBox do SVG) +
-              SVG ocupando 100% w & h. Garante que o motion não corte. */}
+          {/* aspectRatio inline garante 2.91:1 — Tailwind utility podia
+              falhar em alguns builds. overflow:visible no SVG previne corte. */}
           <motion.div
-            className="relative w-[280px] sm:w-[360px] md:w-[420px] aspect-[291/100]"
+            className="relative"
+            style={{
+              width: "min(420px, 80vw)",
+              aspectRatio: "291 / 100",
+            }}
             initial={{ scale: 0.92, opacity: 0, y: 0 }}
             animate={
               phase === "exit"
@@ -127,8 +131,12 @@ export function SplashScreen() {
           >
             <DropeLogoMotion
               textColor="rgb(var(--fg-strong))"
-              width="100%"
-              height="100%"
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "block",
+                overflow: "visible",
+              }}
             />
           </motion.div>
 
