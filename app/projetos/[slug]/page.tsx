@@ -341,6 +341,51 @@ export default async function CaseStudyPage({ params }: Props) {
                   </div>
                 </Reveal>
               )}
+
+              {/* SLOT 7-8 — pair 50/50, mesma altura */}
+              {(c.gallery[6] || c.gallery[7]) && (
+                <Reveal direction="up" delay={0.05}>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {c.gallery[6] && (
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-section bg-surface">
+                        <CaseImage
+                          src={c.gallery[6].src}
+                          alt={c.gallery[6].alt}
+                          index={6}
+                          total={c.gallery.length}
+                          sizes="(min-width:640px) 50vw, 100vw"
+                        />
+                      </div>
+                    )}
+                    {c.gallery[7] && (
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-section bg-surface">
+                        <CaseImage
+                          src={c.gallery[7].src}
+                          alt={c.gallery[7].alt}
+                          index={7}
+                          total={c.gallery.length}
+                          sizes="(min-width:640px) 50vw, 100vw"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Reveal>
+              )}
+
+              {/* SLOT 9 — full width 16:9 (fecha o bloco) */}
+              {c.gallery[8] && (
+                <Reveal direction="up" delay={0.05}>
+                  <div className="relative aspect-[16/9] w-full overflow-hidden rounded-section bg-surface">
+                    <CaseImage
+                      src={c.gallery[8].src}
+                      alt={c.gallery[8].alt}
+                      index={8}
+                      total={c.gallery.length}
+                      sizes="(min-width:1400px) 1400px, 100vw"
+                    />
+                  </div>
+                </Reveal>
+              )}
             </div>
           </div>
         </Container>
