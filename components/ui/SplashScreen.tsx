@@ -109,11 +109,10 @@ export function SplashScreen() {
           />
 
           {/* === LOGO motion oficial (SVG embed JSX direto) === */}
-          {/* DropeLogoMotion renderiza o SVG inline como JSX, com classes
-              que disparam as animações CSS de globals.css automaticamente
-              no mount. textColor herda do theme (rgb fg-strong). */}
+          {/* Wrapper com aspect-[291/100] (proporção do viewBox do SVG) +
+              SVG ocupando 100% w & h. Garante que o motion não corte. */}
           <motion.div
-            className="relative w-[280px] sm:w-[340px]"
+            className="relative w-[280px] sm:w-[360px] md:w-[420px] aspect-[291/100]"
             initial={{ scale: 0.92, opacity: 0, y: 0 }}
             animate={
               phase === "exit"
@@ -129,7 +128,7 @@ export function SplashScreen() {
             <DropeLogoMotion
               textColor="rgb(var(--fg-strong))"
               width="100%"
-              height="auto"
+              height="100%"
             />
           </motion.div>
 
@@ -180,15 +179,6 @@ export function SplashScreen() {
             </div>
           </motion.div>
 
-          {/* Rodapé sigla */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 label-mono text-fg-faint tracking-[0.3em]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: phase === "loading" ? 1 : 0 }}
-            transition={{ duration: 0.5, delay: phase === "loading" ? 0.2 : 0 }}
-          >
-            DROPÊ · 2026
-          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
