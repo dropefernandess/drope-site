@@ -168,8 +168,8 @@ export function Depoimentos() {
           </div>
         </Reveal>
 
-        {/* GRID DE 4 DEPOIMENTOS */}
-        <Stagger as="ul" className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        {/* GRID DE 4 DEPOIMENTOS — pl-0 list-none reseta padding default do <ul> */}
+        <Stagger as="ul" className="grid gap-3 md:grid-cols-2 lg:grid-cols-4 list-none pl-0 m-0">
           {testimonials.map((data) => (
             <StaggerItem as="li" key={data.slug}>
               <TestimonialCard data={data} />

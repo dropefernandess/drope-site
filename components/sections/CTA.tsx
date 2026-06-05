@@ -14,9 +14,9 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 export function CTA() {
   const { t } = useLocale();
   return (
-    <section id="contato" className="bg-bg px-6 pb-24 md:pb-32 md:px-12">
+    <section id="contato" className="bg-bg pb-24 md:pb-32">
       <Container>
-        <Reveal className="relative overflow-hidden rounded-section min-h-[560px] md:min-h-[640px]">
+        <Reveal className="relative overflow-hidden rounded-section md:min-h-[640px]">
           {/* Background — reunião/colaboração ao redor de mesa, gente conversando */}
           <Image
             src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=2400&q=90"
@@ -39,10 +39,10 @@ export function CTA() {
             aria-hidden
           />
 
-          {/* Conteúdo */}
-          <div className="relative p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 grid gap-8 md:gap-12 lg:grid-cols-12 items-end min-h-[520px] md:min-h-[640px]">
+          {/* Conteúdo — padding simétrico em mobile (p-8 todos os lados) */}
+          <div className="relative p-8 sm:p-10 md:p-12 lg:p-16 xl:p-20 grid gap-8 md:gap-12 lg:grid-cols-12 lg:items-end md:min-h-[640px]">
 
-            <div className="lg:col-span-7 flex flex-col gap-6 justify-end">
+            <div className="lg:col-span-7 flex flex-col gap-6 lg:justify-end">
               <Reveal delay={0.05} className="inline-flex items-center gap-2 self-start rounded-pill bg-ink-50/15 backdrop-blur border border-ink-50/20 px-3.5 py-1.5">
                 <Clock className="size-3 text-ink-50" strokeWidth={2.5} />
                 <span className="text-xs font-medium text-ink-50">
