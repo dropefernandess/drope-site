@@ -61,6 +61,12 @@
 @layer base {
   html { scroll-behavior: smooth; }
 
+  html, body {
+    /* clip horizontal overflow globalmente — qualquer elemento renegado
+       (decoração, gradient blur, etc) não gera scroll lateral em mobile */
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-bg text-fg-strong font-sans antialiased;
     text-rendering: optimizeLegibility;
