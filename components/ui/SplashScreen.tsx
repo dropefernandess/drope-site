@@ -108,13 +108,16 @@ export function SplashScreen() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
+            {/* mode="inline" — necessário porque o CSP do middleware bloqueia
+                <object> (object-src 'none'). Inline injeta o SVG direto no DOM
+                e o SMIL roda nativamente como parte do documento. */}
             <AnimatedSVG
               src="/animations/loading.svg"
               alt="Carregando"
               width={220}
               height={220}
-              mode="object"
-              className="select-none"
+              mode="inline"
+              className="select-none [&>svg]:w-full [&>svg]:h-full [&>svg]:block"
             />
           </motion.div>
 
