@@ -8,8 +8,8 @@
    em pesos próximos (Medium 500 ↔ SemiBold 600).
    ============================================================ */
 :root {
-  /* — Light mode (default, surface neutra clean — sem amarelado cream) — */
-  --bg:           246 246 246;
+  /* — Light mode (default, paper-feel cream — autoral da marca) — */
+  --bg:           242 242 235;
   --bg-soft:      255 255 255;
   --surface:      16 16 16;
   --surface-a:    0.04;

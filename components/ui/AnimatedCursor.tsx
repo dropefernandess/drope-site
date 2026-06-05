@@ -3,6 +3,20 @@
 import { motion } from "framer-motion";
 
 /**
+ * Decide se o texto do label fica branco ou preto com base na luminância
+ * da cor do cursor. Permite usar paleta inteira sem se preocupar.
+ */
+function labelTextColor(hex: string): string {
+  const clean = hex.replace("#", "");
+  const r = parseInt(clean.slice(0, 2), 16);
+  const g = parseInt(clean.slice(2, 4), 16);
+  const b = parseInt(clean.slice(4, 6), 16);
+  // YIQ — fórmula clássica de contraste perceptual
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+  return yiq > 160 ? "#101010" : "#FFFFFF";
+}
+
+/**
  * AnimatedCursor — cursor flutuante com label, movimento em loop (vai e volta).
  *
  * Visual:
@@ -58,30 +72,32 @@ export function AnimatedCursor({
         times: [0, 0.25, 0.5, 0.75, 1],
       }}
     >
-      {/* Cursor SVG (estilo Framer/Figma) */}
+      {/* Cursor SVG (estilo Framer/Figma) — sem borda branca, cantos suavizados
+          via stroke da mesma cor + linejoin/linecap rounded */}
       <svg
         width="20"
         height="22"
         viewBox="0 0 20 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-md"
-        style={{ filter: `drop-shadow(0 4px 12px ${color}66)` }}
+        style={{ filter: `drop-shadow(0 4px 10px ${color}55)` }}
       >
         <path
           d="M3.5 1.5L17.5 11L9.5 13L6.5 20L3.5 1.5Z"
           fill={color}
-          stroke="white"
-          strokeWidth="1.5"
+          stroke={color}
+          strokeWidth="2.5"
           strokeLinejoin="round"
+          strokeLinecap="round"
         />
       </svg>
 
-      {/* Label pill */}
+      {/* Label pill — colado mais perto do cursor (left-2.5 top-3.5) */}
       <span
-        className="absolute left-4 top-5 inline-flex items-center rounded-pill px-2.5 py-1 text-[11px] font-semibold text-white whitespace-nowrap shadow-md"
+        className="absolute left-2.5 top-3.5 inline-flex items-center rounded-pill px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap shadow-md"
         style={{
           backgroundColor: color,
+          color: labelTextColor(color),
           boxShadow: `0 4px 12px ${color}55`,
         }}
       >

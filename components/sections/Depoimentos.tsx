@@ -72,10 +72,11 @@ const testimonials: Testimonial[] = [
 ];
 
 const tones: Record<Tone, { bg: string; fg: string; muted: string; border: string; avatarBg: string }> = {
-  brand:  { bg: "bg-brand",      fg: "text-brand-fg",  muted: "text-brand-fg/75", border: "border-brand-fg/15", avatarBg: "bg-brand-fg/15 text-brand-fg" },
-  cream:  { bg: "bg-ink-50",     fg: "text-ink-900",   muted: "text-ink-700",     border: "border-ink-900/10", avatarBg: "bg-brand text-brand-fg" },
-  dark:   { bg: "bg-fg-strong",  fg: "text-bg",        muted: "text-bg/70",       border: "border-bg/15",      avatarBg: "bg-brand text-brand-fg" },
-  soft:   { bg: "bg-bg-soft",    fg: "text-fg-strong", muted: "text-fg-mute",     border: "border-line",       avatarBg: "bg-brand text-brand-fg" },
+  brand:  { bg: "bg-brand",                 fg: "text-brand-fg",  muted: "text-brand-fg/75", border: "border-brand-fg/15", avatarBg: "bg-brand-fg/15 text-brand-fg" },
+  // "cream" agora usa branco puro pra destacar do bg cream do site
+  cream:  { bg: "bg-bg-soft",               fg: "text-ink-900",   muted: "text-ink-700",     border: "border-ink-900/10", avatarBg: "bg-brand text-brand-fg" },
+  dark:   { bg: "bg-fg-strong",             fg: "text-bg",        muted: "text-bg/70",       border: "border-bg/15",      avatarBg: "bg-brand text-brand-fg" },
+  soft:   { bg: "bg-bg-soft",               fg: "text-fg-strong", muted: "text-fg-mute",     border: "border-line",       avatarBg: "bg-brand text-brand-fg" },
 };
 
 const stats: { vKey: DictionaryKey; lKey: DictionaryKey }[] = [

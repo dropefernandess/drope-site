@@ -24,7 +24,9 @@ export function CTA() {
   return (
     <section id="contato" className="bg-bg pb-24 md:pb-32">
       <Container>
-        <Reveal className="relative overflow-hidden rounded-section bg-fg-strong">
+        {/* bg fixo escuro em LIGHT e DARK mode — não vira cream em dark
+            #101010 no light (fg-strong) / #1A1A1A no dark (mais fosco que --bg) */}
+        <Reveal className="relative overflow-hidden rounded-section bg-[#101010] dark:bg-[#1A1A1A]">
 
           {/* === Glow radial difuso (multi-layer) === */}
           <div
@@ -53,25 +55,25 @@ export function CTA() {
           />
 
           {/* === Cursores animados (decoração viva) === */}
-          {/* Cursor 1: vermelho coral - "Branding" */}
+          {/* Cursor 1: brand vermelho — "Branding" */}
           <AnimatedCursor
-            color="#F25041"
+            color="#DE2828"
             label={t("cta.cursor1")}
-            position={{ top: "32%", right: "18%" }}
-            offsetX={50}
-            offsetY={28}
+            position={{ top: "30%", right: "16%" }}
+            offsetX={100}
+            offsetY={55}
             duration={5}
             delay={0}
             className="hidden md:block"
           />
 
-          {/* Cursor 2: azul/cyan - "Visão" */}
+          {/* Cursor 2: cream/ink-50 — "Visão" (contraste no bg dark) */}
           <AnimatedCursor
-            color="#3B82F6"
+            color="#F2F2EB"
             label={t("cta.cursor2")}
-            position={{ top: "62%", right: "38%" }}
-            offsetX={-45}
-            offsetY={-20}
+            position={{ top: "60%", right: "36%" }}
+            offsetX={-90}
+            offsetY={-45}
             duration={6}
             delay={1.5}
             className="hidden md:block"

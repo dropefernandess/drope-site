@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowUpRight, Download, Mail, Phone, MapPin } from "lucide-r
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
+import { Signature } from "@/components/ui/Signature";
 
 /**
  * /cv — Currículo Vitae do Pedro Fernandes (Drope).
@@ -179,6 +180,11 @@ export default function CVPage() {
                 — Drope pra quem trabalha comigo.
               </p>
             </Reveal>
+
+            {/* Assinatura — autoral, cor brand */}
+            <div className="pt-1">
+              <Signature color="rgb(var(--brand))" height={52} />
+            </div>
 
             <Reveal direction="up" delay={0.3} className="flex flex-wrap gap-3 pt-3">
               <a href="mailto:contato@dropefernandes.com" className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3.5 py-2 text-xs font-medium text-fg-strong hover:bg-surface transition">
