@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AnimatedSVG } from "@/components/ui/AnimatedSVG";
+import { DropeLogoMotion } from "@/components/ui/DropeLogoMotion";
 
 /**
  * SplashScreen — splash com motion oficial da logo Drope.
@@ -108,16 +108,12 @@ export function SplashScreen() {
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
           />
 
-          {/* === LOGO motion oficial (AnimatedSVG inline) === */}
-          {/* Forço a cor do texto (--wm) via theme do site, sobrescreve
-              a media query prefers-color-scheme nativa do SVG.
-              [&_svg.drope-anim]:[--wm:rgb(var(--fg-strong))] aplica no SVG injetado. */}
+          {/* === LOGO motion oficial (SVG embed JSX direto) === */}
+          {/* DropeLogoMotion renderiza o SVG inline como JSX, com classes
+              que disparam as animações CSS de globals.css automaticamente
+              no mount. textColor herda do theme (rgb fg-strong). */}
           <motion.div
-            className="relative drope-logo-wrap [&_svg.drope-anim]:!w-full [&_svg.drope-anim]:!h-full [&_svg.drope-anim]:block"
-            style={{
-              // Força --wm a usar fg-strong (light: dark, dark: cream)
-              ["--wm" as string]: "rgb(var(--fg-strong))",
-            }}
+            className="relative w-[280px] sm:w-[340px]"
             initial={{ scale: 0.92, opacity: 0, y: 0 }}
             animate={
               phase === "exit"
@@ -130,23 +126,12 @@ export function SplashScreen() {
                 : { duration: ENTER_MS / 1000, ease: [0.22, 1, 0.36, 1] }
             }
           >
-            <div className="w-[280px] sm:w-[340px] aspect-[291/100] [&_svg]:!w-full [&_svg]:!h-full">
-              <AnimatedSVG
-                src="/animations/drope-logo-animated.svg"
-                alt="Drope Fernandes"
-                width={340}
-                height={117}
-                mode="inline"
-              />
-            </div>
+            <DropeLogoMotion
+              textColor="rgb(var(--fg-strong))"
+              width="100%"
+              height="auto"
+            />
           </motion.div>
-
-          {/* Helper CSS pra forçar cor do texto do SVG injetado */}
-          <style jsx global>{`
-            .drope-logo-wrap svg.drope-anim {
-              --wm: rgb(var(--fg-strong)) !important;
-            }
-          `}</style>
 
           {/* === Progress bar + contador === */}
           <motion.div
