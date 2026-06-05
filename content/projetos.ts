@@ -85,7 +85,7 @@ export const projetos: Projeto[] = [
     title: "Bada Bing — Bakehouse",
     description:
       "E-commerce e copy para pizzaria de fermentação natural em Dubai Marina.",
-    categorias: ["branding", "web-design", "ui-ux-design"],
+    categorias: ["web-design"],
     image: "/projetos/bada-bing.png",
     year: 2026,
     featured: true,
@@ -221,7 +221,7 @@ export const projetos: Projeto[] = [
     slug: "myko",
     title: "MYKO — Moda Praia",
     description: "Identidade visual para marca de moda praia com conceito lifestyle.",
-    categorias: ["branding"],
+    categorias: ["branding", "graphic-design"],
     image: "/projetos/myko.png",
     year: 2024,
     case: {
@@ -349,7 +349,7 @@ export const projetos: Projeto[] = [
     title: "Sirius Agência",
     description:
       "Identidade visual completa para agência criativa, do conceito ao motion.",
-    categorias: ["branding", "motion-design"],
+    categorias: ["branding", "web-design", "motion-design"],
     image: "/projetos/sirius.png",
     year: 2023,
     case: {
@@ -416,7 +416,7 @@ export const projetos: Projeto[] = [
     title: "GO Trace",
     description:
       "SaaS de rastreamento de pedidos e gestão pós-venda para e-commerces.",
-    categorias: ["ui-ux-design", "web-design"],
+    categorias: ["branding", "ui-ux-design", "web-design"],
     image: "/projetos/go-trace.jpg",
     year: 2025,
     case: {
@@ -483,7 +483,7 @@ export const projetos: Projeto[] = [
     title: "Finanças Já!",
     description:
       "App de gestão financeira pessoal com foco em clareza e usabilidade.",
-    categorias: ["ui-ux-design"],
+    categorias: ["branding", "web-design", "motion-design"],
     image: "/projetos/financas-ja.png",
     year: 2025,
     case: {
@@ -549,7 +549,7 @@ export const projetos: Projeto[] = [
     title: "MoneyFy",
     description:
       "Gestão financeira via WhatsApp com categorização automática por IA.",
-    categorias: ["ui-ux-design", "branding"],
+    categorias: ["web-design", "ui-ux-design", "branding"],
     image: "/projetos/moneyfy.jpg",
     year: 2026,
     case: {
@@ -799,6 +799,82 @@ export const projetos: Projeto[] = [
           eyebrow: "RESULTADO",
           title: "Identidade firme aplicada em todas as frentes.",
           body: "A nova identidade foi aplicada em material processual, redes sociais, sinalização do escritório e papelaria completa. O escritório passou a ser reconhecido na região pela presença visual distinta, com vários clientes mencionando o cartão de visita como primeiro contato memorável.",
+        },
+      ],
+      next: "vitta-clube",
+    },
+  },
+
+  // ====================================================================
+  // 12. VITTA CLUBE — site (placeholder, completar com infos reais)
+  // ====================================================================
+  {
+    slug: "vitta-clube",
+    title: "Vitta Clube",
+    description:
+      "Site institucional para clube de benefícios em saúde e bem-estar.",
+    categorias: ["web-design"],
+    image: "/projetos/bada-bing.png", // PLACEHOLDER — trocar quando subir
+    year: 2026,
+    case: {
+      subtitle:
+        "Plataforma de benefícios em saúde ganha presença digital clara, focada em conversão e clareza de oferta.",
+      meta: {
+        cliente: "Vitta Clube",
+        setor: "Saúde · Benefícios",
+        role: "Web Design",
+        duracao: "Em produção",
+        entregaveis: ["Site institucional", "Páginas de planos"],
+      },
+      tags: ["Web Design", "Institucional"],
+      hero: {
+        src: "/projetos/bada-bing.png", // PLACEHOLDER
+        alt: "Vitta Clube — site institucional",
+      },
+      gallery: [],
+      sections: [
+        {
+          eyebrow: "EM PRODUÇÃO",
+          title: "Conteúdo do case sendo preparado.",
+          body: "Este case está em fase final de produção. Volte em breve pra ver o estudo completo: desafio, processo de design, decisões estratégicas e resultados mensuráveis do projeto.",
+        },
+      ],
+      next: "gama-brasil",
+    },
+  },
+
+  // ====================================================================
+  // 13. GAMA BRASIL — site (placeholder, completar com infos reais)
+  // ====================================================================
+  {
+    slug: "gama-brasil",
+    title: "Gama Brasil",
+    description:
+      "Site institucional para empresa brasileira em transformação digital.",
+    categorias: ["web-design"],
+    image: "/projetos/bada-bing.png", // PLACEHOLDER — trocar quando subir
+    year: 2026,
+    case: {
+      subtitle:
+        "Empresa Gama ganha presença web alinhada ao posicionamento institucional renovado.",
+      meta: {
+        cliente: "Gama Brasil",
+        setor: "Corporativo",
+        role: "Web Design",
+        duracao: "Em produção",
+        entregaveis: ["Site institucional", "Landing pages"],
+      },
+      tags: ["Web Design", "Institucional"],
+      hero: {
+        src: "/projetos/bada-bing.png", // PLACEHOLDER
+        alt: "Gama Brasil — site institucional",
+      },
+      gallery: [],
+      sections: [
+        {
+          eyebrow: "EM PRODUÇÃO",
+          title: "Conteúdo do case sendo preparado.",
+          body: "Este case está em fase final de produção. Volte em breve pra ver o estudo completo: desafio, processo de design, decisões estratégicas e resultados mensuráveis do projeto.",
         },
       ],
       next: "bada-bing", // volta pro primeiro
