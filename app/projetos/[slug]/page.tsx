@@ -237,36 +237,112 @@ export default async function CaseStudyPage({ params }: Props) {
         ))}
       </Container>
 
-      {/* ===== 6. GALLERY FINAL — sequência de imagens (sem buracos) =====
-            Layout estilo Wegrow: 2 fileiras de 3 imagens 16:9 iguais ao hero. */}
+      {/* ===== 6. GALLERY FINAL — pattern Wegrow (full → pair → full → pair) =====
+            Ritmo editorial: alterna imagem full-width com par de imagens 50/50
+            de mesma altura. Mais respiro visual que grid uniforme. */}
       {c.gallery.length > 0 && (
         <Container as="section" className="mt-24 md:mt-32">
-          <Reveal direction="up" className="flex flex-col gap-6">
-            <div className="flex items-baseline justify-between gap-4 mb-2">
+          <div className="flex flex-col gap-6">
+            <Reveal direction="right">
               <p className="label-mono">
                 <span className="text-fg-strong">{String(c.sections.length + 1).padStart(2, "0")}</span>
                 <span className="mx-3 text-fg-faint">──</span>
                 <span>Mais imagens do projeto</span>
               </p>
-            </div>
+            </Reveal>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {c.gallery.slice(0, 6).map((img, i) => (
-                <div
-                  key={i}
-                  className="relative aspect-video overflow-hidden rounded-section bg-surface"
-                >
-                  <CaseImage
-                    src={img.src}
-                    alt={img.alt}
-                    index={i}
-                    total={Math.min(c.gallery.length, 6)}
-                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                  />
-                </div>
-              ))}
+            <div className="flex flex-col gap-3">
+              {/* SLOT 1 — full width 16:9 */}
+              {c.gallery[0] && (
+                <Reveal direction="up">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden rounded-section bg-surface">
+                    <CaseImage
+                      src={c.gallery[0].src}
+                      alt={c.gallery[0].alt}
+                      index={0}
+                      total={c.gallery.length}
+                      sizes="(min-width:1400px) 1400px, 100vw"
+                    />
+                  </div>
+                </Reveal>
+              )}
+
+              {/* SLOT 2-3 — pair 50/50, mesma altura (aspect-[4/3]) */}
+              {(c.gallery[1] || c.gallery[2]) && (
+                <Reveal direction="up" delay={0.05}>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {c.gallery[1] && (
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-section bg-surface">
+                        <CaseImage
+                          src={c.gallery[1].src}
+                          alt={c.gallery[1].alt}
+                          index={1}
+                          total={c.gallery.length}
+                          sizes="(min-width:640px) 50vw, 100vw"
+                        />
+                      </div>
+                    )}
+                    {c.gallery[2] && (
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-section bg-surface">
+                        <CaseImage
+                          src={c.gallery[2].src}
+                          alt={c.gallery[2].alt}
+                          index={2}
+                          total={c.gallery.length}
+                          sizes="(min-width:640px) 50vw, 100vw"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Reveal>
+              )}
+
+              {/* SLOT 4 — full width 16:9 */}
+              {c.gallery[3] && (
+                <Reveal direction="up" delay={0.05}>
+                  <div className="relative aspect-[16/9] w-full overflow-hidden rounded-section bg-surface">
+                    <CaseImage
+                      src={c.gallery[3].src}
+                      alt={c.gallery[3].alt}
+                      index={3}
+                      total={c.gallery.length}
+                      sizes="(min-width:1400px) 1400px, 100vw"
+                    />
+                  </div>
+                </Reveal>
+              )}
+
+              {/* SLOT 5-6 — pair 50/50, mesma altura */}
+              {(c.gallery[4] || c.gallery[5]) && (
+                <Reveal direction="up" delay={0.05}>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {c.gallery[4] && (
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-section bg-surface">
+                        <CaseImage
+                          src={c.gallery[4].src}
+                          alt={c.gallery[4].alt}
+                          index={4}
+                          total={c.gallery.length}
+                          sizes="(min-width:640px) 50vw, 100vw"
+                        />
+                      </div>
+                    )}
+                    {c.gallery[5] && (
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-section bg-surface">
+                        <CaseImage
+                          src={c.gallery[5].src}
+                          alt={c.gallery[5].alt}
+                          index={5}
+                          total={c.gallery.length}
+                          sizes="(min-width:640px) 50vw, 100vw"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Reveal>
+              )}
             </div>
-          </Reveal>
+          </div>
         </Container>
       )}
 
