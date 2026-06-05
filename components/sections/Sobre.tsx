@@ -20,7 +20,7 @@ export function Sobre() {
       <Container className="flex flex-col gap-12">
 
         {/* HEADER */}
-        <Reveal>
+        <Reveal direction="right">
           <div className="grid gap-6 lg:grid-cols-12 lg:gap-12 items-end">
             <div className="lg:col-span-7 flex flex-col gap-4">
               <p className="label-mono">
@@ -42,7 +42,7 @@ export function Sobre() {
         <div className="grid gap-3 lg:grid-cols-12 lg:auto-rows-[180px]">
 
           {/* FOTO GRANDE — 5 cols × 3 rows */}
-          <Reveal delay={0.05} className="lg:col-span-5 lg:row-span-3 relative rounded-section overflow-hidden bg-surface min-h-[420px]">
+          <Reveal direction="left" delay={0.05} className="lg:col-span-5 lg:row-span-3 relative rounded-section overflow-hidden bg-surface min-h-[420px]">
             <Image
               src="/sobre-trabalho.png"
               alt="Pedro Fernandes (Drope) trabalhando no MacBook"
@@ -72,7 +72,7 @@ export function Sobre() {
           </Reveal>
 
           {/* CARD BIO TEXT — 7 cols × 1 row (texto mais punchy) */}
-          <Reveal delay={0.1} className="lg:col-span-7 lg:row-span-1 rounded-section border border-line bg-bg p-6 md:p-7 flex flex-col gap-3 justify-center">
+          <Reveal direction="right" delay={0.1} className="lg:col-span-7 lg:row-span-1 rounded-section border border-line bg-bg p-6 md:p-7 flex flex-col gap-3 justify-center">
             <p className="label-mono">{t("sobre.manifesto_label")}</p>
             <p className="text-lg md:text-xl leading-snug text-fg-strong max-w-prose font-medium">
               {t("sobre.manifesto_text_strong")}{" "}

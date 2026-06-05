@@ -94,7 +94,7 @@ export function Processo() {
     <section id="processo" className="bg-bg section-padding overflow-hidden">
       <Container className="flex flex-col gap-14">
 
-        <Reveal>
+        <Reveal direction="right">
           <div className="grid gap-6 lg:grid-cols-12 lg:gap-12 items-end">
             <div className="lg:col-span-7 flex flex-col gap-4">
               <p className="label-mono">

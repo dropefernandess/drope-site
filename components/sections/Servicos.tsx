@@ -111,7 +111,7 @@ export function Servicos() {
     <section id="servicos" className="bg-bg section-padding">
       <Container className="flex flex-col gap-12">
         {/* HEADER + CTA destacado à direita */}
-        <Reveal>
+        <Reveal direction="right">
           <div className="grid gap-6 lg:grid-cols-12 lg:gap-12 items-end">
             <div className="lg:col-span-7 flex flex-col gap-4">
               <p className="label-mono">

@@ -35,16 +35,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * Página de case study — template baseado em athos2 + ignitex + praxis + jaxorion.
+ * Página de case study — refatorado pra estilo Wegrow.
  *
- * Estrutura:
- *  1. Hero — back link + título + subtítulo + tags + meta lateral
- *  2. Hero image — cover wide
- *  3. Stats — 3-4 números do projeto
- *  4. Gallery — grid de imagens (3-6)
- *  5. Sections — alternando texto e imagens (challenge, process, result)
- *  6. CTA inline — agendar + calculadora
- *  7. Próximo/Anterior — navegação entre cases
+ * Nova ORDEM:
+ *  1. Back link (compacto no topo)
+ *  2. HERO MEDIA grande (full bleed) — vídeo ou imagem ANTES da descrição
+ *  3. Header (título + subtítulo + tags + meta lateral)
+ *  4. Stats (3 números)
+ *  5. Sections intercaladas (eyebrow + title + body + imagem grande por section)
+ *  6. Gallery final (6 imgs 16:9 grid 3 cols)
+ *  7. CTA inline
+ *  8. Next/prev
  */
 const aspectClasses: Record<NonNullable<NonNullable<typeof projetos[number]["case"]["gallery"][number]["aspect"]>>, string> = {
   square: "aspect-square",
@@ -68,24 +69,50 @@ export default async function CaseStudyPage({ params }: Props) {
   const prev = projetos[(idx - 1 + projetos.length) % projetos.length];
   const next = projetos[(idx + 1) % projetos.length];
 
+  const hasVideo = projeto.categorias.some(
+    (cat) => VIDEO_CATEGORIES.includes(cat as (typeof VIDEO_CATEGORIES)[number])
+  );
+
   return (
     <article className="pt-24 md:pt-28">
 
-      {/* ===== HERO ===== */}
-      <Container as="section" className="flex flex-col gap-10">
-        <Reveal>
+      {/* ===== 1. BACK LINK compacto ===== */}
+      <Container as="section" className="mb-10 md:mb-14">
+        <Reveal direction="right">
           <Link
             href="/#projetos"
-            className="inline-flex items-center gap-2 text-sm font-medium text-fg-mute hover:text-fg-strong transition"
+            className="inline-flex items-center gap-2 text-sm font-medium text-fg-mute hover:text-fg-strong transition group"
           >
-            <ArrowLeft className="size-3.5" strokeWidth={2.5} />
+            <ArrowLeft className="size-3.5 transition group-hover:-translate-x-1" strokeWidth={2.5} />
             Voltar pra todos os projetos
           </Link>
         </Reveal>
+      </Container>
 
+      {/* ===== 2. HERO MEDIA grande — vai ANTES da descrição (estilo Wegrow) ===== */}
+      <Reveal direction="up" delay={0.05} className="px-6 md:px-12">
+        <div className="relative mx-auto aspect-[16/9] w-full max-w-container overflow-hidden rounded-section bg-surface">
+          {hasVideo ? (
+            <VideoPlaceholder slug={projeto.slug} alt={c.hero.alt} poster={c.hero.src} />
+          ) : (
+            <Image
+              src={c.hero.src}
+              alt={c.hero.alt}
+              fill
+              priority
+              quality={90}
+              sizes="(min-width: 1400px) 1400px, 100vw"
+              className="object-cover"
+            />
+          )}
+        </div>
+      </Reveal>
+
+      {/* ===== 3. HEADER — Título + subtítulo + meta lateral ===== */}
+      <Container as="section" className="mt-20 md:mt-28 flex flex-col gap-10">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 items-start">
           {/* Esquerda — título + subtítulo + tags */}
-          <Reveal delay={0.05} className="lg:col-span-8 flex flex-col gap-6">
+          <Reveal direction="right" className="lg:col-span-8 flex flex-col gap-6">
             <p className="label-mono flex items-center gap-2">
               <span className="size-1 rounded-full bg-brand" />
               {cats}
@@ -109,8 +136,8 @@ export default async function CaseStudyPage({ params }: Props) {
             </div>
           </Reveal>
 
-          {/* Direita — meta info do projeto */}
-          <Reveal delay={0.15} className="lg:col-span-4 rounded-section border border-line bg-bg-soft p-6 md:p-7 flex flex-col gap-4">
+          {/* Direita — meta box */}
+          <Reveal direction="left" delay={0.1} className="lg:col-span-4 rounded-section border border-line bg-bg-soft p-6 md:p-7 flex flex-col gap-4">
             <p className="label-mono">DETALHES DO PROJETO</p>
             <dl className="flex flex-col gap-3">
               <MetaRow label="Cliente"      value={c.meta.cliente} />
@@ -134,31 +161,10 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </Container>
 
-      {/* ===== HERO MEDIA — full bleed ===== */}
-      {/* Cases UI/UX e Web abrem com vídeo (ou placeholder pra trocar depois).
-          Outros abrem com hero image regular. */}
-      <Reveal delay={0.2} className="mt-14 md:mt-20 px-6 md:px-12">
-        <div className="relative mx-auto aspect-[16/9] w-full max-w-container overflow-hidden rounded-section bg-surface">
-          {projeto.categorias.some((cat) => VIDEO_CATEGORIES.includes(cat as (typeof VIDEO_CATEGORIES)[number])) ? (
-            <VideoPlaceholder slug={projeto.slug} alt={c.hero.alt} poster={c.hero.src} />
-          ) : (
-            <Image
-              src={c.hero.src}
-              alt={c.hero.alt}
-              fill
-              priority
-              quality={90}
-              sizes="(min-width: 1400px) 1400px, 100vw"
-              className="object-cover"
-            />
-          )}
-        </div>
-      </Reveal>
-
-      {/* ===== STATS ===== */}
+      {/* ===== 4. STATS ===== */}
       {c.stats && c.stats.length > 0 && (
         <Container as="section" className="mt-20 md:mt-28">
-          <Reveal>
+          <Reveal direction="up">
             <div className="grid gap-3 md:grid-cols-3">
               {c.stats.map((s, i) => (
                 <div
@@ -180,80 +186,102 @@ export default async function CaseStudyPage({ params }: Props) {
         </Container>
       )}
 
-      {/* ===== GALLERY — 6 cards 16:9 iguais ao hero (object-cover) ===== */}
-      {/* Mesmo aspect-ratio do hero pra ritmo visual consistente:
-            mobile: 1 col / sm: 2 cols / lg: 3 cols (2 fileiras de 3). */}
-      <Container as="section" className="mt-20 md:mt-28">
-        <Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {c.gallery.slice(0, 6).map((img, i) => (
-              <div
-                key={i}
-                className="relative aspect-video overflow-hidden rounded-section bg-surface"
-              >
-                <CaseImage
-                  src={img.src}
-                  alt={img.alt}
-                  index={i}
-                  total={Math.min(c.gallery.length, 6)}
-                  sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                />
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </Container>
-
-      {/* ===== SECTIONS — alternando texto e imagens ===== */}
-      <Container as="section" className="mt-20 md:mt-28 flex flex-col gap-20 md:gap-28">
+      {/* ===== 5. SECTIONS — alternando texto e imagens GRANDES (Wegrow style) =====
+            Cada section: header pequeno + body + imagem full-width grande abaixo.
+            Direções de Reveal alternam pra ritmo visual. */}
+      <Container as="section" className="mt-24 md:mt-32 flex flex-col gap-24 md:gap-32">
         {c.sections.map((section, i) => (
-          <Reveal key={i} delay={0.05 * i}>
-            <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-              <div className="lg:col-span-4 flex flex-col gap-3">
-                {section.eyebrow && (
-                  <p className="label-mono">
-                    <span className="text-fg-strong">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="mx-3 text-fg-faint">──</span>
-                    <span>{section.eyebrow}</span>
+          <div key={i} className="flex flex-col gap-10 md:gap-12">
+            {/* Header + body */}
+            <Reveal direction={i % 2 === 0 ? "right" : "left"} delay={0.05}>
+              <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+                <div className="lg:col-span-4 flex flex-col gap-3">
+                  {section.eyebrow && (
+                    <p className="label-mono">
+                      <span className="text-fg-strong">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="mx-3 text-fg-faint">──</span>
+                      <span>{section.eyebrow}</span>
+                    </p>
+                  )}
+                  {section.title && (
+                    <h2 className="text-h-2 text-fg-strong text-balance">
+                      {section.title}
+                    </h2>
+                  )}
+                </div>
+                <div className="lg:col-span-8 flex flex-col gap-6">
+                  <p className="text-body max-w-prose whitespace-pre-line">
+                    {section.body}
                   </p>
-                )}
-                {section.title && (
-                  <h2 className="text-h-2 text-fg-strong text-balance">
-                    {section.title}
-                  </h2>
-                )}
+                </div>
               </div>
-              <div className="lg:col-span-8 flex flex-col gap-6">
-                <p className="text-body max-w-prose whitespace-pre-line">
-                  {section.body}
-                </p>
-                {section.image && (
-                  <div className={`relative ${section.image.aspect ? aspectClasses[section.image.aspect] : "aspect-video"} w-full overflow-hidden rounded-section bg-surface mt-3`}>
-                    <CaseImage
-                      src={section.image.src}
-                      alt={section.image.alt}
-                      sizes="(min-width:1024px) 60vw, 100vw"
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-          </Reveal>
+            </Reveal>
+
+            {/* Imagem da section GRANDE (full width do container) */}
+            {section.image && (
+              <Reveal direction="up" delay={0.15}>
+                <div
+                  className={`relative ${
+                    section.image.aspect ? aspectClasses[section.image.aspect] : "aspect-[16/10]"
+                  } w-full overflow-hidden rounded-section bg-surface`}
+                >
+                  <CaseImage
+                    src={section.image.src}
+                    alt={section.image.alt}
+                    sizes="(min-width:1400px) 1400px, 100vw"
+                  />
+                </div>
+              </Reveal>
+            )}
+          </div>
         ))}
       </Container>
 
-      {/* ===== CTA INLINE ===== */}
+      {/* ===== 6. GALLERY FINAL — sequência de imagens (sem buracos) =====
+            Layout estilo Wegrow: 2 fileiras de 3 imagens 16:9 iguais ao hero. */}
+      {c.gallery.length > 0 && (
+        <Container as="section" className="mt-24 md:mt-32">
+          <Reveal direction="up" className="flex flex-col gap-6">
+            <div className="flex items-baseline justify-between gap-4 mb-2">
+              <p className="label-mono">
+                <span className="text-fg-strong">{String(c.sections.length + 1).padStart(2, "0")}</span>
+                <span className="mx-3 text-fg-faint">──</span>
+                <span>Mais imagens do projeto</span>
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {c.gallery.slice(0, 6).map((img, i) => (
+                <div
+                  key={i}
+                  className="relative aspect-video overflow-hidden rounded-section bg-surface"
+                >
+                  <CaseImage
+                    src={img.src}
+                    alt={img.alt}
+                    index={i}
+                    total={Math.min(c.gallery.length, 6)}
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                  />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </Container>
+      )}
+
+      {/* ===== 7. CTA INLINE ===== */}
       <Container as="section" className="mt-24 md:mt-32">
-        <Reveal>
-          <div className="rounded-section bg-fg-strong text-bg p-8 md:p-12 grid gap-8 md:grid-cols-12 items-center">
+        <Reveal direction="up">
+          <div className="rounded-section bg-[#101010] dark:bg-[#1A1A1A] text-bg p-8 md:p-12 grid gap-8 md:grid-cols-12 items-center">
             <div className="md:col-span-7 flex flex-col gap-3">
-              <p className="text-[11px] uppercase tracking-wider font-medium text-bg/60">
+              <p className="text-[11px] uppercase tracking-wider font-medium text-ink-50/60">
                 CURTIU O QUE VIU?
               </p>
-              <h2 className="text-h-1 text-bg text-balance">
+              <h2 className="text-h-1 text-ink-50 text-balance">
                 Vamos conversar sobre o seu projeto.
               </h2>
-              <p className="text-body text-bg/75 max-w-prose">
+              <p className="text-body text-ink-50/75 max-w-prose">
                 Posso aplicar o mesmo cuidado no que você tem em mente.
                 Agenda uma conversa de 30 min ou usa a calculadora pra estimar.
               </p>
@@ -268,7 +296,7 @@ export default async function CaseStudyPage({ params }: Props) {
               </Link>
               <Link
                 href="/calculadora"
-                className="inline-flex items-center justify-between gap-3 rounded-pill border border-bg/20 bg-bg/5 px-5 py-4 text-sm font-semibold text-bg hover:bg-bg/15 transition"
+                className="inline-flex items-center justify-between gap-3 rounded-pill border border-ink-50/20 bg-ink-50/5 px-5 py-4 text-sm font-semibold text-ink-50 hover:bg-ink-50/15 transition"
               >
                 Estimar projeto
                 <ArrowUpRight className="size-4" strokeWidth={2.5} />
@@ -278,9 +306,9 @@ export default async function CaseStudyPage({ params }: Props) {
         </Reveal>
       </Container>
 
-      {/* ===== NEXT / PREV ===== */}
+      {/* ===== 8. NEXT / PREV ===== */}
       <Container as="section" className="mt-20 md:mt-28 pb-20 grid gap-3 md:grid-cols-2">
-        <Reveal>
+        <Reveal direction="right">
           <Link
             href={`/projetos/${prev.slug}`}
             className="group rounded-section border border-line bg-bg-soft p-6 md:p-7 flex items-center gap-4 hover:border-fg-strong transition h-full"
@@ -292,7 +320,7 @@ export default async function CaseStudyPage({ params }: Props) {
             </div>
           </Link>
         </Reveal>
-        <Reveal delay={0.05}>
+        <Reveal direction="left" delay={0.05}>
           <Link
             href={`/projetos/${next.slug}`}
             className="group rounded-section border border-line bg-bg-soft p-6 md:p-7 flex items-center gap-4 hover:border-fg-strong transition h-full"
