@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/sections/Footer";
 import { ScrollProgressBar } from "@/components/ui/Effects";
+import { SplashScreen } from "@/components/ui/SplashScreen";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import "./globals.css";
 
@@ -99,6 +100,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        {/* Splash de boas-vindas (1.4s + fade) — só no primeiro acesso da sessão */}
+        <SplashScreen />
         <LocaleProvider>
           <ScrollProgressBar />
           <Nav />
