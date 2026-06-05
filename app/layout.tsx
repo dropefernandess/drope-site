@@ -19,17 +19,17 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://dropefernandes.com"),
   title: {
-    default: "Dropê — Design, código e motion em uma mesma cabeça",
+    default: "Dropê — Design e código em uma mesma cabeça",
     template: "%s — Dropê",
   },
   description:
-    "Pedro Fernandes (Drope) — Creative Technologist atendendo marcas no Brasil e internacionalmente. Branding, UI/UX, motion e código.",
+    "Pedro Fernandes (Drope) — Designer Multidisciplinar atendendo no Brasil e internacionalmente, branding, UI/UX, motion e código.",
   openGraph: {
     type: "website",
     locale: "pt_BR",
     siteName: "Dropê",
     title: "Dropê — Pedro Fernandes",
-    description: "Design, código e motion — em uma mesma cabeça.",
+    description: "Design e código — em uma mesma cabeça.",
     images: ["/og.png"],
   },
   twitter: {
@@ -73,10 +73,10 @@ const personSchema = {
     addressCountry: "BR",
   },
   sameAs: [
-    "https://instagram.com/dropefernandes",
+    "https://instagram.com/drope.fernandes",
     "https://linkedin.com/in/dropefernandes",
     "https://behance.net/dropefernandes",
-    "https://dribbble.com/dropefernandes",
+    "https://dribbble.com/drope-fernandes",
   ],
   knowsAbout: [
     "Branding",

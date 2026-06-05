@@ -20,10 +20,10 @@ const nav: { href: string; key: DictionaryKey }[] = [
 ];
 
 const social = [
-  { href: "https://instagram.com/dropefernandes", label: "Instagram", Icon: Instagram },
+  { href: "https://instagram.com/drope.fernandes", label: "Instagram", Icon: Instagram },
   { href: "https://linkedin.com/in/dropefernandes", label: "LinkedIn", Icon: Linkedin },
   { href: "https://behance.net/dropefernandes", label: "Behance" },
-  { href: "https://dribbble.com/dropefernandes", label: "Dribbble" },
+  { href: "https://dribbble.com/drope-fernandes", label: "Dribbble" },
 ];
 
 export function Footer() {
