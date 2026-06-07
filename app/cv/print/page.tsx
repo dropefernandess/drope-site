@@ -3,24 +3,20 @@ import type { Metadata } from "next";
 /**
  * /cv/print — Página dedicada APENAS pra geração de PDF A4.
  *
- * Diferente do /cv (público):
- *  - Sem menu, sem footer, sem CTAs, sem botões
- *  - Sem badges decorativos, sem assinatura, sem foto, sem sociais
- *  - Sem splash screen (server component puro)
- *  - Layout DENSO pra caber TUDO em 1 página A4
- *  - Fundo branco #FFFFFF (não usa tokens do tema)
- *  - Cor única: preto + cinza médio + brand vermelho como detalhe
- *  - HTML semântico + texto plain pra ATS (sistemas de tracking de RH
- *    + IAs de análise de CV) extrair tudo sem barreira
+ * Layout 2 colunas (estilo CV profissional):
+ *  - SIDEBAR esquerda (~65mm): bg dark, foto, contato, idiomas, skills
+ *  - MAIN direita (~145mm): bg branco, nome, sobre, experiência, formação
  *
- * Acessar diretamente em /cv/print (sem link no menu).
- * Script generate-cv-pdf.mjs aponta pra essa rota.
+ * Diferente do /cv (público):
+ *  - Sem menu, sem footer, sem CTAs, sem badges decorativos
+ *  - Sem splash screen (server component puro + CSS guards)
+ *  - HTML semântico + ATS keywords pra IAs de RH
  */
 
 export const metadata: Metadata = {
   title: "Pedro Henrique Fernandes e Silva — Designer Multidisciplinar · CV",
   description:
-    "Pedro Henrique Fernandes e Silva. Designer Multidisciplinar com 7 anos de experiência em Branding, UI/UX Design, Web Design, Motion Design e Front-end básico. Photoshop, Illustrator, Figma, Framer, After Effects, Next.js, Tailwind CSS, React.",
+    "Pedro Henrique Fernandes e Silva. Designer Multidisciplinar com 7 anos de experiência em Branding, UI/UX Design, Web Design, Motion Design e Front-end básico. Photoshop, Illustrator, InDesign, Figma, Framer, After Effects, Next.js, Tailwind CSS, React.",
   keywords: [
     "Designer Multidisciplinar",
     "Designer Gráfico",
@@ -54,30 +50,15 @@ export const metadata: Metadata = {
     "Senador Firmino",
     "Minas Gerais",
     "Brasil",
-    "Remote",
     "Freelancer",
     "7 anos experiência",
   ],
-  robots: { index: false, follow: false }, // página de print, não SEO
+  robots: { index: false, follow: false },
 };
 
 const skills = {
-  "Gráfico & Branding": [
-    "Photoshop",
-    "Illustrator",
-    "InDesign",
-    "Brand Systems",
-    "Identidade Visual",
-    "Print",
-  ],
-  "Digital & UI/UX": [
-    "Figma",
-    "Framer",
-    "Design Tokens",
-    "Wireframing",
-    "Prototipagem",
-    "Design System",
-  ],
+  "Gráfico & Branding": ["Photoshop", "Illustrator", "InDesign", "Branding", "Identidade Visual", "Print"],
+  "Digital & UI/UX": ["Figma", "Framer", "Design Tokens", "Prototipagem", "Design System"],
   Motion: ["After Effects", "Logo Reveal", "Web Animation", "Motion Design"],
   "Front-end básico": ["HTML", "CSS", "Tailwind CSS", "Next.js (intermediário)"],
 };
@@ -154,10 +135,24 @@ const education = [
   },
 ];
 
+// Cores (não usa CSS vars do tema — PDF sempre claro)
+const C = {
+  bg: "#FFFFFF",
+  ink: "#0A0A0A",
+  inkSoft: "#333",
+  inkMute: "#666",
+  inkFaint: "#999",
+  line: "#E5E5E5",
+  brand: "#DE2828",
+  sidebar: "#101010",
+  sidebarText: "#E8E8E5",
+  sidebarMute: "#A0A0A0",
+};
+
 export default function CVPrintPage() {
   return (
     <>
-      {/* === GUARDS — esconde tudo que NÃO faz parte do CV print === */}
+      {/* === GUARDS — esconde tudo que NÃO é parte do CV print === */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -167,8 +162,6 @@ export default function CVPrintPage() {
               padding: 0 !important;
               overflow: hidden !important;
             }
-            /* Esconde Nav, Footer, ScrollProgressBar, SplashScreen e qualquer
-               elemento fixed/sticky que não seja parte do CV print */
             body > header,
             body > footer,
             body > nav,
@@ -180,7 +173,6 @@ export default function CVPrintPage() {
             main > * > footer,
             footer,
             .marquee-track { display: none !important; }
-            /* Garante que main não tem padding herdado do site */
             main { padding: 0 !important; margin: 0 !important; }
           `,
         }}
@@ -189,225 +181,309 @@ export default function CVPrintPage() {
       <div
         className="cv-print"
         style={{
-          background: "#FFFFFF",
-          color: "#0A0A0A",
-          fontFamily: "Inter, system-ui, sans-serif",
-          fontSize: "9px",
-          lineHeight: 1.45,
-          padding: "12mm 14mm",
+          display: "grid",
+          gridTemplateColumns: "65mm 1fr",
           width: "210mm",
           minHeight: "297mm",
+          background: C.bg,
+          color: C.ink,
+          fontFamily: "Inter, system-ui, sans-serif",
+          fontSize: "9px",
+          lineHeight: 1.5,
           boxSizing: "border-box",
         }}
       >
-      {/* ============ HEADER ============ */}
-      <header
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          gap: "12mm",
-          alignItems: "end",
-          paddingBottom: "4mm",
-          borderBottom: "1px solid #E5E5E5",
-          marginBottom: "5mm",
-        }}
-      >
-        <div>
-          <h1
-            style={{
-              fontSize: "22px",
-              fontWeight: 600,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              margin: 0,
-              color: "#0A0A0A",
-            }}
-          >
-            Pedro Henrique Fernandes e Silva
-          </h1>
-          <p
-            style={{
-              fontSize: "12px",
-              fontWeight: 500,
-              color: "#DE2828",
-              margin: "2px 0 0 0",
-            }}
-          >
-            Designer Multidisciplinar · 7 anos de experiência
-          </p>
-        </div>
-        <div
+        {/* ============================================================
+           SIDEBAR ESQUERDA (dark) — foto + contato + idiomas + skills
+           ============================================================ */}
+        <aside
           style={{
-            fontSize: "8.5px",
-            color: "#555",
-            textAlign: "right",
-            lineHeight: 1.65,
+            background: C.sidebar,
+            color: C.sidebarText,
+            padding: "10mm 8mm",
+            display: "flex",
+            flexDirection: "column",
+            gap: "7mm",
           }}
         >
-          <div>contato@dropefernandes.com</div>
-          <div>+55 (32) 9 9805-7750</div>
-          <div>Senador Firmino, MG · Brasil</div>
+          {/* === FOTO === */}
+          <div
+            style={{
+              width: "44mm",
+              height: "44mm",
+              borderRadius: "50%",
+              overflow: "hidden",
+              alignSelf: "center",
+              border: `2px solid ${C.brand}`,
+              boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/cv/photo.jpg"
+              alt="Pedro Henrique Fernandes e Silva"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "top",
+              }}
+            />
+          </div>
+
+          {/* === CONTATO === */}
           <div>
-            <a href="https://dropefernandes.com" style={{ color: "#0A0A0A" }}>
-              dropefernandes.com
-            </a>
+            <SidebarLabel>Contato</SidebarLabel>
+            <div style={{ marginTop: "2mm", display: "flex", flexDirection: "column", gap: "1.5mm", fontSize: "8.5px" }}>
+              <ContactRow label="Email" value="contato@dropefernandes.com" />
+              <ContactRow label="Telefone" value="+55 (32) 9 9805-7750" />
+              <ContactRow label="Localização" value="Senador Firmino, MG · Brasil" />
+              <ContactRow label="Portfólio" value="dropefernandes.com" />
+            </div>
           </div>
-        </div>
-      </header>
 
-      {/* ============ SOBRE ============ */}
-      <section style={{ marginBottom: "5mm" }}>
-        <SectionLabel>Sobre</SectionLabel>
-        <p style={{ margin: "1mm 0 0 0", maxWidth: "175mm" }}>
-          Designer Multidisciplinar com 7 anos no ofício. Comecei no design
-          gráfico e fui ampliando o range para branding, UI/UX, motion e
-          front-end básico. Já atendi marcas no Brasil, Dubai e Portugal. Conduzo
-          projetos inteiros do briefing à launch, com parceiros pontuais de
-          confiança quando o escopo exige mais profundidade em uma frente
-          específica.
-        </p>
-      </section>
-
-      {/* ============ SKILLS + IDIOMAS ============ */}
-      <section
-        style={{
-          marginBottom: "5mm",
-          display: "grid",
-          gridTemplateColumns: "1fr 60mm",
-          gap: "8mm",
-        }}
-      >
-        <div>
-          <SectionLabel>Habilidades</SectionLabel>
-          <div style={{ marginTop: "1.5mm", display: "flex", flexDirection: "column", gap: "1.5mm" }}>
-            {Object.entries(skills).map(([group, items]) => (
-              <div key={group} style={{ display: "grid", gridTemplateColumns: "32mm 1fr", gap: "2mm" }}>
-                <span style={{ fontWeight: 600, color: "#0A0A0A" }}>{group}</span>
-                <span style={{ color: "#333" }}>{items.join(" · ")}</span>
-              </div>
-            ))}
+          {/* === IDIOMAS === */}
+          <div>
+            <SidebarLabel>Idiomas</SidebarLabel>
+            <div style={{ marginTop: "2mm", display: "flex", flexDirection: "column", gap: "2mm", fontSize: "8.5px" }}>
+              {languages.map((l) => (
+                <div key={l.name} style={{ display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontWeight: 600, color: C.sidebarText }}>{l.name}</span>
+                  <span style={{ color: C.sidebarMute, fontSize: "7.5px", lineHeight: 1.4 }}>{l.level}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        <div>
-          <SectionLabel>Idiomas</SectionLabel>
-          <div style={{ marginTop: "1.5mm", display: "flex", flexDirection: "column", gap: "1.5mm" }}>
-            {languages.map((l) => (
-              <div key={l.name} style={{ display: "flex", flexDirection: "column" }}>
-                <span style={{ fontWeight: 600, color: "#0A0A0A" }}>{l.name}</span>
-                <span style={{ color: "#555", fontSize: "8.5px" }}>{l.level}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ============ EXPERIÊNCIA ============ */}
-      <section style={{ marginBottom: "5mm" }}>
-        <SectionLabel>Experiência Profissional</SectionLabel>
-        <ol style={{ listStyle: "none", padding: 0, margin: "1.5mm 0 0 0", display: "flex", flexDirection: "column", gap: "3mm" }}>
-          {experience.map((job) => (
-            <li
-              key={`${job.company}-${job.period}`}
+          {/* === HABILIDADES === */}
+          <div>
+            <SidebarLabel>Habilidades</SidebarLabel>
+            <div style={{ marginTop: "2mm", display: "flex", flexDirection: "column", gap: "2.5mm" }}>
+              {Object.entries(skills).map(([group, items]) => (
+                <div key={group}>
+                  <p style={{ fontSize: "7.5px", fontWeight: 700, color: C.brand, margin: "0 0 1mm 0", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    {group}
+                  </p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1mm" }}>
+                    {items.map((item) => (
+                      <span
+                        key={item}
+                        style={{
+                          fontSize: "7.5px",
+                          padding: "0.8mm 2mm",
+                          borderRadius: "10px",
+                          border: `0.5px solid ${C.sidebarMute}`,
+                          color: C.sidebarText,
+                          background: "rgba(255,255,255,0.04)",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        {/* ============================================================
+           MAIN DIREITA (branco) — nome + sobre + experiência + formação
+           ============================================================ */}
+        <main
+          style={{
+            padding: "10mm 12mm",
+            display: "flex",
+            flexDirection: "column",
+            gap: "5mm",
+          }}
+        >
+          {/* === HEADER NOME + CARGO === */}
+          <header style={{ paddingBottom: "3mm", borderBottom: `1px solid ${C.line}` }}>
+            <h1
               style={{
-                display: "grid",
-                gridTemplateColumns: "34mm 1fr",
-                gap: "3mm",
-                pageBreakInside: "avoid",
+                fontSize: "22px",
+                fontWeight: 600,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.05,
+                margin: 0,
+                color: C.ink,
               }}
             >
-              <div style={{ color: "#555", fontSize: "8.5px", lineHeight: 1.45 }}>
-                <div style={{ fontWeight: 600, color: "#DE2828" }}>{job.period}</div>
-                <div>{job.location}</div>
-              </div>
-              <div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "2mm", flexWrap: "wrap" }}>
-                  <strong style={{ fontSize: "10px", color: "#0A0A0A" }}>{job.role}</strong>
-                  <span style={{ color: "#555" }}>·</span>
-                  <span style={{ color: "#0A0A0A", fontWeight: 500 }}>{job.company}</span>
-                </div>
-                <ul style={{ listStyle: "none", padding: 0, margin: "1mm 0 0 0", display: "flex", flexDirection: "column", gap: "0.8mm" }}>
-                  {job.bullets.map((b, j) => (
-                    <li key={j} style={{ display: "flex", gap: "2mm", color: "#222" }}>
-                      <span style={{ color: "#DE2828", flexShrink: 0 }}>·</span>
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* ============ FORMAÇÃO ============ */}
-      <section>
-        <SectionLabel>Formação Acadêmica</SectionLabel>
-        <ol style={{ listStyle: "none", padding: 0, margin: "1.5mm 0 0 0" }}>
-          {education.map((ed) => (
-            <li
-              key={ed.course}
+              Pedro Henrique
+              <br />
+              <span style={{ color: C.brand }}>Fernandes e Silva</span>
+            </h1>
+            <p
               style={{
-                display: "grid",
-                gridTemplateColumns: "34mm 1fr",
+                fontSize: "11px",
+                fontWeight: 500,
+                color: C.inkSoft,
+                margin: "1.5mm 0 0 0",
+                letterSpacing: "0.02em",
+              }}
+            >
+              Designer Multidisciplinar · 7 anos de experiência
+            </p>
+          </header>
+
+          {/* === SOBRE === */}
+          <section>
+            <MainLabel>Sobre</MainLabel>
+            <p style={{ margin: "1.5mm 0 0 0", color: C.inkSoft, fontSize: "9px", lineHeight: 1.55 }}>
+              Designer Multidisciplinar com 7 anos no ofício. Comecei no design
+              gráfico e fui ampliando o range para branding, UI/UX, motion e
+              front-end básico. Já atendi marcas no Brasil, Dubai e Portugal.
+              Conduzo projetos inteiros do briefing à launch, com parceiros
+              pontuais de confiança quando o escopo exige mais profundidade
+              em uma frente específica.
+            </p>
+          </section>
+
+          {/* === EXPERIÊNCIA === */}
+          <section>
+            <MainLabel>Experiência Profissional</MainLabel>
+            <ol
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: "2mm 0 0 0",
+                display: "flex",
+                flexDirection: "column",
                 gap: "3mm",
               }}
             >
-              <div style={{ color: "#555", fontSize: "8.5px" }}>
-                <div style={{ fontWeight: 600, color: "#DE2828" }}>{ed.period}</div>
-                <div>{ed.location}</div>
-              </div>
-              <div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "2mm", flexWrap: "wrap" }}>
-                  <strong style={{ fontSize: "10px", color: "#0A0A0A" }}>{ed.course}</strong>
-                  <span style={{ color: "#555" }}>·</span>
-                  <span style={{ color: "#0A0A0A", fontWeight: 500 }}>{ed.school}</span>
-                </div>
-                <p style={{ margin: "0.5mm 0 0 0", color: "#555", fontSize: "8.5px" }}>{ed.degree}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
+              {experience.map((job) => (
+                <li
+                  key={`${job.company}-${job.period}`}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "30mm 1fr",
+                    gap: "3mm",
+                    pageBreakInside: "avoid",
+                  }}
+                >
+                  <div style={{ color: C.inkMute, fontSize: "8px", lineHeight: 1.45 }}>
+                    <div style={{ fontWeight: 700, color: C.brand, fontSize: "8.5px" }}>{job.period}</div>
+                    <div style={{ marginTop: "0.5mm" }}>{job.location}</div>
+                  </div>
+                  <div>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "2mm", flexWrap: "wrap" }}>
+                      <strong style={{ fontSize: "10.5px", color: C.ink, fontWeight: 600 }}>{job.role}</strong>
+                      <span style={{ color: C.inkFaint }}>·</span>
+                      <span style={{ color: C.ink, fontWeight: 500, fontSize: "9.5px" }}>{job.company}</span>
+                    </div>
+                    <ul
+                      style={{
+                        listStyle: "none",
+                        padding: 0,
+                        margin: "1mm 0 0 0",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.8mm",
+                      }}
+                    >
+                      {job.bullets.map((b, j) => (
+                        <li key={j} style={{ display: "flex", gap: "2mm", color: C.inkSoft, fontSize: "8.5px", lineHeight: 1.5 }}>
+                          <span style={{ color: C.brand, flexShrink: 0 }}>·</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
 
-      {/* ============ ATS / IA Keywords (visualmente invisível mas crawlable) ============
-          Texto plain pra IAs de análise de CV detectarem skills e seniority sem dúvida.
-          Renderizado fora da viewport visual mas presente no HTML do PDF. */}
-      <div
-        aria-hidden="false"
-        style={{
-          position: "absolute",
-          left: "-9999px",
-          width: "1px",
-          height: "1px",
-          overflow: "hidden",
-          color: "#FFFFFF",
-          fontSize: "1px",
-        }}
-      >
-        Pedro Henrique Fernandes e Silva, also known as Drope Fernandes,
-        Designer Multidisciplinar with 7 years of experience. Skills: Graphic
-        Designer, UI/UX Designer, Brand Designer, Motion Designer, Front-end
-        Developer, Web Designer, Product Designer, Visual Identity, Brand
-        System, Design System, Design Tokens, Photoshop, Illustrator, InDesign,
-        Figma, Framer, After Effects, Adobe Creative Cloud, HTML, CSS, Tailwind
-        CSS, React, Next.js, Framer Motion. Languages: Portuguese (Native),
-        English (Intermediate), Spanish (Intermediate). Location: Senador
-        Firmino, Minas Gerais, Brazil. Available for remote work. Freelance.
-        International experience: Brazil, Dubai, Portugal. Senior designer,
-        creative director, art director, full-stack designer.
-      </div>
+          {/* === FORMAÇÃO === */}
+          <section>
+            <MainLabel>Formação Acadêmica</MainLabel>
+            <ol style={{ listStyle: "none", padding: 0, margin: "2mm 0 0 0" }}>
+              {education.map((ed) => (
+                <li
+                  key={ed.course}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "30mm 1fr",
+                    gap: "3mm",
+                  }}
+                >
+                  <div style={{ color: C.inkMute, fontSize: "8px" }}>
+                    <div style={{ fontWeight: 700, color: C.brand, fontSize: "8.5px" }}>{ed.period}</div>
+                    <div style={{ marginTop: "0.5mm" }}>{ed.location}</div>
+                  </div>
+                  <div>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "2mm", flexWrap: "wrap" }}>
+                      <strong style={{ fontSize: "10.5px", color: C.ink, fontWeight: 600 }}>{ed.course}</strong>
+                      <span style={{ color: C.inkFaint }}>·</span>
+                      <span style={{ color: C.ink, fontWeight: 500, fontSize: "9.5px" }}>{ed.school}</span>
+                    </div>
+                    <p style={{ margin: "0.5mm 0 0 0", color: C.inkMute, fontSize: "8.5px" }}>{ed.degree}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        </main>
+
+        {/* ============ ATS / IA Keywords invisíveis ============ */}
+        <div
+          aria-hidden="false"
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: "1px",
+            height: "1px",
+            overflow: "hidden",
+            color: "#FFFFFF",
+            fontSize: "1px",
+          }}
+        >
+          Pedro Henrique Fernandes e Silva, also known as Drope Fernandes,
+          Designer Multidisciplinar with 7 years of experience. Skills: Graphic
+          Designer, UI/UX Designer, Brand Designer, Motion Designer, Front-end
+          Developer, Web Designer, Product Designer, Visual Identity, Brand
+          System, Design System, Design Tokens, Photoshop, Illustrator, InDesign,
+          Figma, Framer, After Effects, Adobe Creative Cloud, HTML, CSS, Tailwind
+          CSS, React, Next.js, Framer Motion. Languages: Portuguese (Native),
+          English (Intermediate), Spanish (Intermediate). Location: Senador
+          Firmino, Minas Gerais, Brazil. International experience: Brazil,
+          Dubai, Portugal. Senior designer, creative director, art director.
+        </div>
       </div>
     </>
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+// ===== HELPERS =====
+function SidebarLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      style={{
+        fontSize: "8.5px",
+        fontWeight: 700,
+        letterSpacing: "0.15em",
+        textTransform: "uppercase",
+        color: "#DE2828",
+        margin: 0,
+        paddingBottom: "1.5mm",
+        borderBottom: "0.5px solid rgba(255,255,255,0.15)",
+      }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function MainLabel({ children }: { children: React.ReactNode }) {
   return (
     <h2
       style={{
         fontSize: "9px",
         fontWeight: 700,
-        letterSpacing: "0.12em",
+        letterSpacing: "0.15em",
         textTransform: "uppercase",
         color: "#DE2828",
         margin: 0,
@@ -417,5 +493,16 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     >
       {children}
     </h2>
+  );
+}
+
+function ContactRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <span style={{ fontSize: "7px", fontWeight: 600, color: "#DE2828", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+        {label}
+      </span>
+      <span style={{ color: "#E8E8E5", fontSize: "8.5px", lineHeight: 1.35, wordBreak: "break-word" }}>{value}</span>
+    </div>
   );
 }
