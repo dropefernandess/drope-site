@@ -182,14 +182,14 @@ export default function CVPrintPage() {
         className="cv-print"
         style={{
           display: "grid",
-          gridTemplateColumns: "65mm 1fr",
+          gridTemplateColumns: "70mm 1fr",
           width: "210mm",
           minHeight: "297mm",
           background: C.bg,
           color: C.ink,
           fontFamily: "Inter, system-ui, sans-serif",
-          fontSize: "9px",
-          lineHeight: 1.5,
+          fontSize: "11px",
+          lineHeight: 1.55,
           boxSizing: "border-box",
         }}
       >
@@ -200,22 +200,22 @@ export default function CVPrintPage() {
           style={{
             background: C.sidebar,
             color: C.sidebarText,
-            padding: "10mm 8mm",
+            padding: "14mm 10mm",
             display: "flex",
             flexDirection: "column",
-            gap: "7mm",
+            gap: "10mm",
           }}
         >
           {/* === FOTO === */}
           <div
             style={{
-              width: "44mm",
-              height: "44mm",
+              width: "50mm",
+              height: "50mm",
               borderRadius: "50%",
               overflow: "hidden",
               alignSelf: "center",
-              border: `2px solid ${C.brand}`,
-              boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+              border: `2.5px solid ${C.brand}`,
+              boxShadow: "0 6px 16px rgba(0,0,0,0.45)",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -234,7 +234,7 @@ export default function CVPrintPage() {
           {/* === CONTATO === */}
           <div>
             <SidebarLabel>Contato</SidebarLabel>
-            <div style={{ marginTop: "2mm", display: "flex", flexDirection: "column", gap: "1.5mm", fontSize: "8.5px" }}>
+            <div style={{ marginTop: "3mm", display: "flex", flexDirection: "column", gap: "2.5mm", fontSize: "10px" }}>
               <ContactRow label="Email" value="contato@dropefernandes.com" />
               <ContactRow label="Telefone" value="+55 (32) 9 9805-7750" />
               <ContactRow label="Localização" value="Senador Firmino, MG · Brasil" />
@@ -245,11 +245,11 @@ export default function CVPrintPage() {
           {/* === IDIOMAS === */}
           <div>
             <SidebarLabel>Idiomas</SidebarLabel>
-            <div style={{ marginTop: "2mm", display: "flex", flexDirection: "column", gap: "2mm", fontSize: "8.5px" }}>
+            <div style={{ marginTop: "3mm", display: "flex", flexDirection: "column", gap: "3mm", fontSize: "10px" }}>
               {languages.map((l) => (
                 <div key={l.name} style={{ display: "flex", flexDirection: "column" }}>
-                  <span style={{ fontWeight: 600, color: C.sidebarText }}>{l.name}</span>
-                  <span style={{ color: C.sidebarMute, fontSize: "7.5px", lineHeight: 1.4 }}>{l.level}</span>
+                  <span style={{ fontWeight: 600, color: C.sidebarText, fontSize: "10.5px" }}>{l.name}</span>
+                  <span style={{ color: C.sidebarMute, fontSize: "9px", lineHeight: 1.4, marginTop: "0.5mm" }}>{l.level}</span>
                 </div>
               ))}
             </div>
@@ -258,24 +258,24 @@ export default function CVPrintPage() {
           {/* === HABILIDADES === */}
           <div>
             <SidebarLabel>Habilidades</SidebarLabel>
-            <div style={{ marginTop: "2mm", display: "flex", flexDirection: "column", gap: "2.5mm" }}>
+            <div style={{ marginTop: "3mm", display: "flex", flexDirection: "column", gap: "3.5mm" }}>
               {Object.entries(skills).map(([group, items]) => (
                 <div key={group}>
-                  <p style={{ fontSize: "7.5px", fontWeight: 700, color: C.brand, margin: "0 0 1mm 0", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                  <p style={{ fontSize: "9px", fontWeight: 700, color: C.brand, margin: "0 0 1.5mm 0", textTransform: "uppercase", letterSpacing: "0.06em" }}>
                     {group}
                   </p>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1mm" }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1.2mm" }}>
                     {items.map((item) => (
                       <span
                         key={item}
                         style={{
-                          fontSize: "7.5px",
-                          padding: "0.8mm 2mm",
-                          borderRadius: "10px",
+                          fontSize: "8.5px",
+                          padding: "1mm 2.5mm",
+                          borderRadius: "12px",
                           border: `0.5px solid ${C.sidebarMute}`,
                           color: C.sidebarText,
-                          background: "rgba(255,255,255,0.04)",
-                          lineHeight: 1.2,
+                          background: "rgba(255,255,255,0.05)",
+                          lineHeight: 1.3,
                         }}
                       >
                         {item}
@@ -293,19 +293,19 @@ export default function CVPrintPage() {
            ============================================================ */}
         <main
           style={{
-            padding: "10mm 12mm",
+            padding: "14mm 16mm",
             display: "flex",
             flexDirection: "column",
-            gap: "5mm",
+            gap: "8mm",
           }}
         >
           {/* === HEADER NOME + CARGO === */}
-          <header style={{ paddingBottom: "3mm", borderBottom: `1px solid ${C.line}` }}>
+          <header style={{ paddingBottom: "5mm", borderBottom: `1px solid ${C.line}` }}>
             <h1
               style={{
-                fontSize: "22px",
+                fontSize: "30px",
                 fontWeight: 600,
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.025em",
                 lineHeight: 1.05,
                 margin: 0,
                 color: C.ink,
@@ -317,11 +317,11 @@ export default function CVPrintPage() {
             </h1>
             <p
               style={{
-                fontSize: "11px",
+                fontSize: "13px",
                 fontWeight: 500,
                 color: C.inkSoft,
-                margin: "1.5mm 0 0 0",
-                letterSpacing: "0.02em",
+                margin: "3mm 0 0 0",
+                letterSpacing: "0.01em",
               }}
             >
               Designer Multidisciplinar · 7 anos de experiência
@@ -331,7 +331,7 @@ export default function CVPrintPage() {
           {/* === SOBRE === */}
           <section>
             <MainLabel>Sobre</MainLabel>
-            <p style={{ margin: "1.5mm 0 0 0", color: C.inkSoft, fontSize: "9px", lineHeight: 1.55 }}>
+            <p style={{ margin: "3mm 0 0 0", color: C.inkSoft, fontSize: "11px", lineHeight: 1.65 }}>
               Designer Multidisciplinar com 7 anos no ofício. Comecei no design
               gráfico e fui ampliando o range para branding, UI/UX, motion e
               front-end básico. Já atendi marcas no Brasil, Dubai e Portugal.
@@ -348,10 +348,10 @@ export default function CVPrintPage() {
               style={{
                 listStyle: "none",
                 padding: 0,
-                margin: "2mm 0 0 0",
+                margin: "4mm 0 0 0",
                 display: "flex",
                 flexDirection: "column",
-                gap: "3mm",
+                gap: "6mm",
               }}
             >
               {experience.map((job) => (
@@ -359,34 +359,34 @@ export default function CVPrintPage() {
                   key={`${job.company}-${job.period}`}
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "30mm 1fr",
-                    gap: "3mm",
+                    gridTemplateColumns: "36mm 1fr",
+                    gap: "4mm",
                     pageBreakInside: "avoid",
                   }}
                 >
-                  <div style={{ color: C.inkMute, fontSize: "8px", lineHeight: 1.45 }}>
-                    <div style={{ fontWeight: 700, color: C.brand, fontSize: "8.5px" }}>{job.period}</div>
-                    <div style={{ marginTop: "0.5mm" }}>{job.location}</div>
+                  <div style={{ color: C.inkMute, fontSize: "10px", lineHeight: 1.45 }}>
+                    <div style={{ fontWeight: 700, color: C.brand, fontSize: "10.5px" }}>{job.period}</div>
+                    <div style={{ marginTop: "1mm" }}>{job.location}</div>
                   </div>
                   <div>
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "2mm", flexWrap: "wrap" }}>
-                      <strong style={{ fontSize: "10.5px", color: C.ink, fontWeight: 600 }}>{job.role}</strong>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "2.5mm", flexWrap: "wrap" }}>
+                      <strong style={{ fontSize: "13px", color: C.ink, fontWeight: 600 }}>{job.role}</strong>
                       <span style={{ color: C.inkFaint }}>·</span>
-                      <span style={{ color: C.ink, fontWeight: 500, fontSize: "9.5px" }}>{job.company}</span>
+                      <span style={{ color: C.ink, fontWeight: 500, fontSize: "12px" }}>{job.company}</span>
                     </div>
                     <ul
                       style={{
                         listStyle: "none",
                         padding: 0,
-                        margin: "1mm 0 0 0",
+                        margin: "2mm 0 0 0",
                         display: "flex",
                         flexDirection: "column",
-                        gap: "0.8mm",
+                        gap: "1.5mm",
                       }}
                     >
                       {job.bullets.map((b, j) => (
-                        <li key={j} style={{ display: "flex", gap: "2mm", color: C.inkSoft, fontSize: "8.5px", lineHeight: 1.5 }}>
-                          <span style={{ color: C.brand, flexShrink: 0 }}>·</span>
+                        <li key={j} style={{ display: "flex", gap: "2.5mm", color: C.inkSoft, fontSize: "10.5px", lineHeight: 1.55 }}>
+                          <span style={{ color: C.brand, flexShrink: 0, fontWeight: 700 }}>·</span>
                           <span>{b}</span>
                         </li>
                       ))}
@@ -400,27 +400,27 @@ export default function CVPrintPage() {
           {/* === FORMAÇÃO === */}
           <section>
             <MainLabel>Formação Acadêmica</MainLabel>
-            <ol style={{ listStyle: "none", padding: 0, margin: "2mm 0 0 0" }}>
+            <ol style={{ listStyle: "none", padding: 0, margin: "4mm 0 0 0" }}>
               {education.map((ed) => (
                 <li
                   key={ed.course}
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "30mm 1fr",
-                    gap: "3mm",
+                    gridTemplateColumns: "36mm 1fr",
+                    gap: "4mm",
                   }}
                 >
-                  <div style={{ color: C.inkMute, fontSize: "8px" }}>
-                    <div style={{ fontWeight: 700, color: C.brand, fontSize: "8.5px" }}>{ed.period}</div>
-                    <div style={{ marginTop: "0.5mm" }}>{ed.location}</div>
+                  <div style={{ color: C.inkMute, fontSize: "10px" }}>
+                    <div style={{ fontWeight: 700, color: C.brand, fontSize: "10.5px" }}>{ed.period}</div>
+                    <div style={{ marginTop: "1mm" }}>{ed.location}</div>
                   </div>
                   <div>
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "2mm", flexWrap: "wrap" }}>
-                      <strong style={{ fontSize: "10.5px", color: C.ink, fontWeight: 600 }}>{ed.course}</strong>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "2.5mm", flexWrap: "wrap" }}>
+                      <strong style={{ fontSize: "13px", color: C.ink, fontWeight: 600 }}>{ed.course}</strong>
                       <span style={{ color: C.inkFaint }}>·</span>
-                      <span style={{ color: C.ink, fontWeight: 500, fontSize: "9.5px" }}>{ed.school}</span>
+                      <span style={{ color: C.ink, fontWeight: 500, fontSize: "12px" }}>{ed.school}</span>
                     </div>
-                    <p style={{ margin: "0.5mm 0 0 0", color: C.inkMute, fontSize: "8.5px" }}>{ed.degree}</p>
+                    <p style={{ margin: "1.5mm 0 0 0", color: C.inkMute, fontSize: "10.5px" }}>{ed.degree}</p>
                   </div>
                 </li>
               ))}
@@ -462,13 +462,13 @@ function SidebarLabel({ children }: { children: React.ReactNode }) {
   return (
     <h2
       style={{
-        fontSize: "8.5px",
+        fontSize: "10.5px",
         fontWeight: 700,
-        letterSpacing: "0.15em",
+        letterSpacing: "0.18em",
         textTransform: "uppercase",
         color: "#DE2828",
         margin: 0,
-        paddingBottom: "1.5mm",
+        paddingBottom: "2mm",
         borderBottom: "0.5px solid rgba(255,255,255,0.15)",
       }}
     >
@@ -481,13 +481,13 @@ function MainLabel({ children }: { children: React.ReactNode }) {
   return (
     <h2
       style={{
-        fontSize: "9px",
+        fontSize: "11px",
         fontWeight: 700,
-        letterSpacing: "0.15em",
+        letterSpacing: "0.18em",
         textTransform: "uppercase",
         color: "#DE2828",
         margin: 0,
-        paddingBottom: "1mm",
+        paddingBottom: "1.5mm",
         borderBottom: "0.5px solid #E5E5E5",
       }}
     >
@@ -499,10 +499,12 @@ function MainLabel({ children }: { children: React.ReactNode }) {
 function ContactRow({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <span style={{ fontSize: "7px", fontWeight: 600, color: "#DE2828", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+      <span style={{ fontSize: "8.5px", fontWeight: 700, color: "#DE2828", textTransform: "uppercase", letterSpacing: "0.1em" }}>
         {label}
       </span>
-      <span style={{ color: "#E8E8E5", fontSize: "8.5px", lineHeight: 1.35, wordBreak: "break-word" }}>{value}</span>
+      <span style={{ color: "#E8E8E5", fontSize: "10px", lineHeight: 1.4, wordBreak: "break-word", marginTop: "0.5mm" }}>
+        {value}
+      </span>
     </div>
   );
 }
