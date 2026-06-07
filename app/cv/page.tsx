@@ -17,23 +17,25 @@ import { Signature } from "@/components/ui/Signature";
 
 // ===== DATA =====
 
-// Habilidades agrupadas por categoria — mais legível que % arbitrária
+// Habilidades agrupadas por categoria — ordem reflete a trajetória:
+// design gráfico como base, design digital construído em cima, código básico
+// como ferramenta complementar pra entregar projetos próprios.
 const skillGroups: { label: string; items: string[] }[] = [
   {
-    label: "Design Tools",
-    items: ["Figma", "Framer", "Photoshop", "Illustrator", "After Effects"],
+    label: "Gráfico & Branding",
+    items: ["Photoshop", "Illustrator", "InDesign", "Brand systems", "Print"],
   },
   {
-    label: "Code",
-    items: ["HTML", "CSS", "Tailwind CSS", "React", "Next.js", "Framer Motion"],
+    label: "Digital & UI/UX",
+    items: ["Figma", "Framer", "Design tokens", "Wireframing", "Prototipagem"],
   },
   {
-    label: "Design Systems",
-    items: ["Brand systems", "Design tokens", "Web animation", "Motion design"],
+    label: "Motion",
+    items: ["After Effects", "Logo reveal", "Web animation"],
   },
   {
-    label: "Workflow",
-    items: ["Notion", "Linear", "Slack", "Cal.com", "Git/GitHub"],
+    label: "Front-end básico",
+    items: ["HTML", "CSS", "Tailwind CSS", "Next.js (intermediário)"],
   },
 ];
 
@@ -190,7 +192,7 @@ export default function CVPage() {
 
             <Reveal direction="up" delay={0.2} className="flex flex-col gap-1">
               <p className="text-h-3 text-brand font-semibold">
-                Product Designer &amp; Front-end
+                Designer Multidisciplinar
               </p>
               <p className="text-body text-fg-mute italic">
                 — Drope pra quem trabalha comigo.
@@ -258,15 +260,16 @@ export default function CVPage() {
         <Section number="01" title="Sobre">
           <Reveal direction="up" className="flex flex-col gap-4 max-w-[640px]">
             <p className="text-lead text-fg-body">
-              Product Designer e front-end com 7 anos atuando entre branding,
-              UI/UX e desenvolvimento. Do briefing à launch, na mesma cabeça.
+              Designer multidisciplinar com 7 anos no ofício. Comecei
+              no design gráfico e fui ampliando o range pra branding,
+              UI/UX, motion e front-end básico.
             </p>
             <p className="text-body text-fg-mute">
-              Já atendi marcas no Brasil, Dubai e Portugal, com foco em sistemas
-              de identidade integrados a produtos digitais funcionais.
-              Confortável conduzindo um projeto inteiro do conceito ao código,
-              com parceiros pontuais de confiança quando o escopo pede mais
-              profundidade em uma frente específica.
+              Já atendi marcas no Brasil, Dubai e Portugal. Hoje conduzo
+              projetos inteiros do briefing à launch, com parceiros pontuais
+              de confiança quando o escopo pede mais profundidade em uma
+              frente específica. O design gráfico continua sendo a base
+              que sustenta todo o resto.
             </p>
           </Reveal>
         </Section>
@@ -405,7 +408,7 @@ export default function CVPage() {
         >
           <div className="flex flex-col gap-2">
             <p className="text-[11px] uppercase tracking-wider font-medium text-bg/60">
-              PROCURANDO UM PRODUCT DESIGNER?
+              PROCURANDO UM DESIGNER MULTIDISCIPLINAR?
             </p>
             <h2 className="text-h-1 text-bg text-balance">
               Vamos conversar sobre o seu projeto.
