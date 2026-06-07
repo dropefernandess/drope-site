@@ -260,16 +260,13 @@ export default function CVPage() {
         <Section number="01" title="Sobre">
           <Reveal direction="up" className="flex flex-col gap-4 max-w-[640px]">
             <p className="text-lead text-fg-body">
-              Designer multidisciplinar com 7 anos no ofício. Comecei
-              no design gráfico e fui ampliando o range pra branding,
-              UI/UX, motion e front-end básico.
+              Sou um Designer Multidisciplinar com 7 anos de ofício
+              construindo marcas, interfaces e sistemas visuais. Tenho
+              o design gráfico como base e a tecnologia como extensão.
             </p>
             <p className="text-body text-fg-mute">
-              Já atendi marcas no Brasil, Dubai e Portugal. Hoje conduzo
-              projetos inteiros do briefing à launch, com parceiros pontuais
-              de confiança quando o escopo pede mais profundidade em uma
-              frente específica. O design gráfico continua sendo a base
-              que sustenta todo o resto.
+              Atendo clientes no Brasil e no exterior com projetos que
+              vão do conceito ao ar, com consistência visual em cada etapa.
             </p>
           </Reveal>
         </Section>

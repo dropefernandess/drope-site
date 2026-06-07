@@ -332,12 +332,11 @@ export default function CVPrintPage() {
           <section>
             <MainLabel>Sobre</MainLabel>
             <p style={{ margin: "3mm 0 0 0", color: C.inkSoft, fontSize: "11px", lineHeight: 1.65 }}>
-              Designer Multidisciplinar com 7 anos no ofício. Comecei no design
-              gráfico e fui ampliando o range para branding, UI/UX, motion e
-              front-end básico. Já atendi marcas no Brasil, Dubai e Portugal.
-              Conduzo projetos inteiros do briefing à launch, com parceiros
-              pontuais de confiança quando o escopo exige mais profundidade
-              em uma frente específica.
+              Sou um Designer Multidisciplinar com 7 anos de ofício construindo
+              marcas, interfaces e sistemas visuais. Tenho o design gráfico
+              como base e a tecnologia como extensão. Atendo clientes no Brasil
+              e no exterior com projetos que vão do conceito ao ar, com
+              consistência visual em cada etapa.
             </p>
           </section>
 
