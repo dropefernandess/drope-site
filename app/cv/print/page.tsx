@@ -169,11 +169,11 @@ export default function CVPrintPage() {
             body > div[class*="z-[100]"],
             body > div[class*="z-50"],
             body > main > header,
-            main > * > header,
-            main > * > footer,
             footer,
             .marquee-track { display: none !important; }
-            main { padding: 0 !important; margin: 0 !important; }
+            /* Zera padding/margin do <main> do layout root (direto filho de body)
+               sem afetar o <main> interno do CV (dentro de .cv-print) */
+            body > main { padding: 0 !important; margin: 0 !important; }
           `,
         }}
       />
@@ -293,10 +293,10 @@ export default function CVPrintPage() {
            ============================================================ */}
         <main
           style={{
-            padding: "14mm 16mm",
+            padding: "18mm 20mm 18mm 18mm",
             display: "flex",
             flexDirection: "column",
-            gap: "8mm",
+            gap: "9mm",
           }}
         >
           {/* === HEADER NOME + CARGO === */}
