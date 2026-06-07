@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Download, Mail, Phone, MapPin } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowLeft, ArrowUpRight, Download, Mail, Phone, MapPin, Linkedin, Instagram, Globe } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { Signature } from "@/components/ui/Signature";
@@ -11,27 +10,38 @@ import { Signature } from "@/components/ui/Signature";
 /**
  * /cv — Currículo Vitae do Pedro Fernandes (Drope).
  *
- * Estilo: single column minimal, premium-feel. Sem entrar no menu ou footer.
- * Botão download fixa no top-right pra exportar PDF original.
- *
- * Conteúdo extraído do PDF original (Currículo-Pedro.pdf) com ratings
- * traduzidos de estrelas pra barras percentuais (mais clean).
+ * Refatorado pra senioridade internacional: cargo "Product Designer &
+ * Front-end", resumo punchy, skills em chips, idiomas honestos, links
+ * sociais completos, badge "Available", print mode, timestamp.
  */
 
 // ===== DATA =====
-type SkillRating = { name: string; pct: number };
 
-const skills: SkillRating[] = [
-  { name: "Photoshop",    pct: 100 },
-  { name: "Illustrator",  pct: 80 },
-  { name: "After Effects", pct: 60 },
-  { name: "Figma",        pct: 80 },
-  { name: "Framer",       pct: 90 },
+// Habilidades agrupadas por categoria — mais legível que % arbitrária
+const skillGroups: { label: string; items: string[] }[] = [
+  {
+    label: "Design Tools",
+    items: ["Figma", "Framer", "Photoshop", "Illustrator", "After Effects"],
+  },
+  {
+    label: "Code",
+    items: ["HTML", "CSS", "Tailwind CSS", "React", "Next.js", "Framer Motion"],
+  },
+  {
+    label: "Design Systems",
+    items: ["Brand systems", "Design tokens", "Web animation", "Motion design"],
+  },
+  {
+    label: "Workflow",
+    items: ["Notion", "Linear", "Slack", "Cal.com", "Git/GitHub"],
+  },
 ];
 
-const languages: SkillRating[] = [
-  { name: "Inglês",   pct: 40 },
-  { name: "Espanhol", pct: 50 },
+// Idiomas com descrição honesta de fluência (sem rating arbitrário)
+const languages: { name: string; level: string }[] = [
+  { name: "Português",  level: "Nativo" },
+  { name: "Inglês",     level: "Leitura técnica fluente · Conversação em evolução" },
+  { name: "Espanhol",   level: "Intermediário" },
 ];
 
 type Job = {
@@ -49,10 +59,10 @@ const experience: Job[] = [
     company: "Be Done",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Participação em reuniões com superiores e outros membros da equipe, sugerindo melhorias na área a fim de elevar eficiência e qualidade do serviço.",
-      "Produção de relatórios de Marketing para empresas parceiras, apresentando informações do serviço prestado junto a estratégias de melhoria e solução de problemas.",
-      "Desenvolvimento de identidades visuais combinando elementos gráficos com os valores das marcas para facilitar o reconhecimento no mercado.",
-      "Tratamento de imagens em ferramentas de edição (cor, iluminação, sombras, saturação) pra aprimorar a visualização final.",
+      "Atuei como consultor estratégico em decisões de design, identificando ineficiências e propondo melhorias mensuráveis no fluxo de entrega da agência.",
+      "Estruturei relatórios de Marketing para empresas parceiras, transformando dados brutos em estratégias acionáveis de melhoria de performance.",
+      "Desenvolvi identidades visuais alinhando elementos gráficos aos valores das marcas — facilitando reconhecimento e percepção de valor no mercado.",
+      "Conduzi tratamento e finalização de imagens em ferramentas de edição (cor, iluminação, sombras, saturação) priorizando consistência visual em todos os entregáveis.",
     ],
   },
   {
@@ -61,12 +71,11 @@ const experience: Job[] = [
     company: "Novus Soluções Criativas",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Comunicação direta com clientes pra definir conceito, escopo, orçamento e prazos de entrega.",
-      "Criação de identidades visuais pra uso em redes sociais, anúncios e conteúdos informativos.",
-      "Produção de vídeos pra uso digital e impressão tradicional.",
-      "Desenvolvimento de mais de 10 projetos de gerenciamento de rede + identidade visual desde a fase inicial.",
-      "Elaboração de pacotes de identidade visual pra novas linhas de produtos e rótulos, incluindo PDV, materiais de marketing e mais.",
-      "Apoio à equipe na realização de tarefas diversas conforme demanda, garantindo agilidade e eficiência.",
+      "Liderei a comunicação direta com clientes na definição de conceito, escopo, orçamento e cronograma de mais de 10 projetos de identidade visual desde a fase inicial.",
+      "Conduzi a criação de identidades visuais para redes sociais, anúncios e conteúdos informativos — entregando consistência visual em múltiplas frentes.",
+      "Produzi vídeos para uso digital e impressão tradicional, conectando direção de arte e motion design no mesmo profissional.",
+      "Elaborei pacotes completos de identidade visual para novas linhas de produtos e rótulos, incluindo PDV, materiais de marketing e papelaria.",
+      "Apoiei o time em demandas múltiplas de design, garantindo agilidade na entrega sem comprometer qualidade.",
     ],
   },
   {
@@ -75,10 +84,10 @@ const experience: Job[] = [
     company: "KOJIO",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Criação de logotipos pra empresas, definindo design que se relacionasse com produtos e serviços comercializados.",
-      "Finalização de imagens gráficas, adequando arquivos às especificações do briefing antes da impressão.",
-      "Desenvolvimento de identidades visuais combinando elementos gráficos com valores das marcas pra facilitar reconhecimento.",
-      "Tratamento de imagens em edição pra aprimorar visualização do arquivo final.",
+      "Criei logotipos com pesquisa de mercado, definindo design que se relacionasse com produtos e serviços comercializados — gerando identificação direta com consumidores.",
+      "Finalizei imagens gráficas adequando arquivos às especificações técnicas do briefing antes da impressão, eliminando retrabalho de produção.",
+      "Desenvolvi identidades visuais combinando elementos gráficos com valores das marcas para facilitar reconhecimento e percepção de valor.",
+      "Tratei imagens em edição (cor, iluminação, sombras, saturação) priorizando aprimorar visualização final do arquivo.",
     ],
   },
   {
@@ -87,11 +96,11 @@ const experience: Job[] = [
     company: "DGL Engenharia",
     location: "Senador Firmino, MG",
     bullets: [
-      "Produção de relatórios de Marketing, apresentando informações à equipe junto a estratégias de melhoria.",
-      "Criação de identidades visuais corporativas com design baseado na coesão entre elementos (logotipos, banners).",
-      "Formatação de imagens e objetos pra projetos impressos ou digitais, entregando arquivos prontos pra produção.",
-      "Criação de arquivos pra uso com métodos de impressão digitais ou tradicionais.",
-      "Comunicação com clientes pra determinar conceito, definir escopos, orçamentos e prazos viáveis.",
+      "Estruturei relatórios mensais de Marketing que viraram referência interna na apresentação de estratégias ao time executivo.",
+      "Criei identidades visuais corporativas com sistema baseado na coesão entre elementos (logotipos, banners) — garantindo aplicação consistente em todas as frentes.",
+      "Formatei imagens e objetos pra projetos impressos e digitais, entregando arquivos prontos para produção em ambos os meios.",
+      "Adequei arquivos pra impressão digital e tradicional, respeitando especificações técnicas de cada método de produção.",
+      "Comuniquei-me diretamente com clientes na definição de conceito, escopo, orçamento e prazos viáveis pra entregas.",
     ],
   },
 ];
@@ -106,35 +115,34 @@ const education = [
   },
 ];
 
-// ===== COMPONENTES =====
-
-function SkillBar({ name, pct, delay = 0 }: SkillRating & { delay?: number }) {
-  return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-baseline justify-between">
-        <p className="text-sm font-medium text-fg-strong">{name}</p>
-        <p className="text-[11px] tabular-nums font-mono text-fg-mute">{pct}%</p>
-      </div>
-      <div className="relative h-[3px] w-full rounded-full bg-surface-2 overflow-hidden">
-        <motion.div
-          className="absolute inset-y-0 left-0 bg-brand rounded-full"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${pct}%` }}
-          viewport={{ once: true, margin: "0px 0px -50px 0px" }}
-          transition={{ duration: 1.2, delay, ease: [0.22, 1, 0.36, 1] }}
-        />
-      </div>
-    </div>
-  );
-}
+// Links sociais — completos pra recrutador validar presença
+const socials = [
+  { href: "https://www.linkedin.com/in/dropefernandes",  label: "LinkedIn",  Icon: Linkedin },
+  { href: "https://instagram.com/drope.fernandes",       label: "Instagram", Icon: Instagram },
+  { href: "https://behance.net/dropefernandes",          label: "Behance",   Icon: Globe },
+  { href: "https://dribbble.com/drope-fernandes",        label: "Dribbble",  Icon: Globe },
+];
 
 // ===== PAGE =====
 export default function CVPage() {
   return (
     <div className="min-h-screen bg-bg">
 
+      {/* === Print mode CSS — otimiza pra impressão direta do navegador === */}
+      <style jsx global>{`
+        @media print {
+          header[data-cv-topbar] { display: none !important; }
+          [data-cv-cta-final], [data-cv-photo] { display: none !important; }
+          main { padding-top: 1.5rem !important; }
+          .print-break-inside-avoid { break-inside: avoid; }
+          a { color: inherit !important; text-decoration: none !important; }
+          .label-mono { color: #555 !important; }
+          body { background: white !important; }
+        }
+      `}</style>
+
       {/* === TOP BAR — voltar + download === */}
-      <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-bg/85 border-b border-line">
+      <header data-cv-topbar className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-bg/85 border-b border-line">
         <div className="mx-auto max-w-[860px] flex items-center justify-between px-6 py-4">
           <Link
             href="/"
@@ -161,8 +169,14 @@ export default function CVPage() {
         {/* ===== HERO ===== */}
         <section className="grid gap-10 md:grid-cols-[1fr_180px] items-end mb-20 md:mb-24">
           <div className="flex flex-col gap-6">
-            <Reveal direction="up" className="label-mono flex items-center gap-2">
-              <span className="size-1 rounded-full bg-brand animate-pulse" />
+            {/* Badge availability + status */}
+            <Reveal direction="up" className="inline-flex items-center gap-2 self-start rounded-pill border border-status/30 bg-status/8 px-3 py-1.5 text-[11px] font-medium text-fg-strong">
+              <span className="size-1.5 rounded-full bg-status animate-pulse" />
+              Available · Remote · Brazil (UTC-3)
+            </Reveal>
+
+            <Reveal direction="up" delay={0.05} className="label-mono flex items-center gap-2">
+              <span className="size-1 rounded-full bg-brand" />
               Curriculum Vitae · 2026
             </Reveal>
 
@@ -175,7 +189,9 @@ export default function CVPage() {
             </Reveal>
 
             <Reveal direction="up" delay={0.2} className="flex flex-col gap-1">
-              <p className="text-h-3 text-brand font-semibold">Diretor de Arte</p>
+              <p className="text-h-3 text-brand font-semibold">
+                Product Designer &amp; Front-end
+              </p>
               <p className="text-body text-fg-mute italic">
                 — Drope pra quem trabalha comigo.
               </p>
@@ -186,7 +202,8 @@ export default function CVPage() {
               <Signature color="rgb(var(--brand))" height={52} />
             </div>
 
-            <Reveal direction="up" delay={0.3} className="flex flex-wrap gap-3 pt-3">
+            {/* Pills de contato — email, telefone, location + sociais */}
+            <Reveal direction="up" delay={0.3} className="flex flex-wrap gap-2 pt-3">
               <a href="mailto:contato@dropefernandes.com" className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3.5 py-2 text-xs font-medium text-fg-strong hover:bg-surface transition">
                 <Mail className="size-3.5 text-brand" strokeWidth={2.5} />
                 contato@dropefernandes.com
@@ -197,13 +214,33 @@ export default function CVPage() {
               </a>
               <span className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3.5 py-2 text-xs font-medium text-fg-strong">
                 <MapPin className="size-3.5 text-brand" strokeWidth={2.5} />
-                Senador Firmino, MG
+                Brazil · Remote
               </span>
+              <a href="https://dropefernandes.com" target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3.5 py-2 text-xs font-medium text-fg-strong hover:bg-surface transition">
+                <Globe className="size-3.5 text-brand" strokeWidth={2.5} />
+                dropefernandes.com
+              </a>
+            </Reveal>
+
+            {/* Links sociais */}
+            <Reveal direction="up" delay={0.35} className="flex flex-wrap gap-2">
+              {socials.map((s) => (
+                <a
+                  key={s.href}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-pill border border-line bg-bg-soft px-3 py-1.5 text-[11px] font-medium text-fg-mute hover:text-fg-strong hover:bg-surface transition"
+                >
+                  <s.Icon className="size-3" strokeWidth={2.5} />
+                  {s.label}
+                </a>
+              ))}
             </Reveal>
           </div>
 
           {/* Foto */}
-          <Reveal direction="left" delay={0.15} className="md:justify-self-end">
+          <Reveal direction="left" delay={0.15} className="md:justify-self-end" data-cv-photo>
             <div className="relative w-32 h-32 md:w-44 md:h-44 overflow-hidden rounded-full bg-surface ring-4 ring-bg-soft shadow-lg">
               <Image
                 src="/sobre-fullbody.png"
@@ -219,33 +256,71 @@ export default function CVPage() {
 
         {/* ===== RESUMO ===== */}
         <Section number="01" title="Sobre">
-          <Reveal direction="up" className="text-lead text-fg-body max-w-[640px]">
-            Designer gráfico especialista em gerenciamento de rede, hábil na
-            criação de logotipos, materiais de marketing, design de sites,
-            direção e edição de vídeo. Profissional dinâmico e criativo,
-            com foco na satisfação do cliente.
+          <Reveal direction="up" className="flex flex-col gap-4 max-w-[640px]">
+            <p className="text-lead text-fg-body">
+              Product Designer e front-end com 7 anos atuando entre branding,
+              UI/UX e desenvolvimento. Do briefing à launch, na mesma cabeça.
+            </p>
+            <p className="text-body text-fg-mute">
+              Já atendi marcas no Brasil, Dubai e Portugal, com foco em sistemas
+              de identidade integrados a produtos digitais funcionais.
+              Confortável conduzindo um projeto inteiro do conceito ao código,
+              com parceiros pontuais de confiança quando o escopo pede mais
+              profundidade em uma frente específica.
+            </p>
           </Reveal>
         </Section>
 
         {/* ===== SKILLS + IDIOMAS ===== */}
         <Section number="02" title="Habilidades & idiomas">
           <div className="grid gap-12 md:grid-cols-2">
-            {/* Skills */}
-            <div className="flex flex-col gap-5">
-              <p className="label-mono text-fg-faint">FERRAMENTAS</p>
-              <div className="flex flex-col gap-5">
-                {skills.map((s, i) => (
-                  <SkillBar key={s.name} {...s} delay={i * 0.08} />
+            {/* Skills agrupados por categoria */}
+            <div className="flex flex-col gap-6">
+              <p className="label-mono text-fg-faint">FERRAMENTAS &amp; STACK</p>
+              <div className="flex flex-col gap-4">
+                {skillGroups.map((g, i) => (
+                  <Reveal
+                    key={g.label}
+                    direction="up"
+                    delay={i * 0.06}
+                    className="flex flex-col gap-2"
+                  >
+                    <p className="text-[11px] uppercase tracking-wider font-medium text-fg-mute">
+                      {g.label}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {g.items.map((item) => (
+                        <span
+                          key={item}
+                          className="inline-flex items-center rounded-pill border border-line bg-bg-soft px-2.5 py-1 text-xs font-medium text-fg-strong"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </Reveal>
                 ))}
               </div>
             </div>
 
-            {/* Idiomas */}
-            <div className="flex flex-col gap-5">
+            {/* Idiomas com descrição honesta */}
+            <div className="flex flex-col gap-6">
               <p className="label-mono text-fg-faint">IDIOMAS</p>
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-4">
                 {languages.map((l, i) => (
-                  <SkillBar key={l.name} {...l} delay={i * 0.08} />
+                  <Reveal
+                    key={l.name}
+                    direction="up"
+                    delay={i * 0.06}
+                    className="flex flex-col gap-1 border-b border-line pb-3 last:border-0 last:pb-0"
+                  >
+                    <p className="text-sm font-semibold text-fg-strong">
+                      {l.name}
+                    </p>
+                    <p className="text-xs text-fg-mute leading-snug">
+                      {l.level}
+                    </p>
+                  </Reveal>
                 ))}
               </div>
             </div>
@@ -261,7 +336,7 @@ export default function CVPage() {
                 key={`${job.company}-${job.period}`}
                 direction={i % 2 === 0 ? "right" : "left"}
                 delay={i * 0.05}
-                className="grid gap-4 md:grid-cols-[180px_1fr] md:gap-10 pb-12 border-b border-line last:border-0"
+                className="grid gap-4 md:grid-cols-[180px_1fr] md:gap-10 pb-12 border-b border-line last:border-0 print-break-inside-avoid"
               >
                 {/* Período */}
                 <div className="flex flex-col gap-1">
@@ -321,11 +396,16 @@ export default function CVPage() {
           </ol>
         </Section>
 
-        {/* ===== CTA FINAL ===== */}
-        <Reveal direction="up" delay={0.1} className="mt-20 rounded-section bg-fg-strong text-bg p-8 md:p-12 grid gap-6 md:grid-cols-[1fr_auto] items-center">
+        {/* ===== CTA FINAL (oculto no print) ===== */}
+        <Reveal
+          direction="up"
+          delay={0.1}
+          data-cv-cta-final
+          className="mt-20 rounded-section bg-fg-strong text-bg p-8 md:p-12 grid gap-6 md:grid-cols-[1fr_auto] items-center"
+        >
           <div className="flex flex-col gap-2">
             <p className="text-[11px] uppercase tracking-wider font-medium text-bg/60">
-              PROCURANDO UM DIRETOR DE ARTE?
+              PROCURANDO UM PRODUCT DESIGNER?
             </p>
             <h2 className="text-h-1 text-bg text-balance">
               Vamos conversar sobre o seu projeto.
@@ -349,6 +429,11 @@ export default function CVPage() {
             </Link>
           </div>
         </Reveal>
+
+        {/* ===== TIMESTAMP — última atualização ===== */}
+        <p className="mt-10 text-center text-[11px] text-fg-faint tracking-wider uppercase">
+          Última atualização: Junho · 2026
+        </p>
       </main>
     </div>
   );
@@ -359,7 +444,7 @@ function Section({
   number, title, children,
 }: { number: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="mb-20 md:mb-24">
+    <section className="mb-20 md:mb-24 print-break-inside-avoid">
       <Reveal direction="right" className="flex items-baseline gap-4 mb-8 md:mb-10">
         <span className="text-2xl md:text-3xl font-semibold tabular-nums text-brand">
           {number}
