@@ -23,15 +23,15 @@ import { Signature } from "@/components/ui/Signature";
 const skillGroups: { label: string; items: string[] }[] = [
   {
     label: "Gráfico & Branding",
-    items: ["Photoshop", "Illustrator", "InDesign", "Brand systems", "Print"],
+    items: ["Photoshop", "Illustrator", "InDesign", "Branding", "Identidade Visual", "Print"],
   },
   {
     label: "Digital & UI/UX",
-    items: ["Figma", "Framer", "Design tokens", "Wireframing", "Prototipagem"],
+    items: ["Figma", "Framer", "Design Tokens", "Prototipagem", "Design System"],
   },
   {
     label: "Motion",
-    items: ["After Effects", "Logo reveal", "Web animation"],
+    items: ["After Effects", "Logo Reveal", "Web Animation", "Motion Design"],
   },
   {
     label: "Front-end básico",
@@ -61,10 +61,9 @@ const experience: Job[] = [
     company: "Be Done",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Atuei como consultor estratégico em decisões de design, identificando ineficiências e propondo melhorias mensuráveis no fluxo de entrega da agência.",
-      "Estruturei relatórios de Marketing para empresas parceiras, transformando dados brutos em estratégias acionáveis de melhoria de performance.",
-      "Desenvolvi identidades visuais alinhando elementos gráficos aos valores das marcas — facilitando reconhecimento e percepção de valor no mercado.",
-      "Conduzi tratamento e finalização de imagens em ferramentas de edição (cor, iluminação, sombras, saturação) priorizando consistência visual em todos os entregáveis.",
+      "Atuei como consultor estratégico em decisões de design, identificando ineficiências no fluxo de entrega.",
+      "Estruturei relatórios de Marketing transformando dados brutos em estratégias acionáveis para empresas parceiras.",
+      "Desenvolvi identidades visuais alinhando elementos gráficos aos valores das marcas.",
     ],
   },
   {
@@ -73,11 +72,9 @@ const experience: Job[] = [
     company: "Novus Soluções Criativas",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Liderei a comunicação direta com clientes na definição de conceito, escopo, orçamento e cronograma de mais de 10 projetos de identidade visual desde a fase inicial.",
-      "Conduzi a criação de identidades visuais para redes sociais, anúncios e conteúdos informativos — entregando consistência visual em múltiplas frentes.",
-      "Produzi vídeos para uso digital e impressão tradicional, conectando direção de arte e motion design no mesmo profissional.",
-      "Elaborei pacotes completos de identidade visual para novas linhas de produtos e rótulos, incluindo PDV, materiais de marketing e papelaria.",
-      "Apoiei o time em demandas múltiplas de design, garantindo agilidade na entrega sem comprometer qualidade.",
+      "Liderei comunicação direta com clientes em 10+ projetos, definindo conceito, escopo e cronograma de identidade visual.",
+      "Criei identidades visuais para redes sociais, anúncios e conteúdos, conectando direção de arte e motion design.",
+      "Elaborei pacotes completos de identidade para novas linhas de produtos, incluindo PDV, marketing e papelaria.",
     ],
   },
   {
@@ -86,10 +83,8 @@ const experience: Job[] = [
     company: "KOJIO",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Criei logotipos com pesquisa de mercado, definindo design que se relacionasse com produtos e serviços comercializados — gerando identificação direta com consumidores.",
-      "Finalizei imagens gráficas adequando arquivos às especificações técnicas do briefing antes da impressão, eliminando retrabalho de produção.",
-      "Desenvolvi identidades visuais combinando elementos gráficos com valores das marcas para facilitar reconhecimento e percepção de valor.",
-      "Tratei imagens em edição (cor, iluminação, sombras, saturação) priorizando aprimorar visualização final do arquivo.",
+      "Criei logotipos com pesquisa de mercado, alinhando design aos produtos comercializados.",
+      "Finalizei imagens gráficas e identidades visuais adequando arquivos às especificações do briefing.",
     ],
   },
   {
@@ -98,11 +93,8 @@ const experience: Job[] = [
     company: "DGL Engenharia",
     location: "Senador Firmino, MG",
     bullets: [
-      "Estruturei relatórios mensais de Marketing que viraram referência interna na apresentação de estratégias ao time executivo.",
-      "Criei identidades visuais corporativas com sistema baseado na coesão entre elementos (logotipos, banners) — garantindo aplicação consistente em todas as frentes.",
-      "Formatei imagens e objetos pra projetos impressos e digitais, entregando arquivos prontos para produção em ambos os meios.",
-      "Adequei arquivos pra impressão digital e tradicional, respeitando especificações técnicas de cada método de produção.",
-      "Comuniquei-me diretamente com clientes na definição de conceito, escopo, orçamento e prazos viáveis pra entregas.",
+      "Estruturei relatórios mensais de Marketing que viraram referência interna em apresentações de estratégia.",
+      "Criei identidades visuais corporativas e formatei arquivos prontos para produção impressa e digital.",
     ],
   },
 ];

@@ -84,9 +84,9 @@ const experience: Job[] = [
     company: "Be Done",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Atuei como consultor estratégico em decisões de design, identificando ineficiências no fluxo de entrega da agência.",
-      "Estruturei relatórios de Marketing para empresas parceiras, transformando dados brutos em estratégias acionáveis.",
-      "Desenvolvi identidades visuais alinhando elementos gráficos aos valores das marcas — facilitando reconhecimento de mercado.",
+      "Atuei como consultor estratégico em decisões de design, identificando ineficiências no fluxo de entrega.",
+      "Estruturei relatórios de Marketing transformando dados brutos em estratégias acionáveis para empresas parceiras.",
+      "Desenvolvi identidades visuais alinhando elementos gráficos aos valores das marcas.",
     ],
   },
   {
@@ -95,10 +95,9 @@ const experience: Job[] = [
     company: "Novus Soluções Criativas",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Liderei comunicação direta com clientes na definição de conceito, escopo e cronograma de 10+ projetos de identidade visual.",
-      "Conduzi criação de identidades visuais para redes sociais, anúncios e conteúdos informativos com consistência visual.",
-      "Produzi vídeos para uso digital e impressão, conectando direção de arte e motion design no mesmo profissional.",
-      "Elaborei pacotes completos de identidade visual para novas linhas de produtos, incluindo PDV, marketing e papelaria.",
+      "Liderei comunicação direta com clientes em 10+ projetos, definindo conceito, escopo e cronograma de identidade visual.",
+      "Criei identidades visuais para redes sociais, anúncios e conteúdos, conectando direção de arte e motion design.",
+      "Elaborei pacotes completos de identidade para novas linhas de produtos, incluindo PDV, marketing e papelaria.",
     ],
   },
   {
@@ -107,9 +106,8 @@ const experience: Job[] = [
     company: "KOJIO",
     location: "Juiz de Fora, MG",
     bullets: [
-      "Criei logotipos com pesquisa de mercado, alinhando design aos produtos e serviços comercializados.",
-      "Finalizei imagens gráficas adequando arquivos às especificações técnicas do briefing antes da impressão.",
-      "Desenvolvi identidades visuais combinando elementos gráficos com valores das marcas.",
+      "Criei logotipos com pesquisa de mercado, alinhando design aos produtos comercializados.",
+      "Finalizei imagens gráficas e identidades visuais adequando arquivos às especificações do briefing.",
     ],
   },
   {
@@ -118,9 +116,8 @@ const experience: Job[] = [
     company: "DGL Engenharia",
     location: "Senador Firmino, MG",
     bullets: [
-      "Estruturei relatórios mensais de Marketing que viraram referência interna na apresentação de estratégias.",
-      "Criei identidades visuais corporativas com sistema baseado na coesão entre logotipos, banners e aplicações.",
-      "Formatei imagens e objetos para projetos impressos e digitais, entregando arquivos prontos para produção.",
+      "Estruturei relatórios mensais de Marketing que viraram referência interna em apresentações de estratégia.",
+      "Criei identidades visuais corporativas e formatei arquivos prontos para produção impressa e digital.",
     ],
   },
 ];
@@ -293,10 +290,10 @@ export default function CVPrintPage() {
            ============================================================ */}
         <main
           style={{
-            padding: "18mm 20mm 18mm 18mm",
+            padding: "14mm 16mm 14mm 15mm",
             display: "flex",
             flexDirection: "column",
-            gap: "9mm",
+            gap: "6mm",
           }}
         >
           {/* === HEADER NOME + CARGO === */}
@@ -347,10 +344,10 @@ export default function CVPrintPage() {
               style={{
                 listStyle: "none",
                 padding: 0,
-                margin: "4mm 0 0 0",
+                margin: "3mm 0 0 0",
                 display: "flex",
                 flexDirection: "column",
-                gap: "6mm",
+                gap: "4.5mm",
               }}
             >
               {experience.map((job) => (
