@@ -90,6 +90,13 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  // Verificação do Google Search Console (método meta-tag — fallback do DNS).
+  // Se usar verificação via meta tag, defina NEXT_PUBLIC_GSC_VERIFICATION
+  // no Vercel (Settings → Environment Variables) com o código que o GSC der.
+  // Se verificar via DNS TXT (recomendado), pode ignorar — fica undefined.
+  verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION }
+    : undefined,
 };
 
 // Script inline pra setar tema ANTES do paint (evita FOUC).
