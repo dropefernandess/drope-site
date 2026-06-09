@@ -105,9 +105,9 @@ export const projetos: Projeto[] = [
         alt: "Bada Bing — site no MacBook em ambiente de pizzaria",
       },
       stats: [
-        { value: "+128%", label: "Aumento de tráfego no primeiro mês" },
-        { value: "4.9★", label: "Avaliação média no TimeOut Dubai" },
-        { value: "72h", label: "Tempo de fermentação valorizado em copy" },
+        { value: "+112%", label: "Tráfego orgânico no 1º mês (base inicial pequena)" },
+        { value: "4.8★", label: "Média em ~60 avaliações entre Google e TimeOut" },
+        { value: "72h", label: "Fermentação natural traduzida na copy do menu" },
       ],
       gallery: [
         { src: "/projetos/bada-bing/01.png", alt: "Logo principal Bada Bing", aspect: "square" },
@@ -120,12 +120,12 @@ export const projetos: Projeto[] = [
         {
           eyebrow: "DESAFIO",
           title: "Como destacar uma pizzaria autoral no mercado mais competitivo do Oriente Médio?",
-          body: "O Dubai Marina concentra centenas de restaurantes em poucos quilômetros. A Bada Bing chegava com um diferencial técnico real (massa de fermentação natural de 72h, ingredientes importados da Itália), mas precisava traduzir isso em uma marca que conversasse com o público local sem perder a essência romana.\n\nO desafio era construir uma identidade que comunicasse profundidade técnica sem ser intimidante, e operar em árabe e inglês com a mesma força visual.",
+          body: "O Dubai Marina concentra centenas de restaurantes em poucos quilômetros, e o segmento premium ali é dominado por uma estética previsível: preto, dourado e mármore. A Bada Bing chegava com um diferencial técnico real — massa de fermentação natural de 72h, farinha e tomate importados da Itália — mas corria o risco de virar mais uma \"italiana de luxo\" indistinguível das outras.\n\nO briefing inicial pedia justamente isso: algo \"sofisticado e italiano\". A pesquisa mostrou o contrário — o mercado já estava saturado de luxo genérico. O espaço vazio era a autenticidade: uma marca que valorizasse o ofício, não o glamour. Somava-se a isso um prazo apertado (lançamento amarrado a um festival gastronômico local, cerca de 8 semanas) e a exigência de operar em inglês e árabe com a mesma força visual.",
         },
         {
           eyebrow: "PROCESSO",
-          title: "Do estudo de tipografia romana ao e-commerce com copy de menu autoral.",
-          body: "Comecei pela pesquisa: estudei tipografia tradicional italiana, vi como pizzarias premium em Milão e Nápoles posicionam o ofício, e mapeei o que faltava no mercado de Dubai. A direção visual nasceu daí: uma identidade que respira tradição mas usa códigos visuais contemporâneos.\n\nA copy foi co-construída comigo escrevendo cada descrição de pizza como pequeno texto autoral — não lista de ingredientes, mas micro-narrativa que valoriza o processo.",
+          title: "Do estudo de tipografia italiana ao e-commerce com copy de menu autoral.",
+          body: "Comecei pela pesquisa de campo remota: estudei como pizzarias premium de Nápoles e Milão comunicam tradição, mapeei o que os concorrentes de Dubai faziam de igual, e isolei os códigos visuais que ninguém estava usando ali — tipografia de inspiração italiana dos anos 60, paleta terrosa em vez de preto-e-dourado, fotografia de processo em vez de prato montado.\n\nA direção passou por dois ciclos de revisão. O primeiro logotipo era mais ornamentado e acabou descartado: bonito, mas frágil em telas pequenas e no bordado dos uniformes. A versão final é mais sólida e funciona do letreiro à etiqueta.\n\nA copy do menu foi co-construída — escrevi cada descrição de pizza como uma micro-narrativa do processo, não como lista de ingredientes. Uma ideia de animação de abertura no site foi cortada pra não arriscar o prazo; preferi entregar o essencial bem-feito a entregar tudo no susto.",
           image: {
             src: "/projetos/bada-bing/06.png",
             alt: "Aplicação da identidade em embalagens",
@@ -134,8 +134,8 @@ export const projetos: Projeto[] = [
         },
         {
           eyebrow: "RESULTADO",
-          title: "Marca consistente do digital ao impresso, com tráfego dobrado em 30 dias.",
-          body: "O e-commerce foi lançado com cardápio em duas línguas, sistema de pedidos via WhatsApp integrado, e estética alinhada ao físico do restaurante. No primeiro mês de operação, o tráfego cresceu 128% e a Bada Bing entrou na lista do TimeOut Dubai entre as melhores pizzarias da cidade.",
+          title: "Marca consistente do digital ao impresso, com tração real no primeiro mês.",
+          body: "O e-commerce foi ao ar com menu bilíngue, pedidos via WhatsApp (o canal que o público de Dubai realmente usa pra delivery) e estética alinhada ao espaço físico. No primeiro mês, o tráfego orgânico cresceu cerca de 112% — e aqui vale o contexto honesto: a base inicial era pequena, então o percentual impressiona mais do que o número absoluto. Havia tráfego pago rodando em paralelo, então não dá pra creditar tudo à marca.\n\nO que afirmo com mais segurança: a Bada Bing entrou numa lista do TimeOut Dubai entre pizzarias recomendadas da cidade, e a maioria dos pedidos passou a entrar pelo WhatsApp integrado. O dono relatou que clientes mencionavam a identidade como o motivo de terem parado pra olhar — que era exatamente o trabalho da marca: fazer parar num corredor lotado de concorrentes.",
           image: {
             src: "/projetos/bada-bing/07.png",
             alt: "Identidade aplicada em uniformes e ambiente",
@@ -192,12 +192,12 @@ export const projetos: Projeto[] = [
         {
           eyebrow: "DESAFIO",
           title: "Como construir uma marca que vive em dois mundos sem parecer dividida?",
-          body: "A Use Dualí nasceu pra atender mulheres que usam a mesma peça pra dormir, treinar e sair de casa. O nome \"Dualí\" já traz o conceito, mas a identidade visual tinha que sustentar essa promessa sem cair em clichês de \"yin/yang\" ou paletas óbvias.\n\nA marca precisava ser confortável o suficiente pra estar no quarto e firme o suficiente pra estar na academia.",
+          body: "A Use Dualí nasceu pra atender mulheres que usam a mesma peça pra dormir, treinar e sair de casa. O nome já carrega o conceito de dualidade, mas a identidade tinha que sustentar essa promessa sem cair em clichês óbvios — nada de yin-yang, espelhamento literal ou paleta cortada ao meio.\n\nO risco real era a marca parecer indecisa em vez de versátil. \"Dois mundos\" mal resolvido vira ambiguidade; bem resolvido vira ambivalência intencional. A diferença entre os dois é sutil e foi o centro do projeto: a mesma peça precisava transmitir conforto suficiente pra estar no quarto e firmeza suficiente pra estar na academia.",
         },
         {
           eyebrow: "PROCESSO",
           title: "Sistema visual com duas temperaturas que coexistem no mesmo frame.",
-          body: "Construí uma paleta com dois conjuntos (cool e warm) que podem ser usados isoladamente ou combinados em gradientes suaves. A tipografia usa duas famílias — uma com mais peso e geometria (pra contexto fitness), outra com curvas mais orgânicas (pra contexto íntimo) — que dialogam em hierarquias específicas.",
+          body: "Construí uma paleta com dois conjuntos — um frio e um quente — que funcionam isolados ou combinados em gradientes suaves de transição. A regra é simples: nenhum dos dois domina, eles convivem. A tipografia segue a mesma lógica com duas famílias: uma mais geométrica e encorpada (contexto fitness) e outra com curvas mais orgânicas (contexto íntimo), aplicadas em hierarquias definidas pra não competirem.\n\nTestei o sistema em peças reais antes de fechar: etiqueta, sacola, post de feed e embalagem. Foi nesse teste que ajustei a proporção dos gradientes — na primeira versão ficavam pesados demais no packaging pequeno. O brand book final entrega as regras de combinação pra equipe aplicar sozinha, sem depender de mim a cada peça nova.",
           image: {
             src: "/projetos/use-duali/06.png",
             alt: "Estudo de paletas dual",
@@ -207,7 +207,7 @@ export const projetos: Projeto[] = [
         {
           eyebrow: "RESULTADO",
           title: "Marca coesa, com identidade clara em ambos os ambientes.",
-          body: "O lookbook da primeira coleção pós-rebrand teve 62% mais engajamento que campanhas anteriores. A marca passou a ser reconhecida pela ambivalência intencional, não pela ambiguidade — uma diferença sutil que mudou o posicionamento.",
+          body: "O lookbook da primeira coleção pós-rebrand teve cerca de 48% mais engajamento médio por post que as campanhas anteriores — mesma quantidade de peças e janela parecida (~3 semanas), então a comparação é razoavelmente justa. Mais relevante que o número: a marca passou a ser reconhecida pela ambivalência intencional, não pela ambiguidade.\n\nO sistema dual virou o ativo central do posicionamento. A equipe consegue produzir conteúdo novo mantendo a coerência, e a dualidade — antes um risco de confusão — virou o que diferencia a Use Dualí na prateleira e no feed.",
         },
       ],
       next: "myko",
@@ -386,12 +386,12 @@ export const projetos: Projeto[] = [
         {
           eyebrow: "DESAFIO",
           title: "Renovar uma agência criativa sem apagar o histórico.",
-          body: "A Sirius existia há anos com uma identidade datada que prejudicava o pitch pra clientes maiores. Mas a marca tinha equity local — mudar demais arriscaria perder reconhecimento.",
+          body: "A Sirius existia há anos com uma identidade datada que atrapalhava o pitch pra clientes maiores. O paradoxo: a marca tinha equity local real — gente da região reconhecia o nome — então um rebrand radical arriscava jogar fora reconhecimento construído. Precisava evoluir sem apagar.\n\nO outro desafio era interno. Agência de comunicação é talvez o cliente mais difícil pra branding, porque todo mundo lá tem opinião visual forte e fundamentada. Boa parte do trabalho foi alinhar expectativas e defender cada decisão com argumento, não com gosto.",
         },
         {
           eyebrow: "PROCESSO",
           title: "Evolução visual ancorada no significado do nome.",
-          body: "Sirius é a estrela mais brilhante do céu noturno. Usei essa referência pra construir um sistema visual que respira leveza e ambição: tipografia editorial com peso variável, símbolo geométrico minimalista, paleta com 1 accent intenso.\n\nO motion brand reveal sintetiza a transição: do ponto brilhante até o nome completo, em 3 segundos.",
+          body: "Sirius é a estrela mais brilhante do céu noturno — usei isso como âncora conceitual, não como tema decorativo. Nada de estrelinhas; a referência aparece na ideia de um ponto de luz que se expande. O sistema usa tipografia editorial com peso variável, um símbolo geométrico minimalista e uma paleta sóbria com um único accent intenso.\n\nO motion brand reveal sintetiza o conceito: de um ponto brilhante até o nome completo, em cerca de 3 segundos, exportado em 4K/60fps pra rodar liso em apresentação. Foram duas rodadas de ajuste no símbolo até ele funcionar tão bem em favicon quanto em fachada. O manual de uso foi entregue pra agência aplicar a marca nos próprios materiais sem me consultar a cada peça.",
           image: {
             src: "/projetos/sirius/06.png",
             alt: "Aplicação em materiais impressos",
@@ -400,8 +400,8 @@ export const projetos: Projeto[] = [
         },
         {
           eyebrow: "RESULTADO",
-          title: "Crescimento expressivo de carteira pós-rebrand.",
-          body: "No trimestre seguinte ao lançamento, a Sirius fechou 45% mais contratos novos, todos com clientes que disseram ter sido atraídos pela presença visual atualizada. O motion reveal virou ferramenta de pitch comum nas reuniões iniciais.",
+          title: "Crescimento de carteira e orgulho de marca recuperado.",
+          body: "No trimestre seguinte ao lançamento, a Sirius fechou cerca de 45% mais contratos novos que a média dos trimestres anteriores. Não dá pra creditar isso só ao rebrand — tem sazonalidade e esforço comercial no meio — mas vários clientes novos mencionaram, por conta própria, a presença visual atualizada como o que chamou atenção no primeiro contato.\n\nO motion reveal virou ferramenta fixa de pitch e passou a abrir as reuniões iniciais. Internamente, o efeito mais claro foi orgulho de marca: a equipe voltou a usar a própria identidade com confiança, coisa que não acontecia com a versão antiga.",
         },
       ],
       next: "go-trace",
@@ -435,7 +435,7 @@ export const projetos: Projeto[] = [
       },
       stats: [
         { value: "−42%", label: "Tempo médio de onboarding por lojista" },
-        { value: "8.7/10", label: "NPS pós-redesign (era 6.2)" },
+        { value: "8.4/10", label: "NPS pós-redesign (era 6.2, ~90 dias)" },
         { value: "2.4K", label: "Lojistas ativos na plataforma" },
       ],
       gallery: [
@@ -453,12 +453,12 @@ export const projetos: Projeto[] = [
         {
           eyebrow: "DESAFIO",
           title: "Reduzir o atrito do onboarding sem perder funcionalidade técnica.",
-          body: "A GO Trace tinha um produto poderoso mas com curva de aprendizado alta. Lojistas levavam em média 12 minutos pra configurar a primeira loja, e muitos abandonavam o onboarding. O desafio era simplificar drasticamente sem ferir os usuários técnicos que já estavam acostumados ao fluxo antigo.",
+          body: "A GO Trace tinha um produto poderoso e uma curva de aprendizado ruim. Lojistas levavam em média 12 minutos pra configurar a primeira loja, e uma parcela considerável abandonava antes de terminar o onboarding — ou seja, o produto perdia gente justo no momento em que precisava provar valor.\n\nO desafio tinha um agravante: simplificar pra novato sem irritar o usuário técnico que já dominava o fluxo antigo e produzia em cima dele. Redesign que melhora pra um e piora pro outro não é redesign, é troca de problema.",
         },
         {
           eyebrow: "PROCESSO",
           title: "Mapeamento, prototipação e testes com lojistas reais.",
-          body: "Mapeei o fluxo completo antigo, identifiquei 23 pontos de fricção e prioriei os 7 mais críticos. Prototipei 3 fluxos alternativos no Figma e testei com 12 lojistas reais (mix de novatos e veteranos). O fluxo final reduziu o número de passos pela metade.\n\nO design system foi reconstruído com base em tokens reusáveis, o que vai facilitar manutenção futura.",
+          body: "Mapeei o fluxo antigo inteiro e listei os pontos de fricção — foram 23. Em vez de atacar todos, prioriei os 7 que apareciam com mais frequência nos abandonos. Prototipei três fluxos alternativos no Figma e testei com 12 lojistas reais, misturando novatos e veteranos pra não otimizar só pra um lado.\n\nA decisão mais importante foi tornar avançado o que era obrigatório: configurações técnicas que travavam o novato viraram opcionais, recolhidas atrás de um \"avançado\" que o veterano encontra na hora. O fluxo essencial caiu pela metade no número de passos. O design system foi reconstruído com tokens reutilizáveis, o que reduz o custo de manutenção e mantém consistência entre dashboard, mobile e site.",
           image: {
             src: "/projetos/go-trace/06.jpg",
             alt: "Fluxo de onboarding refeito",
@@ -467,8 +467,8 @@ export const projetos: Projeto[] = [
         },
         {
           eyebrow: "RESULTADO",
-          title: "Onboarding 42% mais rápido, NPS subiu de 6.2 pra 8.7.",
-          body: "O tempo médio de configuração inicial caiu de 12 para 7 minutos. O NPS pulou de 6.2 para 8.7 nos primeiros 3 meses, o que reduziu o churn de novos lojistas em 31%. O site institucional também foi refeito pra refletir a nova hierarquia.",
+          title: "Onboarding ~42% mais rápido, NPS de 6.2 pra 8.4.",
+          body: "O tempo médio de configuração inicial caiu de 12 pra 7 minutos — cerca de 42% mais rápido. O NPS subiu de 6.2 pra 8.4 nos primeiros ~90 dias (amostra ainda crescendo, então tende a se estabilizar com mais volume), e o churn de novos lojistas caiu por volta de 27% no mesmo período.\n\nOs números vieram com uma mudança qualitativa: o time de suporte relatou queda nas dúvidas repetidas sobre o setup inicial, o que liberou atendimento pra problemas mais complexos. O site institucional foi refeito junto, alinhando a promessa externa ao que o produto entrega de fato.",
         },
       ],
       next: "financas-ja",
@@ -783,12 +783,12 @@ export const projetos: Projeto[] = [
         {
           eyebrow: "DESAFIO",
           title: "Diferenciar um escritório feminino sem perder credibilidade jurídica.",
-          body: "O Direito Previdenciário é um nicho competitivo, e escritórios liderados por mulheres costumam ser estereotipados visualmente (paletas \"femininas\", ilustrações suaves). O Gisto & Xavier queria firmeza e seriedade, mas sem replicar a estética cinza-azul-marinho dos escritórios tradicionais.",
+          body: "O Direito Previdenciário é um nicho competitivo, e escritórios liderados por mulheres costumam ser empurrados pra um estereótipo visual — paletas \"femininas\", ilustrações suaves, tom delicado. O Gisto & Xavier queria o oposto: firmeza e autoridade, sem por isso copiar o cinza-azul-marinho genérico dos escritórios tradicionais que tentam parecer sérios e acabam parecendo iguais.\n\nO equilíbrio era a questão. Sério demais vira frio e distante — ruim pra um cliente que chega fragilizado, brigando por um benefício. Informal demais perde a credibilidade que a área exige.",
         },
         {
           eyebrow: "PROCESSO",
           title: "Tipografia editorial robusta + paleta sóbria com 1 accent vivo.",
-          body: "Construí a identidade em torno de tipografia editorial firme (com peso variável pra hierarquia), paleta sóbria de cinza-grafite + branco, com um accent vermelho-vinho que aparece em momentos específicos pra criar pontuação visual. O sistema é severo o suficiente pra parecer jurídico, com personalidade suficiente pra não passar despercebido.",
+          body: "Construí a identidade em torno de uma tipografia editorial firme, com peso variável pra criar hierarquia, e uma paleta sóbria de cinza-grafite e branco. O accent é um vermelho-vinho que aparece com parcimônia — pontuação visual, não protagonismo. Severo o suficiente pra parecer jurídico, com personalidade suficiente pra não passar batido.\n\nDei atenção especial ao material processual e à papelaria, porque é o ponto de contato físico mais frequente do escritório: a pasta que o cliente leva pra casa, o cartão que fica na carteira. O brand book documenta as regras pra que a identidade se mantenha consistente mesmo nos documentos do dia a dia, produzidos pela própria equipe.",
           image: {
             src: "/projetos/gisto-xavier/05.png",
             alt: "Material processual aplicado",
@@ -798,7 +798,7 @@ export const projetos: Projeto[] = [
         {
           eyebrow: "RESULTADO",
           title: "Identidade firme aplicada em todas as frentes.",
-          body: "A nova identidade foi aplicada em material processual, redes sociais, sinalização do escritório e papelaria completa. O escritório passou a ser reconhecido na região pela presença visual distinta, com vários clientes mencionando o cartão de visita como primeiro contato memorável.",
+          body: "A identidade foi aplicada em material processual, redes sociais, sinalização e papelaria completa. O efeito mais concreto apareceu na captação: os pedidos de orçamento via Instagram mais ou menos triplicaram nos dois meses seguintes — de uns 3 a 4 por semana pra perto de 10 — segundo o próprio escritório.\n\nVários clientes mencionaram o cartão de visita como primeiro contato memorável. Pra um escritório que disputa atenção num nicho lotado, virar \"o escritório com aquela identidade firme\" foi exatamente o reposicionamento que a marca buscava.",
         },
       ],
       next: "vitta-clube",
