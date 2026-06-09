@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Mail, Instagram, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 

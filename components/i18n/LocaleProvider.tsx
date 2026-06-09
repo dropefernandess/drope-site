@@ -1,67 +1,84 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { DEFAULT_LOCALE, dictionaries, type DictionaryKey, type Locale } from "@/lib/i18n/dictionaries";
+import { createContext, useCallback, useContext, useMemo } from "react";
+import { usePathname } from "next/navigation";
+import {
+  DEFAULT_LOCALE,
+  dictionaries,
+  type DictionaryKey,
+  type Locale,
+} from "@/lib/i18n/dictionaries";
 
-const COOKIE_NAME = "drope-locale";
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 ano
+/**
+ * i18n URL-based: o locale é DERIVADO do pathname.
+ *  - /en, /en/sobre, /en/projetos/...  → "en"
+ *  - tudo o mais (raiz)                 → "pt"
+ *
+ * Vantagens vs cookie:
+ *  - Sem flash de hidratação (usePathname resolve no SSR e no client)
+ *  - URL é a fonte da verdade → compartilhável, indexável, com hreflang
+ *  - Voltar/avançar do browser respeita o idioma
+ */
 
 type LocaleContextValue = {
   locale: Locale;
-  setLocale: (l: Locale) => void;
   t: (key: DictionaryKey) => string;
+  /** Prefixa um path canônico (PT) com /en quando o locale é "en". */
+  lhref: (path: string) => string;
 };
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
+/** Deriva o locale a partir do pathname. */
+export function localeFromPath(pathname: string | null): Locale {
+  if (!pathname) return DEFAULT_LOCALE;
+  return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "pt";
+}
+
+/** Prefixa path canônico com /en quando necessário (puro, testável). */
+export function localizeHref(path: string, locale: Locale): string {
+  // Âncoras, URLs externas, mailto/tel: retorna como veio
+  if (
+    !path.startsWith("/") ||
+    path.startsWith("//") ||
+    path.startsWith("/#")
+  ) {
+    return path;
+  }
+  if (locale === "pt") return path;
+  // en: prefixa /en
+  if (path === "/") return "/en";
+  return `/en${path}`;
+}
+
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
-
-  // Lê cookie no mount
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    const cookie = document.cookie
-      .split("; ")
-      .find((c) => c.startsWith(`${COOKIE_NAME}=`));
-    if (cookie) {
-      const val = cookie.split("=")[1] as Locale;
-      if (val === "pt" || val === "en") {
-        setLocaleState(val);
-        document.documentElement.lang = val === "pt" ? "pt-BR" : "en";
-      }
-    }
-  }, []);
-
-  const setLocale = useCallback((l: Locale) => {
-    setLocaleState(l);
-    document.cookie = `${COOKIE_NAME}=${l}; max-age=${COOKIE_MAX_AGE}; path=/; SameSite=Lax`;
-    document.documentElement.lang = l === "pt" ? "pt-BR" : "en";
-  }, []);
+  const pathname = usePathname();
+  const locale = localeFromPath(pathname);
 
   const t = useCallback(
-    (key: DictionaryKey) => {
-      return dictionaries[locale][key] ?? dictionaries[DEFAULT_LOCALE][key] ?? key;
-    },
+    (key: DictionaryKey) =>
+      dictionaries[locale][key] ?? dictionaries[DEFAULT_LOCALE][key] ?? key,
     [locale]
   );
 
-  return (
-    <LocaleContext.Provider value={{ locale, setLocale, t }}>
-      {children}
-    </LocaleContext.Provider>
+  const lhref = useCallback((path: string) => localizeHref(path, locale), [locale]);
+
+  const value = useMemo(
+    () => ({ locale, t, lhref }),
+    [locale, t, lhref]
   );
+
+  return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;
 }
 
 /** Hook pra usar a tradução em qualquer componente client. */
 export function useLocale(): LocaleContextValue {
   const ctx = useContext(LocaleContext);
   if (!ctx) {
-    // Fallback graceful — retorna PT sem provider (server components,
-    // testes, ou componentes fora do tree).
     return {
       locale: DEFAULT_LOCALE,
-      setLocale: () => {},
       t: (key) => dictionaries[DEFAULT_LOCALE][key] ?? key,
+      lhref: (path) => path,
     };
   }
   return ctx;

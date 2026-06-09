@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus, Mail } from "lucide-react";
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "secondary" | "ghost";

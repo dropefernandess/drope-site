@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight, Mail, MessageCircle, Loader2, Check, X as XIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { enviarEstimativa, type EstimativaPayload } from "@/app/actions/enviar-estimativa";

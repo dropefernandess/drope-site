@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedClock, AnimatedMail } from "@/components/ui/AnimatedIcons";
 import { motion } from "framer-motion";

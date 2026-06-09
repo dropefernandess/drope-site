@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight, Clock, Mail, Video } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";

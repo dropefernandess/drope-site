@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight, Clock, Check, X as XIcon } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";

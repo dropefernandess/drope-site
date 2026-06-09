@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { Container } from "@/components/ui/Container";
 
 export default function NotFound() {

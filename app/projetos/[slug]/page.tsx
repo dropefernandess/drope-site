@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowUpRight, ArrowLeft, ExternalLink } from "lucide-react";

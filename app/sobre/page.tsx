@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";

@@ -46,6 +46,10 @@ export const metadata: Metadata = {
   publisher: "Drope Fernandes",
   alternates: {
     canonical: "/",
+    languages: {
+      "pt-BR": "/",
+      en: "/en",
+    },
   },
   openGraph: {
     type: "website",

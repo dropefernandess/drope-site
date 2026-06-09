@@ -2,10 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Locale } from "@/lib/i18n/dictionaries";
 import { cn } from "@/lib/utils";
+
+/** Converte o pathname atual pra o equivalente no outro idioma. */
+function pathForLocale(pathname: string, target: Locale): string {
+  const isEn = pathname === "/en" || pathname.startsWith("/en/");
+  // normaliza pra path canônico PT (sem /en)
+  const ptPath = isEn ? pathname.replace(/^\/en/, "") || "/" : pathname;
+  if (target === "pt") return ptPath;
+  return ptPath === "/" ? "/en" : `/en${ptPath}`;
+}
 
 /**
  * LocaleToggle — seletor dropdown com bandeiras SVG (BR/US).
@@ -25,7 +35,9 @@ const FLAGS: Record<Locale, { src: string; label: string; shortLabel: string }> 
 };
 
 export function LocaleToggle({ className }: { className?: string }) {
-  const { locale, setLocale, t } = useLocale();
+  const { locale, t } = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -94,8 +106,10 @@ export function LocaleToggle({ className }: { className?: string }) {
                   role="option"
                   aria-selected={isActive}
                   onClick={() => {
-                    setLocale(loc);
                     setOpen(false);
+                    if (loc !== locale) {
+                      router.push(pathForLocale(pathname ?? "/", loc));
+                    }
                   }}
                   className={cn(
                     "w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors text-left",

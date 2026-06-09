@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -8,6 +7,7 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LocaleToggle } from "@/components/i18n/LocaleToggle";
+import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 
@@ -44,10 +44,16 @@ export function Nav() {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
+  // Normaliza o pathname removendo o prefixo /en pra comparar com hrefs canônicos
+  const canonicalPath =
+    pathname === "/en" || pathname?.startsWith("/en/")
+      ? pathname.replace(/^\/en/, "") || "/"
+      : pathname;
+
   const isActive = (href: string) => {
     const path = href.split("#")[0];
-    if (path === "/" || path === "") return pathname === "/" && !href.includes("#");
-    return pathname === path || pathname.startsWith(path + "/");
+    if (path === "/" || path === "") return canonicalPath === "/" && !href.includes("#");
+    return canonicalPath === path || canonicalPath?.startsWith(path + "/");
   };
 
   return (
