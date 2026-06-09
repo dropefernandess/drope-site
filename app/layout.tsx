@@ -61,7 +61,7 @@ export const metadata: Metadata = {
       "Branding, UI/UX e front-end pra marcas no Brasil e no exterior. Do conceito ao ar, com consistência visual em cada etapa.",
     images: [
       {
-        url: "/og.png",
+        url: "/og.jpg",
         width: 1200,
         height: 630,
         alt: "Drope Fernandes — Designer Multidisciplinar",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
       "Designer Multidisciplinar Freelance · Pedro Fernandes (Drope)",
     description:
       "Branding, UI/UX e front-end pra marcas no Brasil e no exterior.",
-    images: ["/og.png"],
+    images: ["/og.jpg"],
     creator: "@dropefernandes",
   },
   // Next 15 App Router detecta automaticamente:
@@ -153,7 +153,7 @@ const structuredData = {
       "@type": "ProfessionalService",
       "@id": `${SITE_URL}/#studio`,
       name: "Drope Fernandes — Design Multidisciplinar",
-      image: `${SITE_URL}/og.png`,
+      image: `${SITE_URL}/og.jpg`,
       url: SITE_URL,
       email: "contato@dropefernandes.com",
       telephone: "+55-32-99805-7750",
