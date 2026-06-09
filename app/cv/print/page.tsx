@@ -197,10 +197,10 @@ export default function CVPrintPage() {
           style={{
             background: C.sidebar,
             color: C.sidebarText,
-            padding: "14mm 10mm",
+            padding: "12mm 9mm",
             display: "flex",
             flexDirection: "column",
-            gap: "10mm",
+            gap: "8mm",
           }}
         >
           {/* === FOTO === */}
@@ -290,10 +290,10 @@ export default function CVPrintPage() {
            ============================================================ */}
         <main
           style={{
-            padding: "14mm 16mm 14mm 15mm",
+            padding: "12mm 13mm 12mm 13mm",
             display: "flex",
             flexDirection: "column",
-            gap: "6mm",
+            gap: "5mm",
           }}
         >
           {/* === HEADER NOME + CARGO === */}
@@ -344,10 +344,10 @@ export default function CVPrintPage() {
               style={{
                 listStyle: "none",
                 padding: 0,
-                margin: "3mm 0 0 0",
+                margin: "2.5mm 0 0 0",
                 display: "flex",
                 flexDirection: "column",
-                gap: "4.5mm",
+                gap: "4mm",
               }}
             >
               {experience.map((job) => (
