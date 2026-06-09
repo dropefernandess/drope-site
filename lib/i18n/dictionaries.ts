@@ -23,6 +23,7 @@ export const dictionaries = {
     "nav.metodo": "Método",
     "nav.calculadora": "Calculadora",
     "nav.blog": "Blog",
+    "nav.glossario": "Glossário",
     "nav.cta": "Agendar",
     "nav.cta_long": "Agendar conversa",
     "nav.toggle_lang_aria": "Mudar idioma",
@@ -453,6 +454,17 @@ export const dictionaries = {
     "proposta.cta_desc": "Use a calculadora se já souber o escopo aproximado. Se ainda tá no ar, me escreve direto que a gente conversa.",
     "proposta.cta_calc": "Abrir calculadora",
     "proposta.cta_agendar": "Agendar conversa",
+
+    // === /glossario PAGE ===
+    "gloss.eyebrow": "Glossário · Design descomplicado",
+    "gloss.title": "O vocabulário do design, em português claro.",
+    "gloss.lead": "Os termos que aparecem em todo projeto de design — explicados sem jargão. Útil pra alinhar conversa entre cliente e designer.",
+    "gloss.search_placeholder": "Buscar termo…",
+    "gloss.empty": "Nenhum termo encontrado.",
+    "gloss.cta_eyebrow": "FICOU COM DÚVIDA?",
+    "gloss.cta_title": "Vamos conversar sobre o seu projeto.",
+    "gloss.cta_desc": "Explico cada etapa em linguagem clara, sem te afogar em termos técnicos.",
+    "gloss.cta_button": "Agendar conversa",
   },
   en: {
     // === NAV ===
@@ -462,6 +474,7 @@ export const dictionaries = {
     "nav.metodo": "Method",
     "nav.calculadora": "Pricing",
     "nav.blog": "Blog",
+    "nav.glossario": "Glossary",
     "nav.cta": "Book a call",
     "nav.cta_long": "Book a call",
     "nav.toggle_lang_aria": "Switch language",
@@ -892,6 +905,17 @@ export const dictionaries = {
     "proposta.cta_desc": "Use the pricing tool if you already know the rough scope. If still in the air, write me directly and we'll talk.",
     "proposta.cta_calc": "Open pricing tool",
     "proposta.cta_agendar": "Book a call",
+
+    // === /glossario PAGE ===
+    "gloss.eyebrow": "Glossary · Design, demystified",
+    "gloss.title": "The vocabulary of design, in plain English.",
+    "gloss.lead": "The terms that show up in every design project — explained without jargon. Handy for aligning the conversation between client and designer.",
+    "gloss.search_placeholder": "Search term…",
+    "gloss.empty": "No term found.",
+    "gloss.cta_eyebrow": "STILL UNSURE?",
+    "gloss.cta_title": "Let's talk about your project.",
+    "gloss.cta_desc": "I explain each step in plain language, without drowning you in technical terms.",
+    "gloss.cta_button": "Book a call",
   },
 } as const;
 

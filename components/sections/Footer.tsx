@@ -17,6 +17,7 @@ const nav: { href: string; key: DictionaryKey }[] = [
   { href: "/calculadora", key: "nav.calculadora" },
   { href: "/agendar",     key: "nav.cta"         },
   { href: "/blog",        key: "nav.blog"        },
+  { href: "/glossario",   key: "nav.glossario"   },
 ];
 
 const social = [
