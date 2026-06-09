@@ -73,7 +73,9 @@ export const metadata: Metadata = {
     images: ["/og.png"],
     creator: "@dropefernandes",
   },
-  icons: { icon: "/favicon.ico" },
+  // Next 15 App Router detecta automaticamente:
+  //   app/icon.svg       → favicon vetorial em todas as resoluções
+  //   app/apple-icon.png → apple-touch-icon 180×180
   robots: {
     index: true,
     follow: true,
