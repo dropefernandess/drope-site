@@ -100,38 +100,98 @@ const themeScript = `
 })();
 `;
 
-// JSON-LD Person schema — Google enriquece resultados com nome,
-// alternateName (Drope), profissão, sameAs links sociais.
-const personSchema = {
+// JSON-LD @graph — Person + ProfessionalService (Local SEO).
+// O @graph conecta os dois nós via @id, dando ao Google um perfil
+// completo: a pessoa (Pedro) E o serviço (estúdio de design) com
+// área de atendimento, range de preço e localização — pra ranquear
+// em buscas regionais (MG) e por serviço ("designer freelance brasil").
+const SITE_URL = "https://dropefernandes.com";
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Pedro Fernandes",
-  alternateName: "Drope",
-  url: "https://dropefernandes.com",
-  image: "https://dropefernandes.com/sobre-fullbody.png",
-  jobTitle: "Designer multidisciplinar",
-  description:
-    "Designer multidisciplinar atuando entre identidade visual, interface, motion e código. Atende marcas no Brasil e internacionalmente desde 2018.",
-  email: "contato@dropefernandes.com",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Senador Firmino",
-    addressRegion: "MG",
-    addressCountry: "BR",
-  },
-  sameAs: [
-    "https://instagram.com/drope.fernandes",
-    "https://linkedin.com/in/dropefernandes",
-    "https://behance.net/dropefernandes",
-    "https://dribbble.com/drope-fernandes",
-  ],
-  knowsAbout: [
-    "Branding",
-    "Identidade visual",
-    "UI/UX Design",
-    "Web Design",
-    "Motion Design",
-    "Front-end development",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#pedro`,
+      name: "Pedro Fernandes",
+      alternateName: ["Drope", "Pedro Henrique Fernandes e Silva"],
+      url: SITE_URL,
+      image: `${SITE_URL}/sobre-fullbody.png`,
+      jobTitle: "Designer Multidisciplinar",
+      description:
+        "Designer Multidisciplinar com 7 anos de ofício construindo marcas, interfaces e sistemas visuais. Design gráfico como base, tecnologia como extensão.",
+      email: "contato@dropefernandes.com",
+      telephone: "+55-32-99805-7750",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Senador Firmino",
+        addressRegion: "MG",
+        addressCountry: "BR",
+      },
+      worksFor: { "@id": `${SITE_URL}/#studio` },
+      sameAs: [
+        "https://instagram.com/drope.fernandes",
+        "https://linkedin.com/in/dropefernandes",
+        "https://behance.net/dropefernandes",
+        "https://dribbble.com/drope-fernandes",
+      ],
+      knowsAbout: [
+        "Branding",
+        "Identidade Visual",
+        "UI/UX Design",
+        "Web Design",
+        "Motion Design",
+        "Front-end Development",
+        "Design Systems",
+        "Design Tokens",
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE_URL}/#studio`,
+      name: "Drope Fernandes — Design Multidisciplinar",
+      image: `${SITE_URL}/og.png`,
+      url: SITE_URL,
+      email: "contato@dropefernandes.com",
+      telephone: "+55-32-99805-7750",
+      priceRange: "R$ 3.500+",
+      founder: { "@id": `${SITE_URL}/#pedro` },
+      description:
+        "Estúdio de design multidisciplinar: branding, UI/UX, web e motion. Atende marcas no Brasil e no exterior, do conceito ao ar.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Senador Firmino",
+        addressRegion: "MG",
+        postalCode: "36540-000",
+        addressCountry: "BR",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: -20.9167,
+        longitude: -43.0944,
+      },
+      areaServed: [
+        { "@type": "Country", name: "Brasil" },
+        { "@type": "AdministrativeArea", name: "Minas Gerais" },
+        { "@type": "Place", name: "Atendimento internacional remoto" },
+      ],
+      knowsLanguage: ["pt-BR", "en"],
+      sameAs: [
+        "https://instagram.com/drope.fernandes",
+        "https://linkedin.com/in/dropefernandes",
+        "https://behance.net/dropefernandes",
+        "https://dribbble.com/drope-fernandes",
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Serviços de Design",
+        itemListElement: [
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Identidade Visual" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "UI/UX Design" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Design & Desenvolvimento" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Motion Design" } },
+        ],
+      },
+    },
   ],
 };
 
@@ -142,7 +202,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
       <body>
