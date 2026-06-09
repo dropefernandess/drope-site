@@ -73,8 +73,59 @@ export default async function CaseStudyPage({ params }: Props) {
     (cat) => VIDEO_CATEGORIES.includes(cat as (typeof VIDEO_CATEGORIES)[number])
   );
 
+  // === JSON-LD CreativeWork + BreadcrumbList ===
+  const SITE = "https://dropefernandes.com";
+  const creativeWorkSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: projeto.title,
+    description: c.subtitle,
+    image: c.gallery.slice(0, 3).map((g) => `${SITE}${g.src}`),
+    creator: {
+      "@type": "Person",
+      name: "Pedro Fernandes",
+      alternateName: "Drope",
+      url: SITE,
+    },
+    datePublished: projeto.year ? `${projeto.year}-01-01` : undefined,
+    genre: cats,
+    keywords: c.tags.join(", "),
+    inLanguage: "pt-BR",
+    isPartOf: {
+      "@type": "CollectionPage",
+      name: "Portfólio Drope Fernandes",
+      url: `${SITE}/projetos`,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE}/projetos/${projeto.slug}`,
+    },
+    ...(c.meta.link && {
+      url: c.meta.link,
+      sameAs: [c.meta.link],
+    }),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+      { "@type": "ListItem", position: 2, name: "Projetos", item: `${SITE}/projetos` },
+      { "@type": "ListItem", position: 3, name: projeto.title },
+    ],
+  };
+
   return (
     <article className="pt-24 md:pt-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       {/* ===== 1. BACK LINK compacto ===== */}
       <Container as="section" className="mb-10 md:mb-14">

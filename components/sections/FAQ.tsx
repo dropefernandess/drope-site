@@ -26,8 +26,26 @@ export function FAQ() {
   const { t } = useLocale();
   const [open, setOpen] = useState<number | null>(0);
 
+  // JSON-LD FAQPage — Google pode mostrar rich snippet com Q&A direto na SERP
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((it) => ({
+      "@type": "Question",
+      name: t(it.qKey),
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: t(it.aKey),
+      },
+    })),
+  };
+
   return (
     <section id="faq" className="bg-bg section-padding">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Container className="flex flex-col gap-14">
 
         <Reveal>

@@ -140,6 +140,18 @@ export default async function PostPage({ params }: Props) {
     },
     articleSection: post.categoria,
     inLanguage: "pt-BR",
+    keywords: post.categoria,
+  };
+
+  // BreadcrumbList schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE.url}/blog` },
+      { "@type": "ListItem", position: 3, name: post.titulo },
+    ],
   };
 
   return (
@@ -148,6 +160,10 @@ export default async function PostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <article className="pt-24 md:pt-28">
