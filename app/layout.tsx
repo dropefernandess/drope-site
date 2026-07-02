@@ -4,6 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/sections/Footer";
 import { ScrollProgressBar } from "@/components/ui/Effects";
 import { SplashScreen } from "@/components/ui/SplashScreen";
+import { DesignRulers } from "@/components/canvas/DesignRulers";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import "./globals.css";
 
@@ -221,6 +222,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SplashScreen />
         <LocaleProvider>
           <ScrollProgressBar />
+          <DesignRulers />
           <Nav />
           <main>{children}</main>
           <Footer />
