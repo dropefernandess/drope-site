@@ -19,11 +19,11 @@
 
   --fg-strong:    16 16 16;
   --fg-body:      16 16 16;
-  --fg-body-a:    0.78;
+  --fg-body-a:    0.80;
   --fg-mute:      16 16 16;
-  --fg-mute-a:    0.60;
+  --fg-mute-a:    0.66;   /* era 0.60 — sobe pra garantir WCAG AA em texto de apoio */
   --fg-faint:     16 16 16;
-  --fg-faint-a:   0.42;
+  --fg-faint-a:   0.52;   /* era 0.42 — labels decorativos legíveis */
 
   --brand:        222 40 40;
   --brand-fg:     242 242 235;
@@ -44,11 +44,11 @@
 
   --fg-strong:    242 242 235;
   --fg-body:      255 255 255;
-  --fg-body-a:    0.74;
+  --fg-body-a:    0.78;
   --fg-mute:      255 255 255;
-  --fg-mute-a:    0.58;
+  --fg-mute-a:    0.64;   /* era 0.58 — AA no dark */
   --fg-faint:     255 255 255;
-  --fg-faint-a:   0.40;
+  --fg-faint-a:   0.50;   /* era 0.40 */
 
   --brand:        222 40 40;
   --brand-fg:     242 242 235;
@@ -83,6 +83,14 @@
   ::selection {
     background: rgb(var(--brand));
     color: rgb(var(--brand-fg));
+  }
+
+  /* Foco visível de alto contraste — navegação por teclado (WCAG 2.4.7).
+     :focus-visible só dispara via teclado, não suja o clique de mouse. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand));
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 

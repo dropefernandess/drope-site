@@ -189,15 +189,23 @@ quintalestudio (prazos explícitos).
   localStorage `drope-rulers`; **default OFF**; oculto <768px;
   reduced-motion safe; aria-hidden nas réguas
 
-### ⏳ Fase 0 — PRÓXIMA: Design System
-REGRA COMBINADA: apresentar **3 direções de paleta + par tipográfico** pro
-Pedro ESCOLHER antes de aplicar global. NÃO trocar o brand unilateralmente.
-Pedido do prompt: vermelho mais "assinado" (carmim/alaranjado + escala 50-900),
-neutros quentes, surface-0/1/2 em camadas, tipografia com personalidade
-(display + leitura, clamp fluido), raios menos "bubbly", focus-visible ring,
-contraste AA em tudo, rota /styleguide interna.
-NOTA: auditoria viu o site em dark e chamou de "genérico"; o default real é
-light cream. Avaliar com o Pedro o quanto mudar de verdade.
+### ✅ Fase 0 — FECHADA (decisão do Pedro)
+**IDENTIDADE INTOCADA**: seguir o BRAND SYSTEM — DROPE
+(D:\Logo\Drope Logo\BRAND SYSTEM - DROPE.pdf; rasterizado, ilegível por
+ferramenta — mas os tokens do site JÁ vieram dele: #DE2828 + coral/deep/
+burnt/wine/dark, ink 50-900, cream #F2F2EB, Inter todos os pesos).
+O redesign é 100% de INTERAÇÃO/LAYOUT, não de identidade.
+Entregue:
+- components/ui/Buttons.tsx — ButtonPrimary/Secondary/Dark/Ghost com
+  fill-up + text-slide (CSS puro group-hover, zero JS)
+- components/ui/ScrollFX.tsx — TextScrollReveal (palavra a palavra,
+  scroll-linked) + StickyStack/StickyCard (empilhamento Framer-style)
+- Contraste AA: fg-mute-a 0.60→0.66 / fg-faint-a 0.42→0.52 (light);
+  0.58→0.64 / 0.40→0.50 (dark); fg-body-a +0.02
+- :focus-visible ring brand global
+- /styleguide reescrito como doc viva do DS (3 direções removidas)
+Referências de interação: unkern.design, quintalestudio.com.br,
+unkern.com, hoxtrade.framer.website, wapfy.framer.website
 
 ### ⏳ Fase 2 — Home seção a seção
 Labels de frame ("01 — Hero"), hero com foto mais clara + H1 respirando,
