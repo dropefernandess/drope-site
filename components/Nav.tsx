@@ -59,7 +59,8 @@ export function Nav() {
   return (
     <>
       {/* ============ DESKTOP — pill flutuante ============ */}
-      <header className="hidden md:flex fixed inset-x-0 top-4 z-50 justify-center px-6 pointer-events-none">
+      {/* top-8: folga pra régua de design (22px) não sobrepor a pill */}
+      <header className="hidden md:flex fixed inset-x-0 top-8 z-50 justify-center px-6 pointer-events-none">
         <div
           className={cn(
             "pointer-events-auto flex items-center gap-2 rounded-pill border border-line px-2 py-2 backdrop-blur-xl transition-colors duration-300",

@@ -85,7 +85,9 @@ export function Processo() {
   const { t } = useLocale();
 
   return (
-    <section id="processo" className="bg-bg section-padding overflow-hidden">
+    // SEM overflow-hidden: ancestral com overflow != visible mata o
+    // position:sticky dos cards (html/body já clipam overflow-x global)
+    <section id="processo" className="bg-bg section-padding">
       <Container className="flex flex-col gap-14">
 
         <Reveal direction="right">

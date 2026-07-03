@@ -283,20 +283,22 @@ export function DesignRulers() {
         style={{ bottom: 0 }}
       />
 
-      {/* Linhas do cursor */}
+      {/* Marcadores do cursor — CONFINADOS às réguas (tick na régua de
+          cima segue o X, tick na régua da esquerda segue o Y), como no
+          Figma. Linha atravessando a tela só quando é guia arrastada. */}
       {!reduced && (
         <>
           <div
             ref={vLineRef}
             aria-hidden
-            className="pointer-events-none fixed left-0 top-0 z-[47] h-full w-px"
-            style={{ background: `${BRAND}80` }}
+            className="pointer-events-none fixed left-0 top-0 z-[47] w-px"
+            style={{ height: RULER, background: BRAND }}
           />
           <div
             ref={hLineRef}
             aria-hidden
-            className="pointer-events-none fixed left-0 top-0 z-[47] h-px w-full"
-            style={{ background: `${BRAND}80` }}
+            className="pointer-events-none fixed left-0 top-0 z-[47] h-px"
+            style={{ width: RULER, background: BRAND }}
           />
         </>
       )}
