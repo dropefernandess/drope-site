@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 import { TextScrollReveal } from "@/components/ui/ScrollFX";
+import { ButtonPrimary, ButtonSecondary, ButtonInverse } from "@/components/ui/Buttons";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 
@@ -66,19 +67,12 @@ export default function SobrePage() {
                 {t("about.lead")}
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
-                <Link
-                  href="mailto:contato@dropefernandes.com"
-                  className="group inline-flex items-center gap-2 rounded-pill bg-brand px-5 py-3 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
-                >
+                <ButtonPrimary href="mailto:contato@dropefernandes.com" className="px-5 py-3">
                   {t("about.cta_chat")}
-                  <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-                </Link>
-                <Link
-                  href="/proposta"
-                  className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-5 py-3 text-sm font-semibold text-fg-strong hover:bg-surface transition"
-                >
+                </ButtonPrimary>
+                <ButtonSecondary href="/proposta" className="px-5 py-3">
                   {t("about.cta_method")}
-                </Link>
+                </ButtonSecondary>
               </div>
             </Reveal>
 
@@ -253,20 +247,15 @@ export default function SobrePage() {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col gap-3 justify-end">
-              <Link
+              <ButtonPrimary
                 href="mailto:contato@dropefernandes.com"
-                className="group inline-flex items-center justify-between gap-3 rounded-pill bg-brand px-5 py-4 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
+                className="justify-between px-5 py-4"
               >
                 contato@dropefernandes.com
-                <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-              </Link>
-              <Link
-                href="/calculadora"
-                className="inline-flex items-center justify-between gap-3 rounded-pill border border-bg/20 bg-bg/5 px-5 py-4 text-sm font-semibold text-bg hover:bg-bg/15 transition"
-              >
+              </ButtonPrimary>
+              <ButtonInverse href="/calculadora" className="justify-between px-5 py-4">
                 {t("about.cta_estimate")}
-                <ArrowUpRight className="size-4" strokeWidth={2.5} />
-              </Link>
+              </ButtonInverse>
             </div>
           </div>
         </Reveal>

@@ -4,6 +4,7 @@ import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { ButtonPrimary } from "@/components/ui/Buttons";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { posts } from "@/content/posts";
 
@@ -94,13 +95,12 @@ export default function BlogPage() {
               {t("blog_idx.cta_desc")}
             </p>
           </div>
-          <Link
+          <ButtonPrimary
             href="mailto:contato@dropefernandes.com?subject=Avisa%20quando%20sair%20um%20post"
-            className="group inline-flex items-center justify-between gap-3 self-end rounded-pill bg-brand px-5 py-4 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
+            className="justify-between self-end px-5 py-4"
           >
             {t("cta.conversar")}
-            <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-          </Link>
+          </ButtonPrimary>
         </Reveal>
       </Container>
     </div>

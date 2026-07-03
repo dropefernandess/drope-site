@@ -1,8 +1,8 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { Container } from "@/components/ui/Container";
+import { ButtonDark } from "@/components/ui/Buttons";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { DictionaryKey } from "@/lib/i18n/dictionaries";
@@ -127,13 +127,9 @@ export function Servicos() {
               <p className="text-body max-w-prose">
                 {t("servicos.desc")}
               </p>
-              <Link
-                href="/proposta"
-                className="group inline-flex items-center gap-2 rounded-pill bg-fg-strong px-5 py-3 text-sm font-semibold text-bg hover:opacity-90 transition"
-              >
+              <ButtonDark href="/proposta" className="px-5 py-3">
                 {t("servicos.cta")}
-                <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-              </Link>
+              </ButtonDark>
             </div>
           </div>
         </Reveal>

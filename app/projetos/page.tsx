@@ -1,9 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { LocalLink as Link } from "@/components/i18n/LocalLink";
-import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { ButtonPrimary, ButtonInverse } from "@/components/ui/Buttons";
 import { Reveal } from "@/components/ui/Motion";
 import { ProjectCard } from "@/components/projetos/ProjectCard";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -139,20 +138,12 @@ export default function ProjetosIndexPage() {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col gap-3">
-              <Link
-                href="/agendar"
-                className="group inline-flex items-center justify-between gap-3 rounded-pill bg-brand px-5 py-4 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
-              >
+              <ButtonPrimary href="/agendar" className="justify-between px-5 py-4">
                 {t("cta.agendar_30")}
-                <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-              </Link>
-              <Link
-                href="/calculadora"
-                className="inline-flex items-center justify-between gap-3 rounded-pill border border-bg/20 bg-bg/5 px-5 py-4 text-sm font-semibold text-bg hover:bg-bg/15 transition"
-              >
+              </ButtonPrimary>
+              <ButtonInverse href="/calculadora" className="justify-between px-5 py-4">
                 {t("cta.estimar")}
-                <ArrowUpRight className="size-4" strokeWidth={2.5} />
-              </Link>
+              </ButtonInverse>
             </div>
           </div>
         </Reveal>

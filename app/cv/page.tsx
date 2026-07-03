@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Download, Mail, Phone, MapPin, Linkedin, Instagram, Globe } from "lucide-react";
+import { ArrowLeft, Download, Mail, Phone, MapPin, Linkedin, Instagram, Globe } from "lucide-react";
+import { ButtonPrimary } from "@/components/ui/Buttons";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { Signature } from "@/components/ui/Signature";
@@ -145,14 +146,20 @@ export default function CVPage() {
             <ArrowLeft className="size-3.5" strokeWidth={2.5} />
             Voltar pro site
           </Link>
+          {/* <a download> nativo (Button do DS não repassa download) —
+              fill-up brand aplicado inline */}
           <a
             href="/cv/curriculo-drope-fernandes.pdf"
             download="Curriculo-Pedro-Fernandes-Drope.pdf"
-            className="group inline-flex items-center gap-2 rounded-pill bg-fg-strong px-4 py-2 text-xs font-semibold text-bg hover:opacity-90 transition"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-pill bg-fg-strong px-4 py-2 text-xs font-semibold text-bg"
           >
-            <Download className="size-3.5" strokeWidth={2.5} />
-            <span className="hidden sm:inline">Baixar PDF</span>
-            <span className="sm:hidden">PDF</span>
+            <span
+              aria-hidden
+              className="absolute inset-0 translate-y-full rounded-pill bg-brand transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
+            />
+            <Download className="relative size-3.5" strokeWidth={2.5} />
+            <span className="relative hidden sm:inline">Baixar PDF</span>
+            <span className="relative sm:hidden">PDF</span>
           </a>
         </div>
       </header>
@@ -407,18 +414,21 @@ export default function CVPage() {
             <a
               href="/cv/curriculo-drope-fernandes.pdf"
               download="Curriculo-Pedro-Fernandes-Drope.pdf"
-              className="group inline-flex items-center justify-center gap-2 rounded-pill border border-bg/20 bg-bg/5 px-5 py-3.5 text-sm font-semibold text-bg hover:bg-bg/15 transition whitespace-nowrap"
+              className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-pill border border-bg/20 bg-bg/5 px-5 py-3.5 text-sm font-semibold text-bg whitespace-nowrap"
             >
-              <Download className="size-4" strokeWidth={2.5} />
-              Baixar PDF
+              <span
+                aria-hidden
+                className="absolute inset-0 translate-y-full rounded-pill bg-bg/15 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
+              />
+              <Download className="relative size-4" strokeWidth={2.5} />
+              <span className="relative">Baixar PDF</span>
             </a>
-            <Link
+            <ButtonPrimary
               href="/agendar"
-              className="group inline-flex items-center justify-center gap-2 rounded-pill bg-brand px-5 py-3.5 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition whitespace-nowrap"
+              className="justify-center px-5 py-3.5 whitespace-nowrap"
             >
               Agendar conversa
-              <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-            </Link>
+            </ButtonPrimary>
           </div>
         </Reveal>
 

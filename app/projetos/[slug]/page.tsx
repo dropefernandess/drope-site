@@ -2,8 +2,9 @@ import Image from "next/image";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowUpRight, ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowUpRight, ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { ButtonPrimary, ButtonDark } from "@/components/ui/Buttons";
 import { Reveal } from "@/components/ui/Motion";
 import { CaseImage } from "@/components/projetos/CaseImage";
 import { VideoPlaceholder } from "@/components/projetos/VideoPlaceholder";
@@ -198,15 +199,13 @@ export default async function CaseStudyPage({ params }: Props) {
               <MetaRow label="Entregáveis"  value={c.meta.entregaveis.join(", ")} />
             </dl>
             {c.meta.link && (
-              <Link
+              <ButtonDark
                 href={c.meta.link}
-                target="_blank"
-                rel="noopener"
-                className="group mt-2 inline-flex items-center justify-between gap-2 rounded-pill bg-fg-strong px-4 py-2.5 text-sm font-semibold text-bg hover:opacity-90 transition"
+                external
+                className="mt-2 justify-between px-4 py-2.5"
               >
                 Visitar projeto
-                <ExternalLink className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-              </Link>
+              </ButtonDark>
             )}
           </Reveal>
         </div>
@@ -459,19 +458,21 @@ export default async function CaseStudyPage({ params }: Props) {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col gap-3">
-              <Link
-                href="/agendar"
-                className="group inline-flex items-center justify-between gap-3 rounded-pill bg-brand px-5 py-4 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
-              >
+              <ButtonPrimary href="/agendar" className="justify-between px-5 py-4">
                 Agendar 30 min
-                <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-              </Link>
+              </ButtonPrimary>
+              {/* card escuro FIXO nos 2 temas → tokens ink-50 diretos
+                  (ButtonInverse usa bg semântico, que flipa no dark) */}
               <Link
                 href="/calculadora"
-                className="inline-flex items-center justify-between gap-3 rounded-pill border border-ink-50/20 bg-ink-50/5 px-5 py-4 text-sm font-semibold text-ink-50 hover:bg-ink-50/15 transition"
+                className="group relative inline-flex items-center justify-between gap-3 overflow-hidden rounded-pill border border-ink-50/20 bg-ink-50/5 px-5 py-4 text-sm font-semibold text-ink-50"
               >
-                Estimar projeto
-                <ArrowUpRight className="size-4" strokeWidth={2.5} />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 translate-y-full rounded-pill bg-ink-50/15 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
+                />
+                <span className="relative">Estimar projeto</span>
+                <ArrowUpRight className="relative size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
               </Link>
             </div>
           </div>

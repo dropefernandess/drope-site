@@ -127,6 +127,33 @@ export function ButtonGhost({ href, children, arrow = true, className, external 
   );
 }
 
+/** Inverse — outline sobre card escuro (bg-fg-strong), fill sutil sobe.
+    Usa tokens semânticos (bg flipa com o tema junto do card). */
+export function ButtonInverse({ href, children, arrow = true, className, external }: ButtonBaseProps) {
+  return (
+    <LocalLink
+      href={href}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      className={cn(
+        "group relative inline-flex items-center gap-2 overflow-hidden rounded-pill border border-bg/20 bg-bg/5 px-6 py-3.5 text-sm font-semibold text-bg",
+        className
+      )}
+    >
+      <span
+        aria-hidden
+        className="absolute inset-0 translate-y-full rounded-pill bg-bg/15 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
+      />
+      <span className="relative"><SlideLabel>{children}</SlideLabel></span>
+      {arrow && (
+        <ArrowUpRight
+          className="relative size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          strokeWidth={2.5}
+        />
+      )}
+    </LocalLink>
+  );
+}
+
 /** Dark — pill escura (usado em CTAs sobre fundo claro), fill brand sobe. */
 export function ButtonDark({ href, children, arrow = true, className, external }: ButtonBaseProps) {
   return (

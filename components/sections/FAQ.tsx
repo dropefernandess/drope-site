@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus, Mail } from "lucide-react";
-import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { Container } from "@/components/ui/Container";
+import { ButtonPrimary } from "@/components/ui/Buttons";
 import { Reveal } from "@/components/ui/Motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { DictionaryKey } from "@/lib/i18n/dictionaries";
@@ -128,13 +128,12 @@ export function FAQ() {
                   {t("faq.cta_desc")}
                 </p>
               </div>
-              <Link
+              <ButtonPrimary
                 href="mailto:contato@dropefernandes.com?subject=Pergunta%20sobre%20projeto"
-                className="group inline-flex items-center justify-between gap-2 rounded-pill bg-brand px-5 py-3 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
+                className="justify-between px-5 py-3"
               >
                 {t("faq.cta_button")}
-                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-              </Link>
+              </ButtonPrimary>
             </div>
           </aside>
         </Reveal>

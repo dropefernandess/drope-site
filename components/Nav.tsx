@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { ButtonDark } from "@/components/ui/Buttons";
 import { LocaleToggle } from "@/components/i18n/LocaleToggle";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -116,13 +117,9 @@ export function Nav() {
           <ThemeToggle className="ml-0.5" />
 
           {/* CTA */}
-          <Link
-            href="/agendar"
-            className="ml-1 inline-flex items-center gap-1.5 rounded-pill bg-fg-strong px-4 py-2 text-sm font-semibold text-bg transition hover:opacity-90"
-          >
+          <ButtonDark href="/agendar" className="ml-1 gap-1.5 px-4 py-2">
             {t("nav.cta")}
-            <ArrowUpRight className="size-3.5" strokeWidth={2.5} />
-          </Link>
+          </ButtonDark>
         </div>
       </header>
 
@@ -178,13 +175,12 @@ export function Nav() {
             })}
           </nav>
 
-          <Link
+          <ButtonDark
             href="/agendar"
-            className="mt-6 inline-flex items-center justify-center gap-2 rounded-pill bg-fg-strong px-6 py-4 text-base font-semibold text-bg"
+            className="mt-6 justify-center px-6 py-4 text-base"
           >
             {t("nav.cta_long")}
-            <ArrowUpRight className="size-4" strokeWidth={2.5} />
-          </Link>
+          </ButtonDark>
         </div>
       </div>
     </>

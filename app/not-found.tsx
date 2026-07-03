@@ -1,8 +1,8 @@
 "use client";
 
-import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { LocalLink as Link } from "@/components/i18n/LocalLink";
+import { ButtonPrimary, ButtonGhost } from "@/components/ui/Buttons";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 
 /**
@@ -73,20 +73,13 @@ export default function NotFound() {
         <p className="text-lead text-fg-body max-w-prose">{copy.body}</p>
 
         <div className="flex flex-wrap items-center gap-3 pt-2">
-          <Link
-            href="/"
-            className="group inline-flex items-center gap-2 rounded-pill bg-brand px-6 py-3.5 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition shadow-sm shadow-brand/20"
-          >
-            <ArrowLeft className="size-3.5 transition group-hover:-translate-x-0.5" strokeWidth={2.5} />
-            {copy.home}
-          </Link>
-          <Link
-            href="/agendar"
-            className="group inline-flex items-center gap-1.5 text-sm font-medium text-fg-strong hover:text-brand transition"
-          >
-            {copy.book}
-            <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-          </Link>
+          <ButtonPrimary href="/" arrow={false}>
+            <span className="inline-flex items-center gap-2">
+              <ArrowLeft className="size-3.5" strokeWidth={2.5} />
+              {copy.home}
+            </span>
+          </ButtonPrimary>
+          <ButtonGhost href="/agendar">{copy.book}</ButtonGhost>
         </div>
       </Container>
     </section>

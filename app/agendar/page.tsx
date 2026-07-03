@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { LocalLink as Link } from "@/components/i18n/LocalLink";
-import { ArrowUpRight, Clock, Mail, Video } from "lucide-react";
+import { Clock, Mail, Video } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { ButtonPrimary } from "@/components/ui/Buttons";
 import { Reveal } from "@/components/ui/Motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 
@@ -131,13 +131,12 @@ export default function AgendarPage() {
               <p className="text-sm text-bg/70">
                 {t("agendar.email_desc")}
               </p>
-              <Link
+              <ButtonPrimary
                 href="mailto:contato@dropefernandes.com"
-                className="group inline-flex items-center justify-between gap-2 rounded-pill bg-brand px-4 py-2.5 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition mt-1"
+                className="justify-between px-4 py-2.5 mt-1"
               >
                 contato@dropefernandes.com
-                <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-              </Link>
+              </ButtonPrimary>
             </div>
           </Reveal>
 

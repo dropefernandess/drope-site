@@ -1,8 +1,9 @@
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { ButtonPrimary, ButtonInverse } from "@/components/ui/Buttons";
 import { Reveal } from "@/components/ui/Motion";
 import { PostTOC } from "@/components/blog/PostTOC";
 import { getPost, posts, type Bloco } from "@/content/posts";
@@ -232,20 +233,15 @@ export default async function PostPage({ params }: Props) {
                 </p>
               </div>
               <div className="md:col-span-5 flex flex-col gap-3">
-                <Link
-                  href="/agendar"
-                  className="group inline-flex items-center justify-between gap-3 rounded-pill bg-brand px-5 py-4 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
-                >
+                <ButtonPrimary href="/agendar" className="justify-between px-5 py-4">
                   Agendar 30 min
-                  <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-                </Link>
-                <Link
+                </ButtonPrimary>
+                <ButtonInverse
                   href={`/blog/${next.slug}`}
-                  className="inline-flex items-center justify-between gap-3 rounded-pill border border-bg/20 bg-bg/5 px-5 py-4 text-sm font-semibold text-bg hover:bg-bg/15 transition"
+                  className="justify-between px-5 py-4"
                 >
                   Próximo texto: {next.titulo.slice(0, 26)}…
-                  <ArrowUpRight className="size-4" strokeWidth={2.5} />
-                </Link>
+                </ButtonInverse>
               </div>
             </div>
           </Reveal>

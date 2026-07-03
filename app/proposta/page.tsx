@@ -3,6 +3,7 @@
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight, Clock, Check, X as XIcon } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { ButtonPrimary, ButtonInverse } from "@/components/ui/Buttons";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { DictionaryKey } from "@/lib/i18n/dictionaries";
@@ -255,14 +256,21 @@ export default function PropostaPage() {
                 </ul>
                 <Link
                   href="/calculadora"
-                  className={`mt-auto inline-flex items-center justify-between gap-2 rounded-pill px-5 py-3 text-sm font-semibold transition ${
+                  className={`group relative mt-auto inline-flex items-center justify-between gap-2 overflow-hidden rounded-pill px-5 py-3 text-sm font-semibold ${
                     p.featured
-                      ? "bg-brand-fg text-brand hover:opacity-90"
-                      : "border border-line bg-bg text-fg-strong hover:bg-surface"
+                      ? "bg-brand-fg text-brand"
+                      : "border border-line bg-bg text-fg-strong"
                   }`}
                 >
-                  {t(p.ctaKey)}
-                  <ArrowUpRight className="size-4" strokeWidth={2.5} />
+                  {/* fill-up do DS, tonalizado por variante */}
+                  <span
+                    aria-hidden
+                    className={`absolute inset-0 translate-y-full rounded-pill transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 ${
+                      p.featured ? "bg-brand/10" : "bg-surface-2"
+                    }`}
+                  />
+                  <span className="relative">{t(p.ctaKey)}</span>
+                  <ArrowUpRight className="relative size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
                 </Link>
               </StaggerItem>
             ))}
@@ -282,20 +290,12 @@ export default function PropostaPage() {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col gap-3 justify-end">
-              <Link
-                href="/calculadora"
-                className="group inline-flex items-center justify-between gap-3 rounded-pill bg-brand px-5 py-4 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
-              >
+              <ButtonPrimary href="/calculadora" className="justify-between px-5 py-4">
                 {t("proposta.cta_calc")}
-                <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-              </Link>
-              <Link
-                href="/agendar"
-                className="inline-flex items-center justify-between gap-3 rounded-pill border border-bg/20 bg-bg/5 px-5 py-4 text-sm font-semibold text-bg hover:bg-bg/15 transition"
-              >
+              </ButtonPrimary>
+              <ButtonInverse href="/agendar" className="justify-between px-5 py-4">
                 {t("proposta.cta_agendar")}
-                <ArrowUpRight className="size-4" strokeWidth={2.5} />
-              </Link>
+              </ButtonInverse>
             </div>
           </div>
         </Reveal>

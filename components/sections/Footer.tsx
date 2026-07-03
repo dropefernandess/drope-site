@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ArrowUpRight, Mail, Instagram, Linkedin } from "lucide-react";
+import { ButtonPrimary } from "@/components/ui/Buttons";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
@@ -71,14 +72,15 @@ export function Footer() {
           </p>
 
           {/* Email CTA */}
-          <Link
+          <ButtonPrimary
             href="mailto:contato@dropefernandes.com"
-            className="group inline-flex items-center gap-2 self-start rounded-pill bg-brand px-4 py-2.5 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition"
+            className="self-start px-4 py-2.5"
           >
-            <Mail className="size-4" strokeWidth={2.5} />
-            contato@dropefernandes.com
-            <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-          </Link>
+            <span className="inline-flex items-center gap-2">
+              <Mail className="size-4" strokeWidth={2.5} />
+              contato@dropefernandes.com
+            </span>
+          </ButtonPrimary>
         </Reveal>
 
         {/* Navegação */}

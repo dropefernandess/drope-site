@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight, Mail, MessageCircle, Loader2, Check, X as XIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ButtonSecondary, ButtonDark } from "@/components/ui/Buttons";
 import { enviarEstimativa, type EstimativaPayload } from "@/app/actions/enviar-estimativa";
 import { waLink } from "@/lib/config";
 
@@ -119,20 +120,27 @@ export function EstimativaForm({ canSubmit, payload, resumoWhatsapp }: Props) {
                 <p className="text-xs text-brand font-medium px-1">{errMsg}</p>
               )}
 
+              {/* <button> nativo (submit + disabled) — fill-up do DS inline */}
               <button
                 type="submit"
                 disabled={pending}
-                className="group inline-flex items-center justify-center gap-2 rounded-pill bg-brand px-5 py-3 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition disabled:opacity-60"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-pill bg-brand px-5 py-3 text-sm font-semibold text-brand-fg disabled:opacity-60"
               >
-                {pending ? (
-                  <>
-                    <Loader2 className="size-4 animate-spin" /> Enviando…
-                  </>
-                ) : (
-                  <>
-                    <Mail className="size-4" strokeWidth={2.5} /> Enviar pro Drope
-                  </>
-                )}
+                <span
+                  aria-hidden
+                  className="absolute inset-0 translate-y-full rounded-pill bg-brand-deep transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
+                />
+                <span className="relative inline-flex items-center gap-2">
+                  {pending ? (
+                    <>
+                      <Loader2 className="size-4 animate-spin" /> Enviando…
+                    </>
+                  ) : (
+                    <>
+                      <Mail className="size-4" strokeWidth={2.5} /> Enviar pro Drope
+                    </>
+                  )}
+                </span>
               </button>
 
               <div className="flex items-center gap-3 my-1">
@@ -141,15 +149,16 @@ export function EstimativaForm({ canSubmit, payload, resumoWhatsapp }: Props) {
                 <div className="flex-1 h-px bg-line" />
               </div>
 
-              <Link
+              <ButtonSecondary
                 href={waLink(resumoWhatsapp)}
-                target="_blank"
-                rel="noopener"
-                className="group inline-flex items-center justify-center gap-2 rounded-pill border border-line bg-bg-soft px-5 py-3 text-sm font-semibold text-fg-strong hover:bg-surface transition"
+                external
+                className="justify-center px-5 py-3"
               >
-                <MessageCircle className="size-4 text-[#25D366]" strokeWidth={2.5} />
-                Continuar no WhatsApp
-              </Link>
+                <span className="inline-flex items-center gap-2">
+                  <MessageCircle className="size-4 text-[#25D366]" strokeWidth={2.5} />
+                  Continuar no WhatsApp
+                </span>
+              </ButtonSecondary>
               <Link
                 href="/agendar"
                 className="text-center text-xs text-fg-mute hover:text-fg-strong transition"
@@ -178,13 +187,12 @@ export function EstimativaForm({ canSubmit, payload, resumoWhatsapp }: Props) {
               Vou responder em até 24h pro <strong className="text-fg-strong">{email}</strong>.
               Enquanto isso, se quiser adiantar:
             </p>
-            <Link
+            <ButtonDark
               href="/agendar"
-              className="inline-flex items-center justify-center gap-2 rounded-pill bg-fg-strong px-4 py-2.5 text-xs font-semibold text-bg hover:opacity-90 transition mt-1"
+              className="justify-center px-4 py-2.5 text-xs mt-1"
             >
               Agendar 30 min agora
-              <ArrowUpRight className="size-3.5" strokeWidth={2.5} />
-            </Link>
+            </ButtonDark>
           </motion.div>
         )}
       </AnimatePresence>

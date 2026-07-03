@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, ArrowUpRight } from "lucide-react";
+import { Search } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
-import { LocalLink } from "@/components/i18n/LocalLink";
+import { ButtonPrimary } from "@/components/ui/Buttons";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import {
   glossario,
@@ -140,13 +140,12 @@ export function GlossarioClient() {
             <h2 className="text-h-1 text-ink-50 text-balance">{t("gloss.cta_title")}</h2>
             <p className="text-body text-ink-50/75 max-w-prose">{t("gloss.cta_desc")}</p>
           </div>
-          <LocalLink
+          <ButtonPrimary
             href="/agendar"
-            className="group inline-flex items-center justify-center gap-2 rounded-pill bg-brand px-5 py-3.5 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition whitespace-nowrap"
+            className="justify-center px-5 py-3.5 whitespace-nowrap"
           >
             {t("gloss.cta_button")}
-            <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-          </LocalLink>
+          </ButtonPrimary>
         </Reveal>
       </Container>
     </div>
