@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { ButtonPrimary, ButtonSecondary, ButtonGhost, ButtonDark } from "@/components/ui/Buttons";
 import { TextScrollReveal, StickyStack, StickyCard } from "@/components/ui/ScrollFX";
+import { ProcessArt } from "@/components/ui/ProcessArt";
 
 /**
  * Styleguide interno — documentação VIVA do design system.
@@ -149,12 +150,18 @@ export function StyleguideClient() {
               { n: "04", t: "Entrega & Refinamento", d: "Refinos finais, deploy, documentação e suporte pros próximos passos.", tone: "bg-bg-soft border border-line text-fg-strong" },
             ].map((card, i, arr) => (
               <StickyCard key={card.n} index={i} total={arr.length}>
-                <div className={`rounded-section p-8 md:p-12 min-h-[280px] flex flex-col justify-between gap-6 shadow-lg ${card.tone}`}>
-                  <p className="text-4xl font-semibold tabular-nums opacity-60">{card.n}</p>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-h-2">{card.t}</h3>
-                    <p className="text-base opacity-80 max-w-prose">{card.d}</p>
+                <div className={`rounded-section p-8 md:p-12 min-h-[280px] grid gap-8 md:grid-cols-[1fr_auto] items-center shadow-lg ${card.tone}`}>
+                  <div className="flex flex-col justify-between gap-6">
+                    <p className="text-4xl font-semibold tabular-nums opacity-60">{card.n}</p>
+                    <div className="flex flex-col gap-2">
+                      <h3 className="text-h-2">{card.t}</h3>
+                      <p className="text-base opacity-80 max-w-prose">{card.d}</p>
+                    </div>
                   </div>
+                  <ProcessArt
+                    step={(i + 1) as 1 | 2 | 3 | 4}
+                    className="w-28 md:w-36 shrink-0 justify-self-center md:justify-self-end opacity-90"
+                  />
                 </div>
               </StickyCard>
             ))}

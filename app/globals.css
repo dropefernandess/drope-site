@@ -233,6 +233,54 @@
 .drope-logo-svg .f7 { transform: translateY(2.0px); animation: drope-letDrop 0.233s cubic-bezier(.33,1,.68,1) 1.367s forwards; }
 .drope-logo-svg .f8 { transform: translateY(2.0px); animation: drope-letDrop 0.233s cubic-bezier(.33,1,.68,1) 1.400s forwards; }
 
+/* ============================================================
+   DS PROCESS ART — SVGs animados dos cards do processo
+   (stagger embutido nos keyframes: animation-delay só vale na
+   1ª iteração com loop infinito, então cada bloco tem timing próprio)
+   ============================================================ */
+@keyframes ds-spin  { to { transform: rotate(360deg); } }
+@keyframes ds-blink { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+@keyframes ds-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes ds2-draw {
+  0%   { stroke-dashoffset: 210; opacity: 1; }
+  55%  { stroke-dashoffset: 0; }
+  88%  { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes ds3-b1 {
+  0%       { opacity: 0; transform: translateY(8px); }
+  10%      { opacity: 1; transform: translateY(0); }
+  84%      { opacity: 1; }
+  94%, 100% { opacity: 0; }
+}
+@keyframes ds3-b2 {
+  0%, 8%   { opacity: 0; transform: translateY(8px); }
+  18%      { opacity: 1; transform: translateY(0); }
+  84%      { opacity: 1; }
+  94%, 100% { opacity: 0; }
+}
+@keyframes ds3-b3 {
+  0%, 16%  { opacity: 0; transform: translateY(8px); }
+  26%      { opacity: 1; transform: translateY(0); }
+  84%      { opacity: 1; }
+  94%, 100% { opacity: 0; }
+}
+@keyframes ds4-fade  { 0% { opacity: 0; } 6% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes ds4-ring  { 0% { stroke-dashoffset: 252; } 48% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+@keyframes ds4-check { 0%, 48% { stroke-dashoffset: 54; } 66% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+
+.ds-art .ds1-sweep  { animation: ds-spin 5s linear infinite; }
+.ds-art .ds1-blip   { animation: ds-blink 2.2s ease-in-out infinite; }
+.ds-art .ds1-blip-2 { animation: ds-blink 2.2s ease-in-out 1.1s infinite; }
+.ds-art .ds2-draw   { stroke-dasharray: 210; animation: ds2-draw 3.8s ease-in-out infinite; }
+.ds-art .ds3-b1     { transform-box: fill-box; animation: ds3-b1 4.5s ease-in-out infinite; }
+.ds-art .ds3-b2     { transform-box: fill-box; animation: ds3-b2 4.5s ease-in-out infinite; }
+.ds-art .ds3-b3     { transform-box: fill-box; animation: ds3-b3 4.5s ease-in-out infinite; }
+.ds-art .ds3-cursor { transform-box: fill-box; animation: ds-float 3s ease-in-out infinite; }
+.ds-art .ds4-wrap   { animation: ds4-fade 5s ease-in-out infinite; }
+.ds-art .ds4-ring   { stroke-dasharray: 252; animation: ds4-ring 5s ease-in-out infinite; }
+.ds-art .ds4-check  { stroke-dasharray: 54; animation: ds4-check 5s ease-in-out infinite; }
+
 .marquee-track {
   display: flex;
   width: max-content;
@@ -251,6 +299,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
+  /* loops infinitos a 0.01ms viram busy-repaint — desliga de vez */
+  .ds-art, .ds-art * { animation: none !important; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
