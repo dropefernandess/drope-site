@@ -6,6 +6,7 @@ import { ArrowUpRight, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { TextScrollReveal } from "@/components/ui/ScrollFX";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { DictionaryKey } from "@/lib/i18n/dictionaries";
 
@@ -115,11 +116,18 @@ export default function SobrePage() {
               {t("about.manifesto_title")}
             </h2>
           </Reveal>
-          <Reveal delay={0.1} className="lg:col-span-8 flex flex-col gap-5 text-body max-w-prose">
-            <p>{t("about.manifesto_p1")}</p>
-            <p>{t("about.manifesto_p2")}</p>
-            <p className="text-fg-strong">{t("about.manifesto_p3")}</p>
-          </Reveal>
+          <div className="lg:col-span-8 flex flex-col gap-6 max-w-prose">
+            {/* frase-manifesto acende palavra a palavra no scroll (DS ScrollFX) */}
+            <TextScrollReveal
+              as="p"
+              className="text-xl md:text-2xl font-medium leading-snug text-fg-strong"
+              text={t("about.manifesto_p1")}
+            />
+            <Reveal delay={0.1} className="flex flex-col gap-5 text-body">
+              <p>{t("about.manifesto_p2")}</p>
+              <p className="text-fg-strong">{t("about.manifesto_p3")}</p>
+            </Reveal>
+          </div>
         </section>
 
         {/* ===== TIMELINE — cards iguais grid ===== */}

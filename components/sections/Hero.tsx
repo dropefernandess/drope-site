@@ -4,6 +4,7 @@ import Image from "next/image";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedClock } from "@/components/ui/AnimatedIcons";
+import { ButtonPrimary, ButtonGhost } from "@/components/ui/Buttons";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
@@ -69,21 +70,9 @@ export function Hero() {
 
             <Reveal delay={0.4} className="flex flex-wrap items-center gap-4">
               <Magnetic strength={0.18}>
-                <Link
-                  href="#projetos"
-                  className="group inline-flex items-center gap-2 rounded-pill bg-brand px-6 py-3.5 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition shadow-sm shadow-brand/20"
-                >
-                  {t("hero.cta_primary")}
-                  <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-                </Link>
+                <ButtonPrimary href="#projetos">{t("hero.cta_primary")}</ButtonPrimary>
               </Magnetic>
-              <Link
-                href="/agendar"
-                className="group inline-flex items-center gap-1.5 text-sm font-medium text-fg-strong hover:text-brand transition"
-              >
-                {t("hero.cta_secondary")}
-                <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-              </Link>
+              <ButtonGhost href="/agendar">{t("hero.cta_secondary")}</ButtonGhost>
             </Reveal>
           </div>
 

@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { LocalLink as Link } from "@/components/i18n/LocalLink";
-import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { ButtonDark } from "@/components/ui/Buttons";
 import { Reveal } from "@/components/ui/Motion";
 import { ProjectCard } from "@/components/projetos/ProjectCard";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -86,13 +85,7 @@ export function Projetos() {
 
         {/* CTA pra portfólio completo */}
         <Reveal className="flex justify-center pt-4">
-          <Link
-            href="/projetos"
-            className="group inline-flex items-center gap-2 rounded-pill bg-fg-strong px-6 py-3.5 text-sm font-semibold text-bg hover:opacity-90 transition"
-          >
-            {t("projetos.cta_portfolio")}
-            <ArrowUpRight className="size-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-          </Link>
+          <ButtonDark href="/projetos">{t("projetos.cta_portfolio")}</ButtonDark>
         </Reveal>
       </Container>
     </section>

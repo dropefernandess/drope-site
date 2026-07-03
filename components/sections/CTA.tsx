@@ -1,12 +1,12 @@
 "use client";
 
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
-import { ArrowUpRight } from "lucide-react";
 import { AnimatedClock, AnimatedMail } from "@/components/ui/AnimatedIcons";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Motion";
 import { AnimatedCursor } from "@/components/ui/AnimatedCursor";
+import { ButtonPrimary } from "@/components/ui/Buttons";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 
 /**
@@ -104,19 +104,23 @@ export function CTA() {
               </Reveal>
 
               <Reveal delay={0.3} direction="up" className="flex flex-wrap items-center gap-3 pt-3">
-                <Link
-                  href="/agendar"
-                  className="group inline-flex items-center gap-2 rounded-pill bg-brand px-6 py-3.5 text-sm font-semibold text-brand-fg hover:bg-brand-deep transition shadow-lg shadow-brand/30"
-                >
-                  <AnimatedMail className="size-4" strokeWidth={2.5} />
-                  <span>{t("cta.button_primary")}</span>
-                  <ArrowUpRight className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-                </Link>
+                <ButtonPrimary href="/agendar" className="shadow-lg shadow-brand/30">
+                  <span className="inline-flex items-center gap-2">
+                    <AnimatedMail className="size-4" strokeWidth={2.5} />
+                    {t("cta.button_primary")}
+                  </span>
+                </ButtonPrimary>
+                {/* outline sobre card escuro fixo — tokens ink-50 direto,
+                    com o mesmo fill-up do DS */}
                 <Link
                   href="/calculadora"
-                  className="inline-flex items-center gap-2 rounded-pill border border-ink-50/25 bg-ink-50/5 backdrop-blur px-6 py-3.5 text-sm font-semibold text-ink-50 hover:bg-ink-50/15 transition"
+                  className="group relative inline-flex items-center gap-2 overflow-hidden rounded-pill border border-ink-50/25 bg-ink-50/5 backdrop-blur px-6 py-3.5 text-sm font-semibold text-ink-50"
                 >
-                  {t("cta.button_calc")}
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 translate-y-full rounded-pill bg-ink-50/15 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
+                  />
+                  <span className="relative">{t("cta.button_calc")}</span>
                 </Link>
               </Reveal>
             </div>
