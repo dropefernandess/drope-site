@@ -6,6 +6,7 @@ import { ScrollProgressBar } from "@/components/ui/Effects";
 import { SplashScreen } from "@/components/ui/SplashScreen";
 import { DesignRulers } from "@/components/canvas/DesignRulers";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
+import { SiteChrome } from "@/components/SiteChrome";
 import "./globals.css";
 
 // Inter em TODOS os pesos — Thin 100 ao Black 900.
@@ -218,14 +219,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        {/* Splash de boas-vindas (1.4s + fade) — só no primeiro acesso da sessão */}
-        <SplashScreen />
         <LocaleProvider>
-          <ScrollProgressBar />
-          <DesignRulers />
-          <Nav />
+          {/* SiteChrome some em rotas standalone (ex.: /briefing) */}
+          <SiteChrome>
+            {/* Splash de boas-vindas (1.4s + fade) — só no primeiro acesso da sessão */}
+            <SplashScreen />
+            <ScrollProgressBar />
+            <DesignRulers />
+            <Nav />
+          </SiteChrome>
           <main>{children}</main>
-          <Footer />
+          <SiteChrome>
+            <Footer />
+          </SiteChrome>
         </LocaleProvider>
       </body>
     </html>
