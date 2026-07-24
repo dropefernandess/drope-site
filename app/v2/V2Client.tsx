@@ -8,8 +8,7 @@ import { V2Hero } from "@/components/v2/V2Hero";
 import { V2Marquee } from "@/components/v2/V2Marquee";
 import { V2Services } from "@/components/v2/V2Services";
 import { V2Projects } from "@/components/v2/V2Projects";
-import { V2CTA } from "@/components/v2/V2CTA";
-import { V2Footer } from "@/components/v2/V2Footer";
+import { V2Finale } from "@/components/v2/V2Finale";
 
 /**
  * V2Client — orquestra a página do preview.
@@ -75,8 +74,7 @@ export function V2Client() {
       <V2Marquee />
       <V2Services />
       <V2Projects />
-      <V2CTA />
-      <V2Footer />
+      <V2Finale />
     </div>
   );
 }

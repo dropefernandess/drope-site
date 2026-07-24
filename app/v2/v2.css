@@ -1,8 +1,8 @@
 /* ============================================================
    V2 — CSS da rota de preview do redesign (escopo .v2)
    Identidade do manual: Inter · #DE2828 · cream/ink.
-   As refs (Kubric/Pallet/GroundAI/10x) entram como estrutura
-   e motion — recoloridas nos tokens oficiais.
+   Fiel aos prompts de referência: superfícies FLAT (sem washes,
+   sem sombras decorativas), glass só na nav, motion via JS.
    ============================================================ */
 
 /* Lenis toma conta do scroll — desliga o smooth nativo pra não brigar */
@@ -15,40 +15,11 @@ html.lenis body {
   scroll-behavior: auto !important;
 }
 
-/* Grain sutil (data-uri feTurbulence) — textura de página impressa */
-.v2-grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
-  background-size: 160px 160px;
-}
-
-/* ---- HERO: reveal char a char (padrão Kubric, gerado em runtime) ---- */
-.v2-char {
-  display: inline-block;
-  transform: translateY(112%);
-  opacity: 0;
-  animation: v2CharUp 0.68s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-@keyframes v2CharUp {
-  to { transform: translateY(0); opacity: 1; }
-}
-.v2-line {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
-}
-
-/* Nav pill glass sobre cream */
+/* Nav pill glass (única superfície com blur — padrão Kubric) */
 .v2-pill {
-  border: 1px solid rgb(16 16 16 / 0.10);
-  background: linear-gradient(12deg, rgb(255 255 255 / 0.55) -40%, rgb(255 255 255 / 0.25) 100%);
+  border: 1px solid rgb(16 16 16 / 0.1);
+  background: rgb(255 255 255 / 0.4);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 24px rgb(16 16 16 / 0.06);
   transform-origin: center;
   transform: scaleX(0);
   opacity: 0;
@@ -78,48 +49,11 @@ html.lenis body {
   100% { transform: translateY(0);    opacity: 1; }
 }
 
-/* Wash de brand no hero — 2 radiais que respiram devagar */
-.v2-wash {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(42% 50% at 78% 18%, rgb(222 40 40 / 0.07) 0%, transparent 70%),
-    radial-gradient(50% 60% at 12% 85%, rgb(222 40 40 / 0.05) 0%, transparent 70%);
-  animation: v2Wash 22s ease-in-out infinite alternate;
-}
-@keyframes v2Wash {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to   { transform: translate3d(-2%, 2%, 0) scale(1.06); }
-}
-
-/* Fallback procedural da textura do CTA (sarja diagonal + respiração).
-   Quando public/v2/cta-texture.jpg existir, a <img> cobre este layer. */
-.v2-twill {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      52deg,
-      rgb(242 242 235 / 0.055) 0px,
-      rgb(242 242 235 / 0.055) 1px,
-      transparent 1px,
-      transparent 4px
-    ),
-    radial-gradient(60% 80% at 30% 20%, rgb(64 12 8 / 0.5) 0%, transparent 60%),
-    radial-gradient(50% 70% at 80% 75%, rgb(58 58 44 / 0.55) 0%, transparent 65%),
-    #121210;
-}
-
-/* Reveals GSAP: estado inicial (JS anima pra visível).
-   Sem JS/reduced-motion, o fallback abaixo garante conteúdo visível. */
+/* Reveals GSAP: estado inicial (JS anima pra visível). */
 .v2 [data-v2-reveal] {
   opacity: 0;
   transform: translateY(28px);
 }
 @media (prefers-reduced-motion: reduce) {
   .v2 [data-v2-reveal] { opacity: 1 !important; transform: none !important; }
-  .v2 .v2-char { animation: none; transform: none; opacity: 1; }
-  .v2 .v2-wash { animation: none; }
 }

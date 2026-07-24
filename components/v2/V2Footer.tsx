@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Instagram, Linkedin, Mail } from "lucide-react";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
@@ -44,7 +43,9 @@ const tile =
 
 export function V2Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#0C0C0B] pb-10 pt-20 text-ink-50">
+    // z-10 + bg opaco + topo arredondado: é a CORTINA que cobre o CTA
+    // pinado do V2Finale ao rolar
+    <footer className="relative z-10 overflow-hidden rounded-t-[32px] border-t border-ink-50/10 bg-[#0C0C0B] pb-10 pt-20 text-ink-50">
       <div className="mx-auto grid max-w-container gap-4 px-6 md:grid-cols-12 md:px-12">
         {/* ===== CARD GRANDE — "antes de ir, dá uma olhada" ===== */}
         <div
@@ -182,10 +183,6 @@ export function V2Footer() {
         </div>
       </div>
 
-      {/* logo mínima no canto */}
-      <div className="pointer-events-none absolute right-8 top-8 opacity-40">
-        <Image src="/brand/drope-dark.svg" alt="" width={80} height={28} className="h-6 w-auto" />
-      </div>
     </footer>
   );
 }

@@ -1,52 +1,43 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Image from "next/image";
+import { motion, cubicBezier, useReducedMotion } from "framer-motion";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
-import { ArrowUpRight } from "lucide-react";
+import { V2Btn } from "./V2Btn";
+import { useViewport } from "./useViewport";
+import { CASES, FAN_SLOTS } from "./v2-cases";
 
 /**
- * V2Hero — estrutura Kubric (header absoluto + headline char-by-char +
- * side-nav + bottom row com about-card), recolorida no manual:
- * cream de base, wash vermelha respirando, grain de papel.
+ * V2Hero — hero da ref Pallet Ross, fiel ao prompt:
+ * headline central gigante word-by-word, LEQUE de 7 covers embaixo com
+ * entrada coreografada em 3 fases do card líder (sobe → voa pro slot 6 →
+ * varre até o slot 0) revelando os outros exatamente quando passa por
+ * eles (bezier invertida), balões de chat com squash-and-stretch.
+ * Header Kubric (logo + nav pill glass + botão sólido) + side-nav.
+ * Superfície FLAT — cream puro, zero gradiente, zero sombra decorativa.
  */
 
-const CHAR_STEP = 0.032;
-const LINE_GAP = 0.55;
+const smoothEase = cubicBezier(0.22, 1, 0.36, 1);
 
-/** Divide a linha em chars com delay incremental (padrão Kubric). */
-function CharLine({
-  text,
-  base,
-  className,
-}: {
-  text: string;
-  base: number;
-  className?: string;
-}) {
-  let i = 0;
-  return (
-    <span className={`v2-line ${className ?? ""}`}>
-      {text.split(" ").map((word, w) => (
-        <span key={w} className="inline-block whitespace-nowrap">
-          {word.split("").map((ch, c) => {
-            const delay = base + i * CHAR_STEP;
-            i++;
-            return (
-              <span
-                key={c}
-                className="v2-char"
-                style={{ animationDelay: `${delay}s` }}
-              >
-                {ch}
-              </span>
-            );
-          })}
-          {w < text.split(" ").length - 1 && <span>&nbsp;</span>}
-        </span>
-      ))}
-    </span>
-  );
+/* Inverte a easing: acha t onde ease(t) ≈ p (busca binária) */
+function timeForProgress(p: number): number {
+  let lo = 0, hi = 1;
+  for (let i = 0; i < 24; i++) {
+    const mid = (lo + hi) / 2;
+    if (smoothEase(mid) < p) lo = mid;
+    else hi = mid;
+  }
+  return (lo + hi) / 2;
 }
+
+/* Timeline da entrada (segundos) — valores do prompt */
+const INTRO_DELAY = 0.8;
+const RISE = 0.72;
+const TRAVEL = 0.6;
+const SWEEP = 1.6;
+const TOTAL = RISE + TRAVEL + SWEEP;
+const SWEEP_START = INTRO_DELAY + RISE + TRAVEL;
 
 const NAV = [
   { href: "#hero", label: "Início" },
@@ -55,16 +46,93 @@ const NAV = [
   { href: "#contato", label: "Contato" },
 ];
 
-export function V2Hero() {
-  return (
-    <section
-      id="hero"
-      className="v2-grain relative flex min-h-screen flex-col overflow-hidden"
-    >
-      <div className="v2-wash" aria-hidden />
+const H1_LINES = [["Crio", "marcas", "pra", "durar"], ["e", "entrego", "funcionando."]];
 
-      {/* ===== HEADER (absoluto, só no hero — padrão Kubric) ===== */}
-      <header className="relative z-20 flex items-center justify-between px-6 pt-6 md:px-12 md:pt-8">
+/** Palavra com rise (Pallet: y28 → 0, delay global × 0.08) */
+function Word({ w, i, accent }: { w: string; i: number; accent?: boolean }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, y: 28 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
+      className={`mr-[0.22em] inline-block ${accent ? "text-brand" : ""}`}
+    >
+      {w}
+    </motion.span>
+  );
+}
+
+/** Balão de chat com jelly squash-and-stretch (valores do prompt) */
+function Bubble({
+  label,
+  tone,
+  delay,
+  style,
+  tail,
+}: {
+  label: string;
+  tone: "brand" | "ink";
+  delay: number;
+  style: React.CSSProperties;
+  tail: "left" | "right";
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        scaleX: [1, 1.25, 0.75, 1.15, 0.95, 1.05, 1],
+        scaleY: [1, 0.75, 1.25, 0.85, 1.05, 0.95, 1],
+      }}
+      transition={{ duration: 0.8, delay }}
+      style={style}
+      className={`absolute z-20 rounded-full px-[18px] py-[8px] text-[15px] font-semibold text-white ${
+        tone === "brand" ? "bg-brand" : "bg-ink-900"
+      }`}
+    >
+      {label}
+      <span
+        aria-hidden
+        className={`absolute -bottom-2 size-0 border-t-[10px] ${
+          tone === "brand" ? "border-t-brand" : "border-t-ink-900"
+        } ${
+          tail === "left"
+            ? "left-4 border-l-8 border-r-4 border-l-transparent border-r-transparent"
+            : "right-4 border-l-4 border-r-8 border-l-transparent border-r-transparent"
+        }`}
+      />
+    </motion.div>
+  );
+}
+
+export function V2Hero() {
+  const vp = useViewport();
+  const reduced = useReducedMotion();
+  const [leadDone, setLeadDone] = useState(false);
+
+  const k = Math.min(1, vp.w / 1500);
+  const cw = Math.max(150, Math.min(210, vp.w * 0.13));
+  const rowY = vp.h * 0.76; // linha do leque (HERO_ROW_Y proporcional)
+
+  /* Delays de reveal por slot: quando o líder passa por cada um */
+  const reveals = useMemo(() => {
+    const s6 = FAN_SLOTS[6].x, s0 = FAN_SLOTS[0].x;
+    return FAN_SLOTS.map((slot, i) => {
+      if (i === 0) return 0;
+      const p = (slot.x - s6) / (s0 - s6);
+      return SWEEP_START + timeForProgress(p) * SWEEP;
+    });
+  }, []);
+
+  const slotStyle = (i: number) => ({
+    left: vp.w / 2 + FAN_SLOTS[i].x * k,
+    top: rowY + FAN_SLOTS[i].y * k,
+  });
+
+  return (
+    <section id="hero" className="relative min-h-screen overflow-hidden bg-bg">
+      {/* ===== HEADER (Kubric) ===== */}
+      <header className="relative z-30 flex items-center justify-between px-6 pt-6 md:px-12 md:pt-7">
         <Link href="/" aria-label="Dropê — início" className="shrink-0">
           <Image
             src="/brand/drope-light.svg"
@@ -75,40 +143,30 @@ export function V2Hero() {
             className="h-8 w-auto md:h-9"
           />
         </Link>
-
         <nav
           aria-label="Seções"
-          className="v2-pill hidden items-center gap-7 rounded-pill px-5 py-2.5 md:inline-flex"
+          className="v2-pill hidden items-center gap-8 rounded-full px-5 py-2.5 md:inline-flex"
         >
           {NAV.map((n, i) => (
             <a
               key={n.href}
               href={n.href}
-              className="v2-pill-link text-sm font-medium text-fg-strong/70 transition-colors hover:text-fg-strong"
+              className="v2-pill-link text-[15px] font-medium text-fg-strong/70 transition-colors hover:text-fg-strong"
               style={{ animationDelay: `${0.6 + i * 0.08}s` }}
             >
               {n.label}
             </a>
           ))}
         </nav>
-
-        <Link
-          href="/agendar"
-          className="group relative inline-flex items-center gap-2 overflow-hidden rounded-pill bg-fg-strong px-5 py-2.5 text-sm font-semibold text-bg"
-        >
-          <span
-            aria-hidden
-            className="absolute inset-0 translate-y-full rounded-pill bg-brand transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
-          />
-          <span className="relative">Agendar</span>
-          <ArrowUpRight className="relative size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-        </Link>
+        <V2Btn href="/agendar" variant="brand" className="px-5 py-2.5">
+          Agendar
+        </V2Btn>
       </header>
 
-      {/* ===== SIDE-NAV vertical (direita) ===== */}
+      {/* ===== SIDE-NAV (Kubric) ===== */}
       <nav
         aria-label="Navegação lateral"
-        className="absolute right-6 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-end gap-3.5 md:right-12 lg:flex"
+        className="absolute right-6 top-1/2 z-30 hidden -translate-y-1/2 flex-col items-end gap-3.5 md:right-12 lg:flex"
       >
         {NAV.map((n, i) => (
           <a
@@ -131,109 +189,180 @@ export function V2Hero() {
         ))}
       </nav>
 
-      {/* ===== HEADLINE ===== */}
-      <div className="relative z-10 flex flex-1 flex-col justify-center px-6 md:px-12">
-        <p
-          className="label-mono v2-pill-link mb-5 flex items-center gap-2"
-          style={{ animationDelay: "0.35s" }}
-        >
-          <span className="size-1 rounded-full bg-brand" />
-          Pedro Fernandes · Designer multidisciplinar
-        </p>
-        <h1 className="max-w-5xl text-[clamp(2.9rem,7.2vw,6.2rem)] font-semibold leading-[1.04] tracking-[-0.03em] text-fg-strong">
-          <CharLine text="Crio marcas" base={0.35} />
-          <CharLine text="pra durar e entrego" base={0.35 + LINE_GAP} />
-          <span className="v2-line">
-            <CharLine text="elas " base={0.35 + LINE_GAP * 2} className="!inline" />
-            <span className="text-brand">
-              <CharLine text="funcionando." base={0.35 + LINE_GAP * 2.4} className="!inline" />
-            </span>
-          </span>
-        </h1>
-      </div>
-
-      {/* ===== BOTTOM ROW ===== */}
-      <div className="relative z-10 grid items-end gap-x-10 gap-y-3 px-6 pb-8 md:grid-cols-[1fr_auto] md:px-12">
-        <div className="flex flex-col gap-3">
-          <p
-            className="v2-pill-link text-sm font-semibold text-fg-strong"
-            style={{ animationDelay: "1.1s" }}
-          >
-            01 — Manifesto
-          </p>
-          <p
-            className="v2-pill-link max-w-[440px] text-[15px] leading-relaxed text-fg-mute"
-            style={{ animationDelay: "1.2s" }}
-          >
-            Branding, UI/UX e desenvolvimento na mesma cabeça, do briefing à
-            launch. Sem ping-pong entre fornecedores, sem perder a direção no
-            caminho.
-          </p>
-          <div
-            className="v2-pill-link mt-2 flex flex-wrap items-center gap-5"
-            style={{ animationDelay: "1.32s" }}
-          >
-            <a
-              href="#trabalhos"
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-pill bg-brand px-6 py-3.5 text-sm font-semibold text-brand-fg shadow-sm shadow-brand/20"
-            >
-              <span
-                aria-hidden
-                className="absolute inset-0 translate-y-full rounded-pill bg-brand-deep transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0"
-              />
-              <span className="relative">Ver trabalhos</span>
-              <ArrowUpRight className="relative size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.5} />
-            </a>
-            <a
-              href="#servicos"
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-fg-strong"
-            >
-              Rolar pra ver
-              <span className="inline-flex size-6 items-center justify-center overflow-hidden rounded-full border border-line transition-colors group-hover:border-fg-strong">
-                <svg viewBox="0 0 8 9" className="v2-chevron size-2.5" fill="none" aria-hidden>
-                  <path d="M4 1v6.5M4 7.5 1.4 5M4 7.5 6.6 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+      {/* ===== CENTRO (Pallet): headline word-by-word ===== */}
+      <main className="relative z-10 mx-auto flex max-w-[1100px] flex-col items-center px-6 pt-16 text-center md:pt-20">
+        <h1 className="text-[clamp(2.8rem,7vw,6rem)] font-extrabold leading-[1.0] tracking-[-0.035em] text-fg-strong">
+          {(() => {
+            let g = 0;
+            return H1_LINES.map((line, li) => (
+              <span key={li} className="block">
+                {line.map((w) => {
+                  const idx = g++;
+                  return (
+                    <Word
+                      key={idx}
+                      w={w}
+                      i={idx}
+                      accent={w === "funcionando."}
+                    />
+                  );
+                })}
               </span>
-            </a>
-          </div>
-        </div>
+            ));
+          })()}
+        </h1>
 
-        {/* About-card (padrão Kubric, com a tua foto) */}
-        <Link
-          href="/sobre"
-          className="v2-pill-link group hidden w-[340px] overflow-hidden rounded-card border border-line bg-bg-soft shadow-sm transition-shadow hover:shadow-lg md:flex"
-          style={{ animationDelay: "1.45s" }}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 2.2 }}
+          className="mt-10 max-w-[480px] text-base leading-[1.6] text-fg-strong/55"
         >
-          <div className="w-[128px] shrink-0 p-1.5">
-            <div className="relative h-full min-h-[110px] overflow-hidden rounded-[12px] bg-surface">
-              <Image
-                src="/hero-portrait.jpg"
-                alt="Pedro Fernandes (Drope)"
-                fill
-                sizes="128px"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-          </div>
-          <div className="flex flex-1 flex-col justify-between p-4 pl-2">
-            <div>
-              <h3 className="text-[13px] font-bold text-fg-strong">Quem é o Dropê</h3>
-              <p className="mt-1 text-xs leading-snug text-fg-mute">
-                Design gráfico de base, tecnologia como extensão. 8+ anos de
-                ofício.
-              </p>
-            </div>
-            <svg
-              viewBox="0 0 77 13"
-              className="h-3 w-16 self-end text-fg-faint transition-colors group-hover:text-brand"
-              fill="none"
-              aria-hidden
+          Branding, UI/UX e desenvolvimento na mesma cabeça, do briefing à
+          launch. Sem ping-pong entre fornecedores.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 2.4 }}
+          className="mt-7 flex items-center gap-4"
+        >
+          <V2Btn href="#trabalhos" variant="dark" arrow={false} className="rounded-full px-7">
+            Ver trabalhos
+          </V2Btn>
+          <V2Btn href="/agendar" variant="ghost" arrow={false} className="rounded-full px-5 text-fg-strong/80">
+            Agendar 30 min
+          </V2Btn>
+        </motion.div>
+      </main>
+
+      {/* ===== LEQUE DE COVERS (coreografia de entrada Pallet) ===== */}
+      <div className="pointer-events-none absolute inset-0 z-[5] hidden md:block" aria-hidden={false}>
+        {/* Balões — pipocam quando o sweep termina */}
+        <Bubble
+          label="Vi teu trabalho no Insta!"
+          tone="brand"
+          delay={reduced ? 0.4 : 3.05}
+          style={{ left: `calc(50% - ${380 * k}px)`, top: rowY - cw * 0.62 }}
+          tail="left"
+        />
+        <Bubble
+          label="@drope · bora criar?"
+          tone="ink"
+          delay={reduced ? 0.55 : 3.2}
+          style={{ left: `calc(50% + ${180 * k}px)`, top: rowY - cw * 0.68 }}
+          tail="right"
+        />
+
+        {reduced ? (
+          /* reduced-motion: leque estático, sem coreografia */
+          CASES.map((c, i) => (
+            <div
+              key={c.slug}
+              className="pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2"
+              style={{ ...slotStyle(i), zIndex: FAN_SLOTS[i].z }}
             >
-              <path d="M1 6.5H75M75 6.5L70 1.5M75 6.5L70 11.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </Link>
+              <FanCard c={c} cw={cw} rotate={FAN_SLOTS[i].r} scale={FAN_SLOTS[i].s} />
+            </div>
+          ))
+        ) : (
+          <>
+            {/* Card líder — 3 fases: sobe / voa pro slot 6 / varre até o 0 */}
+            <motion.div
+              className="pointer-events-auto absolute left-0 top-0 z-[8]"
+              initial={false}
+              animate={{
+                x: [vp.w / 2, vp.w / 2, vp.w / 2 + FAN_SLOTS[6].x * k, vp.w / 2 + FAN_SLOTS[0].x * k],
+                y: [vp.h / 2 + 180, rowY, rowY + FAN_SLOTS[6].y * k, rowY + FAN_SLOTS[0].y * k],
+                rotate: [0, 0, FAN_SLOTS[6].r, FAN_SLOTS[0].r],
+                scale: [0.3, 1, FAN_SLOTS[6].s, FAN_SLOTS[0].s],
+                opacity: [0, 1, 1, 1],
+              }}
+              transition={{
+                duration: TOTAL,
+                delay: INTRO_DELAY,
+                times: [0, RISE / TOTAL, (RISE + TRAVEL) / TOTAL, 1],
+                ease: [smoothEase, smoothEase, smoothEase],
+              }}
+              onAnimationComplete={() => setLeadDone(true)}
+              style={{ translateX: "-50%", translateY: "-50%" }}
+            >
+              <FanCard c={CASES[0]} cw={cw} rotate={0} scale={1} />
+            </motion.div>
+
+            {/* Slots 1–6 — revelam quando o líder passa (bezier invertida) */}
+            {CASES.slice(1).map((c, j) => {
+              const i = j + 1;
+              return (
+                <motion.div
+                  key={c.slug}
+                  className="pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2"
+                  style={{ ...slotStyle(i), zIndex: FAN_SLOTS[i].z }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: i <= 3 ? 0.06 : 0.18,
+                    delay: leadDone ? 0 : reveals[i],
+                    ease: "easeOut",
+                  }}
+                >
+                  <FanCard c={c} cw={cw} rotate={FAN_SLOTS[i].r} scale={FAN_SLOTS[i].s} />
+                </motion.div>
+              );
+            })}
+          </>
+        )}
       </div>
+
+      {/* Scroll-down (canto inferior esquerdo) */}
+      <motion.a
+        href="#servicos"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.8, duration: 0.5 }}
+        className="group absolute bottom-7 left-6 z-20 inline-flex items-center gap-2 text-sm font-semibold text-fg-strong md:left-12"
+      >
+        Rolar
+        <span className="inline-flex size-6 items-center justify-center overflow-hidden rounded-full border border-fg-strong/20 transition-colors group-hover:border-fg-strong">
+          <svg viewBox="0 0 8 9" className="v2-chevron size-2.5" fill="none" aria-hidden>
+            <path d="M4 1v6.5M4 7.5 1.4 5M4 7.5 6.6 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+      </motion.a>
     </section>
+  );
+}
+
+function FanCard({
+  c,
+  cw,
+  rotate,
+  scale,
+}: {
+  c: (typeof CASES)[number];
+  cw: number;
+  rotate: number;
+  scale: number;
+}) {
+  return (
+    <Link href={`/projetos/${c.slug}`} aria-label={`Ver case ${c.title}`}>
+      <motion.div
+        whileHover={{ scale: 1.04, zIndex: 30 }}
+        transition={{ duration: 0.22, ease: [0.34, 1.56, 0.64, 1] }}
+        className="relative overflow-hidden rounded-[18px] border border-ink-900/10 bg-surface"
+        style={{ width: cw, height: cw, rotate, scale }}
+      >
+        <Image
+          src={c.img}
+          alt={c.title}
+          fill
+          sizes="220px"
+          priority
+          className="object-cover"
+          draggable={false}
+        />
+      </motion.div>
+    </Link>
   );
 }
