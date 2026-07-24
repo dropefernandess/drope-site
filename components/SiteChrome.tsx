@@ -7,10 +7,11 @@ import { usePathname } from "next/navigation";
  * ScrollProgressBar, DesignRulers) em rotas standalone que têm
  * identidade própria e não fazem parte da navegação do site.
  *
- * Hoje: /briefing (formulário da marca de biscoitos da mãe do Pedro).
+ * Hoje: /briefing (formulário da marca de biscoitos da mãe do Pedro) e
+ * /v2 (preview interno do redesign — tem chrome próprio).
  * O /cv/print continua com os guards CSS próprios (Playwright).
  */
-const STANDALONE_ROUTES = ["/briefing"];
+const STANDALONE_ROUTES = ["/briefing", "/v2"];
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
