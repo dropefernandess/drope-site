@@ -1,0 +1,429 @@
+/* ============================================================
+   V2 — TOKENS · "O Ponto de Silêncio"
+   Fase 1 da DIRECAO-CRIATIVA-V2.md. Nada de seção antes disto.
+
+   Regra: se um valor não estiver aqui, ele não existe no V2.
+   Todos os ratios de contraste foram MEDIDOS, não estimados.
+   ============================================================ */
+
+.v2 {
+  /* ---------- SUPERFÍCIES ---------- */
+  --v2-surface-base: #f2f2eb; /* cream — base do site */
+  --v2-surface-raised: #ffffff; /* card sobre cream (borda, não sombra) */
+  --v2-surface-inverse: #101010; /* seção-âncora escura */
+  --v2-surface-accent: #de2828; /* superfície de ação */
+
+  /* ---------- TEXTO (ratio sobre a superfície correspondente) ---------- */
+  --v2-text-primary: #101010; /* 16.92:1 sobre cream ✓ */
+  --v2-text-secondary: #545452; /*  6.75:1 ✓ (ink 70%) */
+  --v2-text-tertiary: #6a6a68; /*  4.82:1 ✓ (ink 60%) — PISO ABSOLUTO */
+  --v2-text-accent: #73160e; /* 10.09:1 ✓ — o vermelho DE TEXTO */
+
+  --v2-text-on-inverse: #f2f2eb; /* 16.92:1 sobre ink ✓ */
+  --v2-text-on-inverse-sec: #989893; /*  6.57:1 sobre ink ✓ (cream 60%) */
+
+  /* NUNCA use --v2-surface-accent como cor de texto abaixo de 24px:
+     #DE2828 sobre cream = 4.21:1 → reprova AA (mínimo 4.5).
+     Passa apenas em texto grande (≥24px ou ≥19px bold), onde o mínimo é 3:1.
+     Para texto vermelho em corpo, use --v2-text-accent. */
+  --v2-accent: #de2828;
+  --v2-accent-hover: #bf2c2c;
+
+  /* ---------- BORDAS ---------- */
+  --v2-border-subtle: rgb(16 16 16 / 0.08);
+  --v2-border-strong: rgb(16 16 16 / 0.16);
+  --v2-border-on-inverse: rgb(242 242 235 / 0.12);
+
+  /* ---------- GRADE ---------- */
+  --v2-container: 1440px;
+  --v2-gutter: 24px;
+  --v2-margin: clamp(24px, 5vw, 96px);
+  --v2-columns: 12;
+  --v2-section: clamp(96px, 12vw, 160px);
+
+  /* ---------- ESPAÇAMENTO (escala fechada) ---------- */
+  --v2-1: 4px;
+  --v2-2: 8px;
+  --v2-3: 12px;
+  --v2-4: 16px;
+  --v2-6: 24px;
+  --v2-8: 32px;
+  --v2-12: 48px;
+  --v2-16: 64px;
+  --v2-24: 96px;
+  --v2-32: 128px;
+  --v2-40: 160px;
+  --v2-50: 200px;
+
+  /* ---------- TIPOGRAFIA ----------
+     Máx. 3 níveis por seção. Peso 800 proibido — 600 é o teto.
+     `display` aparece UMA vez no site inteiro. */
+  --v2-display: clamp(48px, 6vw, 72px);
+  --v2-h1: clamp(36px, 4vw, 52px);
+  --v2-h2: clamp(28px, 3vw, 36px);
+  --v2-h3: 22px;
+  --v2-lead: clamp(17px, 1.4vw, 20px);
+  --v2-body: 16px;
+  --v2-small: 14px;
+  --v2-caption: 13px;
+  --v2-eyebrow: 12px;
+
+  --v2-track-display: -0.035em;
+  --v2-track-h1: -0.03em;
+  --v2-track-h2: -0.02em;
+  --v2-track-h3: -0.015em;
+  --v2-track-lead: -0.01em;
+  --v2-track-eyebrow: 0.14em;
+
+  --v2-leading-display: 0.98;
+  --v2-leading-h1: 1.05;
+  --v2-leading-h2: 1.15;
+  --v2-leading-h3: 1.3;
+  --v2-leading-lead: 1.5;
+  --v2-leading-body: 1.6;
+
+  /* ---------- FORMA ---------- */
+  --v2-radius-control: 8px;
+  --v2-radius-card: 12px; /* TETO */
+  --v2-radius-pill: 999px; /* só nav pill e status badge */
+  /* Sombra: PROIBIDA. Elevação = superfície + borda 1px. */
+
+  /* ---------- MOTION ---------- */
+  --v2-ease-snap: cubic-bezier(0.16, 1, 0.3, 1); /* expo-out — o padrão */
+  --v2-ease-out: cubic-bezier(0.33, 1, 0.68, 1); /* micro-interação */
+  --v2-dur-micro: 180ms;
+  --v2-dur-base: 320ms;
+  --v2-dur-enter: 480ms;
+  --v2-dur-rule: 600ms;
+  --v2-stagger: 40ms;
+  /* BANIDO: cubic-bezier(0.34, 1.56, 0.64, 1) — overshoot elástico.
+     É o tell nº1 de interface gerada. */
+}
+
+/* ============================================================
+   SUPERFÍCIE INVERSA
+   Aplicar em <section data-surface="inverse">.
+   color-scheme corrige scrollbar e controles nativos.
+   ============================================================ */
+.v2 [data-surface="inverse"] {
+  color-scheme: dark;
+  background: var(--v2-surface-inverse);
+  color: var(--v2-text-on-inverse);
+  --v2-text-primary: var(--v2-text-on-inverse);
+  --v2-text-secondary: var(--v2-text-on-inverse-sec);
+  --v2-text-tertiary: var(--v2-text-on-inverse-sec);
+  --v2-border-subtle: var(--v2-border-on-inverse);
+}
+
+/* ============================================================
+   GRADE
+   Lei: conteúdo NUNCA ocupa as 12 colunas. Texto vive em 5–7.
+   ============================================================ */
+.v2-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--v2-columns), minmax(0, 1fr));
+  gap: var(--v2-gutter);
+  max-width: var(--v2-container);
+  margin-inline: auto;
+  padding-inline: var(--v2-margin);
+}
+
+@media (max-width: 768px) {
+  .v2 {
+    --v2-columns: 4;
+  }
+}
+
+/* ============================================================
+   TIPOGRAFIA
+   ============================================================ */
+.v2-display,
+.v2-h1,
+.v2-h2,
+.v2-h3 {
+  font-weight: 600;
+  text-wrap: balance;
+  color: var(--v2-text-primary);
+}
+
+.v2-display {
+  font-size: var(--v2-display);
+  letter-spacing: var(--v2-track-display);
+  line-height: var(--v2-leading-display);
+}
+.v2-h1 {
+  font-size: var(--v2-h1);
+  letter-spacing: var(--v2-track-h1);
+  line-height: var(--v2-leading-h1);
+}
+.v2-h2 {
+  font-size: var(--v2-h2);
+  letter-spacing: var(--v2-track-h2);
+  line-height: var(--v2-leading-h2);
+}
+.v2-h3 {
+  font-size: var(--v2-h3);
+  letter-spacing: var(--v2-track-h3);
+  line-height: var(--v2-leading-h3);
+}
+
+.v2-lead {
+  font-size: var(--v2-lead);
+  font-weight: 400;
+  letter-spacing: var(--v2-track-lead);
+  line-height: var(--v2-leading-lead);
+  color: var(--v2-text-secondary);
+  max-width: 62ch;
+}
+
+.v2-body {
+  font-size: var(--v2-body);
+  line-height: var(--v2-leading-body);
+  color: var(--v2-text-secondary);
+  max-width: 68ch;
+}
+
+.v2-eyebrow {
+  font-size: var(--v2-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--v2-track-eyebrow);
+  text-transform: uppercase;
+  color: var(--v2-text-tertiary);
+}
+
+/* Números comparáveis — metade do que faz a Mercury parecer precisa. */
+.v2-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* ============================================================
+   MOTION — os três gestos. Só existem estes três.
+
+   SEGURANÇA: os estados iniciais escondidos só existem sob `.v2-ready`,
+   classe que o JS adiciona ao montar. Sem JS, tudo renderiza visível.
+   (O `/v2` antigo fazia o inverso — `body:not(.is-ready)` escondia por
+   padrão, então qualquer falha de JS deixava a página em branco.)
+   ============================================================ */
+
+/* ① SNAP — entra deslocado e assenta. 80% dos casos. */
+.v2-ready [data-snap] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.v2-ready [data-snap].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--v2-dur-enter) var(--v2-ease-snap),
+    transform var(--v2-dur-enter) var(--v2-ease-snap);
+}
+
+/* ② RÉGUA — o alinhamento se tornando visível. */
+.v2-rule {
+  height: 1px;
+  background: var(--v2-border-strong);
+  transform-origin: left;
+}
+.v2-ready .v2-rule {
+  transform: scaleX(0);
+}
+.v2-ready .v2-rule.is-in {
+  transform: scaleX(1);
+  transition: transform var(--v2-dur-rule) var(--v2-ease-snap);
+}
+
+/* Headline: reveal por LINHA com máscara.
+   Substitui o stagger palavra-por-palavra (assinatura de IA). */
+.v2-line {
+  display: block;
+  overflow: hidden;
+}
+.v2-line > span {
+  display: block;
+}
+.v2-ready .v2-line > span {
+  transform: translateY(100%);
+}
+.v2-ready .v2-line.is-in > span {
+  transform: none;
+  transition: transform var(--v2-dur-enter) var(--v2-ease-snap);
+}
+
+/* ③ TRAVA — o pin. Existe em EXATAMENTE uma seção (Trabalhos). */
+.v2-pin {
+  will-change: transform;
+}
+
+/* Accordion sem reflow — anima sem tocar em height. */
+.v2-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--v2-dur-base) var(--v2-ease-snap);
+}
+.v2-collapse > * {
+  min-height: 0;
+  overflow: hidden;
+}
+.v2-collapse[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+/* ============================================================
+   SEÇÃO — ritmo vertical
+   ============================================================ */
+.v2-section {
+  padding-block: var(--v2-section);
+}
+
+/* ============================================================
+   AÇÕES
+   ============================================================ */
+.v2-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--v2-2);
+  font-size: var(--v2-small);
+  font-weight: 500;
+  line-height: 1;
+  border-radius: var(--v2-radius-control);
+  /* 14px de line-height + 15px×2 = 44px — o mínimo de alvo de toque */
+  padding: 15px var(--v2-6);
+  min-height: 44px;
+  touch-action: manipulation;
+  transition:
+    background-color var(--v2-dur-micro) var(--v2-ease-out),
+    color var(--v2-dur-micro) var(--v2-ease-out),
+    border-color var(--v2-dur-micro) var(--v2-ease-out);
+}
+
+.v2-action--solid {
+  background: var(--v2-text-primary);
+  color: var(--v2-surface-base);
+}
+.v2-action--solid:hover {
+  background: #2b2b2b;
+}
+
+.v2-action--accent {
+  background: var(--v2-accent);
+  color: #ffffff; /* 4.73:1 sobre #DE2828 ✓ */
+}
+.v2-action--accent:hover {
+  background: var(--v2-accent-hover);
+}
+
+/* Link com régua — a régua cresce no hover */
+.v2-action--quiet {
+  padding-inline: 0;
+  color: var(--v2-text-secondary);
+  position: relative;
+}
+.v2-action--quiet::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 1px;
+  background: var(--v2-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--v2-dur-base) var(--v2-ease-snap);
+}
+.v2-action--quiet:hover {
+  color: var(--v2-text-primary);
+}
+.v2-action--quiet:hover::after,
+.v2-action--quiet:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   NAV — link com régua no estado ativo/hover
+   ============================================================ */
+.v2-nav-link {
+  position: relative;
+  padding-block: var(--v2-1);
+  transition: color var(--v2-dur-micro) var(--v2-ease-out);
+}
+.v2-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--v2-dur-base) var(--v2-ease-snap);
+}
+.v2-nav-link:hover {
+  color: var(--v2-text-primary);
+}
+.v2-nav-link:hover::after,
+.v2-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   BLOCO DE DADOS
+   ============================================================ */
+.v2-data {
+  display: flex;
+  flex-direction: column;
+  gap: var(--v2-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.v2-data__row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--v2-3);
+}
+.v2-data__value {
+  font-size: var(--v2-small);
+  color: var(--v2-text-primary);
+  min-width: 3ch;
+}
+.v2-data__label {
+  font-size: var(--v2-caption);
+  color: var(--v2-text-tertiary);
+  margin: 0;
+}
+
+/* ============================================================
+   FOCO — nunca outline:none sem substituto.
+   ============================================================ */
+.v2 :focus-visible {
+  outline: 2px solid var(--v2-accent);
+  outline-offset: 3px;
+  border-radius: var(--v2-radius-control);
+}
+
+/* ============================================================
+   REDUCED MOTION — desliga os três gestos.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .v2-ready [data-snap],
+  .v2-ready [data-snap].is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .v2-ready .v2-rule,
+  .v2-ready .v2-rule.is-in {
+    transform: scaleX(1);
+    transition: none;
+  }
+  .v2-ready .v2-line > span,
+  .v2-ready .v2-line.is-in > span {
+    transform: none;
+    transition: none;
+  }
+  .v2-collapse {
+    transition: none;
+  }
+}
