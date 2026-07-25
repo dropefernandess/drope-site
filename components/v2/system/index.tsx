@@ -15,7 +15,7 @@
  * Estados iniciais só existem sob `.v2-ready` — sem JS, tudo aparece.
  */
 
-import type { ElementType, ReactNode } from "react";
+import { Fragment, type ElementType, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /* ============================================================
@@ -137,9 +137,15 @@ export function MaskedHeading({
   return (
     <Tag className={className}>
       {lines.map((line, i) => (
-        <span key={i} className="v2-line" data-step={step + i}>
-          <span>{line}</span>
-        </span>
+        <Fragment key={i}>
+          <span className="v2-line" data-step={step + i}>
+            <span>{line}</span>
+          </span>
+          {/* Espaço real entre as linhas: sem ele o nome acessível do
+              heading vira "durare entrego" — as linhas são block, então
+              o espaço colapsa visualmente e não custa nada. */}
+          {i < lines.length - 1 ? " " : null}
+        </Fragment>
       ))}
     </Tag>
   );
