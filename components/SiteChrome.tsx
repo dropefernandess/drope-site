@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
  * /v2 (preview interno do redesign — tem chrome próprio).
  * O /cv/print continua com os guards CSS próprios (Playwright).
  */
-const STANDALONE_ROUTES = ["/briefing", "/v2"];
+const STANDALONE_ROUTES = ["/briefing", "/v2", "/v3"];
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

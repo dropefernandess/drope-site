@@ -1,0 +1,375 @@
+/* ============================================================
+   V3 — "AFLUENTE" · dark-first
+   Sistema em DIRECAO-V3.md. Escopo: .v3
+   ============================================================ */
+
+.v3 {
+  /* ---------- COR ---------- */
+  --azul-950: #08080b;
+  --azul-900: #0c0e14;
+  --azul-800: #131722;
+  --azul-700: #1b2130;
+  --azul-600: #16309b;
+  --roxo-500: #5b25bd;
+  --roxo-400: #7c4ddb;
+  --sage-400: #a3b8a5;
+  --sage-300: #bccdbd;
+
+  --n-0: #fafafa; /* 19.16:1 sobre --azul-950 */
+  --n-300: #a8adb8; /*  8.89:1 */
+  --n-500: #767c87; /*  4.77:1 — piso real. #6E747F dava 4.26 e reprovava AA */
+
+  --line: rgb(255 255 255 / 0.07);
+  --line-strong: rgb(255 255 255 / 0.14);
+
+  /* ---------- RAIO ---------- */
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-card: 40px;
+
+  /* ---------- ESPAÇAMENTO base-4 ---------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-24: 96px;
+  --s-32: 128px;
+
+  /* ---------- GRADE ---------- */
+  --edge: clamp(20px, 4vw, 80px);
+  --max: 1440px;
+  --gutter: 24px;
+  --section: clamp(96px, 11vw, 160px);
+
+  /* ---------- ELEVAÇÃO — baixa e suave ---------- */
+  --e-1: 0 1px 2px rgb(0 0 0 / 0.3);
+  --e-2: 0 4px 16px rgb(0 0 0 / 0.28);
+  --e-3: 0 12px 40px rgb(0 0 0 / 0.32);
+
+  /* ---------- MOTION — um easing só ---------- */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --d-hover: 240ms;
+  --d-base: 380ms;
+  --d-reveal: 620ms;
+
+  background: var(--azul-950);
+  color: var(--n-0);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   TIPOGRAFIA
+   Regra: a palavra que carrega a emoção vai em serif itálico.
+   ============================================================ */
+
+.v3-display,
+.v3-h1 {
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.v3-display {
+  font-size: clamp(52px, 7vw, 104px);
+  letter-spacing: -0.03em;
+  line-height: 0.94;
+}
+.v3-h1 {
+  font-size: clamp(38px, 4.4vw, 64px);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+.v3-h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.v3-h3 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+.v3-lead {
+  font-size: clamp(17px, 1.5vw, 21px);
+  letter-spacing: -0.01em;
+  line-height: 1.55;
+  color: var(--n-300);
+  max-width: 56ch;
+}
+.v3-body {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--n-300);
+  max-width: 68ch;
+}
+.v3-small {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--n-300);
+}
+.v3-mono {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--n-500);
+}
+.v3-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* A ênfase serif — o motor tipográfico do site */
+.v3-em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+.v3-em--sage {
+  color: var(--sage-300);
+}
+.v3-em--glow {
+  background: linear-gradient(96deg, var(--sage-300) 0%, var(--roxo-400) 62%, var(--n-0) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   GRADE
+   ============================================================ */
+
+.v3-wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--edge);
+}
+
+.v3-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+@media (max-width: 860px) {
+  .v3-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.v3-section {
+  padding-block: var(--section);
+}
+
+.v3-rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+  margin: 0;
+}
+
+/* ============================================================
+   REVEAL — fade-up 24px + scale 0.98→1 · stagger 70ms (GSAP)
+   Estado inicial só sob .v3-ready: sem JS, tudo aparece.
+   ============================================================ */
+
+.v3-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+}
+
+/* ============================================================
+   AÇÕES
+   ============================================================ */
+
+.v3-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 48px;
+  padding: 14px var(--s-6);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  touch-action: manipulation;
+  transition:
+    transform var(--d-hover) var(--ease),
+    background-color var(--d-hover) var(--ease),
+    border-color var(--d-hover) var(--ease),
+    box-shadow var(--d-hover) var(--ease);
+}
+
+.v3-btn--primary {
+  background: var(--n-0);
+  color: var(--azul-950);
+  box-shadow: var(--e-2);
+}
+.v3-btn--primary:hover {
+  transform: scale(1.03);
+  box-shadow: var(--e-3);
+}
+
+.v3-btn--ghost {
+  border: 1px solid var(--line-strong);
+  color: var(--n-0);
+  background: rgb(255 255 255 / 0.02);
+}
+.v3-btn--ghost:hover {
+  transform: scale(1.03);
+  border-color: rgb(255 255 255 / 0.28);
+  background: rgb(255 255 255 / 0.06);
+}
+
+/* Pill de status / eyebrow com bolinha viva */
+.v3-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 7px 14px 7px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgb(255 255 255 / 0.03);
+  backdrop-filter: blur(12px);
+}
+.v3-chip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--sage-400);
+  box-shadow: 0 0 0 3px rgb(163 184 165 / 0.18);
+}
+
+/* ============================================================
+   SERVIÇOS — linha que eleva no hover
+   ============================================================ */
+
+.v3-svc {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: var(--s-6);
+  padding: var(--s-8) var(--s-6);
+  border-radius: var(--r-lg);
+  border: 1px solid transparent;
+  transition:
+    transform var(--d-hover) var(--ease),
+    background-color var(--d-hover) var(--ease),
+    border-color var(--d-hover) var(--ease),
+    box-shadow var(--d-hover) var(--ease);
+}
+.v3-svc:hover {
+  transform: scale(1.015);
+  background: var(--azul-800);
+  border-color: var(--line);
+  box-shadow: var(--e-3);
+}
+.v3-svc__thumb {
+  position: absolute;
+  right: var(--s-24);
+  top: 50%;
+  width: 148px;
+  aspect-ratio: 4 / 3;
+  translate: 0 -50%;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px) scale(0.94) rotate(-3deg);
+  pointer-events: none;
+  box-shadow: var(--e-3);
+  transition:
+    opacity var(--d-base) var(--ease),
+    transform var(--d-base) var(--ease);
+}
+.v3-svc:hover .v3-svc__thumb {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(-3deg);
+}
+@media (max-width: 1100px) {
+  .v3-svc__thumb {
+    display: none;
+  }
+}
+
+/* ============================================================
+   TRABALHOS — a trava
+   ============================================================ */
+
+.v3-case {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  box-shadow: var(--e-3);
+  border: 1px solid var(--line);
+}
+
+/* ============================================================
+   FECHO — gradiente respirando (~20s)
+   ============================================================ */
+
+.v3-fecho-bg {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(46% 48% at 28% 34%, rgb(91 37 189 / 0.5) 0%, transparent 68%),
+    radial-gradient(44% 46% at 74% 62%, rgb(22 48 155 / 0.52) 0%, transparent 70%),
+    radial-gradient(38% 40% at 52% 88%, rgb(163 184 165 / 0.18) 0%, transparent 72%);
+  filter: blur(48px);
+  animation: v3-breathe 20s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes v3-breathe {
+  0%,
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.14) translate3d(2%, -3%, 0);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   FOCO
+   ============================================================ */
+
+.v3 :focus-visible {
+  outline: 2px solid var(--sage-400);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  .v3-fecho-bg {
+    animation: none;
+  }
+  .v3-btn,
+  .v3-svc,
+  .v3-svc__thumb {
+    transition: none;
+  }
+  .v3-svc:hover,
+  .v3-btn:hover {
+    transform: none;
+  }
+}
