@@ -14,8 +14,8 @@ export const AGENDA = {
   dias: [1, 2, 3, 4, 5],
   /** Janelas do dia, em horário de Brasília (a pausa do almoço fica de fora). */
   janelas: [
-    ["09:00", "12:00"],
-    ["14:00", "18:00"],
+    ["10:00", "12:00"],
+    ["14:00", "17:00"],
   ] as [string, string][],
   /** Antecedência mínima para agendar, em horas. */
   antecedenciaHoras: 12,

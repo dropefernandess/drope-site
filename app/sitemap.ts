@@ -43,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...bilingual("/agendar",     { changeFrequency: "yearly",  priority: 0.7 },  lastModified),
     ...bilingual("/blog",        { changeFrequency: "weekly",  priority: 0.6 },  lastModified),
     ...bilingual("/glossario",   { changeFrequency: "monthly", priority: 0.65 }, lastModified),
+    ...bilingual("/privacidade", { changeFrequency: "yearly",  priority: 0.3 },  lastModified),
   ];
 
   const projectRoutes = projetos.flatMap((p) =>

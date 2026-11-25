@@ -14,16 +14,16 @@ import { Icon, ICONS } from "@/components/rb/ui";
  * (os de baixo recuam um pouco e escurecem, deixando a aba aparecendo).
  */
 export const MOVES = [
-  { n: "01", img: "/rb/pieces/meiotom.jpg",
+  { n: "01", img: "/rb/cronograma/01-escuta-e-imersao.jpg",
     pt: { t: "Escuta e imersão", d: "Ouço o negócio, o cliente e o mercado antes de pensar em qualquer forma. Entrevista, pesquisa e referências entram aqui.", c: "Etapas 01 e 02" },
     en: { t: "Listening and immersion", d: "I listen to the business, the client and the market before thinking about any form. Interviews, research and references come in here.", c: "Steps 01 and 02" } },
-  { n: "02", img: "/rb/pieces/dither.jpg",
+  { n: "02", img: "/rb/cronograma/02-silencio-e-territorio.jpg",
     pt: { t: "Silêncio e território", d: "Tudo o que foi ouvido decanta até virar uma direção clara. As escolhas importantes são feitas juntos, com opções na mesa.", c: "Etapas 03 e 04" },
     en: { t: "Silence and territory", d: "Everything heard settles until it becomes a clear direction. The important choices are made together, with options on the table.", c: "Steps 03 and 04" } },
-  { n: "03", img: "/rb/pieces/seda.jpg",
+  { n: "03", img: "/rb/cronograma/03-forma-sistema-e-prova.jpg",
     pt: { t: "Forma, sistema e prova", d: "A direção vira marca, interface e site, testados com conteúdo real. Nada é aprovado em mockup ideal.", c: "Etapas 05, 06 e 07" },
     en: { t: "Form, system and proof", d: "The direction becomes brand, interface and website, tested with real content. Nothing gets approved in an ideal mockup.", c: "Steps 05, 06 and 07" } },
-  { n: "04", img: "/rb/pieces/brilho.jpg",
+  { n: "04", img: "/rb/cronograma/04-entrega-e-orbita.jpg",
     pt: { t: "Construção, entrega e órbita", d: "Do layout ao ar, com documentação completa e 30 dias de acompanhamento depois da entrega.", c: "Etapas 08, 09 e 10" },
     en: { t: "Build, delivery and orbit", d: "From layout to launch, with complete documentation and 30 days of follow-up after delivery.", c: "Steps 08, 09 and 10" } },
 ];

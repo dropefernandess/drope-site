@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { BrandArrow, Icon, ICONS, RollText } from "@/components/rb/ui";
 import { DotWave } from "@/components/rb/DotWave";
+import { PrivacyNote } from "@/components/rb/legal/PrivacyNote";
 import { AGENDA } from "@/lib/agenda/config";
 import { cn } from "@/lib/utils";
 
@@ -287,6 +288,7 @@ export function AgendaPropria() {
                     </>)}
               </span>
             </button>
+            <PrivacyNote uso="agenda" />
           </div>
         </form>
       </div>

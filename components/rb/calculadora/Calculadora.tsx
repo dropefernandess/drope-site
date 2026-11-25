@@ -76,7 +76,7 @@ const COPY: Record<Locale, {
       { title: "Quer um valor fechado?", helper: "Me manda a estimativa com seu nome e e-mail. Eu respondo em até 24 horas." },
     ],
     servicos: {
-      branding: { label: "Identidade visual", desc: "Logo, paleta, tipografia e manual." },
+      branding: { label: "Branding", desc: "Logo, paleta, tipografia e manual." },
       ui:       { label: "UI/UX design", desc: "App, painel ou produto: fluxos, protótipo e telas finais." },
       web:      { label: "Web design", desc: "Landing page ou site institucional, já desenvolvido." },
       motion:   { label: "Motion design", desc: "Animação de logo e microinterações." },
@@ -133,7 +133,7 @@ const COPY: Record<Locale, {
       { title: "Want a final quote?", helper: "Send me the estimate with your name and email. I'll reply within 24 hours." },
     ],
     servicos: {
-      branding: { label: "Visual identity", desc: "Logo, palette, typography and guidelines." },
+      branding: { label: "Branding", desc: "Logo, palette, typography and guidelines." },
       ui:       { label: "UI/UX design", desc: "App, dashboard or product: flows, prototype and final screens." },
       web:      { label: "Web design", desc: "Landing page or company website, fully built." },
       motion:   { label: "Motion design", desc: "Logo animation and microinteractions." },

@@ -25,7 +25,7 @@ const COPY = {
     work: "Vamos trabalhar juntos?",
     workLinks: [["/agendar", "Agendar uma conversa"], ["/orcamento", "Fazer meu orçamento"], ["/metodo", "Ver o processo"]],
     bye: "Até já!", follow: "Me segue",
-    rights: "© 2026 Drope Fernandes · Todos direitos reservados.",
+    rights: "© 2026 Drope Fernandes · Todos direitos reservados.", privacy: "Privacidade",
   },
   en: {
     title: "Before you go, check these links",
@@ -35,7 +35,7 @@ const COPY = {
     work: "Shall we work together?",
     workLinks: [["/agendar", "Book a call"], ["/orcamento", "Get a quote"], ["/metodo", "See the process"]],
     bye: "See you!", follow: "Follow me",
-    rights: "© 2026 Drope Fernandes · All rights reserved.",
+    rights: "© 2026 Drope Fernandes · All rights reserved.", privacy: "Privacy",
   },
 };
 
@@ -134,7 +134,10 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <p className="t-small mt-14 text-center text-ink-50 lg:mt-[72px]">{c.rights}</p>
+        <p className="t-small mt-14 text-center text-ink-50 lg:mt-[72px]">
+          {c.rights}{" "}·{" "}
+          <Link href="/privacidade" className="underline decoration-ink-400 underline-offset-4 transition-colors hover:decoration-ink-50">{c.privacy}</Link>
+        </p>
       </div>
     </footer>
   );

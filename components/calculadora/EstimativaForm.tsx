@@ -5,6 +5,7 @@ import { enviarEstimativa, type EstimativaPayload } from "@/app/actions/enviar-e
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { BrandArrow, BrandButton, RollText } from "@/components/rb/ui";
 import { DotWave } from "@/components/rb/DotWave";
+import { PrivacyNote } from "@/components/rb/legal/PrivacyNote";
 import type { Locale } from "@/lib/i18n/dictionaries";
 import { waLink } from "@/lib/config";
 import { cn } from "@/lib/utils";
@@ -243,6 +244,7 @@ export function EstimativaForm({ canSubmit, payload, resumoWhatsapp }: Props) {
                   </>)}
             </span>
           </button>
+          <PrivacyNote uso="orcamento" />
         </div>
       </form>
 
