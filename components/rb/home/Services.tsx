@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { EASE, ImageReveal, Reveal, RevealGroup, useReducedMotionSafe } from "@/components/rb/motion";
 import { Label } from "@/components/rb/ui";
 import { SERVICES, type ServiceKey } from "@/content/rb/projects";
 import { cn } from "@/lib/utils";
@@ -27,19 +29,20 @@ const nameCls = "text-[clamp(44px,calc(34.86px+2.343vw),72px)] font-semibold lea
 
 export function Services() {
   const { locale } = useLocale();
+  const reduced = useReducedMotionSafe();
   const [active, setActive] = useState(0);
   const cur = SERVICE_INFO[active];
   return (
     <section aria-labelledby="servicos" className="bg-bg">
       <div className="rb-container py-16 lg:py-[100px]">
-        <div className="flex items-center justify-between">
+        <Reveal y={16} className="flex items-center justify-between">
           <Label as="h2" className="text-ink-700 dark:text-ink-200"><span id="servicos">{locale === "pt" ? "Serviços" : "Services"}</span></Label>
           <span className="t-label text-ink-700 dark:text-ink-200">(04)</span>
-        </div>
+        </Reveal>
         <div className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-[1fr_624px] lg:gap-16">
-          <ul>
+          <RevealGroup as="ul" stagger={0.08}>
             {SERVICE_INFO.map((s, i) => (
-              <li key={s.key}>
+              <Reveal as="li" key={s.key} y={28}>
                 <button
                   type="button"
                   onMouseEnter={() => setActive(i)}
@@ -50,25 +53,36 @@ export function Services() {
                 >
                   {SERVICES[s.key][locale]}
                 </button>
-                {/* Celular: imagem e descrição embaixo do item ativo */}
-                {active === i && (
-                  <div className="mb-6 mt-4 lg:hidden">
-                    <div className="relative aspect-[624/400] overflow-hidden rounded-xl">
-                      <Image src={s.img} alt={s.alt[locale]} fill sizes="100vw" className="object-cover" />
-                    </div>
-                    <p className="t-small mt-3 text-ink-700 dark:text-ink-200">{s.desc[locale]}</p>
-                  </div>
-                )}
-              </li>
+                {/* Celular: imagem e descrição embaixo do item ativo (abre e fecha com altura suave) */}
+                <AnimatePresence initial={false}>
+                  {active === i && (
+                    <motion.div
+                      key="painel"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={reduced ? { duration: 0 } : { duration: 0.5, ease: EASE }}
+                      className="overflow-hidden lg:hidden"
+                    >
+                      <div className="mb-6 mt-4 lg:hidden">
+                        <div className="relative aspect-[624/400] overflow-hidden rounded-xl">
+                          <Image quality={90} src={s.img} alt={s.alt[locale]} fill sizes="100vw" className="object-cover" />
+                        </div>
+                        <p className="t-small mt-3 text-ink-700 dark:text-ink-200">{s.desc[locale]}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Reveal>
             ))}
-          </ul>
+          </RevealGroup>
           <div className="hidden lg:block">
-            <div className="relative aspect-[624/400] overflow-hidden rounded-xl">
+            <ImageReveal radius={12} className="relative aspect-[624/400] overflow-hidden rounded-xl">
               {SERVICE_INFO.map((s, i) => (
                 <Image key={s.key} src={s.img} alt={i === active ? s.alt[locale] : ""} fill sizes="624px" className={cn("object-cover transition-opacity duration-500", i === active ? "opacity-100" : "opacity-0")} />
               ))}
-            </div>
-            <p className="t-small mt-5 max-w-[624px] text-ink-700 dark:text-ink-200" aria-live="polite">{cur.desc[locale]}</p>
+            </ImageReveal>
+            <Reveal as="p" y={16} delay={0.2} className="t-small mt-5 max-w-[624px] text-ink-700 dark:text-ink-200" aria-live="polite">{cur.desc[locale]}</Reveal>
           </div>
         </div>
       </div>

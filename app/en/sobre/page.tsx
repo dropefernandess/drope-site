@@ -3,7 +3,7 @@ import { AboutPage } from "@/components/rb/sobre/AboutPage";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Drope Fernandes, a multidisciplinary designer for 7 years. Creating from the countryside of Minas Gerais for Brazil, the Emirates and Portugal.",
+  description: "Drope Fernandes, a multidisciplinary designer for 7 years. The story, the process and what drives me: thinking until the simple becomes inevitable.",
   alternates: { canonical: "/en/sobre", languages: { "pt-BR": "/sobre", en: "/en/sobre" } },
 };
 

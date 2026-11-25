@@ -255,7 +255,7 @@ export default function PropostaPage() {
                   ))}
                 </ul>
                 <Link
-                  href="/calculadora"
+                  href="/orcamento"
                   className={`group relative mt-auto inline-flex items-center justify-between gap-2 overflow-hidden rounded-pill px-5 py-3 text-sm font-semibold ${
                     p.featured
                       ? "bg-brand-fg text-brand"
@@ -290,7 +290,7 @@ export default function PropostaPage() {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col gap-3 justify-end">
-              <ButtonPrimary href="/calculadora" className="justify-between px-5 py-4">
+              <ButtonPrimary href="/orcamento" className="justify-between px-5 py-4">
                 {t("proposta.cta_calc")}
               </ButtonPrimary>
               <ButtonInverse href="/agendar" className="justify-between px-5 py-4">

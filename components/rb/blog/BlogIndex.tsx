@@ -5,6 +5,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { Chip, Icon, ICONS, Label, SOCIAL } from "@/components/rb/ui";
 import { FinalCTA } from "@/components/rb/FinalCTA";
+import { ImageReveal, LineReveal, Reveal } from "@/components/rb/motion";
 import type { PostCard } from "./copy";
 import { BLOG_COPY, capaAltDe, capaDe, categoria, formatDate } from "./copy";
 
@@ -66,9 +67,9 @@ function Featured({ post }: { post: PostCard }) {
       </div>
 
       {capa ? (
-        <div className="relative min-h-[260px] bg-ink-700 lg:min-h-full">
+        <ImageReveal radius={0} delay={0.2} className="relative min-h-[260px] bg-ink-700 lg:min-h-full">
           <Image src={capa} alt={capaAltDe(post)} fill sizes="(min-width: 1024px) 440px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none" />
-        </div>
+        </ImageReveal>
       ) : citacao ? (
         <figure aria-hidden className="flex flex-col justify-between border-t border-ink-700 p-6 sm:p-8 lg:border-l lg:border-t-0 lg:p-14">
           <span className="t-serif block h-[0.45em] text-[72px] leading-[0.9] text-brand lg:h-auto lg:text-[120px] lg:leading-[0.6]">“</span>
@@ -85,7 +86,7 @@ function Row({ post }: { post: PostCard }) {
   const { locale } = useLocale();
   const c = BLOG_COPY[locale];
   return (
-    <li className="border-b border-ink-100 dark:border-ink-700">
+    <Reveal as="li" y={24} className="border-b border-ink-100 dark:border-ink-700">
       <article className="group relative grid gap-4 py-8 lg:grid-cols-[260px_minmax(0,1fr)_auto] lg:gap-x-[120px] lg:py-12 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-brand">
         <p className="t-small flex flex-wrap gap-x-2 text-ink-700 dark:text-ink-200 lg:flex-col lg:pt-2">
           <time dateTime={post.data}>{formatDate(post.data, locale)}</time>
@@ -108,7 +109,7 @@ function Row({ post }: { post: PostCard }) {
         </div>
         <ArrowDot className="hidden border-ink-200 text-fg-strong group-hover:border-brand group-hover:bg-brand group-hover:text-ink-50 lg:grid dark:border-ink-700" />
       </article>
-    </li>
+    </Reveal>
   );
 }
 
@@ -122,32 +123,32 @@ export function BlogIndex({ posts }: { posts: PostCard[] }) {
     <>
       <section aria-labelledby="blog-titulo" className="bg-bg">
         <div className="rb-container pb-16 pt-[120px] lg:pb-[120px] lg:pt-[160px]">
-          <Label className="text-ink-700 dark:text-ink-200">{c.label}</Label>
-          <h1 id="blog-titulo" className="t-hero mt-3 max-w-[1100px] text-fg-strong lg:mt-4">
+          <LineReveal><Label className="text-ink-700 dark:text-ink-200">{c.label}</Label></LineReveal>
+          <Reveal as="h1" id="blog-titulo" delay={0.08} className="t-hero mt-3 max-w-[1100px] text-fg-strong lg:mt-4">
             {c.titleA}{" "}
             <span className="t-serif t-hero-serif text-brand">{c.titleB}</span>
-          </h1>
-          <div className="mt-6 flex flex-col gap-3 lg:mt-10">
+          </Reveal>
+          <Reveal delay={0.18} className="mt-6 flex flex-col gap-3 lg:mt-10">
             <p className="t-lead max-w-[760px] text-ink-700 dark:text-ink-200">{t("blog_idx.lead")}</p>
             {c.langNote && <p className="t-small text-ink-700 dark:text-ink-200">{c.langNote}</p>}
-          </div>
+          </Reveal>
 
           {latest && (
-            <div className="mt-12 lg:mt-20">
+            <Reveal delay={0.26} className="mt-12 lg:mt-20">
               <Featured post={latest} />
-            </div>
+            </Reveal>
           )}
 
           {rest.length > 0 && (
             <section aria-labelledby="blog-anteriores" className="mt-16 lg:mt-[120px]">
-              <h2 id="blog-anteriores" className="t-h2 text-fg-strong">{c.earlier}</h2>
+              <LineReveal as="h2" id="blog-anteriores" className="t-h2 text-fg-strong">{c.earlier}</LineReveal>
               <ul className="mt-6 border-t border-ink-100 dark:border-ink-700 lg:mt-10">
                 {rest.map((p) => <Row key={p.slug} post={p} />)}
               </ul>
             </section>
           )}
 
-          <div className="mt-12 flex flex-col gap-4 rounded-2xl border border-ink-100 p-6 dark:border-ink-700 sm:p-8 lg:mt-20 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:p-10">
+          <Reveal className="mt-12 flex flex-col gap-4 rounded-2xl border border-ink-100 p-6 dark:border-ink-700 sm:p-8 lg:mt-20 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:p-10">
             <div>
               <p className="t-h3 text-fg-strong">{t("blog_idx.cta_title")}</p>
               <p className="t-small mt-2 max-w-[620px] text-ink-700 dark:text-ink-200">{t("blog_idx.cta_desc")}</p>
@@ -159,7 +160,7 @@ export function BlogIndex({ posts }: { posts: PostCard[] }) {
               {c.notifyLink}
               <Icon d={ICONS.arrowRight} size={18} className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />
             </a>
-          </div>
+          </Reveal>
         </div>
       </section>
       <FinalCTA />

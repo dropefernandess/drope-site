@@ -6,6 +6,7 @@ import { SplashScreen } from "@/components/ui/SplashScreen";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import { SiteChrome } from "@/components/SiteChrome";
 import "./globals.css";
+import "./rb-motion.css";
 
 // Inter em TODOS os pesos — Thin 100 ao Black 900.
 // Contraste tipográfico (radical weight pairing) substitui necessidade
@@ -168,7 +169,7 @@ const structuredData = {
       url: SITE_URL,
       email: "contato@dropefernandes.com",
       telephone: "+55-32-99805-7750",
-      priceRange: "R$ 3.500+",
+      priceRange: "R$ 2.500+",
       founder: { "@id": `${SITE_URL}/#pedro` },
       description:
         "Estúdio de design multidisciplinar: branding, UI/UX, web e motion. Atende marcas no Brasil e no exterior, do conceito ao ar.",
@@ -215,6 +216,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" className={`${inter.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Sem JS, as entradas animadas (components/rb/motion.tsx) ficam no estado final */}
+        <noscript dangerouslySetInnerHTML={{ __html: "<style>[data-rb-m]{opacity:1!important;transform:none!important;clip-path:none!important}</style>" }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

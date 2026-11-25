@@ -1,8 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Label, SOCIAL } from "@/components/rb/ui";
+import { EASE, LineReveal, Reveal, RevealGroup, useReducedMotionSafe } from "@/components/rb/motion";
+
+/** "+" que gira e vira "−" ao abrir (a barra vertical recolhe). */
+function PlusMinus({ open, reduced }: { open: boolean; reduced: boolean }) {
+  const t = reduced ? { duration: 0 } : { duration: 0.45, ease: EASE };
+  return (
+    <motion.svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="inline-block align-middle" initial={false} animate={{ rotate: open ? 180 : 0 }} transition={t}>
+      <line x1="3" y1="9" x2="15" y2="9" />
+      <motion.line x1="9" y1="3" x2="9" y2="15" initial={false} animate={{ scaleY: open ? 0 : 1 }} transition={t} style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }} />
+    </motion.svg>
+  );
+}
 
 /** Perguntas frequentes — Figma "08 Perguntas frequentes". Uma aberta por vez. */
 export const FAQS = {
@@ -27,37 +40,53 @@ export const FAQS = {
 export function Faq() {
   const { locale } = useLocale();
   const [open, setOpen] = useState(0);
+  const reduced = useReducedMotionSafe();
   const pt = locale === "pt";
+  const panel = reduced ? { duration: 0 } : { duration: 0.5, ease: EASE };
   return (
     <section aria-labelledby="faq" className="bg-bg">
       <div className="rb-container grid gap-10 py-16 lg:grid-cols-[500px_1fr] lg:gap-[60px] lg:py-40">
         <div>
-          <Label className="text-ink-700 dark:text-ink-200">{pt ? "Perguntas frequentes" : "FAQ"}</Label>
-          <h2 id="faq" className="t-h1 mt-3 text-fg-strong">{pt ? "O que costumam perguntar antes do primeiro briefing." : "What people usually ask before the first brief."}</h2>
-          <p className="t-small mt-4 max-w-[440px] text-ink-700 dark:text-ink-200 lg:mt-8">
+          <LineReveal>
+            <Label className="text-ink-700 dark:text-ink-200">{pt ? "Perguntas frequentes" : "FAQ"}</Label>
+          </LineReveal>
+          <Reveal as="h2" id="faq" delay={0.08} className="t-h1 mt-3 text-fg-strong">{pt ? "O que costumam perguntar antes do primeiro briefing." : "What people usually ask before the first brief."}</Reveal>
+          <Reveal as="p" delay={0.16} className="t-small mt-4 max-w-[440px] text-ink-700 dark:text-ink-200 lg:mt-8">
             {pt ? "Se a sua dúvida não estiver aqui, " : "If your question isn't here, "}
             <a href={`mailto:${SOCIAL.email}`} className="underline decoration-ink-200 underline-offset-4 hover:text-fg-strong">{pt ? "manda no e-mail" : "send it by email"}</a>
             {pt ? ". A resposta chega em até 24 horas." : ". You'll hear back within 24 hours."}
-          </p>
+          </Reveal>
         </div>
-        <ul className="border-t border-ink-100 dark:border-ink-700">
+        <RevealGroup as="ul" stagger={0.07} className="border-t border-ink-100 dark:border-ink-700">
           {FAQS[locale].map(([q, a], i) => {
             const isOpen = open === i;
             return (
-              <li key={q} className="border-b border-ink-100 dark:border-ink-700">
+              <Reveal as="li" key={q} y={20} className="border-b border-ink-100 dark:border-ink-700">
                 <h3>
                   <button type="button" aria-expanded={isOpen} aria-controls={`faq-${i}`} onClick={() => setOpen(isOpen ? -1 : i)} className="t-lead flex w-full items-start justify-between gap-6 py-5 text-left text-fg-strong lg:py-7">
                     {q}
-                    <span aria-hidden className="mt-0.5 w-5 shrink-0 text-center">{isOpen ? "−" : "+"}</span>
+                    <span aria-hidden className="mt-0.5 w-5 shrink-0 text-center"><PlusMinus open={isOpen} reduced={reduced} /></span>
                   </button>
                 </h3>
-                <div id={`faq-${i}`} role="region" hidden={!isOpen} className="t-small -mt-1 max-w-[620px] pb-6 pr-10 text-ink-700 dark:text-ink-200 lg:pb-7">
-                  {a}
-                </div>
-              </li>
+                {/* Altura e opacidade suaves; fechada, fica fora da leitura (inert) como o antigo `hidden` */}
+                <motion.div
+                  id={`faq-${i}`}
+                  role="region"
+                  aria-hidden={!isOpen}
+                  inert={!isOpen}
+                  initial={false}
+                  animate={isOpen ? { height: "auto", opacity: 1, marginTop: -4 } : { height: 0, opacity: 0, marginTop: 0 }}
+                  transition={panel}
+                  className="overflow-hidden"
+                >
+                  <div className="t-small max-w-[620px] pb-6 pr-10 text-ink-700 dark:text-ink-200 lg:pb-7">
+                    {a}
+                  </div>
+                </motion.div>
+              </Reveal>
             );
           })}
-        </ul>
+        </RevealGroup>
       </div>
     </section>
   );

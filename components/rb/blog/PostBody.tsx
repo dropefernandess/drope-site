@@ -1,5 +1,6 @@
 import type { Bloco } from "@/content/posts";
 import { slugify } from "@/lib/slugify";
+import { Reveal } from "@/components/rb/motion";
 
 /**
  * Corpo do post (sem hooks, renderiza no servidor). Medida de leitura de
@@ -113,7 +114,8 @@ function RenderBloco({ bloco }: { bloco: Bloco }) {
       );
     case "quote":
       return (
-        <figure className="my-12 border-y border-ink-100 py-10 dark:border-ink-700 lg:my-16 lg:py-12">
+        // Só a citação entra com movimento; o texto corrido fica parado para a leitura.
+        <Reveal as="figure" className="my-12 border-y border-ink-100 py-10 dark:border-ink-700 lg:my-16 lg:py-12">
           <span aria-hidden className="t-serif block h-[0.42em] text-[72px] leading-[1] text-brand lg:text-[96px]">“</span>
           <blockquote className="t-serif mt-2 text-[clamp(30px,calc(23.31px+1.714vw),48px)] leading-[1.12] text-fg-strong lg:mt-3">
             <p>{bloco.texto}</p>
@@ -121,7 +123,7 @@ function RenderBloco({ bloco }: { bloco: Bloco }) {
           {bloco.autor && (
             <figcaption className="t-label mt-6 text-ink-700 dark:text-ink-200">{bloco.autor}</figcaption>
           )}
-        </figure>
+        </Reveal>
       );
     case "hr":
       return <hr className="my-12 border-ink-100 dark:border-ink-700 lg:my-16" />;

@@ -512,7 +512,7 @@ export const projetos: Projeto[] = [
           { label: "Satisfação", title: "NPS de 6,2 para 8,4", body: "Nos primeiros 90 dias. A amostra ainda está crescendo, então o número tende a se estabilizar." },
           { label: "Retenção", title: "Cerca de 27% menos churn", body: "Entre os lojistas novos, no mesmo período. O suporte também passou a receber menos dúvidas repetidas sobre o primeiro acesso." },
         ],
-        citacao: { quote: "[Frase do cliente da GO Trace sobre o projeto]", author: "[Nome · cargo na GO Trace]" },
+        citacao: { quote: "Acertou na mão demais. Ficou fino de verdade, e eu não imagino como poderia ficar melhor.", author: "Yuri Giovannetti · GO Trace" },
       },
     },
   },

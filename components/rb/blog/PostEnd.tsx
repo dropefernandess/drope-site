@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { Chip, Icon, ICONS, Label } from "@/components/rb/ui";
+import { Reveal } from "@/components/rb/motion";
 import type { Post } from "@/content/posts";
 import { BLOG_COPY, categoria, formatDate, POST_GRID } from "./copy";
 
@@ -15,7 +16,7 @@ export function PostEnd({ next }: { next: Pick<Post, "slug" | "titulo" | "excerp
     <div className="rb-container pb-20 lg:pb-[120px]">
       {/* Autor */}
       <div className={`mt-16 lg:mt-24 ${POST_GRID}`}>
-        <div className="max-w-[680px] border-t border-ink-100 pt-8 dark:border-ink-700 lg:col-start-2 lg:pt-10">
+        <Reveal className="max-w-[680px] border-t border-ink-100 pt-8 dark:border-ink-700 lg:col-start-2 lg:pt-10">
           <div className="flex items-start gap-5">
             <div className="relative size-16 shrink-0 overflow-hidden rounded-full bg-ink-900 lg:size-20">
               <Image
@@ -39,12 +40,12 @@ export function PostEnd({ next }: { next: Pick<Post, "slug" | "titulo" | "excerp
               </Link>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       {/* Próximo texto */}
       <section aria-labelledby="proximo-texto" className="mt-16 lg:mt-[120px]">
-        <article className="group relative grid gap-6 rounded-2xl border border-ink-100 p-6 transition-colors duration-200 hover:border-ink-900 motion-reduce:transition-none dark:border-ink-700 dark:hover:border-ink-50 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16 lg:p-14 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-brand">
+        <Reveal as="article" className="group relative grid gap-6 rounded-2xl border border-ink-100 p-6 transition-colors duration-200 hover:border-ink-900 motion-reduce:transition-none dark:border-ink-700 dark:hover:border-ink-50 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16 lg:p-14 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-brand">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-3">
               <Label as="span" className="text-ink-700 dark:text-ink-200">{c.next}</Label>
@@ -69,9 +70,12 @@ export function PostEnd({ next }: { next: Pick<Post, "slug" | "titulo" | "excerp
             aria-hidden
             className="grid size-14 place-items-center justify-self-start rounded-full bg-brand text-ink-50 transition-colors duration-200 group-hover:bg-ink-900 motion-reduce:transition-none dark:group-hover:bg-ink-50 dark:group-hover:text-ink-900 lg:size-[72px]"
           >
-            <Icon d={ICONS.arrowRight} size={26} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" />
+            {/* A seta dá um toque para o lado de tempos em tempos (rb-nudge-x) */}
+            <span className="rb-nudge-x">
+              <Icon d={ICONS.arrowRight} size={26} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" />
+            </span>
           </span>
-        </article>
+        </Reveal>
       </section>
     </div>
   );

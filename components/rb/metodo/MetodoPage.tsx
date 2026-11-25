@@ -4,6 +4,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { BrandButton, Icon, ICONS, Label } from "@/components/rb/ui";
 import { MOVES, Process } from "@/components/rb/home/Process";
 import { FinalCTA } from "@/components/rb/FinalCTA";
+import { LineReveal, Reveal, RevealGroup } from "@/components/rb/motion";
 import { cn } from "@/lib/utils";
 
 /**
@@ -74,7 +75,7 @@ const COPY = {
     facts: [
       ["Prazo", "3 a 4 semanas"],
       ["Etapas", "01 a 05, mais a 09"],
-      ["Valor", "Fixo, mostrado na calculadora ou na proposta"],
+      ["Valor", "Fixo, com estimativa na página de orçamento e valor final na proposta"],
     ],
     includesTitle: "O que entra",
     includes: [
@@ -121,7 +122,7 @@ const COPY = {
     facts: [
       ["Timeline", "3 to 4 weeks"],
       ["Steps", "01 to 05, plus 09"],
-      ["Price", "Fixed, shown on the calculator or in the proposal"],
+      ["Price", "Fixed, estimated on the quote page and final in the proposal"],
     ],
     includesTitle: "What's included",
     includes: [
@@ -154,7 +155,7 @@ const stepPill = "shrink-0 rounded-pill border border-ink-200 px-3 py-1 text-lg 
 
 function StepRow({ s, labels }: { s: Step; labels: { get: string; you: string } }) {
   return (
-    <li className="py-8 first:pt-0 lg:grid lg:grid-cols-[88px_1fr] lg:gap-8 lg:py-10">
+    <Reveal as="li" className="py-8 first:pt-0 lg:grid lg:grid-cols-[88px_1fr] lg:gap-8 lg:py-10">
       <span className={cn(stepPill, "hidden w-fit self-start lg:block")}>{s.n}</span>
       <div>
         <div className="flex items-center gap-3">
@@ -173,14 +174,14 @@ function StepRow({ s, labels }: { s: Step; labels: { get: string; you: string } 
           </div>
         </dl>
       </div>
-    </li>
+    </Reveal>
   );
 }
 
 /** Etapa 03, a assinatura: cartão escuro com a aba vermelha da Home. */
 function SignatureStep({ s, labels }: { s: Step; labels: { get: string; you: string; signature: string; quote: string } }) {
   return (
-    <li className="pb-8 first:pt-0 lg:pb-10">
+    <Reveal as="li" className="pb-8 first:pt-0 lg:pb-10">
       <div className="relative pt-3">
         <svg aria-hidden viewBox="0 0 300 22" className="absolute right-4 top-0 h-[18px] w-[180px] text-brand lg:right-5 lg:h-[22px] lg:w-[300px]" preserveAspectRatio="none" fill="currentColor">
           <path d="M0 22 16 0h284v22Z" />
@@ -205,7 +206,7 @@ function SignatureStep({ s, labels }: { s: Step; labels: { get: string; you: str
           </dl>
         </div>
       </div>
-    </li>
+    </Reveal>
   );
 }
 
@@ -219,19 +220,19 @@ export function MetodoPage() {
       {/* ===== Cabeçalho ===== */}
       <section aria-labelledby="metodo-titulo" className="bg-bg">
         <div className="rb-container pb-16 pt-[140px] lg:pb-[120px] lg:pt-[200px]">
-          <Label className={muted}>{c.label}</Label>
-          <h1 id="metodo-titulo" className="t-hero mt-4 max-w-[1120px] text-balance text-fg-strong lg:mt-6">
+          <LineReveal><Label className={muted}>{c.label}</Label></LineReveal>
+          <Reveal as="h1" id="metodo-titulo" delay={0.08} className="t-hero mt-4 max-w-[1120px] text-balance text-fg-strong lg:mt-6">
             {c.titleA}
             <span className="t-serif t-hero-serif">{c.titleB}</span>.
-          </h1>
-          <p className={cn("t-lead mt-6 max-w-[760px] lg:mt-10", muted)}>{c.lead}</p>
+          </Reveal>
+          <Reveal as="p" delay={0.18} className={cn("t-lead mt-6 max-w-[760px] lg:mt-10", muted)}>{c.lead}</Reveal>
 
-          <p className={cn("t-label mt-12 lg:mt-20", muted)}>{c.movesLabel}</p>
-          <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+          <Reveal as="p" y={16} className={cn("t-label mt-12 lg:mt-20", muted)}>{c.movesLabel}</Reveal>
+          <RevealGroup as="ol" stagger={0.08} className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
             {MOVES.map((m) => {
               const t = m[locale];
               return (
-                <li key={m.n}>
+                <Reveal as="li" key={m.n} y={24}>
                   <a
                     href={`#movimento-${m.n}`}
                     className="group grid h-full grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-ink-100 p-4 transition-colors hover:border-fg-strong dark:border-ink-700 dark:hover:border-ink-50 sm:flex sm:flex-col sm:items-stretch sm:gap-8 sm:p-5 lg:gap-12 lg:p-6"
@@ -246,10 +247,10 @@ export function MetodoPage() {
                     </span>
                     <Icon d={ICONS.arrowDown} size={20} className={cn(arrowCls, "sm:hidden")} />
                   </a>
-                </li>
+                </Reveal>
               );
             })}
-          </ol>
+          </RevealGroup>
         </div>
       </section>
 
@@ -260,11 +261,11 @@ export function MetodoPage() {
       <section aria-labelledby="etapas" className="bg-bg">
         <div className="rb-container py-16 lg:py-40">
           <div className="grid gap-6 lg:grid-cols-[1fr_620px] lg:items-end lg:gap-16">
-            <div>
+            <Reveal>
               <Label className={muted}>{c.stepsLabel}</Label>
               <h2 id="etapas" className="t-h1 mt-3 text-fg-strong">{c.stepsTitle}</h2>
-            </div>
-            <p className={cn("t-small", muted)}>{c.stepsDesc}</p>
+            </Reveal>
+            <Reveal as="p" delay={0.12} className={cn("t-small", muted)}>{c.stepsDesc}</Reveal>
           </div>
 
           <div className="mt-12 lg:mt-20">
@@ -278,11 +279,13 @@ export function MetodoPage() {
                   className="grid scroll-mt-28 gap-8 border-t border-fg-strong py-10 lg:grid-cols-[400px_1fr] lg:gap-16 lg:py-16"
                 >
                   <div className="lg:sticky lg:top-32 lg:self-start">
-                    <Label className={muted}>{c.movement} {m.n}</Label>
-                    <h3 className="t-h2 mt-3 text-fg-strong">{t.t}</h3>
-                    <span className={cn("mt-4 inline-flex items-center gap-2 rounded-pill border border-ink-200 px-3 py-1.5 text-sm font-medium dark:border-ink-700", muted)}>
-                      <Icon d={ICONS.clock} size={14} /> {t.c}
-                    </span>
+                    <Reveal>
+                      <Label className={muted}>{c.movement} {m.n}</Label>
+                      <h3 className="t-h2 mt-3 text-fg-strong">{t.t}</h3>
+                      <span className={cn("mt-4 inline-flex items-center gap-2 rounded-pill border border-ink-200 px-3 py-1.5 text-sm font-medium dark:border-ink-700", muted)}>
+                        <Icon d={ICONS.clock} size={14} className="rb-clock" /> {t.c}
+                      </span>
+                    </Reveal>
                   </div>
                   <ol className="divide-y divide-ink-100 dark:divide-ink-700">
                     {idx.map((i) => {
@@ -305,29 +308,29 @@ export function MetodoPage() {
       <section aria-labelledby="ponto-de-partida" className="bg-ink-900 text-ink-50">
         <div className="rb-container grid gap-12 py-16 lg:grid-cols-[1fr_500px] lg:gap-16 lg:py-40">
           <div className="flex flex-col">
-            <span className="inline-flex w-fit items-center rounded-pill border border-ink-700 px-3 py-1.5 text-sm font-medium text-ink-200">
+            <Reveal as="span" y={12} className="inline-flex w-fit items-center rounded-pill border border-ink-700 px-3 py-1.5 text-sm font-medium text-ink-200">
               {c.pkgChip}
-            </span>
-            <h2 id="ponto-de-partida" className="t-hero mt-5 text-brand">{c.pkgTitle}</h2>
-            <p className="t-lead mt-6 max-w-[640px] text-ink-50">{c.pkgLead}</p>
-            <p className="t-small mt-4 max-w-[640px] text-ink-200">{c.pkgDesc}</p>
+            </Reveal>
+            <LineReveal as="h2" id="ponto-de-partida" delay={0.08} className="t-hero mt-5 text-brand">{c.pkgTitle}</LineReveal>
+            <Reveal as="p" delay={0.16} className="t-lead mt-6 max-w-[640px] text-ink-50">{c.pkgLead}</Reveal>
+            <Reveal as="p" delay={0.22} className="t-small mt-4 max-w-[640px] text-ink-200">{c.pkgDesc}</Reveal>
 
-            <dl className="mt-10 grid border-t border-ink-700 sm:grid-cols-3">
+            <RevealGroup as="dl" stagger={0.08} className="mt-10 grid border-t border-ink-700 sm:grid-cols-3">
               {c.facts.map(([k, v]) => (
-                <div key={k} className="border-b border-ink-700 py-5 sm:border-b-0 sm:pr-6">
+                <Reveal key={k} y={16} className="border-b border-ink-700 py-5 sm:border-b-0 sm:pr-6">
                   <dt className="t-label text-ink-200">{k}</dt>
                   <dd className="t-small mt-1.5 text-ink-50">{v}</dd>
-                </div>
+                </Reveal>
               ))}
-            </dl>
+            </RevealGroup>
 
-            <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:mt-auto lg:pt-12">
-              <BrandButton href="/calculadora" variant="principal" className="w-full justify-between sm:w-auto">{c.pkgCalc}</BrandButton>
+            <Reveal className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:mt-auto lg:pt-12">
+              <BrandButton href="/orcamento" variant="principal" className="w-full justify-between sm:w-auto">{c.pkgCalc}</BrandButton>
               <BrandButton href="/agendar" variant="contorno" className="w-full justify-between sm:w-auto">{c.pkgCall}</BrandButton>
-            </div>
+            </Reveal>
           </div>
 
-          <div className="rounded-2xl border border-ink-700 p-5 lg:p-8">
+          <Reveal delay={0.1} className="rounded-2xl border border-ink-700 p-5 lg:p-8">
             <h3 className="t-label text-ink-200">{c.includesTitle}</h3>
             <ul className="mt-4">
               {c.includes.map((item) => (
@@ -339,12 +342,14 @@ export function MetodoPage() {
             </ul>
 
             <h3 className="t-label mt-8 text-ink-200">{c.pkgStepsTitle}</h3>
-            <ol className="mt-4 grid grid-cols-2 gap-2">
+            <RevealGroup as="ol" stagger={0.045} className="mt-4 grid grid-cols-2 gap-2">
               {steps.map((s) => {
                 const inPkg = PACKAGE_STEPS.includes(s.n);
                 return (
-                  <li
+                  <Reveal
+                    as="li"
                     key={s.n}
+                    y={12}
                     className={cn(
                       "flex items-center gap-2 rounded-lg border px-2.5 py-2 text-base font-medium sm:px-3",
                       inPkg ? "border-brand bg-brand text-ink-50" : "border-ink-700 text-ink-400"
@@ -353,34 +358,34 @@ export function MetodoPage() {
                     <span className="tabular-nums">{s.n}</span>
                     <span className="min-w-0 break-words">{s.name}</span>
                     <span className="sr-only">, {inPkg ? c.inPkg : c.outPkg}</span>
-                  </li>
+                  </Reveal>
                 );
               })}
-            </ol>
+            </RevealGroup>
             <p className="t-small mt-6 text-ink-200">{c.pkgNote}</p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== O que eu preciso de você ===== */}
       <section aria-labelledby="sua-parte" className="bg-bg">
         <div className="rb-container grid gap-10 py-16 lg:grid-cols-[500px_1fr] lg:gap-[60px] lg:py-40">
-          <div>
+          <Reveal>
             <Label className={muted}>{c.needLabel}</Label>
             <h2 id="sua-parte" className="t-h1 mt-3 text-fg-strong">{c.needTitle}</h2>
             <p className={cn("t-small mt-4 max-w-[440px] lg:mt-8", muted)}>{c.needDesc}</p>
-          </div>
-          <ol className="border-t border-ink-100 dark:border-ink-700">
+          </Reveal>
+          <RevealGroup as="ol" stagger={0.08} className="border-t border-ink-100 dark:border-ink-700">
             {c.needs.map(([title, text], i) => (
-              <li key={title} className="grid grid-cols-[40px_1fr] gap-4 border-b border-ink-100 py-6 dark:border-ink-700 lg:grid-cols-[56px_1fr] lg:py-8">
+              <Reveal as="li" key={title} y={20} className="grid grid-cols-[40px_1fr] gap-4 border-b border-ink-100 py-6 dark:border-ink-700 lg:grid-cols-[56px_1fr] lg:py-8">
                 <span aria-hidden className="t-lead tabular-nums text-brand">{String(i + 1).padStart(2, "0")}</span>
                 <div>
                   <h3 className="t-lead text-fg-strong">{title}</h3>
                   <p className={cn("t-small mt-2 max-w-[620px]", muted)}>{text}</p>
                 </div>
-              </li>
+              </Reveal>
             ))}
-          </ol>
+          </RevealGroup>
         </div>
       </section>
 

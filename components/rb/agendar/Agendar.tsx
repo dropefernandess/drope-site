@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LocalLink } from "@/components/i18n/LocalLink";
 import { Chip, Icon, ICONS, Label, SOCIAL } from "@/components/rb/ui";
+import { LinkedinFilled } from "@/components/rb/icons";
+import { LineReveal, Reveal, RevealGroup } from "@/components/rb/motion";
 import type { Locale } from "@/lib/i18n/dictionaries";
 import { waLink } from "@/lib/config";
 
@@ -58,8 +60,8 @@ const COPY: Record<Locale, {
     waMsg: "Oi, Drope! Vim pelo site e quero conversar sobre um projeto.",
     redes: "Redes",
     calcQ: "Quer uma ideia de investimento antes?",
-    calcP: "A calculadora dá uma estimativa em dois minutos.",
-    calcLink: "Calcular meu projeto",
+    calcP: "A página de orçamento dá uma estimativa em dois minutos.",
+    calcLink: "Fazer meu orçamento",
     depoisLabel: "Depois de agendar",
     depoisTitle: "O que acontece depois",
     steps: [
@@ -87,8 +89,8 @@ const COPY: Record<Locale, {
     waMsg: "Hi Drope! I found you through your website and I'd like to talk about a project.",
     redes: "Social",
     calcQ: "Want a sense of the budget first?",
-    calcP: "The calculator gives you an estimate in two minutes.",
-    calcLink: "Estimate my project",
+    calcP: "The quote page gives you an estimate in two minutes.",
+    calcLink: "Get a quote",
     depoisLabel: "After booking",
     depoisTitle: "What happens next",
     steps: [
@@ -164,20 +166,21 @@ export function Agendar() {
       <div className="rb-container">
         {/* ===== CABEÇALHO ===== */}
         <header className="max-w-[980px]">
-          <Label className="text-ink-700 dark:text-ink-200">{c.label}</Label>
-          <h1 className="t-hero mt-4 text-fg-strong">
+          <LineReveal><Label className="text-ink-700 dark:text-ink-200">{c.label}</Label></LineReveal>
+          <LineReveal as="h1" delay={0.08} className="t-hero mt-4 text-fg-strong">
             {c.titleA} <span className="t-serif t-hero-serif text-brand">{c.titleB}</span>
-          </h1>
-          <p className="t-lead mt-6 max-w-[760px] text-ink-700 dark:text-ink-200 lg:mt-8">{c.lead}</p>
-          <ul className="mt-8 flex flex-wrap gap-2">
+          </LineReveal>
+          <Reveal as="p" delay={0.18} className="t-lead mt-6 max-w-[760px] text-ink-700 dark:text-ink-200 lg:mt-8">{c.lead}</Reveal>
+          <RevealGroup as="ul" stagger={0.07} delayChildren={0.28} className="mt-8 flex flex-wrap gap-2">
             {[ICONS.clock, ICON_VIDEO, ICON_FREE].map((d, i) => (
-              <li key={c.chips[i]}>
+              <Reveal as="li" key={c.chips[i]} y={12}>
                 <Chip className="gap-2 text-base">
-                  <Icon d={d} size={16} /> {c.chips[i]}
+                  {/* O relógio anda em tiques (rb-clock) */}
+                  <Icon d={d} size={16} className={i === 0 ? "rb-clock" : undefined} /> {c.chips[i]}
                 </Chip>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </RevealGroup>
           <p className="t-small mt-6 text-ink-700 dark:text-ink-200 lg:hidden">
             {c.jumpA}{" "}
             <a href="#contato-direto" className="inline-flex min-h-[44px] items-center font-semibold text-fg-strong underline decoration-ink-200 underline-offset-4">
@@ -242,7 +245,7 @@ export function Agendar() {
                 {[
                   { href: SOCIAL.instagram, label: "Instagram", el: <Icon d={ICONS.instagram} size={24} /> },
                   { href: SOCIAL.behance, label: "Behance", el: <span aria-hidden className="text-[22px] font-extrabold leading-6 tracking-[-0.02em]">Bē</span> },
-                  { href: SOCIAL.linkedin, label: "LinkedIn", el: <Icon d={ICONS.linkedin} size={24} /> },
+                  { href: SOCIAL.linkedin, label: "LinkedIn", el: <LinkedinFilled size={24} /> },
                 ].map((s) => (
                   <li key={s.label}>
                     <a
@@ -263,7 +266,7 @@ export function Agendar() {
               <p className="t-small font-semibold text-fg-strong">{c.calcQ}</p>
               <p className="t-small mt-2 text-ink-700 dark:text-ink-200">{c.calcP}</p>
               <LocalLink
-                href="/calculadora"
+                href="/orcamento"
                 className="t-small mt-4 inline-flex min-h-[44px] items-center gap-2 font-semibold text-fg-strong underline decoration-ink-200 underline-offset-4 hover:decoration-fg-strong"
               >
                 {c.calcLink}
@@ -275,19 +278,19 @@ export function Agendar() {
 
         {/* ===== O QUE ACONTECE DEPOIS ===== */}
         <section aria-labelledby="depois-titulo" className="mt-20 border-t border-ink-100 pt-14 dark:border-ink-700 lg:mt-32 lg:pt-20">
-          <Label className="text-ink-700 dark:text-ink-200">{c.depoisLabel}</Label>
-          <h2 id="depois-titulo" className="t-h1 mt-3 text-fg-strong">{c.depoisTitle}</h2>
-          <ol className="mt-10 grid gap-4 md:grid-cols-3 lg:mt-14 lg:gap-6">
+          <LineReveal><Label className="text-ink-700 dark:text-ink-200">{c.depoisLabel}</Label></LineReveal>
+          <LineReveal as="h2" id="depois-titulo" delay={0.08} className="t-h1 mt-3 text-fg-strong">{c.depoisTitle}</LineReveal>
+          <RevealGroup as="ol" stagger={0.1} className="mt-10 grid gap-4 md:grid-cols-3 lg:mt-14 lg:gap-6">
             {c.steps.map((s, i) => (
-              <li key={s.t} className="flex flex-col rounded-2xl border border-ink-100 p-6 dark:border-ink-700 lg:p-8">
+              <Reveal as="li" key={s.t} className="flex flex-col rounded-2xl border border-ink-100 p-6 dark:border-ink-700 lg:p-8">
                 <span aria-hidden className="w-fit rounded-pill bg-brand px-3 py-1 text-lg font-semibold leading-[22px] text-ink-50">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="t-lead mt-6 font-semibold text-fg-strong">{s.t}</h3>
                 <p className="t-small mt-3 text-ink-700 dark:text-ink-200">{s.d}</p>
-              </li>
+              </Reveal>
             ))}
-          </ol>
+          </RevealGroup>
         </section>
       </div>
     </div>

@@ -8,7 +8,18 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Locale } from "@/lib/i18n/dictionaries";
-import { Icon, ICONS } from "@/components/rb/ui";
+import { Icon, ICONS, RollText } from "@/components/rb/ui";
+import { DotWave } from "@/components/rb/DotWave";
+
+/** Seta do CTA: sai pela diagonal e uma cópia entra por baixo (.rb-cta__icon). */
+function CtaArrow({ size }: { size: number }) {
+  return (
+    <span className="rb-cta__icon">
+      <Icon d={ICONS.arrowUpRight} size={size} />
+      <Icon d={ICONS.arrowUpRight} size={size} />
+    </span>
+  );
+}
 
 /**
  * Menu do rebrand 2026 — pílula escura flutuante (como o site atual),
@@ -21,7 +32,7 @@ const LINKS: { href: string; pt: string; en: string }[] = [
   { href: "/sobre", pt: "Sobre", en: "About" },
   { href: "/projetos", pt: "Trabalhos", en: "Work" },
   { href: "/metodo", pt: "Método", en: "Method" },
-  { href: "/calculadora", pt: "Calculadora", en: "Pricing" },
+  { href: "/orcamento", pt: "Orçamento", en: "Quote" },
   { href: "/blog", pt: "Blog", en: "Blog" },
 ];
 
@@ -143,9 +154,10 @@ export function Nav() {
           <div className="ml-1 flex items-center gap-1">
             <LocaleSwitch />
             <ThemeToggle className={themeCls} />
-            <Link href="/agendar" className="ml-1 inline-flex h-10 items-center gap-2 rounded-pill bg-ink-50 px-5 text-base font-semibold tracking-[-0.01em] text-ink-900 transition-colors hover:bg-white">
-              {CTA[locale]}
-              <Icon d={ICONS.arrowUpRight} size={16} />
+            <Link href="/agendar" className="rb-cta ml-1 inline-flex h-10 items-center gap-2 rounded-pill bg-ink-50 px-5 text-base font-semibold tracking-[-0.01em] text-ink-900 transition-[background-color,transform] duration-200 hover:bg-white focus-visible:rounded-pill">
+              <DotWave pitch={5} size={1.5} />
+              <RollText>{CTA[locale]}</RollText>
+              <CtaArrow size={16} />
             </Link>
           </div>
         </div>
@@ -200,9 +212,10 @@ export function Nav() {
               );
             })}
           </nav>
-          <Link href="/agendar" tabIndex={open ? 0 : -1} className="mt-6 inline-flex h-14 items-center justify-center gap-2 rounded-pill bg-ink-50 text-lg font-semibold text-ink-900">
-            {CTA_LONG[locale]}
-            <Icon d={ICONS.arrowUpRight} size={16} />
+          <Link href="/agendar" tabIndex={open ? 0 : -1} className="rb-cta mt-6 inline-flex h-14 items-center justify-center gap-2 rounded-pill bg-ink-50 text-lg font-semibold text-ink-900 transition-transform duration-200 focus-visible:rounded-pill">
+            <DotWave pitch={6} size={2} />
+            <RollText>{CTA_LONG[locale]}</RollText>
+            <CtaArrow size={16} />
           </Link>
         </div>
       </div>

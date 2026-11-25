@@ -1,0 +1,57 @@
+/* ============================================================
+   REBRAND 2026 — movimento (loops pequenos e o estado final
+   para quem pede "reduzir movimento"). As entradas ficam em
+   components/rb/motion.tsx (framer-motion).
+   ============================================================ */
+
+/* Rodinha do mouse no hero ("Role para ver os trabalhos") */
+@keyframes rb-wheel {
+  0%   { transform: translateY(0); opacity: 0; }
+  20%  { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translateY(7px); opacity: 0; }
+}
+.rb-wheel { animation: rb-wheel 1.8s cubic-bezier(.45, 0, .55, 1) infinite; }
+
+/* Setas de dica ("Role para ler o case") descendo de leve */
+@keyframes rb-bob-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(3px); }
+}
+.rb-bob-y { display: inline-flex; animation: rb-bob-y 1.8s ease-in-out infinite; }
+
+/* Seta de "Próximo" dando um toque para o lado, com pausa */
+@keyframes rb-nudge-x {
+  0%, 55%, 100% { transform: translateX(0); }
+  70%           { transform: translateX(4px); }
+  85%           { transform: translateX(0); }
+}
+.rb-nudge-x { display: inline-flex; animation: rb-nudge-x 3s ease-in-out infinite; }
+
+/* Relógio dos chips: os ponteiros andam em tiques */
+@keyframes rb-tick { to { transform: rotate(360deg); } }
+.rb-clock polyline {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  animation: rb-tick 12s steps(12, end) infinite;
+}
+
+/* Marcador vermelho pulsando devagar */
+@keyframes rb-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+.rb-pulse { animation: rb-pulse 2.4s ease-in-out infinite; }
+
+/* Palavra em serifa da chamada final flutuando */
+@keyframes rb-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-0.05em) rotate(-1.5deg); }
+}
+.rb-float { display: inline-block; transform-origin: 50% 70%; animation: rb-float 5.5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rb-wheel, .rb-bob-y, .rb-nudge-x, .rb-clock polyline, .rb-pulse, .rb-float { animation: none !important; }
+  /* Entradas (motion.tsx): mostra o estado final mesmo antes do JS */
+  [data-rb-m] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+}

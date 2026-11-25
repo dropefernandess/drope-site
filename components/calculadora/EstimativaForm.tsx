@@ -3,7 +3,8 @@
 import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { enviarEstimativa, type EstimativaPayload } from "@/app/actions/enviar-estimativa";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { BrandArrow, BrandButton } from "@/components/rb/ui";
+import { BrandArrow, BrandButton, RollText } from "@/components/rb/ui";
+import { DotWave } from "@/components/rb/DotWave";
 import type { Locale } from "@/lib/i18n/dictionaries";
 import { waLink } from "@/lib/config";
 import { cn } from "@/lib/utils";
@@ -231,11 +232,15 @@ export function EstimativaForm({ canSubmit, payload, resumoWhatsapp }: Props) {
             disabled={!canSubmit || pending}
             className="rb-btn rb-btn--escuro w-full disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
-            <span>{pending ? c.enviando : c.enviar}</span>
+            <DotWave />
+            <RollText>{pending ? c.enviando : c.enviar}</RollText>
             <span className="rb-btn__block">
               {pending
                 ? <span aria-hidden className="size-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                : <BrandArrow />}
+                : (<>
+                    <span className="rb-btn__arrow"><BrandArrow /></span>
+                    <span className="rb-btn__arrow" aria-hidden><BrandArrow /></span>
+                  </>)}
             </span>
           </button>
         </div>

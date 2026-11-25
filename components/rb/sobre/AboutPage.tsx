@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { BrandButton, Icon, ICONS, Label, SOCIAL } from "@/components/rb/ui";
 import { FinalCTA } from "@/components/rb/FinalCTA";
+import { ImageReveal, LineReveal, Reveal, RevealGroup, useReducedMotionSafe } from "@/components/rb/motion";
 import { AGORA } from "@/content/rb/agora";
 import { cn } from "@/lib/utils";
 
@@ -19,8 +20,8 @@ import { cn } from "@/lib/utils";
 const COPY = {
   pt: {
     label: "Sobre · Drope Fernandes",
-    h1: "Crio do interior de Minas para o Brasil, os Emirados e Portugal.",
-    portrait: "Retrato · 2026", role: "Role",
+    h1: "Penso até o simples ficar inevitável.",
+    portrait: "Retrato · 2026", portraitRole: "Designer multidisciplinar", role: "Role",
     origemL: "01 · Origem",
     origem: "Comecei desenhando marca para a banda do colégio, em 2018, e nunca mais parei. Nasci no design gráfico e fui me expandindo para branding, UI/UX, web e motion, até conseguir levar um projeto inteiro do conceito ao ar.",
     hojeL: "02 · Hoje",
@@ -43,8 +44,8 @@ const COPY = {
   },
   en: {
     label: "About · Drope Fernandes",
-    h1: "I create from the countryside of Minas Gerais for Brazil, the Emirates and Portugal.",
-    portrait: "Portrait · 2026", role: "Scroll",
+    h1: "I think until the simple becomes inevitable.",
+    portrait: "Portrait · 2026", portraitRole: "Multidisciplinary designer", role: "Scroll",
     origemL: "01 · Origin",
     origem: "I started drawing a logo for my school band in 2018 and never stopped. I was born in graphic design and kept expanding into branding, UI/UX, web and motion, until I could take a whole project from concept to launch.",
     hojeL: "02 · Today",
@@ -78,8 +79,23 @@ function Corners({ className }: { className?: string }) {
 }
 
 function MoveItem({ text, i, p, last }: { text: string; i: number; p: MotionValue<number>; last: boolean }) {
-  const opacity = useTransform(p, (v) => { const d = i - v; if (d < -0.6) return 0; if (d < 0) return 1 + d * 1.6; if (d < 0.5) return 1; if (d < 1.5) return 0.5; if (d < 2.5) return 0.22; return 0; });
-  const filter = useTransform(p, (v) => { const d = Math.max(0, i - v - 0.4); return `blur(${Math.min(10, d * 5)}px)`; });
+  // Só a frase na linha de leitura fica nítida (pedido do Pedro, 25/11): a de baixo
+  // aparece bem apagada e desfocada, e a que sai por cima some desfocando.
+  const opacity = useTransform(p, (v) => {
+    const d = i - v;
+    if (d < -0.6) return 0;
+    if (d < 0) return 1 + d * 1.6;
+    if (d < 0.3) return 1;
+    if (d < 0.7) return 1 - ((d - 0.3) / 0.4) * 0.85;
+    if (d < 1.6) return 0.15;
+    if (d < 2.2) return 0.15 * (1 - (d - 1.6) / 0.6);
+    return 0;
+  });
+  const filter = useTransform(p, (v) => {
+    const d = i - v;
+    const b = d < 0 ? Math.min(12, -d * 16) : Math.min(18, Math.max(0, d - 0.3) * 24);
+    return `blur(${b}px)`;
+  });
   return (
     <motion.span style={{ opacity, filter }} className={cn("block pb-[0.08em]", last ? "text-ink-50" : "text-ink-200")}>
       {text}
@@ -112,7 +128,7 @@ function MoveList({ items, p }: { items: string[]; p: MotionValue<number> }) {
 function WhatMovesMe() {
   const { locale } = useLocale();
   const c = COPY[locale];
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const ref = useRef<HTMLDivElement>(null);
   const n = c.move.length;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
@@ -174,37 +190,38 @@ export function AboutPage() {
       <section className="bg-bg pt-28 lg:pt-44">
         <div className="rb-container grid items-center gap-12 lg:grid-cols-[1fr_480px] lg:gap-20">
           <div>
-            <Label>{c.label}</Label>
-            <h1 className="t-h1 mt-3 max-w-[700px] text-fg-strong lg:mt-5">{c.h1}</h1>
+            <LineReveal><Label>{c.label}</Label></LineReveal>
+            <Reveal as="h1" delay={0.08} className="t-h1 mt-3 max-w-[700px] text-fg-strong lg:mt-5">{c.h1}</Reveal>
           </div>
           <figure className="relative mx-2 lg:mx-0">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
-              <Image src="/rb/portrait.jpg" alt={locale === "pt" ? "Drope Fernandes sentado numa poltrona de couro" : "Drope Fernandes sitting in a leather armchair"} fill priority sizes="(min-width: 1024px) 480px, 100vw" className="object-cover" />
-            </div>
+            {/* Só o retrato abre; as guias dos cantos ficam paradas */}
+            <ImageReveal radius={8} delay={0.15} className="relative aspect-[4/5] overflow-hidden rounded-lg">
+              <Image quality={90} src="/rb/portrait.jpg" alt={locale === "pt" ? "Drope Fernandes sentado numa poltrona de couro" : "Drope Fernandes sitting in a leather armchair"} fill priority sizes="(min-width: 1024px) 480px, 100vw" className="object-cover" />
+            </ImageReveal>
             <Corners />
-            <figcaption className="t-label mt-6 flex justify-between text-ink-400">
-              <span>{c.portrait}</span><span>Senador Firmino, MG</span>
-            </figcaption>
+            <Reveal as="figcaption" y={12} delay={0.4} className="t-label mt-6 flex justify-between text-ink-400">
+              <span>{c.portrait}</span><span>{c.portraitRole}</span>
+            </Reveal>
           </figure>
         </div>
-        <a href="#origem" className="t-label mx-auto mt-12 hidden w-fit items-center gap-2 text-ink-400 hover:text-fg-strong lg:flex">
-          {c.role} <Icon d={ICONS.arrowDown} size={14} />
-        </a>
+        <Reveal as="a" y={12} delay={0.5} href="#origem" className="t-label mx-auto mt-12 hidden w-fit items-center gap-2 text-ink-400 hover:text-fg-strong lg:flex">
+          {c.role} <span className="rb-bob-y"><Icon d={ICONS.arrowDown} size={14} /></span>
+        </Reveal>
       </section>
 
       {/* 02 Origem e hoje */}
       <section id="origem" className="scroll-mt-24 bg-bg pt-24 lg:pt-[200px]">
         <div className="rb-container">
           <div className="lg:px-[160px]">
-            <Label>{c.origemL}</Label>
-            <p className="t-lead mt-4 max-w-[800px] text-ink-700 dark:text-ink-200 lg:mt-6">{c.origem}</p>
+            <LineReveal><Label>{c.origemL}</Label></LineReveal>
+            <Reveal as="p" delay={0.08} className="t-lead mt-4 max-w-[800px] text-ink-700 dark:text-ink-200 lg:mt-6">{c.origem}</Reveal>
           </div>
           <div className="mt-20 grid gap-6 lg:mt-[200px] lg:grid-cols-[1fr_560px] lg:gap-20">
             <div>
-              <Label>{c.hojeL}</Label>
-              <h2 className="t-h1 mt-3 max-w-[620px] text-fg-strong lg:mt-4">{c.hojeT}</h2>
+              <LineReveal><Label>{c.hojeL}</Label></LineReveal>
+              <Reveal as="h2" delay={0.08} className="t-h1 mt-3 max-w-[620px] text-fg-strong lg:mt-4">{c.hojeT}</Reveal>
             </div>
-            <div className="lg:pt-12">
+            <Reveal delay={0.16} className="lg:pt-12">
               <p className="t-small text-ink-700 dark:text-ink-200">{c.hojeP}</p>
               <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 lg:mt-8">
                 {[["Instagram", SOCIAL.instagram], ["Behance", SOCIAL.behance], ["LinkedIn", SOCIAL.linkedin]].map(([l, h]) => (
@@ -212,7 +229,7 @@ export function AboutPage() {
                 ))}
                 <li><Link href="/agendar" className="t-label inline-flex items-center gap-1.5 text-fg-strong hover:text-brand">{c.conversar} <Icon d={ICONS.arrowUpRight} size={14} /></Link></li>
               </ul>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -220,17 +237,17 @@ export function AboutPage() {
       {/* 03 O caminho */}
       <section aria-labelledby="caminho" className="bg-bg py-24 lg:py-[200px]">
         <div className="rb-container">
-          <Label>{c.caminhoL}</Label>
-          <h2 id="caminho" className="t-h2 mt-3 text-fg-strong lg:mt-4">{c.caminhoT}</h2>
-          <ol className="mt-8 grid gap-6 lg:mt-16 lg:grid-cols-4 lg:gap-6">
+          <LineReveal><Label>{c.caminhoL}</Label></LineReveal>
+          <LineReveal as="h2" id="caminho" delay={0.08} className="t-h2 mt-3 text-fg-strong lg:mt-4">{c.caminhoT}</LineReveal>
+          <RevealGroup as="ol" stagger={0.1} className="mt-8 grid gap-6 lg:mt-16 lg:grid-cols-4 lg:gap-6">
             {c.marcos.map(([y, e, x], i) => (
-              <li key={y} className="border-t border-ink-100 pt-4 dark:border-ink-700 lg:pt-6">
-                <p className={cn("t-h1", i === c.marcos.length - 1 ? "text-brand" : "text-fg-strong")}>{y}</p>
+              <Reveal as="li" key={y} className="border-t border-ink-100 pt-4 dark:border-ink-700 lg:pt-6">
+                <LineReveal as="p" className={cn("t-h1", i === c.marcos.length - 1 ? "text-brand" : "text-fg-strong")}>{y}</LineReveal>
                 <p className="t-lead mt-2 text-fg-strong lg:mt-4">{e}</p>
                 <p className="t-small mt-1 text-ink-400 lg:mt-2">{x}</p>
-              </li>
+              </Reveal>
             ))}
-          </ol>
+          </RevealGroup>
         </div>
       </section>
 
@@ -240,38 +257,38 @@ export function AboutPage() {
       {/* 06 Em números */}
       <section aria-labelledby="numeros" className="bg-bg pb-20 lg:pb-[200px]">
         <div className="rb-container grid gap-6 lg:grid-cols-[360px_1fr]">
-          <Label as="h2" className="lg:pt-6"><span id="numeros">{c.numerosL}</span></Label>
-          <dl className="border-t border-ink-100 dark:border-ink-700">
+          <Reveal y={16}><Label as="h2" className="lg:pt-6"><span id="numeros">{c.numerosL}</span></Label></Reveal>
+          <RevealGroup as="dl" stagger={0.08} className="border-t border-ink-100 dark:border-ink-700">
             {c.numeros.map(([a, b, n]) => (
-              <div key={a} className="grid grid-cols-[1fr_auto] items-start gap-x-6 gap-y-1 border-b border-ink-100 py-4 dark:border-ink-700 lg:grid-cols-[300px_1fr_auto] lg:py-6">
+              <Reveal key={a} y={20} className="grid grid-cols-[1fr_auto] items-start gap-x-6 gap-y-1 border-b border-ink-100 py-4 dark:border-ink-700 lg:grid-cols-[300px_1fr_auto] lg:py-6">
                 <dt className="t-lead text-fg-strong">{a}</dt>
-                <dd className="t-h2 row-span-2 text-right text-fg-strong lg:order-last lg:row-span-1">{n}</dd>
+                <LineReveal as="dd" className="t-h2 row-span-2 text-right text-fg-strong lg:order-last lg:row-span-1">{n}</LineReveal>
                 <dd className="t-small text-ink-400 lg:pt-1">{b}</dd>
-              </div>
+              </Reveal>
             ))}
-          </dl>
+          </RevealGroup>
         </div>
       </section>
 
       {/* 07 Créditos */}
       <section aria-labelledby="creditos" className="bg-bg pb-24 lg:pb-[200px]">
         <div className="rb-container">
-          <p className="t-label text-center text-ink-400">{c.creditosL}</p>
-          <h2 id="creditos" className="t-display mt-3 text-center text-fg-strong max-sm:text-[48px] lg:mt-4">Drope Fernandes</h2>
-          <dl className="mx-auto mt-12 max-w-[760px] space-y-7 lg:mt-24 lg:space-y-10">
+          <LineReveal as="p" className="t-label text-center text-ink-400">{c.creditosL}</LineReveal>
+          <LineReveal as="h2" id="creditos" delay={0.08} className="t-display mt-3 text-center text-fg-strong max-sm:text-[48px] lg:mt-4">Drope Fernandes</LineReveal>
+          <RevealGroup as="dl" stagger={0.07} className="mx-auto mt-12 max-w-[760px] space-y-7 lg:mt-24 lg:space-y-10">
             {([
               [c.faco, c.facoList], [c.opero, c.operoList], [c.fora, AGORA.hobbies[locale]],
               [c.ouvindo, [AGORA.ouvindo[locale]]], [c.lendo, [AGORA.lendo[locale]]], [c.aprendendo, [AGORA.aprendendo[locale]]], [c.onde, ["Senador Firmino, MG"]],
             ] as [string, string[]][]).map(([k, vs]) => (
-              <div key={k} className="grid grid-cols-[120px_1fr] gap-4 lg:grid-cols-[1fr_1fr] lg:gap-10">
+              <Reveal key={k} y={20} className="grid grid-cols-[120px_1fr] gap-4 lg:grid-cols-[1fr_1fr] lg:gap-10">
                 <dt className="t-label pt-1 text-right text-ink-400">{k}</dt>
                 <dd className="t-lead text-fg-strong">{vs.map((v, i) => <span key={i} className="block">{v}</span>)}</dd>
-              </div>
+              </Reveal>
             ))}
-          </dl>
-          <div className="mt-14 flex justify-center lg:mt-20">
+          </RevealGroup>
+          <Reveal className="mt-14 flex justify-center lg:mt-20">
             <BrandButton href="/projetos" variant="contorno" className="w-full sm:w-auto">{c.trabalhos}</BrandButton>
-          </div>
+          </Reveal>
         </div>
       </section>
       <FinalCTA />

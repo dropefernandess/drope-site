@@ -16,6 +16,13 @@ const nextConfig: NextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  // Rebrand 2026: a Calculadora virou Orçamento (pedido do Pedro, 25/11).
+  async redirects() {
+    return [
+      { source: "/calculadora", destination: "/orcamento", permanent: true },
+      { source: "/en/calculadora", destination: "/en/orcamento", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

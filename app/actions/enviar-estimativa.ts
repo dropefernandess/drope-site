@@ -60,8 +60,8 @@ export async function enviarEstimativa(
   // Email HTML clean
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 560px; margin: 0 auto; color: #101010; background: #F2F2EB; padding: 32px;">
-      <h1 style="font-size: 22px; font-weight: 600; margin: 0 0 8px; color: #DE2828;">Nova estimativa via calculadora</h1>
-      <p style="font-size: 14px; color: #3D3D3D; margin: 0 0 24px;">Lead chegou pela /calculadora do site.</p>
+      <h1 style="font-size: 22px; font-weight: 600; margin: 0 0 8px; color: #DE2828;">Nova estimativa via orçamento</h1>
+      <p style="font-size: 14px; color: #3D3D3D; margin: 0 0 24px;">Lead chegou pela página /orcamento do site.</p>
 
       <div style="background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
         <p style="font-size: 11px; color: #7D7D7D; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px;">CONTATO</p>
@@ -72,7 +72,7 @@ export async function enviarEstimativa(
       <div style="background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
         <p style="font-size: 11px; color: #7D7D7D; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px;">FAIXA ESTIMADA</p>
         <p style="font-size: 28px; font-weight: 700; margin: 0 0 4px; color: #DE2828;">${fmtMoeda(payload.faixaMin)} – ${fmtMoeda(payload.faixaMax)}</p>
-        <p style="font-size: 12px; color: #7D7D7D; margin: 0;">Variação ±10% sobre escopo/prazo combinados</p>
+        <p style="font-size: 12px; color: #7D7D7D; margin: 0;">Faixa de -10% a +15% sobre o valor base, conforme escopo e prazo</p>
       </div>
 
       <div style="background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
@@ -110,7 +110,7 @@ export async function enviarEstimativa(
 
   try {
     const { data, error } = await resend.emails.send({
-      from: `Calculadora Dropê <noreply@dropefernandes.com>`, // domínio verificado no Resend
+      from: `Orçamento Drope Fernandes <noreply@dropefernandes.com>`, // domínio verificado no Resend
       to: [SITE.contactEmail],
       replyTo: payload.email,
       subject: `Nova estimativa — ${payload.nome} (${fmtMoeda(payload.faixaMin)}–${fmtMoeda(payload.faixaMax)})`,

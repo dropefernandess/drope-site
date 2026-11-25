@@ -1,6 +1,7 @@
 "use client";
 
 import { LocalLink } from "@/components/i18n/LocalLink";
+import { DotWave } from "@/components/rb/DotWave";
 import { cn } from "@/lib/utils";
 
 /**
@@ -27,7 +28,25 @@ const VARIANT_CLS: Record<BtnVariant, string> = {
   principal: "rb-btn--principal",
 };
 
-/** Botão da marca: corpo com canto cortado + bloco da seta. A largura acompanha o texto. */
+/**
+ * Texto que rola no hover: o rótulo sobe e uma cópia entra por baixo.
+ * A cópia é aria-hidden, então o nome acessível continua um só.
+ * Estilo em globals.css (.rb-roll); dispara dentro de .rb-btn e .rb-cta.
+ */
+export function RollText({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={cn("rb-roll", className)}>
+      <span>{children}</span>
+      <span aria-hidden>{children}</span>
+    </span>
+  );
+}
+
+/**
+ * Botão da marca: corpo com canto cortado + bloco da seta. A largura acompanha o texto.
+ * Interação: campo de pontos (DotWave) no fundo, rótulo que rola, seta que sai e
+ * volta dentro do bloco, bloco um tom mais escuro/claro; no clique, onda de pontos.
+ */
 export function BrandButton({
   href,
   children,
@@ -46,9 +65,11 @@ export function BrandButton({
   const cls = cn("rb-btn", VARIANT_CLS[variant], full && "rb-btn--full", className);
   const inner = (
     <>
-      <span>{children}</span>
+      <DotWave />
+      <RollText>{children}</RollText>
       <span className="rb-btn__block">
-        <BrandArrow />
+        <span className="rb-btn__arrow"><BrandArrow /></span>
+        <span className="rb-btn__arrow" aria-hidden><BrandArrow /></span>
       </span>
     </>
   );

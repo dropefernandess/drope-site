@@ -21,8 +21,11 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <Works />
+      {/* O hero fica preso (sticky) só até o fim dos trabalhos, que deslizam por cima dele */}
+      <div>
+        <Hero />
+        <Works />
+      </div>
       <About />
       <Manifesto />
       <Services />

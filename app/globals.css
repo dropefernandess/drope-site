@@ -201,7 +201,8 @@
      Geometria do ASSETS: corpo 68px de altura, chanfro de 22×19px no canto
      inferior direito; bloco 61×56 a 6px da borda, chanfro 18.3×15.65. */
   .rb-btn {
-    --btn-body: #101010; --btn-fill: transparent; --btn-text: #F2F2EB; --btn-block: #DE2828; --btn-arrow: #F2F2EB;
+    --btn-body: #101010; --btn-fill: transparent; --btn-text: #F2F2EB; --btn-block: #DE2828; --btn-block-hover: #BF2C2C; --btn-arrow: #F2F2EB;
+    --dot-color: #F2F2EB; --dot-alpha: 0.5;
     position: relative; isolation: isolate;
     display: inline-flex; align-items: center; justify-content: space-between;
     height: 68px; padding: 0 95px 0 20px;
@@ -209,6 +210,7 @@
     font-weight: 500; letter-spacing: -0.03em; line-height: 1;
     font-size: clamp(20px, calc(18.51px + 0.381vw), 24px);
     white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
     transition: transform 200ms cubic-bezier(.22,1,.36,1);
   }
   .rb-btn::before, .rb-btn::after { content: ""; position: absolute; z-index: -1; }
@@ -220,20 +222,89 @@
     inset: 0; background: var(--btn-fill);
     clip-path: polygon(1.5px 1.5px, calc(100% - 1.5px) 1.5px, calc(100% - 1.5px) 48.4px, calc(100% - 22.6px) calc(100% - 1.5px), 1.5px calc(100% - 1.5px));
   }
+  /* Rótulo acima do campo de pontos (vale também para o <span> simples do formulário). */
+  .rb-btn > span:not(.rb-btn__block) { position: relative; z-index: 1; }
+  /* Campo de pontos recortado no mesmo desenho do preenchimento (não pinta a borda). */
+  .rb-btn > .rb-dots {
+    clip-path: polygon(1.5px 1.5px, calc(100% - 1.5px) 1.5px, calc(100% - 1.5px) 48.4px, calc(100% - 22.6px) calc(100% - 1.5px), 1.5px calc(100% - 1.5px));
+  }
   .rb-btn__block {
-    position: absolute; right: 6px; top: 6px; width: 61px; height: 56px;
+    position: absolute; z-index: 1; right: 6px; top: 6px; width: 61px; height: 56px;
     display: grid; place-items: center; background: var(--btn-block); color: var(--btn-arrow);
     clip-path: polygon(0 0, 100% 0, 100% 40.35px, 42.7px 100%, 0 100%);
+    transition: background-color 300ms cubic-bezier(.22,1,.36,1);
   }
-  .rb-btn__block svg { transition: transform 240ms cubic-bezier(.22,1,.36,1); }
-  .rb-btn:hover .rb-btn__block svg { transform: translateX(4px); }
-  .rb-btn:active { transform: scale(0.98); }
-  .rb-btn--escuro   { --btn-body: #101010; --btn-fill: #101010; --btn-text: #F2F2EB; --btn-block: #DE2828; }
-  .rb-btn--contorno { --btn-body: #101010; --btn-fill: rgb(var(--bg)); --btn-text: #101010; --btn-block: #101010; }
-  .rb-btn--contorno-vermelho { --btn-body: #101010; --btn-fill: #DE2828; --btn-text: #101010; --btn-block: #101010; }
-  .rb-btn--principal { --btn-body: #DE2828; --btn-fill: #DE2828; --btn-text: #F2F2EB; --btn-block: #73160E; }
-  .dark .rb-btn--contorno { --btn-body: #F2F2EB; --btn-text: #F2F2EB; --btn-block: #F2F2EB; --btn-arrow: #101010; }
+  .rb-btn__block > * { grid-area: 1 / 1; }
+  /* Seta: a da frente sai pela direita, a cópia entra pela esquerda (o recorte do bloco esconde as duas fora dele). */
+  .rb-btn__arrow { display: block; transition: transform var(--rb-roll) var(--rb-ease); }
+  .rb-btn__arrow svg { display: block; }
+  .rb-btn__arrow + .rb-btn__arrow { transform: translateX(-44px); }
+  /* Markup antigo (svg direto no bloco, ex. formulário da calculadora): só empurra a seta. */
+  .rb-btn__block > svg { transition: transform 240ms cubic-bezier(.22,1,.36,1); }
+  .rb-btn:not(:disabled):active { transform: scale(0.97); transition-duration: 90ms; }
+  /* Foco: anel duplo (off-white por dentro, preto por fora) para aparecer no creme, no preto e no vermelho. */
+  .rb-btn:focus-visible { outline: 2px solid #101010; outline-offset: 2px; box-shadow: 0 0 0 2px #F2F2EB; border-radius: 0; }
+
+  /* Hover = um passo na rampa da própria paleta: vermelho → #BF2C2C, vinho → #400C08, preto → #3D3D3D, off-white → #D1D1D1. */
+  .rb-btn--escuro   { --btn-body: #101010; --btn-fill: #101010; --btn-text: #F2F2EB; --btn-block: #DE2828; --btn-block-hover: #BF2C2C; --dot-color: #F2F2EB; --dot-alpha: 0.5; }
+  .rb-btn--contorno { --btn-body: #101010; --btn-fill: rgb(var(--bg)); --btn-text: #101010; --btn-block: #101010; --btn-block-hover: #3D3D3D; --dot-color: #101010; --dot-alpha: 0.5; }
+  .rb-btn--contorno-vermelho { --btn-body: #101010; --btn-fill: #DE2828; --btn-text: #101010; --btn-block: #101010; --btn-block-hover: #3D3D3D; --dot-color: #101010; --dot-alpha: 0.5; }
+  .rb-btn--principal { --btn-body: #DE2828; --btn-fill: #DE2828; --btn-text: #F2F2EB; --btn-block: #73160E; --btn-block-hover: #400C08; --dot-color: #F2F2EB; --dot-alpha: 0.5; }
+  .dark .rb-btn--contorno { --btn-body: #F2F2EB; --btn-text: #F2F2EB; --btn-block: #F2F2EB; --btn-block-hover: #D1D1D1; --btn-arrow: #101010; --dot-color: #F2F2EB; --dot-alpha: 0.45; }
   .rb-btn--full { width: 100%; }
+
+  /* ---- Interação dos botões (BrandButton e CTA do menu) ----
+     Referências: Kodety (estado ativo no hover, no foco e preso 700 ms após o toque;
+     curva in-out 0.65,0,0.35,1) e o "Dot wave" do BoardUI (components/rb/DotWave.tsx). */
+  .rb-btn, .rb-cta { --rb-ease: cubic-bezier(.65,0,.35,1); --rb-roll: 500ms; }
+  .rb-dots { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+
+  /* Texto que rola: as duas cópias no mesmo lugar; a de baixo espera fora do recorte. */
+  .rb-roll { display: inline-grid; overflow: hidden; margin-block: -0.14em; vertical-align: top; }
+  .rb-roll > span { grid-area: 1 / 1; padding-block: 0.14em; transition: transform var(--rb-roll, 500ms) var(--rb-ease, cubic-bezier(.65,0,.35,1)); }
+  .rb-roll > span + span { transform: translateY(100%); }
+
+  /* CTA em pílula do menu: mesma família, mais leve. */
+  .rb-cta {
+    --dot-color: #101010; --dot-alpha: 0.3;
+    position: relative; isolation: isolate; overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .rb-cta > :not(.rb-dots) { position: relative; z-index: 1; }
+  .rb-cta__icon { display: inline-grid; overflow: hidden; }
+  .rb-cta__icon > * { grid-area: 1 / 1; transition: transform var(--rb-roll) var(--rb-ease); }
+  .rb-cta__icon > * + * { transform: translate(-110%, 110%); }
+  .rb-cta:active { transform: scale(0.97); }
+
+  /* Estado ativo: foco por teclado e toque (data-pressed vem do DotWave)… */
+  :is(.rb-btn, .rb-cta):not(:disabled):is(:focus-visible, [data-pressed]) .rb-roll > :first-child { transform: translateY(-100%); }
+  :is(.rb-btn, .rb-cta):not(:disabled):is(:focus-visible, [data-pressed]) .rb-roll > :last-child { transform: translateY(0); }
+  .rb-btn:not(:disabled):is(:focus-visible, [data-pressed]) .rb-btn__block { background-color: var(--btn-block-hover); }
+  .rb-btn:not(:disabled):is(:focus-visible, [data-pressed]) .rb-btn__arrow:first-child { transform: translateX(44px); }
+  .rb-btn:not(:disabled):is(:focus-visible, [data-pressed]) .rb-btn__arrow:last-child { transform: translateX(0); }
+  .rb-btn:not(:disabled):focus-visible .rb-btn__block > svg { transform: translateX(4px); }
+  .rb-cta:is(:focus-visible, [data-pressed]) .rb-cta__icon > :first-child { transform: translate(110%, -110%); }
+  .rb-cta:is(:focus-visible, [data-pressed]) .rb-cta__icon > :last-child { transform: translate(0, 0); }
+
+  /* …e hover só onde existe mouse (no toque o hover ficaria preso). */
+  @media (hover: hover) {
+    :is(.rb-btn, .rb-cta):not(:disabled):hover .rb-roll > :first-child { transform: translateY(-100%); }
+    :is(.rb-btn, .rb-cta):not(:disabled):hover .rb-roll > :last-child { transform: translateY(0); }
+    .rb-btn:not(:disabled):hover .rb-btn__block { background-color: var(--btn-block-hover); }
+    .rb-btn:not(:disabled):hover .rb-btn__arrow:first-child { transform: translateX(44px); }
+    .rb-btn:not(:disabled):hover .rb-btn__arrow:last-child { transform: translateX(0); }
+    .rb-btn:not(:disabled):hover .rb-btn__block > svg { transform: translateX(4px); }
+    .rb-cta:hover .rb-cta__icon > :first-child { transform: translate(110%, -110%); }
+    .rb-cta:hover .rb-cta__icon > :last-child { transform: translate(0, 0); }
+  }
+
+  /* Movimento reduzido: sem pontos, sem rolagem, sem escala; fica a troca de cor. */
+  @media (prefers-reduced-motion: reduce) {
+    .rb-dots { display: none; }
+    .rb-roll > span + span, .rb-btn__arrow + .rb-btn__arrow, .rb-cta__icon > * + * { display: none; }
+    .rb-roll > span, .rb-btn__arrow, .rb-cta__icon > *, .rb-btn__block > svg { transform: none !important; }
+    .rb-btn:active, .rb-cta:active { transform: none !important; }
+  }
 }
 
 @keyframes rb-trail {

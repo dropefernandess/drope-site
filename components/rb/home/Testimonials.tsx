@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Icon, ICONS, Label } from "@/components/rb/ui";
+import { LineReveal, Reveal, RevealGroup } from "@/components/rb/motion";
 
 /**
  * Depoimentos — Figma "07 Depoimentos". Números em vermelho; no desktop os
@@ -64,22 +65,28 @@ export function Testimonials() {
   return (
     <section aria-labelledby="depoimentos" className="bg-bg">
       <div className="rb-container py-16 lg:py-[68px]">
-        <Label className="text-ink-700 dark:text-ink-200">{locale === "pt" ? "Depoimentos" : "Testimonials"}</Label>
-        <h2 id="depoimentos" className="t-h1 mt-3 text-fg-strong">{locale === "pt" ? "Os clientes contam melhor." : "Clients tell it better."}</h2>
-        <dl className="mt-8 divide-y divide-ink-100 border-y border-ink-100 dark:divide-ink-700 dark:border-ink-700 lg:mt-14 lg:grid lg:grid-cols-3 lg:divide-y-0 lg:border-0">
+        <LineReveal>
+          <Label className="text-ink-700 dark:text-ink-200">{locale === "pt" ? "Depoimentos" : "Testimonials"}</Label>
+        </LineReveal>
+        <LineReveal as="h2" id="depoimentos" delay={0.08} className="t-h1 mt-3 text-fg-strong">{locale === "pt" ? "Os clientes contam melhor." : "Clients tell it better."}</LineReveal>
+        <RevealGroup as="dl" stagger={0.12} className="mt-8 divide-y divide-ink-100 border-y border-ink-100 dark:divide-ink-700 dark:border-ink-700 lg:mt-14 lg:grid lg:grid-cols-3 lg:divide-y-0 lg:border-0">
           {STATS.map((s) => (
-            <div key={s.v} className="flex items-center gap-6 py-4 lg:block lg:py-0">
-              <dt className="t-hero w-[130px] shrink-0 text-brand lg:w-auto">{locale === "en" && s.en_v ? s.en_v : s.v}</dt>
-              <dd className="t-small text-ink-700 dark:text-ink-200 lg:mt-2">{s[locale]}</dd>
-            </div>
+            <RevealGroup key={s.v} stagger={0.1} className="flex items-center gap-6 py-4 lg:block lg:py-0">
+              <LineReveal as="dt" className="t-hero w-[130px] shrink-0 text-brand lg:w-auto">{locale === "en" && s.en_v ? s.en_v : s.v}</LineReveal>
+              <Reveal as="dd" y={12} className="t-small text-ink-700 dark:text-ink-200 lg:mt-2">{s[locale]}</Reveal>
+            </RevealGroup>
           ))}
-        </dl>
+        </RevealGroup>
         {/* Desktop: grade 2×2 */}
-        <div className="mt-[90px] hidden gap-6 lg:grid lg:grid-cols-2">
-          {QUOTES.map((q) => <QuoteCard key={q.name} q={q} />)}
-        </div>
+        <RevealGroup stagger={0.1} className="mt-[90px] hidden gap-6 lg:grid lg:grid-cols-2">
+          {QUOTES.map((q) => (
+            <Reveal key={q.name} className="grid">
+              <QuoteCard q={q} />
+            </Reveal>
+          ))}
+        </RevealGroup>
         {/* Celular: carrossel */}
-        <div className="mt-10 lg:hidden">
+        <Reveal className="mt-10 lg:hidden">
           <div ref={track} onScroll={onScroll} className="-mr-6 flex snap-x snap-mandatory gap-3 overflow-x-auto pr-6 [scrollbar-width:none]">
             {QUOTES.map((q) => <QuoteCard key={q.name} q={q} className="w-[300px] shrink-0 snap-start" />)}
           </div>
@@ -94,7 +101,7 @@ export function Testimonials() {
               </button>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

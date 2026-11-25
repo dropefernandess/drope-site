@@ -4,11 +4,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { EstimativaForm } from "@/components/calculadora/EstimativaForm";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { BrandButton, Label } from "@/components/rb/ui";
+import { LineReveal, Reveal } from "@/components/rb/motion";
 import type { Locale } from "@/lib/i18n/dictionaries";
 import { cn } from "@/lib/utils";
 
 /**
- * Calculadora de orçamento (rebrand 2026). Lógica real com state: os valores
+ * Orçamento (antiga Calculadora, rebrand 2026). Valores 30% menores desde 25/11. Lógica real com state: os valores
  * são FAIXAS estimadas, não preço fechado. Preços, multiplicadores e a conta
  * da faixa (0,9× a 1,15× do total) são os mesmos da versão anterior.
  *
@@ -19,33 +20,33 @@ import { cn } from "@/lib/utils";
 
 type Servico = { id: string; price: number };
 const SERVICOS: Servico[] = [
-  { id: "branding", price: 3500 },
-  { id: "ui",       price: 4100 },
-  { id: "web",      price: 3400 },
-  { id: "dev",      price: 3600 },
-  { id: "motion",   price: 2400 },
-  { id: "social",   price: 1800 },
+  { id: "branding", price: 2500 },
+  { id: "ui",       price: 2900 },
+  { id: "web",      price: 2400 },
+  { id: "dev",      price: 2500 },
+  { id: "motion",   price: 1700 },
+  { id: "social",   price: 1300 },
 ];
 
 type Escopo = "lean" | "completo" | "premium";
 const ESCOPOS: { id: Escopo; mult: number }[] = [
   { id: "lean",     mult: 1.0 },
-  { id: "completo", mult: 1.35 },
-  { id: "premium",  mult: 1.7 },
+  { id: "completo", mult: 1.25 },
+  { id: "premium",  mult: 1.5 },
 ];
 
 type Prazo = "flex" | "normal" | "express";
 const PRAZOS: { id: Prazo; mult: number }[] = [
   { id: "flex",    mult: 0.92 },
   { id: "normal",  mult: 1.0 },
-  { id: "express", mult: 1.3 },
+  { id: "express", mult: 1.2 },
 ];
 
 type Addon = { id: string; price: number };
 const ADDONS: Addon[] = [
-  { id: "copy",      price: 900 },
-  { id: "extra-rev", price: 450 },
-  { id: "handoff",   price: 700 },
+  { id: "copy",      price: 650 },
+  { id: "extra-rev", price: 300 },
+  { id: "handoff",   price: 500 },
 ];
 
 type Item = { label: string; desc?: string };
@@ -64,7 +65,7 @@ const COPY: Record<Locale, {
   wa: { hi: string; services: string; scope: string; timeline: string; addons: string; estimate: string; bye: string; empty: string };
 }> = {
   pt: {
-    label: "Calculadora",
+    label: "Orçamento",
     titleA: "Quanto custa o seu",
     titleB: "projeto?",
     lead: "Marque o que você precisa, escolha o escopo e o prazo. A estimativa muda na hora. Para um valor fechado, me manda a estimativa e eu respondo em até 24 horas.",
@@ -114,15 +115,15 @@ const COPY: Record<Locale, {
     barEmpty: "Marque um serviço",
     barLink: "Ver resumo",
     wa: {
-      hi: "Oi, Drope! Vim da calculadora do site.",
+      hi: "Oi, Drope! Vim da página de orçamento do site.",
       services: "Serviços", scope: "Escopo", timeline: "Prazo", addons: "Adicionais",
       estimate: "Estimativa",
       bye: "Quero conversar sobre o projeto.",
-      empty: "Oi, Drope! Vim da calculadora do site e quero conversar sobre um projeto.",
+      empty: "Oi, Drope! Vim da página de orçamento do site e quero conversar sobre um projeto.",
     },
   },
   en: {
-    label: "Pricing calculator",
+    label: "Quote",
     titleA: "How much does your project",
     titleB: "cost?",
     lead: "Pick what you need, then choose the scope and timeline. The estimate updates as you go. For a final quote, send it to me and I'll reply within 24 hours.",
@@ -172,11 +173,11 @@ const COPY: Record<Locale, {
     barEmpty: "Pick a service",
     barLink: "See summary",
     wa: {
-      hi: "Hi Drope! I came from the calculator on your website.",
+      hi: "Hi Drope! I came from the quote page on your website.",
       services: "Services", scope: "Scope", timeline: "Timeline", addons: "Add-ons",
       estimate: "Estimate",
       bye: "I'd like to talk about the project.",
-      empty: "Hi Drope! I came from the calculator on your website and I'd like to talk about a project.",
+      empty: "Hi Drope! I came from the quote page on your website and I'd like to talk about a project.",
     },
   },
 };
@@ -253,11 +254,11 @@ export function Calculadora() {
       <div className="rb-container">
         {/* ===== CABEÇALHO ===== */}
         <header className="max-w-[980px]">
-          <Label className="text-ink-700 dark:text-ink-200">{c.label}</Label>
-          <h1 className="t-hero mt-4 text-fg-strong">
+          <LineReveal><Label className="text-ink-700 dark:text-ink-200">{c.label}</Label></LineReveal>
+          <Reveal as="h1" delay={0.08} className="t-hero mt-4 text-fg-strong">
             {c.titleA} <span className="t-serif t-hero-serif text-brand">{c.titleB}</span>
-          </h1>
-          <p className="t-lead mt-6 max-w-[760px] text-ink-700 dark:text-ink-200 lg:mt-8">{c.lead}</p>
+          </Reveal>
+          <Reveal as="p" delay={0.18} className="t-lead mt-6 max-w-[760px] text-ink-700 dark:text-ink-200 lg:mt-8">{c.lead}</Reveal>
         </header>
 
         <div className="mt-14 grid grid-cols-1 gap-14 lg:mt-24 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-x-16 lg:gap-y-20 xl:grid-cols-[minmax(0,1fr)_440px] xl:gap-x-24">

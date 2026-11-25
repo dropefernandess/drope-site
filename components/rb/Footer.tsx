@@ -1,10 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
 import { Icon, ICONS, SOCIAL } from "@/components/rb/ui";
+import { LinkedinFilled } from "@/components/rb/icons";
+import { useReducedMotionSafe } from "@/components/rb/motion";
 import { cn } from "@/lib/utils";
+import { DitherField } from "@/components/rb/Dither";
 
 /**
  * Rodapé — Figma "10 Rodapé" (referência 10x Designers): textura vermelha
@@ -16,9 +21,9 @@ const COPY = {
     title: "Antes de ir, veja estes links",
     nav: "Navegar", tools: "Ferramentas", contact: "Contato",
     navLinks: [["/projetos", "Trabalhos"], ["/sobre", "Sobre"], ["/metodo", "Método"], ["/blog", "Blog"]],
-    toolLinks: [["/calculadora", "Calculadora"], ["/proposta", "Briefing"], ["/glossario", "Glossário"]],
+    toolLinks: [["/orcamento", "Orçamento"], ["/proposta", "Briefing"], ["/glossario", "Glossário"]],
     work: "Vamos trabalhar juntos?",
-    workLinks: [["/agendar", "Agendar uma conversa"], ["/calculadora", "Calcular meu projeto"], ["/metodo", "Ver o processo"]],
+    workLinks: [["/agendar", "Agendar uma conversa"], ["/orcamento", "Fazer meu orçamento"], ["/metodo", "Ver o processo"]],
     bye: "Até já!", follow: "Me segue",
     rights: "© 2026 Drope Fernandes · Todos direitos reservados.",
   },
@@ -26,22 +31,47 @@ const COPY = {
     title: "Before you go, check these links",
     nav: "Explore", tools: "Tools", contact: "Contact",
     navLinks: [["/projetos", "Work"], ["/sobre", "About"], ["/metodo", "Method"], ["/blog", "Blog"]],
-    toolLinks: [["/calculadora", "Pricing"], ["/proposta", "Briefing"], ["/glossario", "Glossary"]],
+    toolLinks: [["/orcamento", "Quote"], ["/proposta", "Briefing"], ["/glossario", "Glossary"]],
     work: "Shall we work together?",
-    workLinks: [["/agendar", "Book a call"], ["/calculadora", "Estimate my project"], ["/metodo", "See the process"]],
+    workLinks: [["/agendar", "Book a call"], ["/orcamento", "Get a quote"], ["/metodo", "See the process"]],
     bye: "See you!", follow: "Follow me",
     rights: "© 2026 Drope Fernandes · All rights reserved.",
   },
 };
 
-function Bubble({ children, className }: { children: React.ReactNode; className?: string }) {
+/**
+ * Balão com cursor. Flutua num caminho curto em loop, como os cursores do
+ * projeto antigo (components/ui/AnimatedCursor). Só anda quando o rodapé
+ * está na tela; parado em "reduzir movimento".
+ */
+function Bubble({ children, className, path, duration, delay = 0 }: {
+  children: React.ReactNode;
+  className?: string;
+  path: { x: number[]; y: number[] };
+  duration: number;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { margin: "120px 0px" });
+  const reduced = useReducedMotionSafe();
+  const loop = inView && !reduced;
   return (
-    <span aria-hidden className={cn("pointer-events-none absolute z-10 select-none", className)}>
+    <motion.span
+      ref={ref}
+      aria-hidden
+      className={cn("pointer-events-none absolute z-10 select-none", className)}
+      animate={loop ? path : { x: 0, y: 0 }}
+      transition={loop ? { duration, delay, repeat: Infinity, ease: [0.45, 0, 0.55, 1], times: [0, 0.25, 0.5, 0.75, 1] } : { duration: reduced ? 0 : 0.6 }}
+    >
       <svg width="16" height="16" viewBox="0 0 16 16" className="absolute -left-2.5 -top-2.5 text-brand" fill="currentColor"><path d="M0 0 16 6 6 16Z" /></svg>
       <span className="inline-block rounded-[10px] bg-brand px-[18px] py-2.5 text-lg font-medium leading-none text-ink-50 lg:text-xl">{children}</span>
-    </span>
+    </motion.span>
   );
 }
+
+// Caminhos curtos (px) e ritmos diferentes para os dois balões não andarem juntos.
+const PATH_BYE = { x: [0, 16, 6, 22, 0], y: [0, 8, 16, 4, 0] };
+const PATH_FOLLOW = { x: [0, -14, -24, -8, 0], y: [0, -10, 2, 10, 0] };
 
 const card = "rounded-[24px] border border-ink-700/70 bg-ink-900";
 const linkCls = "text-ink-200 transition-colors hover:text-ink-50";
@@ -52,12 +82,14 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-ink-900 text-ink-50">
       <Image src="/rb/footer-texture.jpg" alt="" fill sizes="100vw" className="object-cover" />
+      {/* Dither vermelho em movimento lento sobre a textura (pedido do Pedro, 25/11) */}
+      <DitherField className="mix-blend-screen opacity-60" />
       <div className="relative mx-auto max-w-[1248px] px-6 pb-12 pt-16 lg:px-6 lg:pb-[72px] lg:pt-[120px]">
         <div className="grid gap-3 lg:grid-cols-[1fr_380px] lg:gap-5">
           {/* Cartão de links */}
           <div className={cn(card, "relative flex flex-col gap-10 p-6 lg:min-h-[520px] lg:justify-between lg:p-12")}>
             <h2 className="t-h2 max-w-[440px]">{c.title}</h2>
-            <Bubble className="right-5 top-[-18px] lg:left-[480px] lg:right-auto lg:top-[130px]">{c.bye}</Bubble>
+            <Bubble path={PATH_BYE} duration={5.2} className="right-5 top-[-18px] lg:left-[480px] lg:right-auto lg:top-[130px]">{c.bye}</Bubble>
             <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-[1fr_1fr_1.7fr] lg:gap-x-10">
               <div>
                 <h3 className="t-small text-ink-50">{c.nav}</h3>
@@ -91,14 +123,14 @@ export function Footer() {
             <div className="relative grid grid-cols-3 gap-[9px] lg:gap-2.5">
               {[
                 { href: SOCIAL.instagram, label: "Instagram", el: <Icon d={ICONS.instagram} size={32} /> },
-                { href: SOCIAL.linkedin, label: "LinkedIn", el: <Icon d={ICONS.linkedin} size={32} /> },
+                { href: SOCIAL.linkedin, label: "LinkedIn", el: <LinkedinFilled size={32} /> },
                 { href: SOCIAL.behance, label: "Behance", el: <span className="text-[30px] font-extrabold leading-none tracking-[-0.02em]">Bē</span> },
               ].map((s) => (
                 <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} className={cn(card, "grid h-[88px] place-items-center transition-colors hover:bg-ink-700 lg:h-[144px]")}>
                   {s.el}
                 </a>
               ))}
-              <Bubble className="right-2 top-[66px] lg:right-10 lg:top-[114px]">{c.follow}</Bubble>
+              <Bubble path={PATH_FOLLOW} duration={6.4} delay={0.9} className="right-2 top-[66px] lg:right-10 lg:top-[114px]">{c.follow}</Bubble>
             </div>
           </div>
         </div>
