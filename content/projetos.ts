@@ -128,9 +128,6 @@ export const projetos: Projeto[] = [
       gallery: [
         { src: "/projetos/bada-bing/01.png", alt: "Logo principal Bada Bing", aspect: "square" },
         { src: "/projetos/bada-bing/02.png", alt: "Aplicação em cardápio", aspect: "portrait" },
-        { src: "/projetos/bada-bing/03.png", alt: "Sistema de cores e tipografia", aspect: "wide" },
-        { src: "/projetos/bada-bing/04.png", alt: "Home do e-commerce", aspect: "video" },
-        { src: "/projetos/bada-bing/05.png", alt: "Página de produto", aspect: "video" },
       ],
       mockups: [
         { src: "/projetos/bada-bing/mockups/capa-macbook-iphone.jpg", alt: "Site da Bada Bing no MacBook e no iPhone, sobre azulejos verdes", w: 2200, h: 1467 },
@@ -150,21 +147,11 @@ export const projetos: Projeto[] = [
           eyebrow: "PROCESSO",
           title: "Do estudo de tipografia italiana ao e-commerce com copy de menu autoral.",
           body: "Comecei pela pesquisa de campo remota: estudei como pizzarias premium de Nápoles e Milão comunicam tradição, mapeei o que os concorrentes de Dubai faziam de igual, e isolei os códigos visuais que ninguém estava usando ali — tipografia de inspiração italiana dos anos 60, paleta terrosa em vez de preto-e-dourado, fotografia de processo em vez de prato montado.\n\nA direção passou por dois ciclos de revisão. O primeiro logotipo era mais ornamentado e acabou descartado: bonito, mas frágil em telas pequenas e no bordado dos uniformes. A versão final é mais sólida e funciona do letreiro à etiqueta.\n\nA copy do menu foi co-construída — escrevi cada descrição de pizza como uma micro-narrativa do processo, não como lista de ingredientes. Uma ideia de animação de abertura no site foi cortada pra não arriscar o prazo; preferi entregar o essencial bem-feito a entregar tudo no susto.",
-          image: {
-            src: "/projetos/bada-bing/06.png",
-            alt: "Aplicação da identidade em embalagens",
-            aspect: "wide",
-          },
         },
         {
           eyebrow: "RESULTADO",
           title: "Marca consistente do digital ao impresso, com tração real no primeiro mês.",
           body: "O e-commerce foi ao ar com menu bilíngue, pedidos via WhatsApp (o canal que o público de Dubai realmente usa pra delivery) e estética alinhada ao espaço físico. No primeiro mês, o tráfego orgânico cresceu cerca de 112% — e aqui vale o contexto honesto: a base inicial era pequena, então o percentual impressiona mais do que o número absoluto. Havia tráfego pago rodando em paralelo, então não dá pra creditar tudo à marca.\n\nO que afirmo com mais segurança: a Bada Bing entrou numa lista do TimeOut Dubai entre pizzarias recomendadas da cidade, e a maioria dos pedidos passou a entrar pelo WhatsApp integrado. O dono relatou que clientes mencionavam a identidade como o motivo de terem parado pra olhar — que era exatamente o trabalho da marca: fazer parar num corredor lotado de concorrentes.",
-          image: {
-            src: "/projetos/bada-bing/07.png",
-            alt: "Identidade aplicada em uniformes e ambiente",
-            aspect: "wide",
-          },
         },
       ],
       next: "use-duali",
@@ -335,9 +322,6 @@ export const projetos: Projeto[] = [
       ],
       gallery: [
         { src: "/projetos/vizir/01.jpg", alt: "Home do site", aspect: "video" },
-        { src: "/projetos/vizir/02.jpg", alt: "Página de serviços", aspect: "video" },
-        { src: "/projetos/vizir/03.jpg", alt: "Templates Instagram", aspect: "square" },
-        { src: "/projetos/vizir/04.jpg", alt: "Site mobile", aspect: "portrait" },
       ],
       sections: [
         {
@@ -349,11 +333,6 @@ export const projetos: Projeto[] = [
           eyebrow: "PROCESSO",
           title: "Tipografia sóbria, copy clara e estrutura simples.",
           body: "Construí o site em torno de 3 perguntas: o que vocês fazem, pra quem, e como começar. Eliminei jargão técnico, organizei serviços em pacotes claros, e usei tipografia robusta + paleta neutra com um único accent azul.",
-          image: {
-            src: "/projetos/vizir/05.jpg",
-            alt: "Detalhe de tipografia",
-            aspect: "wide",
-          },
         },
         {
           eyebrow: "RESULTADO",
