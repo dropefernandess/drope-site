@@ -217,7 +217,7 @@ export default function CVPage() {
                 <MapPin className="size-3.5 text-brand" strokeWidth={2.5} />
                 Brazil · Remote
               </span>
-              <a href="https://dropefernandes.com" target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3.5 py-2 text-xs font-medium text-fg-strong hover:bg-surface transition">
+              <a href="https://www.dropefernandes.com" target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-pill border border-line bg-bg-soft px-3.5 py-2 text-xs font-medium text-fg-strong hover:bg-surface transition">
                 <Globe className="size-3.5 text-brand" strokeWidth={2.5} />
                 dropefernandes.com
               </a>

@@ -12,8 +12,9 @@ export const SITE = {
   /** Cal.com handle pra agendamento */
   calLink: "drope/30min",
 
-  /** URL pública canônica (atualizada quando dropefernandes.com propagar) */
-  url: "https://dropefernandes.com",
+  /** Endereço oficial (canônico). O domínio principal na Vercel é o www;
+   *  dropefernandes.com redireciona para cá. Usado em metadata, sitemap e robots. */
+  url: "https://www.dropefernandes.com",
 } as const;
 
 /**

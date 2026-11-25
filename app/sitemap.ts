@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { projetos } from "@/content/projetos";
 import { posts } from "@/content/posts";
+import { SITE } from "@/lib/config";
 
 /**
  * sitemap.xml dinâmico com i18n (hreflang alternates).
@@ -11,7 +12,7 @@ import { posts } from "@/content/posts";
  *
  * Páginas EN entram automaticamente como entradas próprias também.
  */
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dropefernandes.com";
+const BASE = SITE.url;
 
 /** Gera par de entradas (PT + EN) pra uma rota, com alternates cruzados. */
 function bilingual(

@@ -5,6 +5,7 @@ import { Footer } from "@/components/rb/Footer";
 import { SplashScreen } from "@/components/ui/SplashScreen";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import { SiteChrome } from "@/components/SiteChrome";
+import { SITE } from "@/lib/config";
 import "./globals.css";
 import "./rb-motion.css";
 
@@ -28,7 +29,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dropefernandes.com"),
+  metadataBase: new URL(SITE.url),
   title: {
     default: "Drope Fernandes · Designer multidisciplinar",
     template: "%s · Drope Fernandes",
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
     "Motion Designer",
     "Front-end Designer",
   ],
-  authors: [{ name: "Drope Fernandes", url: "https://dropefernandes.com" }],
+  authors: [{ name: "Drope Fernandes", url: SITE.url }],
   creator: "Drope Fernandes",
   publisher: "Drope Fernandes",
   // Canonical fica em cada página (antes estava aqui e todas as páginas
@@ -118,7 +119,7 @@ const themeScript = `
 // completo: a pessoa (Pedro) E o serviço (estúdio de design) com
 // área de atendimento, range de preço e localização — pra ranquear
 // em buscas regionais (MG) e por serviço ("designer freelance brasil").
-const SITE_URL = "https://dropefernandes.com";
+const SITE_URL = SITE.url;
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [

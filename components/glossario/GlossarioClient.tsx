@@ -12,7 +12,7 @@ import {
   type GlossCategory,
 } from "@/content/glossario";
 
-const SITE = "https://dropefernandes.com";
+const SITE = "https://www.dropefernandes.com";
 const CATEGORY_ORDER: GlossCategory[] = ["branding", "tipografia", "uiux", "motion", "frontend"];
 
 export function GlossarioClient() {

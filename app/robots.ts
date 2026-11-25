@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SITE } from "@/lib/config";
 
 /**
  * robots.txt dinâmico.
@@ -6,10 +7,10 @@ import type { MetadataRoute } from "next";
  * Permite que crawlers (Google, Bing, etc) indexem o site público
  * mas bloqueia rotas que não fazem sentido no índice (API/_next/etc).
  *
- * Conforme dropefernandes.com sobe como prod, atualizar host abaixo.
+ * O host vem de SITE.url (www, o domínio principal).
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dropefernandes.com";
+  const baseUrl = SITE.url;
 
   return {
     rules: [

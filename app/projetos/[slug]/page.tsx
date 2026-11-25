@@ -39,7 +39,7 @@ export default async function CaseStudyPage({ params }: Props) {
   const c = projeto.case;
   const name = nameOf(slug, projeto.title);
   const cats = projeto.categorias.map((cat) => categorias.find((x) => x.slug === cat)?.label).filter(Boolean).join(" · ");
-  const SITE = "https://dropefernandes.com";
+  const SITE = "https://www.dropefernandes.com";
   const creativeWorkSchema = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
