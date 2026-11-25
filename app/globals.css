@@ -463,3 +463,12 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Agenda própria (/agendar): calendário e horários lado a lado só quando o
+   bloco tem espaço; a largura da tela engana (em 1024-1280 a coluna é estreita). */
+.agenda-box { container-type: inline-size; }
+@container (min-width: 580px) {
+  .agenda-box .agenda-grid { grid-template-columns: minmax(0, 1fr) 220px; column-gap: 2.5rem; }
+  .agenda-box .agenda-horarios { border-left-width: 1px; padding-left: 2.5rem; }
+  .agenda-box .agenda-slots { grid-template-columns: minmax(0, 1fr); }
+}

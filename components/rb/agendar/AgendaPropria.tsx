@@ -30,6 +30,8 @@ const COPY = {
     confirmar: "Confirmar agendamento", agendando: "Agendando…",
     errNome: "Escreva seu nome.", errEmail: "Confira o e-mail.",
     ocupado: "Esse horário acabou de ser ocupado. Escolha outro.",
+    rapido: "Confira os dados e confirme de novo.",
+    jaAgendado: "Você já tem uma conversa marcada comigo. Para trocar o horário, responda o convite ou me chame no WhatsApp.",
     falhou: "Não consegui agendar agora. Tente de novo ou me chame no WhatsApp.",
     okTitulo: "Agendado.", okA: "O convite com o link do Google Meet foi para", okB: "Até lá!",
     okMeet: "Abrir o link do Meet",
@@ -50,6 +52,8 @@ const COPY = {
     confirmar: "Confirm booking", agendando: "Booking…",
     errNome: "Please enter your name.", errEmail: "Please check your email.",
     ocupado: "That time was just taken. Please pick another one.",
+    rapido: "Please check your details and confirm again.",
+    jaAgendado: "You already have a call booked with me. To change the time, reply to the invite or message me on WhatsApp.",
     falhou: "I couldn't book it right now. Try again or message me on WhatsApp.",
     okTitulo: "Booked.", okA: "The invite with the Google Meet link went to", okB: "See you then!",
     okMeet: "Open the Meet link",
@@ -140,6 +144,7 @@ export function AgendaPropria() {
   const [meet, setMeet] = useState<string | null>(null);
   const nomeRef = useRef<HTMLInputElement>(null);
   const okRef = useRef<HTMLHeadingElement>(null);
+  const abertoEm = useRef(0);
   const topoRef = useRef<HTMLDivElement>(null);
 
   if (!tz || !mes) {
@@ -167,6 +172,7 @@ export function AgendaPropria() {
     setSlot(s);
     setAviso(null);
     setEtapa("dados");
+    abertoEm.current = Date.now();
     requestAnimationFrame(() => nomeRef.current?.focus());
   };
 
@@ -183,8 +189,13 @@ export function AgendaPropria() {
       const r = await fetch("/api/agenda/agendar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ start: slot, nome, email, notas, locale, site }),
+        body: JSON.stringify({ start: slot, nome, email, notas, locale, site, ms: Date.now() - abertoEm.current }),
       });
+      const erroCod = r.ok ? null : ((await r.clone().json().catch(() => ({}))) as { error?: string }).error;
+      if (erroCod === "jaagendado" || erroCod === "rapido") {
+        setAviso(erroCod === "rapido" ? c.rapido : c.jaAgendado);
+        return;
+      }
       if (r.status === 409) {
         setAviso(c.ocupado);
         setEtapa("escolher");
@@ -298,9 +309,9 @@ export function AgendaPropria() {
   // ===== Escolher dia e horário =====
   const doDia = dia ? porDia.get(dia) ?? [] : [];
   return (
-    <div ref={topoRef} className="rounded-2xl border border-ink-100 p-4 dark:border-ink-700 sm:p-6 lg:p-8">
+    <div ref={topoRef} className="agenda-box rounded-2xl border border-ink-100 p-4 dark:border-ink-700 sm:p-6 lg:p-8">
       <div aria-live="polite" className="empty:hidden">{aviso && <p className={cn(errCls, "mb-4 mt-0")}>{aviso}</p>}</div>
-      <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_220px] md:gap-10">
+      <div className="agenda-grid grid gap-8">
         {/* Mês */}
         <div>
           <div className="flex items-center justify-between gap-4">
@@ -343,7 +354,7 @@ export function AgendaPropria() {
         </div>
 
         {/* Horários do dia */}
-        <div className="md:border-l md:border-ink-100 md:pl-10 md:dark:border-ink-700">
+        <div className="agenda-horarios border-ink-100 dark:border-ink-700">
           <p className="t-label text-ink-700 dark:text-ink-200">{dia ? <span className="first-letter:uppercase">{dataDia(dia)}</span> : c.horarios}</p>
           <div className="mt-4">
             {erro ? (
@@ -358,7 +369,7 @@ export function AgendaPropria() {
             ) : !dia ? (
               <p className="t-small text-ink-700 dark:text-ink-200">{c.escolhaDia}</p>
             ) : (
-              <ul className="grid max-h-[360px] grid-cols-3 gap-2 overflow-y-auto pr-1 md:grid-cols-1">
+              <ul className="agenda-slots grid max-h-[360px] grid-cols-3 gap-2 overflow-y-auto pr-1 sm:grid-cols-4">
                 {doDia.map((s) => (
                   <li key={s}>
                     <button

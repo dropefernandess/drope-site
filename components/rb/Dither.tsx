@@ -84,14 +84,14 @@ export function DitherPortrait({ src, alt, sizes, className, pixel = 4, overlay 
       m.r += (m.target - m.r) * 0.14;
       const data = buf.data, R = m.r, R2 = R * R;
       for (let y = 0; y < H; y++) {
-        const wy = 0.035 * Math.sin(y * 0.13 + t * 0.9);
+        const wy = (overlay ? 0.02 : 0.035) * Math.sin(y * 0.13 + t * 0.9);
         for (let x = 0; x < W; x++) {
           const i = y * W + x, o = i * 4;
-          const wave = 0.07 * Math.sin(x * 0.09 + y * 0.05 - t * 1.6) + wy;
-          const on = (overlay ? lum[i] * 0.62 : lum[i]) + wave > BAYER[(y & 3) * 4 + (x & 3)];
+          const wave = (overlay ? 0.04 : 0.07) * Math.sin(x * 0.09 + y * 0.05 - t * 1.6) + wy;
+          const on = (overlay ? lum[i] * 0.36 - 0.02 : lum[i]) + wave > BAYER[(y & 3) * 4 + (x & 3)];
           const c = on ? RED : INK;
           data[o] = c[0]; data[o + 1] = c[1]; data[o + 2] = c[2];
-          let a = overlay ? (on ? 225 : 0) : 255;
+          let a = overlay ? (on ? 175 : 0) : 255;
           if (R > 0.5) {
             const dx = x - m.x, dy = y - m.y, d2 = dx * dx + dy * dy;
             if (d2 < R2) { const k = Math.sqrt(d2) / R; a = k < 0.65 ? 0 : Math.round(a * ((k - 0.65) / 0.35)); }

@@ -55,9 +55,9 @@ async function accessToken(): Promise<string> {
 }
 
 // Simulação local: alguns compromissos fixos + o que for agendado na sessão.
-const mockAgendados: Busy[] = [];
+const mockAgendados: (Busy & { email: string; created: string })[] = [];
 function mockOcupados(timeMin: string, timeMax: string): Busy[] {
-  const out: Busy[] = [...mockAgendados];
+  const out: Busy[] = mockAgendados.map(({ start, end }) => ({ start, end }));
   for (let t = Date.parse(timeMin); t < Date.parse(timeMax); t += 86400e3) {
     const d = new Date(t - 3 * 3600e3).toISOString().slice(0, 10);
     out.push({ start: `${d}T10:00:00${AGENDA.offset}`, end: `${d}T11:00:00${AGENDA.offset}` });
@@ -97,7 +97,7 @@ export async function criarEvento(p: {
   locale: "pt" | "en";
 }): Promise<{ id: string; meet?: string }> {
   if (isMock()) {
-    mockAgendados.push({ start: p.start, end: p.end });
+    mockAgendados.push({ start: p.start, end: p.end, email: p.email.toLowerCase(), created: new Date().toISOString() });
     return { id: "mock", meet: "https://meet.google.com/" };
   }
   const e = env();
@@ -116,6 +116,8 @@ export async function criarEvento(p: {
       attendees: [{ email: p.email, displayName: p.nome }],
       conferenceData: { createRequest: { requestId: crypto.randomUUID(), conferenceSolutionKey: { type: "hangoutsMeet" } } },
       reminders: { useDefault: true },
+      // Marca do site: permite contar agendamentos feitos por aqui (travas contra abuso).
+      extendedProperties: { private: { origem: "site", email: p.email.toLowerCase() } },
     }),
     cache: "no-store",
   });
@@ -126,4 +128,25 @@ export async function criarEvento(p: {
     conferenceData?: { entryPoints?: { entryPointType: string; uri: string }[] };
   };
   return { id: j.id, meet: j.hangoutLink ?? j.conferenceData?.entryPoints?.find((x) => x.entryPointType === "video")?.uri };
+}
+
+/** Agendamentos futuros feitos pelo site (para as travas contra abuso). */
+export async function agendadosPeloSite(): Promise<{ email: string; created: string }[]> {
+  if (isMock()) return mockAgendados.filter((m) => Date.parse(m.end) > Date.now()).map(({ email, created }) => ({ email, created }));
+  const e = env();
+  const token = await accessToken();
+  const q = new URLSearchParams({
+    privateExtendedProperty: "origem=site",
+    timeMin: new Date().toISOString(),
+    singleEvents: "true",
+    maxResults: "250",
+    fields: "items(created,extendedProperties)",
+  });
+  const r = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(e.calendar)}/events?${q}`, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
+  if (!r.ok) throw new Error(`google events.list ${r.status}`);
+  const j = (await r.json()) as { items?: { created?: string; extendedProperties?: { private?: Record<string, string> } }[] };
+  return (j.items ?? []).map((it) => ({ email: it.extendedProperties?.private?.email ?? "", created: it.created ?? "" }));
 }

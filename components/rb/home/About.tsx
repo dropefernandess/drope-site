@@ -48,7 +48,7 @@ export function About() {
               ? "Construo marcas, interfaces e sites que saem do conceito e chegam ao ar, para clientes dentro e fora do Brasil."
               : "I build brands, interfaces and websites that go from concept to launch, for clients in Brazil and abroad."}
           </Reveal>
-          <Reveal delay={0.24} className="mt-8 grid grid-cols-2 gap-3 lg:mt-auto lg:gap-5">
+          <Reveal delay={0.24} className="mt-8 grid grid-cols-2 gap-3 lg:mt-auto lg:gap-5 lg:pt-12">
             <div className={`${cardCls} col-span-2 sm:col-span-1`}>
               <Label>{pt ? "Ouvindo agora" : "Listening to"}</Label>
               <iframe
