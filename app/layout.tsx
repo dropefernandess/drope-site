@@ -30,12 +30,11 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL("https://dropefernandes.com"),
   title: {
-    default:
-      "Designer Multidisciplinar Freelance · Pedro Fernandes (Drope) — Brasil & Internacional",
+    default: "Drope Fernandes · Designer multidisciplinar",
     template: "%s · Drope Fernandes",
   },
   description:
-    "Pedro Fernandes (Drope) — Designer Multidisciplinar com 7 anos no ofício. Branding, UI/UX e front-end pra marcas no Brasil e no exterior. Do conceito ao ar.",
+    "Drope Fernandes, designer multidisciplinar há 7 anos. Branding, web design, UI/UX, direção de arte, motion e social media, do conceito ao ar.",
   keywords: [
     "Designer Multidisciplinar",
     "Designer Freelance Brasil",
@@ -51,8 +50,8 @@ export const metadata: Metadata = {
     "Motion Designer",
     "Front-end Designer",
   ],
-  authors: [{ name: "Pedro Fernandes", url: "https://dropefernandes.com" }],
-  creator: "Pedro Fernandes (Drope)",
+  authors: [{ name: "Drope Fernandes", url: "https://dropefernandes.com" }],
+  creator: "Drope Fernandes",
   publisher: "Drope Fernandes",
   // Canonical fica em cada página (antes estava aqui e todas as páginas
   // sem metadata própria herdavam canonical "/", apontando para a Home).
@@ -60,25 +59,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Drope Fernandes",
-    title:
-      "Designer Multidisciplinar Freelance · Pedro Fernandes (Drope)",
+    title: "Drope Fernandes · Designer multidisciplinar",
     description:
-      "Branding, UI/UX e front-end pra marcas no Brasil e no exterior. Do conceito ao ar, com consistência visual em cada etapa.",
+      "Branding, web design, UI/UX, direção de arte, motion e social media. Do conceito ao ar, sem se perder no caminho.",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "Drope Fernandes — Designer Multidisciplinar",
+        alt: "Drope Fernandes · Designer multidisciplinar",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Designer Multidisciplinar Freelance · Pedro Fernandes (Drope)",
+    title: "Drope Fernandes · Designer multidisciplinar",
     description:
-      "Branding, UI/UX e front-end pra marcas no Brasil e no exterior.",
+      "Branding, web design, UI/UX, direção de arte, motion e social media. Do conceito ao ar.",
     images: ["/og.jpg"],
     creator: "@dropefernandes",
   },

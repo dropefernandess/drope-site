@@ -18,11 +18,15 @@ export const SERVICE_INFO: { key: ServiceKey; img: string; alt: { pt: string; en
   { key: "branding", img: "/rb/services/branding.jpg", alt: { pt: "Chaveiros bordados da GO Trace", en: "GO Trace embroidered key tags" },
     desc: { pt: "Marcas que nascem ou renascem com sistema: estratégia, identidade visual, tom de voz e manual.", en: "Brands born or reborn with a system: strategy, visual identity, tone of voice and guidelines." } },
   { key: "web", img: "/projetos/bada-bing/01.png", alt: { pt: "Site da Bada Bing aberto num notebook", en: "Bada Bing website on a laptop" },
-    desc: { pt: "Sites e produtos digitais do layout ao ar, com UI/UX e código na mesma cabeça.", en: "Websites and digital products from layout to launch, with UI/UX and code in the same head." } },
+    desc: { pt: "Sites institucionais e landing pages do layout ao ar, com o desenvolvimento incluído.", en: "Company websites and landing pages from layout to launch, with development included." } },
+  { key: "ui", img: "/projetos/moneyfy/07.jpg", alt: { pt: "Painel da MoneyFy aberto num notebook", en: "MoneyFy dashboard on a laptop" },
+    desc: { pt: "Apps, painéis e produtos digitais: fluxos, protótipo e telas finais, prontos para o time de desenvolvimento.", en: "Apps, dashboards and digital products: flows, prototype and final screens, ready for the development team." } },
   { key: "arte", img: "/rb/covers/use-duali.jpg", alt: { pt: "Outdoor da Use Dualí", en: "Use Dualí billboard" },
-    desc: { pt: "Campanhas, conteúdo e peças que mantêm a marca coerente em qualquer formato.", en: "Campaigns, content and pieces that keep the brand coherent in any format." } },
+    desc: { pt: "Campanhas, peças e produções de foto e vídeo que levam a marca para fora do manual.", en: "Campaigns, pieces and photo and video productions that take the brand beyond the guidelines." } },
   { key: "motion", img: "/rb/covers/sirius.jpg", alt: { pt: "Fachada com a marca da Sirius", en: "Sirius brand on a building facade" },
-    desc: { pt: "Movimento com vocabulário próprio: motion de marca, animação de logo e conteúdo para redes.", en: "Motion with its own vocabulary: brand motion, logo animation and social content." } },
+    desc: { pt: "Movimento com vocabulário próprio: motion de marca, animação de logo e vinhetas.", en: "Motion with its own vocabulary: brand motion, logo animation and video openers." } },
+  { key: "social", img: "/projetos/use-duali/08.png", alt: { pt: "Posts da Use Dualí para o Instagram", en: "Use Dualí Instagram posts" },
+    desc: { pt: "Templates, calendário e posts para as redes, no mesmo sistema da marca.", en: "Templates, content calendar and posts for social, in the same brand system." } },
 ];
 
 const nameCls = "text-[clamp(44px,calc(34.86px+2.343vw),72px)] font-semibold leading-[1.17] tracking-[-0.03em]";
@@ -37,7 +41,7 @@ export function Services() {
       <div className="rb-container py-16 lg:py-[100px]">
         <Reveal y={16} className="flex items-center justify-between">
           <Label as="h2" className="text-ink-700 dark:text-ink-200"><span id="servicos">{locale === "pt" ? "Serviços" : "Services"}</span></Label>
-          <span className="t-label text-ink-700 dark:text-ink-200">(04)</span>
+          <span className="t-label text-ink-700 dark:text-ink-200">({String(SERVICE_INFO.length).padStart(2, "0")})</span>
         </Reveal>
         <div className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-[1fr_624px] lg:gap-16">
           <RevealGroup as="ul" stagger={0.08}>

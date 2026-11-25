@@ -31,7 +31,12 @@ function useVisible(ref: React.RefObject<Element | null>, onChange: (v: boolean)
   }, [ref]);
 }
 
-export function DitherPortrait({ src, alt, sizes, className, pixel = 4 }: { src: string; alt: string; sizes?: string; className?: string; pixel?: number }) {
+/**
+ * overlay: só os pixels vermelhos por cima da foto, sem o preto (pedido do
+ * Pedro, 25/11: o preto opaco tirava os detalhes da foto). Densidade menor
+ * para a foto continuar legível por baixo.
+ */
+export function DitherPortrait({ src, alt, sizes, className, pixel = 4, overlay = false }: { src: string; alt: string; sizes?: string; className?: string; pixel?: number; overlay?: boolean }) {
   const wrap = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const api = useRef<{ setVisible: (v: boolean) => void } | null>(null);
@@ -83,13 +88,13 @@ export function DitherPortrait({ src, alt, sizes, className, pixel = 4 }: { src:
         for (let x = 0; x < W; x++) {
           const i = y * W + x, o = i * 4;
           const wave = 0.07 * Math.sin(x * 0.09 + y * 0.05 - t * 1.6) + wy;
-          const on = lum[i] + wave > BAYER[(y & 3) * 4 + (x & 3)];
+          const on = (overlay ? lum[i] * 0.62 : lum[i]) + wave > BAYER[(y & 3) * 4 + (x & 3)];
           const c = on ? RED : INK;
           data[o] = c[0]; data[o + 1] = c[1]; data[o + 2] = c[2];
-          let a = 255;
+          let a = overlay ? (on ? 225 : 0) : 255;
           if (R > 0.5) {
             const dx = x - m.x, dy = y - m.y, d2 = dx * dx + dy * dy;
-            if (d2 < R2) { const k = Math.sqrt(d2) / R; a = k < 0.65 ? 0 : Math.round(255 * ((k - 0.65) / 0.35)); }
+            if (d2 < R2) { const k = Math.sqrt(d2) / R; a = k < 0.65 ? 0 : Math.round(a * ((k - 0.65) / 0.35)); }
           }
           data[o + 3] = a;
         }
@@ -125,7 +130,7 @@ export function DitherPortrait({ src, alt, sizes, className, pixel = 4 }: { src:
       alive = false; cancelAnimationFrame(raf); ro.disconnect();
       el.removeEventListener("pointermove", onMove); el.removeEventListener("pointerleave", onLeave); el.removeEventListener("pointerdown", onDown);
     };
-  }, [src, pixel]);
+  }, [src, pixel, overlay]);
 
   useVisible(wrap, (v) => api.current?.setVisible(v));
 

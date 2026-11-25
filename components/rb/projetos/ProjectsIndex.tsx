@@ -17,8 +17,8 @@ import { cn } from "@/lib/utils";
  * vêm do site atual.
  */
 const COPY = {
-  pt: { title: "Trabalhos", desc: "Marcas, sites, direção de arte e motion levados do conceito ao ar. Cada projeto abre com o caminho e o resultado.", grid: "Grade", wide: "Ampla", filter: "Filtrar por área", all: "Tudo", view: "Escolher visualização", empty: "Nenhum projeto nesta área ainda." },
-  en: { title: "Work", desc: "Brands, websites, art direction and motion taken from concept to launch. Each project opens with the path and the result.", grid: "Grid", wide: "Full", filter: "Filter by area", all: "All", view: "Choose view", empty: "No projects in this area yet." },
+  pt: { title: "Trabalhos", desc: "Marcas, sites, produtos digitais, direção de arte, motion e social media levados do conceito ao ar. Cada projeto abre com o caminho e o resultado.", grid: "Grade", wide: "Ampla", filter: "Filtrar por área", all: "Tudo", view: "Escolher visualização", empty: "Nenhum projeto nesta área ainda." },
+  en: { title: "Work", desc: "Brands, websites, digital products, art direction, motion and social media taken from concept to launch. Each project opens with the path and the result.", grid: "Grid", wide: "Full", filter: "Filter by area", all: "All", view: "Choose view", empty: "No projects in this area yet." },
 };
 
 type Filter = "all" | ServiceKey;

@@ -8,12 +8,15 @@ import { LinkedinFilled } from "@/components/rb/icons";
 import { LineReveal, Reveal, RevealGroup } from "@/components/rb/motion";
 import type { Locale } from "@/lib/i18n/dictionaries";
 import { waLink } from "@/lib/config";
+import { AgendaPropria } from "@/components/rb/agendar/AgendaPropria";
 
 /**
  * /agendar — Contato e agendamento (rebrand 2026).
  *
- * Cal.com embed inline (handle "drope/30min"), contato direto (e-mail,
- * WhatsApp e redes) e o que acontece depois de agendar.
+ * Agenda própria ligada ao Google Agenda do Pedro (AgendaPropria) quando as
+ * credenciais estão configuradas; senão, o Cal.com inline (drope/30min) como
+ * antes. Mais o contato direto (e-mail, WhatsApp e redes) e o que acontece
+ * depois de agendar.
  *
  * Como o embed funciona:
  *  - Carrega o script oficial do Cal.com via CDN
@@ -65,7 +68,7 @@ const COPY: Record<Locale, {
     depoisLabel: "Depois de agendar",
     depoisTitle: "O que acontece depois",
     steps: [
-      { t: "Você escolhe o horário", d: "Eu confirmo o agendamento e o link do Google Meet chega no seu e-mail." },
+      { t: "Você escolhe o horário", d: "O convite com o link do Google Meet chega no seu e-mail." },
       { t: "A gente conversa por 30 minutos", d: "Você me conta sobre o projeto, o momento da marca e o prazo. Eu pergunto, escuto e explico como trabalho." },
       { t: "Você recebe uma proposta", d: "Se fizer sentido seguir, mando uma proposta com escopo, etapas, prazo e investimento." },
     ],
@@ -94,18 +97,19 @@ const COPY: Record<Locale, {
     depoisLabel: "After booking",
     depoisTitle: "What happens next",
     steps: [
-      { t: "You pick a time", d: "I confirm the booking and the Google Meet link lands in your inbox." },
+      { t: "You pick a time", d: "The invite with the Google Meet link lands in your inbox." },
       { t: "We talk for 30 minutes", d: "You tell me about the project, where the brand stands and the timeline. I ask, listen and explain how I work." },
       { t: "You get a proposal", d: "If it makes sense to move forward, I send a proposal with scope, steps, timeline and investment." },
     ],
   },
 };
 
-export function Agendar() {
+export function Agendar({ propria = false }: { propria?: boolean }) {
   const { locale } = useLocale();
   const c = COPY[locale];
 
   useEffect(() => {
+    if (propria) return;
     // Cal.com embed snippet (loader oficial)
     (function (C: typeof window, A: string, L: string) {
       const p = function (a: any, ar: any) {
@@ -156,7 +160,7 @@ export function Agendar() {
       hideEventTypeDetails: false,
       layout: "month_view",
     });
-  }, []);
+  }, [propria]);
 
   const rowCls =
     "group flex min-h-[64px] items-center justify-between gap-4 border-b border-ink-700 py-4 transition-colors hover:text-ink-50";
@@ -193,6 +197,9 @@ export function Agendar() {
           {/* ===== AGENDA ===== */}
           <section aria-labelledby="agenda-titulo" className="min-w-0">
             <h2 id="agenda-titulo" className="t-label text-ink-700 dark:text-ink-200">{c.agenda}</h2>
+            {propria ? (
+              <div className="mt-4"><AgendaPropria /></div>
+            ) : (<>
             <div id="cal-inline" className="mt-4 min-h-[560px] w-full overflow-hidden rounded-2xl" />
             <p className="t-small mt-4 text-ink-700 dark:text-ink-200">
               {c.fallbackA}{" "}
@@ -205,6 +212,7 @@ export function Agendar() {
                 {c.fallbackB}
               </a>
             </p>
+            </>)}
           </section>
 
           {/* ===== CONTATO DIRETO ===== */}

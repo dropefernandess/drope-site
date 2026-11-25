@@ -10,7 +10,7 @@ import { AGORA } from "@/content/rb/agora";
 /**
  * Quem sou — Figma "03 Quem sou" (fundo escuro, "multidisciplinar" em
  * vermelho). Cartões "agora" na linha da Broadcast; a hora local de
- * Senador Firmino é real.
+ * de Brasília é real.
  */
 
 function LocalTime() {
@@ -33,8 +33,8 @@ export function About() {
     <section aria-labelledby="quem-sou" className="bg-ink-900 text-ink-50">
       <div className="rb-container grid gap-10 py-16 lg:grid-cols-[560px_1fr] lg:gap-20 lg:py-[100px]">
         <ImageReveal radius={8} className="relative order-2 aspect-[4/5] overflow-hidden rounded-lg lg:order-1">
-          {/* Dither animado em teste (pedido do Pedro, 25/11): o mouse revela a foto; no celular, um toque. */}
-          <DitherPortrait src="/rb/portrait.jpg" alt={pt ? "Drope Fernandes sentado numa poltrona de couro" : "Drope Fernandes sitting in a leather armchair"} sizes="(min-width: 1024px) 560px, 100vw" pixel={3} className="absolute inset-0" />
+          {/* Dither animado (pedido do Pedro, 25/11): só os pixels vermelhos por cima da foto; o mouse limpa um círculo, no celular um toque. */}
+          <DitherPortrait src="/rb/portrait.jpg" alt={pt ? "Drope Fernandes sentado numa poltrona de couro" : "Drope Fernandes sitting in a leather armchair"} sizes="(min-width: 1024px) 560px, 100vw" pixel={3} overlay className="absolute inset-0" />
         </ImageReveal>
         <div className="order-1 flex flex-col lg:order-2">
           <LineReveal>
@@ -45,8 +45,8 @@ export function About() {
           </Reveal>
           <Reveal as="p" delay={0.16} className="t-small mt-4 max-w-[600px] text-ink-400 lg:mt-9">
             {pt
-              ? "Construo marcas, interfaces e sites que saem do conceito e chegam ao ar. Atendo clientes no Brasil, nos Emirados Árabes e em Portugal, daqui de Senador Firmino, MG."
-              : "I build brands, interfaces and websites that go from concept to launch. I work with clients in Brazil, the United Arab Emirates and Portugal, from Senador Firmino, Brazil."}
+              ? "Construo marcas, interfaces e sites que saem do conceito e chegam ao ar, para clientes dentro e fora do Brasil."
+              : "I build brands, interfaces and websites that go from concept to launch, for clients in Brazil and abroad."}
           </Reveal>
           <Reveal delay={0.24} className="mt-8 grid grid-cols-2 gap-3 lg:mt-auto lg:gap-5">
             <div className={`${cardCls} col-span-2 sm:col-span-1`}>
@@ -55,7 +55,7 @@ export function About() {
                 title={pt ? "Bajo de la Piel, de Milo J, no Spotify" : "Bajo de la Piel by Milo J on Spotify"}
                 src={AGORA.spotifyEmbed}
                 width="100%"
-                height="80"
+                height="152"
                 loading="lazy"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 className="mt-3 block rounded-xl border-0"
@@ -70,7 +70,7 @@ export function About() {
               <p className="t-small mt-1.5">{AGORA.aprendendo[locale]}</p>
             </div>
             <div className={`${cardCls} col-span-2 sm:col-span-1`}>
-              <Label>Senador Firmino, MG</Label>
+              <Label>{pt ? "Horário de Brasília" : "Brasília time"}</Label>
               <p className="t-small mt-1.5"><LocalTime /> {pt ? "agora" : "right now"}</p>
             </div>
           </Reveal>

@@ -35,10 +35,10 @@ const COPY = {
     valoresL: "05 · Valores",
     valores: ["Profundidade", "Compromisso", "Excelência", "Resiliência", "Inovação", "Dedicação", "Determinação"],
     numerosL: "06 · Em números",
-    numeros: [["Anos de ofício", "Desde 2018, do design gráfico ao produto digital", "7"], ["Projetos publicados", "Marcas, sites e produtos digitais", "14"], ["Países atendidos", "Brasil, Emirados Árabes e Portugal", "3"], ["Clientes que voltam", "Fazem um segundo projeto comigo", "82%"], ["Disciplinas, um processo", "Branding, web design, direção de arte e motion design", "4"]],
+    numeros: [["Anos de ofício", "Desde 2018, do design gráfico ao produto digital", "7"], ["Projetos publicados", "Marcas, sites e produtos digitais", "14"], ["Países atendidos", "Clientes dentro e fora do Brasil", "3"], ["Clientes que voltam", "Fazem um segundo projeto comigo", "82%"], ["Disciplinas, um processo", "Branding, web, UI/UX, direção de arte, motion e social media", "6"]],
     creditosL: "07 · Créditos",
     faco: "Faço", opero: "Também opero", fora: "Fora do Figma", ouvindo: "Ouvindo", lendo: "Lendo", aprendendo: "Aprendendo", onde: "De onde crio",
-    facoList: ["Branding", "Web design", "Direção de arte", "Motion design"],
+    facoList: ["Branding", "Web design", "UI/UX design", "Direção de arte", "Motion design", "Social media"],
     operoList: ["Design systems e tokens", "Front-end em Next.js", "Copywriting", "Matte painting"],
     trabalhos: "Ver todos os trabalhos",
   },
@@ -59,10 +59,10 @@ const COPY = {
     valoresL: "05 · Values",
     valores: ["Depth", "Commitment", "Excellence", "Resilience", "Innovation", "Dedication", "Determination"],
     numerosL: "06 · In numbers",
-    numeros: [["Years in the craft", "Since 2018, from graphic design to digital product", "7"], ["Published projects", "Brands, websites and digital products", "14"], ["Countries served", "Brazil, United Arab Emirates and Portugal", "3"], ["Returning clients", "Do a second project with me", "82%"], ["Disciplines, one process", "Branding, web design, art direction and motion", "4"]],
+    numeros: [["Years in the craft", "Since 2018, from graphic design to digital product", "7"], ["Published projects", "Brands, websites and digital products", "14"], ["Countries served", "Clients in and outside Brazil", "3"], ["Returning clients", "Do a second project with me", "82%"], ["Disciplines, one process", "Branding, web, UI/UX, art direction, motion and social media", "6"]],
     creditosL: "07 · Credits",
     faco: "I do", opero: "I also run", fora: "Outside Figma", ouvindo: "Listening to", lendo: "Reading", aprendendo: "Learning", onde: "Where I create",
-    facoList: ["Branding", "Web design", "Art direction", "Motion & graphics"],
+    facoList: ["Branding", "Web design", "UI/UX design", "Art direction", "Motion & graphics", "Social media"],
     operoList: ["Design systems and tokens", "Front-end in Next.js", "Copywriting", "Matte painting"],
     trabalhos: "See all work",
   },
@@ -278,7 +278,7 @@ export function AboutPage() {
           <RevealGroup as="dl" stagger={0.07} className="mx-auto mt-12 max-w-[760px] space-y-7 lg:mt-24 lg:space-y-10">
             {([
               [c.faco, c.facoList], [c.opero, c.operoList], [c.fora, AGORA.hobbies[locale]],
-              [c.ouvindo, [AGORA.ouvindo[locale]]], [c.lendo, [AGORA.lendo[locale]]], [c.aprendendo, [AGORA.aprendendo[locale]]], [c.onde, ["Senador Firmino, MG"]],
+              [c.ouvindo, [AGORA.ouvindo[locale]]], [c.lendo, [AGORA.lendo[locale]]], [c.aprendendo, [AGORA.aprendendo[locale]]],
             ] as [string, string[]][]).map(([k, vs]) => (
               <Reveal key={k} y={20} className="grid grid-cols-[120px_1fr] gap-4 lg:grid-cols-[1fr_1fr] lg:gap-10">
                 <dt className="t-label pt-1 text-right text-ink-400">{k}</dt>

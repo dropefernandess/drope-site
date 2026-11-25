@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Icon, ICONS, Label } from "@/components/rb/ui";
@@ -8,17 +9,17 @@ import { LineReveal, Reveal, RevealGroup } from "@/components/rb/motion";
 /**
  * Depoimentos — Figma "07 Depoimentos". Números em vermelho; no desktop os
  * quatro cartões em grade 2×2, no celular um carrossel com o próximo cartão
- * aparecendo na borda, setas e contador. Fotos dos clientes pendentes:
- * por enquanto, iniciais.
+ * aparecendo na borda, setas e contador. Fotos dos clientes enviadas pelo
+ * Pedro no Figma (página FOTOS), recortadas em public/rb/clientes.
  */
 export const QUOTES = [
-  { name: "Isabela Silveira", role: { pt: "Sócia e diretora · Aroeira Studio", en: "Partner and director · Aroeira Studio" },
+  { name: "Isabela Silveira", photo: "/rb/clientes/isabela-silveira.jpg", role: { pt: "Sócia e diretora · Aroeira Studio", en: "Partner and director · Aroeira Studio" },
     q: { pt: "Drope entrega o que combinou, e ainda traz uma opinião sobre por que aquilo é o melhor caminho. Direção, não só execução.", en: "Drope delivers what was agreed, and brings an opinion on why that's the best path. Direction, not just execution." } },
-  { name: "Marcelo Lavinas", role: { pt: "Founder · MoneyFy", en: "Founder · MoneyFy" },
+  { name: "Marcelo Lavinas", photo: "/rb/clientes/marcelo-lavinas.jpg", role: { pt: "Founder · MoneyFy", en: "Founder · MoneyFy" },
     q: { pt: "Pegou identidade, UI e ainda nos guiou na arquitetura do produto. Achei que ia precisar de três fornecedores, precisei de um.", en: "He handled identity, UI and even guided us through the product architecture. I thought I'd need three vendors, I needed one." } },
-  { name: "Rafael Andrade", role: { pt: "CEO · Sirius Agência", en: "CEO · Sirius Agência" },
+  { name: "Rafael Andrade", photo: "/rb/clientes/rafael-andrade.jpg", role: { pt: "CEO · Sirius Agência", en: "CEO · Sirius Agência" },
     q: { pt: "Conheço o Drope desde o início. Cada projeto que passa por ele volta com uma camada a mais que eu não tinha pedido, e que faz diferença.", en: "I've known Drope from the start. Every project that goes through him comes back with an extra layer I didn't ask for, and it makes a difference." } },
-  { name: "Poliana Carolina", role: { pt: "Sócia · Vizir Contabilidade", en: "Partner · Vizir Contabilidade" },
+  { name: "Poliana Carolina", photo: "/rb/clientes/poliana-carolina.jpg", role: { pt: "Sócia · Vizir Contabilidade", en: "Partner · Vizir Contabilidade" },
     q: { pt: "Site, social e papelaria conduzidos com a mesma direção. Sem ruído, sem retrabalho. Profissional fora da curva para o nosso segmento.", en: "Website, social and stationery led with the same direction. No noise, no rework. An outstanding professional for our field." } },
 ];
 
@@ -28,15 +29,13 @@ const STATS = [
   { v: "82%", pt: "voltam para um segundo projeto", en: "come back for a second project" },
 ];
 
-const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("");
-
 function QuoteCard({ q, className = "" }: { q: (typeof QUOTES)[number]; className?: string }) {
   const { locale } = useLocale();
   return (
     <figure className={`flex flex-col justify-between rounded-2xl border border-ink-100 p-6 dark:border-ink-700 lg:min-h-[306px] lg:p-8 ${className}`}>
       <blockquote className="t-body text-fg-strong">“{q.q[locale]}”</blockquote>
       <figcaption className="mt-6 flex items-center gap-4">
-        <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-full bg-ink-100 text-sm font-semibold text-ink-700 lg:size-12">{initials(q.name)}</span>
+        <Image src={q.photo} alt="" width={48} height={48} quality={90} className="size-11 shrink-0 rounded-full object-cover lg:size-12" />
         <span>
           <span className="t-small block text-fg-strong">{q.name}</span>
           <span className="block text-sm text-ink-700 dark:text-ink-200 lg:text-base">{q.role[locale]}</span>

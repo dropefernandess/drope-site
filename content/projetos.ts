@@ -74,7 +74,7 @@ export type ProjectCase = {
     wide?: { src: string; alt: string };
     pair?: { src: string; alt: string }[];
     resultados?: { label: string; title: string; body: string }[];
-    citacao?: { quote: string; author: string };
+    citacao?: { quote: string; author: string; photo?: string };
   };
 };
 
@@ -512,7 +512,7 @@ export const projetos: Projeto[] = [
           { label: "Satisfação", title: "NPS de 6,2 para 8,4", body: "Nos primeiros 90 dias. A amostra ainda está crescendo, então o número tende a se estabilizar." },
           { label: "Retenção", title: "Cerca de 27% menos churn", body: "Entre os lojistas novos, no mesmo período. O suporte também passou a receber menos dúvidas repetidas sobre o primeiro acesso." },
         ],
-        citacao: { quote: "Acertou na mão demais. Ficou fino de verdade, e eu não imagino como poderia ficar melhor.", author: "Yuri Giovannetti · GO Trace" },
+        citacao: { quote: "Acertou na mão demais. Ficou fino de verdade, e eu não imagino como poderia ficar melhor.", author: "Yuri Giovannetti · CEO e estrategista", photo: "/rb/clientes/yuri-giovannetti.jpg" },
       },
     },
   },
@@ -941,7 +941,7 @@ export const projetos: Projeto[] = [
         cliente: "Aroeira Studio",
         setor: "Produtos feitos à mão",
         role: "Branding, Embalagem",
-        duracao: "[a confirmar]",
+        duracao: "6 semanas",
         entregaveis: ["Identidade visual", "Tags e etiquetas", "Sacola e caixa de envio", "Papelaria"],
       },
       tags: ["Branding", "Embalagem"],
@@ -978,7 +978,7 @@ export const projetos: Projeto[] = [
         cliente: "Espaço Equilíbrio",
         setor: "Saúde · Fisioterapia e psicologia",
         role: "Branding, Sinalização",
-        duracao: "[a confirmar]",
+        duracao: "6 semanas",
         entregaveis: ["Identidade visual", "Sinalização", "Papelaria", "Site e redes"],
       },
       tags: ["Branding", "Sinalização"],
@@ -1015,7 +1015,7 @@ export const projetos: Projeto[] = [
         cliente: "Marisco Filmes",
         setor: "Audiovisual · Bahia",
         role: "Branding, Direção de arte",
-        duracao: "[a confirmar]",
+        duracao: "6 semanas",
         entregaveis: ["Identidade visual", "Papelaria", "Social media", "Peças de evento"],
       },
       tags: ["Branding", "Direção de arte"],

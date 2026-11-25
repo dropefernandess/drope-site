@@ -24,7 +24,7 @@ export const FAQS = {
     ["Quanto tempo leva um projeto?", "Identidade visual leva de 3 a 5 semanas. Site institucional, de 6 a 10. O pacote completo, com marca, site e motion, de 8 a 12 semanas. Tudo combinado antes de começar."],
     ["Posso pedir alterações?", "Pode. Cada fase tem rodadas de revisão combinadas antes, e cada rodada reúne todas as mudanças daquela etapa, para o projeto não virar pingue-pongue."],
     ["Como funciona o pagamento?", "Metade no início, para reservar a agenda, e metade na entrega. Projetos longos são divididos em etapas combinadas antes. Contrato e recibos sempre formalizados."],
-    ["Faz projetos fora do Brasil?", "Faço. Já atendi marcas no Brasil, nos Emirados Árabes e em Portugal. Crio de Senador Firmino, MG, e o fuso se ajusta ao projeto."],
+    ["Faz projetos fora do Brasil?", "Faço. Já atendi marcas fora do Brasil, e as conversas se ajustam ao seu fuso."],
     ["O que acontece depois da entrega?", "São 30 dias de acompanhamento depois da entrega, com documentação completa. Ajustes futuros e manutenção são combinados à parte."],
   ],
   en: [
@@ -32,7 +32,7 @@ export const FAQS = {
     ["How long does a project take?", "A visual identity takes 3 to 5 weeks. A company website, 6 to 10. The full package, with brand, website and motion, 8 to 12 weeks. Everything agreed before we start."],
     ["Can I ask for changes?", "Yes. Each phase has review rounds agreed beforehand, and each round gathers every change for that step, so the project doesn't turn into ping-pong."],
     ["How does payment work?", "Half up front to book the schedule, half on delivery. Longer projects are split into milestones agreed in advance. Contract and receipts, always."],
-    ["Do you work outside Brazil?", "I do. I've worked with brands in Brazil, the United Arab Emirates and Portugal. I create from Senador Firmino, Brazil, and adjust to your time zone."],
+    ["Do you work outside Brazil?", "I do. I've worked with brands outside Brazil, and calls adjust to your time zone."],
     ["What happens after delivery?", "30 days of follow-up after delivery, with complete documentation. Future changes and maintenance are agreed separately."],
   ],
 };

@@ -7,18 +7,17 @@ import type { Metadata } from "next";
  */
 export const metadata: Metadata = {
   title: {
-    default:
-      "Multidisciplinary Designer · Pedro Fernandes (Drope) — Brazil & International",
+    default: "Drope Fernandes · Multidisciplinary designer",
     template: "%s · Drope Fernandes",
   },
   description:
-    "Pedro Fernandes (Drope) — Multidisciplinary Designer with 7 years of craft. Branding, UI/UX and front-end for brands in Brazil and abroad. From concept to launch.",
+    "Drope Fernandes, a multidisciplinary designer for 7 years. Branding, web design, UI/UX, art direction, motion and social media, from concept to launch.",
   // Canonical fica em cada página (ver app/layout.tsx).
   openGraph: {
     locale: "en_US",
-    title: "Multidisciplinary Designer · Pedro Fernandes (Drope)",
+    title: "Drope Fernandes · Multidisciplinary designer",
     description:
-      "Branding, UI/UX and front-end for brands in Brazil and abroad. From concept to launch.",
+      "Branding, web design, UI/UX, art direction, motion and social media. From concept to launch, without getting lost on the way.",
   },
 };
 

@@ -21,9 +21,8 @@ import { cn } from "@/lib/utils";
 type Servico = { id: string; price: number };
 const SERVICOS: Servico[] = [
   { id: "branding", price: 2500 },
-  { id: "ui",       price: 2900 },
   { id: "web",      price: 2400 },
-  { id: "dev",      price: 2500 },
+  { id: "ui",       price: 2900 },
   { id: "motion",   price: 1700 },
   { id: "social",   price: 1300 },
 ];
@@ -78,9 +77,8 @@ const COPY: Record<Locale, {
     ],
     servicos: {
       branding: { label: "Identidade visual", desc: "Logo, paleta, tipografia e manual." },
-      ui:       { label: "UI/UX design", desc: "Wireframes, protótipo e telas finais." },
-      web:      { label: "Web design", desc: "Landing page ou site institucional." },
-      dev:      { label: "Front-end", desc: "Desenvolvimento em Next.js e Tailwind." },
+      ui:       { label: "UI/UX design", desc: "App, painel ou produto: fluxos, protótipo e telas finais." },
+      web:      { label: "Web design", desc: "Landing page ou site institucional, já desenvolvido." },
       motion:   { label: "Motion design", desc: "Animação de logo e microinterações." },
       social:   { label: "Social media", desc: "Kit de templates e um mês de posts." },
     },
@@ -136,9 +134,8 @@ const COPY: Record<Locale, {
     ],
     servicos: {
       branding: { label: "Visual identity", desc: "Logo, palette, typography and guidelines." },
-      ui:       { label: "UI/UX design", desc: "Wireframes, prototype and final screens." },
-      web:      { label: "Web design", desc: "Landing page or company website." },
-      dev:      { label: "Front-end", desc: "Built in Next.js and Tailwind." },
+      ui:       { label: "UI/UX design", desc: "App, dashboard or product: flows, prototype and final screens." },
+      web:      { label: "Web design", desc: "Landing page or company website, fully built." },
       motion:   { label: "Motion design", desc: "Logo animation and microinteractions." },
       social:   { label: "Social media", desc: "Template kit and one month of posts." },
     },

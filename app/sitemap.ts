@@ -39,7 +39,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...bilingual("/sobre",       { changeFrequency: "monthly", priority: 0.9 },  lastModified),
     ...bilingual("/projetos",    { changeFrequency: "monthly", priority: 0.95 }, lastModified),
     ...bilingual("/metodo",      { changeFrequency: "monthly", priority: 0.9 },  lastModified),
-    ...bilingual("/proposta",    { changeFrequency: "monthly", priority: 0.8 },  lastModified),
     ...bilingual("/orcamento",   { changeFrequency: "monthly", priority: 0.8 },  lastModified),
     ...bilingual("/agendar",     { changeFrequency: "yearly",  priority: 0.7 },  lastModified),
     ...bilingual("/blog",        { changeFrequency: "weekly",  priority: 0.6 },  lastModified),

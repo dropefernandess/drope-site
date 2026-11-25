@@ -1,7 +1,7 @@
 /**
  * "Agora" — o que o Pedro está ouvindo, lendo e aprendendo (Home, Quem sou,
  * referência Broadcast) e o que faz fora do Figma (Sobre, Créditos).
- * A hora local de Senador Firmino é calculada no navegador.
+ * A hora (horário de Brasília) é calculada no navegador.
  */
 export const AGORA = {
   ouvindo: { pt: "Bajo de la Piel · Milo J", en: "Bajo de la Piel · Milo J" },

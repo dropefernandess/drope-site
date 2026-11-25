@@ -21,6 +21,9 @@ const nextConfig: NextConfig = {
     return [
       { source: "/calculadora", destination: "/orcamento", permanent: true },
       { source: "/en/calculadora", destination: "/en/orcamento", permanent: true },
+      // A /proposta antiga (preços antigos) saiu; o Briefing do rodapé leva ao Método.
+      { source: "/proposta", destination: "/metodo", permanent: true },
+      { source: "/en/proposta", destination: "/en/metodo", permanent: true },
     ];
   },
 };

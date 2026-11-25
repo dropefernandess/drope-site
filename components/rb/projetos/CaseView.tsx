@@ -246,7 +246,10 @@ export function CaseView({ projeto }: { projeto: Projeto }) {
             {rb.citacao && (
               <Reveal as="figure" className="mt-3 rounded-2xl bg-ink-900 p-5 text-ink-50 lg:mt-5 lg:p-8">
                 <blockquote className="t-lead">“{rb.citacao.quote}”</blockquote>
-                <figcaption className="t-label mt-4 text-ink-200">{rb.citacao.author}</figcaption>
+                <figcaption className="t-label mt-4 flex items-center gap-3 text-ink-200">
+                  {rb.citacao.photo && <Image src={rb.citacao.photo} alt="" width={40} height={40} quality={90} className="size-10 shrink-0 rounded-full object-cover" />}
+                  {rb.citacao.author}
+                </figcaption>
               </Reveal>
             )}
           </div>

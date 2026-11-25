@@ -21,7 +21,7 @@ const COPY = {
     title: "Antes de ir, veja estes links",
     nav: "Navegar", tools: "Ferramentas", contact: "Contato",
     navLinks: [["/projetos", "Trabalhos"], ["/sobre", "Sobre"], ["/metodo", "Método"], ["/blog", "Blog"]],
-    toolLinks: [["/orcamento", "Orçamento"], ["/proposta", "Briefing"], ["/glossario", "Glossário"]],
+    toolLinks: [["/orcamento", "Orçamento"], ["/metodo#sua-parte", "Briefing"], ["/glossario", "Glossário"]],
     work: "Vamos trabalhar juntos?",
     workLinks: [["/agendar", "Agendar uma conversa"], ["/orcamento", "Fazer meu orçamento"], ["/metodo", "Ver o processo"]],
     bye: "Até já!", follow: "Me segue",
@@ -31,7 +31,7 @@ const COPY = {
     title: "Before you go, check these links",
     nav: "Explore", tools: "Tools", contact: "Contact",
     navLinks: [["/projetos", "Work"], ["/sobre", "About"], ["/metodo", "Method"], ["/blog", "Blog"]],
-    toolLinks: [["/orcamento", "Quote"], ["/proposta", "Briefing"], ["/glossario", "Glossary"]],
+    toolLinks: [["/orcamento", "Quote"], ["/metodo#sua-parte", "Briefing"], ["/glossario", "Glossary"]],
     work: "Shall we work together?",
     workLinks: [["/agendar", "Book a call"], ["/orcamento", "Get a quote"], ["/metodo", "See the process"]],
     bye: "See you!", follow: "Follow me",
@@ -83,7 +83,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-ink-900 text-ink-50">
       <Image src="/rb/footer-texture.jpg" alt="" fill sizes="100vw" className="object-cover" />
       {/* Dither vermelho em movimento lento sobre a textura (pedido do Pedro, 25/11) */}
-      <DitherField className="mix-blend-screen opacity-60" />
+      <DitherField pixel={3} className="mix-blend-screen opacity-60" />
       <div className="relative mx-auto max-w-[1248px] px-6 pb-12 pt-16 lg:px-6 lg:pb-[72px] lg:pt-[120px]">
         <div className="grid gap-3 lg:grid-cols-[1fr_380px] lg:gap-5">
           {/* Cartão de links */}

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Agendar } from "@/components/rb/agendar/Agendar";
+import { agendaConfigurada } from "@/lib/agenda/google";
 
 /**
  * /agendar — Contato e agendamento (rebrand 2026).
- * Cal.com inline (drope/30min), contato direto e o que acontece depois.
- * O embed e o conteúdo ficam em components/rb/agendar/Agendar.tsx.
+ * Agenda própria (Google Agenda) quando as credenciais existem; senão o
+ * Cal.com inline. Conteúdo em components/rb/agendar/Agendar.tsx.
  */
 export const metadata: Metadata = {
   title: "Contato e agendamento",
@@ -17,5 +18,5 @@ export const metadata: Metadata = {
 };
 
 export default function AgendarPage() {
-  return <Agendar />;
+  return <Agendar propria={agendaConfigurada()} />;
 }

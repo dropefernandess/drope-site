@@ -372,7 +372,7 @@ export function MetodoPage() {
         <div className="rb-container grid gap-10 py-16 lg:grid-cols-[500px_1fr] lg:gap-[60px] lg:py-40">
           <Reveal>
             <Label className={muted}>{c.needLabel}</Label>
-            <h2 id="sua-parte" className="t-h1 mt-3 text-fg-strong">{c.needTitle}</h2>
+            <h2 id="sua-parte" className="t-h1 mt-3 scroll-mt-32 text-fg-strong">{c.needTitle}</h2>
             <p className={cn("t-small mt-4 max-w-[440px] lg:mt-8", muted)}>{c.needDesc}</p>
           </Reveal>
           <RevealGroup as="ol" stagger={0.08} className="border-t border-ink-100 dark:border-ink-700">
