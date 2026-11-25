@@ -65,7 +65,7 @@ export const metadata: Metadata = {
       "Branding, web design, UI/UX, direção de arte, motion e social media. Do conceito ao ar, sem se perder no caminho.",
     images: [
       {
-        url: "/og.jpg",
+        url: "/og-2026.jpg",
         width: 1200,
         height: 630,
         alt: "Drope Fernandes · Designer multidisciplinar",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     title: "Drope Fernandes · Designer multidisciplinar",
     description:
       "Branding, web design, UI/UX, direção de arte, motion e social media. Do conceito ao ar.",
-    images: ["/og.jpg"],
+    images: ["/og-2026.jpg"],
     creator: "@dropefernandes",
   },
   // Next 15 App Router detecta automaticamente:
@@ -163,7 +163,7 @@ const structuredData = {
       "@type": "ProfessionalService",
       "@id": `${SITE_URL}/#studio`,
       name: "Drope Fernandes — Design Multidisciplinar",
-      image: `${SITE_URL}/og.jpg`,
+      image: `${SITE_URL}/og-2026.jpg`,
       url: SITE_URL,
       email: "contato@dropefernandes.com",
       telephone: "+55-32-99805-7750",
