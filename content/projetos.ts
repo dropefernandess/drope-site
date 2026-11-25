@@ -972,44 +972,6 @@ export const projetos: Projeto[] = [
   },
 
   // ====================================================================
-  // 13. GAMA BRASIL — site (placeholder, completar com infos reais)
-  // ====================================================================
-  {
-    slug: "gama-brasil",
-    title: "Gama Brasil",
-    description:
-      "Site institucional para empresa brasileira em transformação digital.",
-    categorias: ["web-design"],
-    image: "/projetos/bada-bing.png", // PLACEHOLDER — trocar quando subir
-    year: 2026,
-    case: {
-      subtitle:
-        "Empresa Gama ganha presença web alinhada ao posicionamento institucional renovado.",
-      meta: {
-        cliente: "Gama Brasil",
-        setor: "Corporativo",
-        role: "Web Design",
-        duracao: "Em produção",
-        entregaveis: ["Site institucional", "Landing pages"],
-      },
-      tags: ["Web Design", "Institucional"],
-      hero: {
-        src: "/projetos/bada-bing.png", // PLACEHOLDER
-        alt: "Gama Brasil — site institucional",
-      },
-      gallery: [],
-      sections: [
-        {
-          eyebrow: "EM PRODUÇÃO",
-          title: "Conteúdo do case sendo preparado.",
-          body: "Este case está em fase final de produção. Volte em breve pra ver o estudo completo: desafio, processo de design, decisões estratégicas e resultados mensuráveis do projeto.",
-        },
-      ],
-      next: "bada-bing", // volta pro primeiro
-    },
-  },
-
-  // ====================================================================
   // REBRAND 2026 — três projetos que só existiam no Figma/Instagram.
   // Texto a partir das legendas do Instagram (17-INSTAGRAM-PORTFOLIO.md).
   // Trechos entre colchetes esperam o Pedro.

@@ -13,8 +13,8 @@ import { LineReveal, Reveal, RevealGroup } from "@/components/rb/motion";
  * Pedro no Figma (página FOTOS), recortadas em public/rb/clientes.
  */
 export const QUOTES = [
-  { name: "Isabela Silveira", photo: "/rb/clientes/isabela-silveira.jpg", role: { pt: "Sócia e diretora · Aroeira Studio", en: "Partner and director · Aroeira Studio" },
-    q: { pt: "Drope entrega o que combinou, e ainda traz uma opinião sobre por que aquilo é o melhor caminho. Direção, não só execução.", en: "Drope delivers what was agreed, and brings an opinion on why that's the best path. Direction, not just execution." } },
+  { name: "Yuri Giovannetti", photo: "/rb/clientes/yuri-giovannetti.jpg", role: { pt: "CEO e estrategista", en: "CEO and strategist" },
+    q: { pt: "Acertou na mão demais. Ficou fino de verdade, e eu não imagino como poderia ficar melhor.", en: "Nailed it. It came out truly refined, and I can't imagine how it could be any better." } },
   { name: "Marcelo Lavinas", photo: "/rb/clientes/marcelo-lavinas.jpg", role: { pt: "Founder · MoneyFy", en: "Founder · MoneyFy" },
     q: { pt: "Pegou identidade, UI e ainda nos guiou na arquitetura do produto. Achei que ia precisar de três fornecedores, precisei de um.", en: "He handled identity, UI and even guided us through the product architecture. I thought I'd need three vendors, I needed one." } },
   { name: "Rafael Andrade", photo: "/rb/clientes/rafael-andrade.jpg", role: { pt: "CEO · Sirius Agência", en: "CEO · Sirius Agência" },

@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
       // A /proposta antiga (preços antigos) saiu; o Briefing do rodapé leva ao Método.
       { source: "/proposta", destination: "/metodo", permanent: true },
       { source: "/en/proposta", destination: "/en/metodo", permanent: true },
+      // Case Gama Brasil apagado (era rascunho com foto errada).
+      { source: "/projetos/gama-brasil", destination: "/projetos", permanent: true },
+      { source: "/en/projetos/gama-brasil", destination: "/en/projetos", permanent: true },
     ];
   },
 };
