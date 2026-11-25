@@ -59,6 +59,9 @@ export type ProjectCase = {
   stats?: { value: string; label: string }[];
   /** Galeria principal pós-hero — 3-6 imagens */
   gallery: { src: string; alt: string; aspect?: "video" | "square" | "portrait" | "wide" }[];
+
+  /** Mockups fotorrealistas do site em uso (seção "No ar"). w/h = tamanho do arquivo. */
+  mockups?: { src: string; alt: string; w: number; h: number }[];
   /** Corpo do case — várias seções alternando texto e imagens */
   sections: CaseSection[];
   /** Próximo projeto sugerido no final */
@@ -110,7 +113,7 @@ export const projetos: Projeto[] = [
         role: "Branding, Web design, Copy",
         duracao: "8 semanas",
         entregaveis: ["Brand system", "E-commerce", "Copy estratégica", "Direção de arte"],
-        link: "https://badabing.com",
+        link: "https://badabing.framer.website/",
       },
       tags: ["Branding", "Web Design", "UI/UX", "Copywriting"],
       hero: {
@@ -128,6 +131,14 @@ export const projetos: Projeto[] = [
         { src: "/projetos/bada-bing/03.png", alt: "Sistema de cores e tipografia", aspect: "wide" },
         { src: "/projetos/bada-bing/04.png", alt: "Home do e-commerce", aspect: "video" },
         { src: "/projetos/bada-bing/05.png", alt: "Página de produto", aspect: "video" },
+      ],
+      mockups: [
+        { src: "/projetos/bada-bing/mockups/capa-macbook-iphone.jpg", alt: "Site da Bada Bing no MacBook e no iPhone, sobre azulejos verdes", w: 2200, h: 1467 },
+        { src: "/projetos/bada-bing/mockups/iphone-mao-forno.jpg", alt: "Site no iPhone, diante do forno a lenha", w: 1467, h: 2200 },
+        { src: "/projetos/bada-bing/mockups/macbook-pizzaria.jpg", alt: "Site no MacBook, no balcão da pizzaria", w: 2200, h: 1467 },
+        { src: "/projetos/bada-bing/mockups/ipad-marina-vertical.jpg", alt: "Site no iPad, com a Dubai Marina ao fundo", w: 2200, h: 1467 },
+        { src: "/projetos/bada-bing/mockups/iphone-azulejos-pizza.jpg", alt: "Site no iPhone, ao lado de uma fatia de pizza romana", w: 2200, h: 2200 },
+        { src: "/projetos/bada-bing/mockups/ipad-marina-horizontal.jpg", alt: "Site no iPad, numa mesa diante da marina", w: 2200, h: 1467 },
       ],
       sections: [
         {
@@ -622,6 +633,13 @@ export const projetos: Projeto[] = [
         { src: "/projetos/moneyfy/06.jpg", alt: "Mockup interface mobile", aspect: "square" },
         { src: "/projetos/moneyfy/07.jpg", alt: "Identidade aplicada em campanha", aspect: "square" },
       ],
+      mockups: [
+        { src: "/projetos/moneyfy/mockups/capa-macbook-iphone.jpg", alt: "App da MoneyFy no MacBook e no iPhone", w: 2200, h: 1467 },
+        { src: "/projetos/moneyfy/mockups/iphone-mao-luz-azul.jpg", alt: "Site da MoneyFy no iPhone, na mão", w: 1467, h: 2200 },
+        { src: "/projetos/moneyfy/mockups/macbook-mesa-preta.jpg", alt: "Site da MoneyFy no MacBook, numa mesa preta", w: 2200, h: 1467 },
+        { src: "/projetos/moneyfy/mockups/iphone-beira-mesa.jpg", alt: "Tela de entrada do app no iPhone", w: 2200, h: 1467 },
+        { src: "/projetos/moneyfy/mockups/monitor-quarto-escuro.jpg", alt: "Site da MoneyFy no monitor, num quarto escuro", w: 2200, h: 1467 },
+      ],
       sections: [
         {
           eyebrow: "DESAFIO",
@@ -854,34 +872,123 @@ export const projetos: Projeto[] = [
     slug: "vitta-clube",
     title: "Vitta Clube",
     description:
-      "Site institucional para clube de benefícios em saúde e bem-estar.",
+      "Site do clube de benefícios regional e nacional em saúde, bem-estar, lazer e compras.",
     categorias: ["web-design"],
-    image: "/projetos/bada-bing.png", // PLACEHOLDER — trocar quando subir
+    image: "/rb/covers/vitta-clube.jpg",
     year: 2026,
     case: {
-      subtitle:
-        "Plataforma de benefícios em saúde ganha presença digital clara, focada em conversão e clareza de oferta.",
+      subtitle: "Site institucional da Vitta Clube, com os benefícios, os planos e a adesão no mesmo fluxo.",
       meta: {
         cliente: "Vitta Clube",
-        setor: "Saúde · Benefícios",
-        role: "Web Design",
-        duracao: "Em produção",
-        entregaveis: ["Site institucional", "Páginas de planos"],
+        setor: "Saúde e benefícios",
+        role: "Web design",
+        duracao: "",
+        entregaveis: ["Site institucional","Versões para computador, tablet e celular"],
+        link: "https://vittaclube.framer.website/",
       },
-      tags: ["Web Design", "Institucional"],
-      hero: {
-        src: "/projetos/bada-bing.png", // PLACEHOLDER
-        alt: "Vitta Clube — site institucional",
-      },
+      tags: ["Web Design"],
+      hero: { src: "/projetos/vitta-clube/mockups/macbook-cafe-da-manha.jpg", alt: "Site da Vitta Clube no MacBook, na mesa do café da manhã" },
       gallery: [],
+      mockups: [
+        { src: "/projetos/vitta-clube/mockups/capa-macbook-iphone.jpg", alt: "Site da Vitta Clube no MacBook e no iPhone", w: 2200, h: 1467 },
+        { src: "/projetos/vitta-clube/mockups/iphone-mao-sofa.jpg", alt: "Site da Vitta Clube no iPhone, no sofá", w: 1467, h: 2200 },
+        { src: "/projetos/vitta-clube/mockups/ipad-casal-vertical.jpg", alt: "Casal segurando o iPad com o site da Vitta Clube", w: 2200, h: 1467 },
+        { src: "/projetos/vitta-clube/mockups/iphone-mesa-itens.jpg", alt: "Site da Vitta Clube no iPhone, ao lado da carteira e das chaves", w: 2200, h: 2200 },
+      ],
       sections: [
         {
-          eyebrow: "EM PRODUÇÃO",
-          title: "Conteúdo do case sendo preparado.",
-          body: "Este case está em fase final de produção. Volte em breve pra ver o estudo completo: desafio, processo de design, decisões estratégicas e resultados mensuráveis do projeto.",
+          eyebrow: "PONTO DE PARTIDA",
+          title: "Muitas vantagens para explicar, e pouca paciência de quem chega.",
+          body: "A Vitta Clube reúne vantagens regionais e nacionais em saúde, bem-estar, lazer e compras: telemedicina 24 horas, rede de descontos, assistência pet, carteirinha digital e suporte humano. O site apresenta tudo isso em blocos curtos e leva direto à adesão, com o campo de e-mail já na primeira tela.",
         },
       ],
-      next: "gama-brasil",
+      rb: {
+        headline: "Um clube de benefícios explicado de forma simples, com a adesão logo na primeira tela.",
+        lead: "Site institucional da Vitta Clube, com os benefícios, os planos e a adesão no mesmo fluxo.",
+        wide: { src: "/projetos/vitta-clube/mockups/ipad-casal-horizontal.jpg", alt: "Casal vendo o site da Vitta Clube no iPad" },
+      },
+    },
+  },
+  {
+    slug: "estudio-cais",
+    title: "Estúdio Cais",
+    description:
+      "Site para estúdio de arquitetura brasileira e atemporal.",
+    categorias: ["web-design"],
+    image: "/rb/covers/estudio-cais.jpg",
+    year: 2026,
+    case: {
+      subtitle: "Site institucional do Estúdio Cais, com o manifesto, o portfólio e o pedido de orçamento sempre à mão.",
+      meta: {
+        cliente: "Estúdio Cais",
+        setor: "Arquitetura e interiores",
+        role: "Web design",
+        duracao: "",
+        entregaveis: ["Site institucional","Portfólio de projetos","Versões para computador, tablet e celular"],
+        link: "https://estudiocais.framer.website/",
+      },
+      tags: ["Web Design"],
+      hero: { src: "/projetos/estudio-cais/mockups/macbook-estudio.jpg", alt: "Site do Estúdio Cais no MacBook, num estúdio de arquitetura" },
+      gallery: [],
+      mockups: [
+        { src: "/projetos/estudio-cais/mockups/capa-macbook-iphone.jpg", alt: "Site do Estúdio Cais no MacBook e no iPhone, sobre travertino", w: 2200, h: 1467 },
+        { src: "/projetos/estudio-cais/mockups/iphone-mao-sala.jpg", alt: "Site no iPhone, numa sala de estar", w: 1467, h: 2200 },
+        { src: "/projetos/estudio-cais/mockups/ipad-mesa-projetos-vertical.jpg", alt: "Site no iPad, sobre a mesa de projetos", w: 2200, h: 1467 },
+        { src: "/projetos/estudio-cais/mockups/ipad-mesa-materiais.jpg", alt: "Site no iPad, ao lado de plantas e amostras de material", w: 2200, h: 1467 },
+      ],
+      sections: [
+        {
+          eyebrow: "PONTO DE PARTIDA",
+          title: "Arquitetura que recebe, que dura e que pertence.",
+          body: "O Estúdio Cais faz arquitetura brasileira e atemporal. O site traduz essa visão com tipografia serifada, muito espaço em branco e fotos dos ambientes em destaque. Logo depois da abertura vem o manifesto, A gente não projeta paredes, projetamos a vida que acontece entre elas, e em seguida os projetos em destaque, com o pedido de orçamento sempre à mão.",
+        },
+      ],
+      rb: {
+        headline: "Um site com o mesmo respiro dos espaços que o estúdio projeta.",
+        lead: "Site institucional do Estúdio Cais, com o manifesto, o portfólio e o pedido de orçamento sempre à mão.",
+        wide: { src: "/projetos/estudio-cais/mockups/monitor-escritorio.jpg", alt: "Site do Estúdio Cais no monitor, num escritório de arquitetura" },
+      },
+    },
+  },
+  {
+    slug: "peu-zr",
+    title: "Peu.zr",
+    description:
+      "Portfólio para fotógrafo e filmmaker de moda e gastronomia em Dubai.",
+    categorias: ["web-design"],
+    image: "/rb/covers/peu-zr.jpg",
+    year: 2026,
+    case: {
+      subtitle: "Site portfólio do Peu.zr, fotógrafo e filmmaker de moda e gastronomia em Dubai.",
+      meta: {
+        cliente: "Peu.zr",
+        setor: "Fotografia e audiovisual",
+        role: "Web design",
+        duracao: "",
+        entregaveis: ["Site portfólio","Versões para computador, tablet e celular"],
+        link: "https://peuzr.com/",
+      },
+      tags: ["Web Design"],
+      hero: { src: "/projetos/peu-zr/mockups/macbook-concreto-camera.jpg", alt: "Site do Peu.zr no MacBook, ao lado de uma câmera de cinema" },
+      gallery: [],
+      mockups: [
+        { src: "/projetos/peu-zr/mockups/capa-macbook-iphone.jpg", alt: "Site do Peu.zr no MacBook e no iPhone, sobre metal perfurado", w: 2200, h: 1467 },
+        { src: "/projetos/peu-zr/mockups/iphone-mao-escuro.jpg", alt: "Site do Peu.zr no iPhone, na mão", w: 1467, h: 2200 },
+        { src: "/projetos/peu-zr/mockups/ipad-filme-vertical.jpg", alt: "Site do Peu.zr no iPad, com filmes e folha de contato", w: 2200, h: 1467 },
+        { src: "/projetos/peu-zr/mockups/ipad-couro-filme.jpg", alt: "Site do Peu.zr no iPad, sobre couro, com filmes 35 mm", w: 2200, h: 1467 },
+      ],
+      sections: [
+        {
+          eyebrow: "PONTO DE PARTIDA",
+          title: "O trabalho de um fotógrafo precisa abrir a página, não um texto.",
+          body: "Peu.zr fotografa e filma moda e gastronomia em Dubai. O site abre com o retrato dele em preto e branco e os trabalhos flutuando ao redor, separados por moda, esporte e comida. O manifesto, Every frame has a reason, conduz para o portfólio, num visual escuro que deixa as imagens em primeiro plano.",
+        },
+      ],
+      rb: {
+        headline: "Um portfólio escuro e editorial, em que cada imagem tem motivo para estar ali.",
+        lead: "Site portfólio do Peu.zr, fotógrafo e filmmaker de moda e gastronomia em Dubai.",
+        wide: { src: "/projetos/peu-zr/mockups/monitor-ilha-edicao.jpg", alt: "Site do Peu.zr no monitor, numa ilha de edição" },
+      },
     },
   },
 

@@ -54,6 +54,12 @@ export const RB_PROJECTS: RBProject[] = [
     desc: { pt: "Marca pessoal de psicóloga que acolhe sem cair nos clichês da área.", en: "A psychologist's personal brand that welcomes without the field's clichés." } },
   { slug: "vizir", name: "Vizir Contabilidade", year: "2025", cats: ["web", "social"], cover: "/rb/covers/vizir.jpg",
     desc: { pt: "Contabilidade tradicional com presença digital moderna e sóbria.", en: "A traditional accounting firm with a modern, sober digital presence." } },
+  { slug: "estudio-cais", name: "Estúdio Cais", year: "2026", cats: ["web"], cover: "/rb/covers/estudio-cais.jpg",
+    desc: { pt: "Site para estúdio de arquitetura brasileira e atemporal.", en: "Website for a timeless Brazilian architecture studio." } },
+  { slug: "vitta-clube", name: "Vitta Clube", year: "2026", cats: ["web"], cover: "/rb/covers/vitta-clube.jpg",
+    desc: { pt: "Site para clube de benefícios em saúde, bem-estar, lazer e compras.", en: "Website for a health, wellness and lifestyle benefits club." } },
+  { slug: "peu-zr", name: "Peu.zr", year: "2026", cats: ["web"], cover: "/rb/covers/peu-zr.jpg",
+    desc: { pt: "Portfólio para fotógrafo e filmmaker de moda e gastronomia em Dubai.", en: "Portfolio for a fashion and food photographer and filmmaker in Dubai." } },
 ];
 
 export function rbProject(slug: string) {

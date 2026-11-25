@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LocalLink as Link } from "@/components/i18n/LocalLink";
-import { Icon, ICONS, Label } from "@/components/rb/ui";
+import { BrandButton, Icon, ICONS, Label } from "@/components/rb/ui";
 import { FinalCTA } from "@/components/rb/FinalCTA";
 import { ImageReveal, LineReveal, Reveal, RevealGroup } from "@/components/rb/motion";
 import { nextRbProject, rbProject, SERVICES } from "@/content/rb/projects";
@@ -15,12 +15,14 @@ import { cn } from "@/lib/utils";
  * Francielle Lima). Modelo para todos os cases: cabeçalho com imagem grande,
  * introdução com ficha e resumo de 1 minuto, números, seções, aplicações em
  * mosaico (legenda embaixo, nunca sobre a foto), resultado e próximo case.
+ * Cases de site ganham a seção "No ar": mockups fotorrealistas do site em uso
+ * (25/11/2026), a primeira grande e as outras em mosaico no formato de cada foto.
  * A prosa dos cases fica em PT nas duas línguas (decisão antiga do site).
  */
 
 const UI = {
-  pt: { hint: "Role para ler o case", crumb: "Trabalhos", cliente: "Cliente", papel: "Papel", escopo: "Escopo", duracao: "Duração", ano: "Ano", resumo: "Resumo · 1 min de leitura", continua: "A história completa continua abaixo", problema: "Problema", papelR: "Papel", solucao: "Solução", resultado: "Resultado", aplic: "Aplicações", aplicT: "A marca no mundo.", mudou: "O que mudou", proximo: "Próximo case", decisao: "A decisão" },
-  en: { hint: "Scroll to read the case", crumb: "Work", cliente: "Client", papel: "Role", escopo: "Scope", duracao: "Duration", ano: "Year", resumo: "Summary · 1 min read", continua: "The full story continues below", problema: "Problem", papelR: "Role", solucao: "Solution", resultado: "Result", aplic: "Applications", aplicT: "The brand out in the world.", mudou: "What changed", proximo: "Next case", decisao: "The decision" },
+  pt: { hint: "Role para ler o case", crumb: "Trabalhos", cliente: "Cliente", papel: "Papel", escopo: "Escopo", duracao: "Duração", ano: "Ano", resumo: "Resumo · 1 min de leitura", continua: "A história completa continua abaixo", problema: "Problema", papelR: "Papel", solucao: "Solução", resultado: "Resultado", aplic: "Aplicações", aplicT: "A marca no mundo.", mudou: "O que mudou", proximo: "Próximo case", decisao: "A decisão", noAr: "No ar", noArT: "O site em uso, do notebook ao celular.", visitar: "Visitar o site" },
+  en: { hint: "Scroll to read the case", crumb: "Work", cliente: "Client", papel: "Role", escopo: "Scope", duracao: "Duration", ano: "Year", resumo: "Summary · 1 min read", continua: "The full story continues below", problema: "Problem", papelR: "Role", solucao: "Solution", resultado: "Result", aplic: "Applications", aplicT: "The brand out in the world.", mudou: "What changed", proximo: "Next case", decisao: "The decision", noAr: "Live", noArT: "The site in use, from laptop to phone.", visitar: "Visit the site" },
 };
 
 const EYEBROW: Record<string, { pt: string; en: string }> = {
@@ -90,7 +92,7 @@ export function CaseView({ projeto }: { projeto: Projeto }) {
               [t.escopo, c.meta.entregaveis.join(", ")],
               [t.duracao, c.meta.duracao],
               [t.ano, String(projeto.year ?? card?.year ?? "")],
-            ].map(([k, v]) => (
+            ].filter(([, v]) => v.trim() !== "").map(([k, v]) => (
               <Reveal key={k} y={16}>
                 <dt className="t-label text-ink-400">{k}</dt>
                 <dd className="t-small mt-1.5 text-fg-strong lg:mt-2">{clean(v)}</dd>
@@ -204,6 +206,35 @@ export function CaseView({ projeto }: { projeto: Projeto }) {
           </section>
         );
       })}
+
+      {/* No ar: mockups do site em uso */}
+      {c.mockups && c.mockups.length > 0 && (
+        <section className="bg-bg pt-20 lg:pt-40">
+          <div className="rb-container">
+            <Reveal className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:px-20">
+              <div>
+                <Label>{t.noAr}</Label>
+                <h2 className="t-h2 mt-3 max-w-[860px] text-fg-strong lg:mt-4">{t.noArT}</h2>
+              </div>
+              {c.meta.link && <BrandButton href={c.meta.link} external variant="contorno" className="w-full shrink-0 sm:w-auto">{t.visitar}</BrandButton>}
+            </Reveal>
+            <ImageReveal radius={12} fill={false} className="mt-10 overflow-hidden rounded-xl lg:mt-14 lg:rounded-2xl">
+              <Image quality={90} src={c.mockups[0].src} alt={c.mockups[0].alt} width={c.mockups[0].w} height={c.mockups[0].h} sizes="(min-width: 1440px) 1280px, 100vw" className="h-auto w-full bg-ink-100" />
+            </ImageReveal>
+            {c.mockups.length > 1 && (
+              <div className="mt-6 columns-1 gap-6 sm:columns-2 lg:mt-8 lg:gap-8">
+                {c.mockups.slice(1).map((m) => (
+                  <div key={m.src} className="mb-6 break-inside-avoid lg:mb-8">
+                    <ImageReveal radius={12} fill={false} className="overflow-hidden rounded-xl lg:rounded-2xl">
+                      <Image quality={90} src={m.src} alt={m.alt} width={m.w} height={m.h} sizes="(min-width: 1440px) 630px, (min-width: 640px) 50vw, 100vw" className="h-auto w-full bg-ink-100" />
+                    </ImageReveal>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Aplicações: mosaico com legenda embaixo */}
       {c.gallery.length > 0 && (
