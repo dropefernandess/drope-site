@@ -13,13 +13,7 @@ export const metadata: Metadata = {
   },
   description:
     "Pedro Fernandes (Drope) — Multidisciplinary Designer with 7 years of craft. Branding, UI/UX and front-end for brands in Brazil and abroad. From concept to launch.",
-  alternates: {
-    canonical: "/en",
-    languages: {
-      "pt-BR": "/",
-      en: "/en",
-    },
-  },
+  // Canonical fica em cada página (ver app/layout.tsx).
   openGraph: {
     locale: "en_US",
     title: "Multidisciplinary Designer · Pedro Fernandes (Drope)",

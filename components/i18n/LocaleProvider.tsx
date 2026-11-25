@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useMemo } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import {
   DEFAULT_LOCALE,
@@ -62,6 +62,11 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   );
 
   const lhref = useCallback((path: string) => localizeHref(path, locale), [locale]);
+
+  // O <html lang> vem fixo do layout raiz; nas rotas /en ele precisa virar "en" (leitores de tela).
+  useEffect(() => {
+    document.documentElement.lang = locale === "en" ? "en" : "pt-BR";
+  }, [locale]);
 
   const value = useMemo(
     () => ({ locale, t, lhref }),

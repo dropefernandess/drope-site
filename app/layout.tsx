@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/sections/Footer";
-import { ScrollProgressBar } from "@/components/ui/Effects";
+import { Inter, Instrument_Serif } from "next/font/google";
+import { Nav } from "@/components/rb/Nav";
+import { Footer } from "@/components/rb/Footer";
 import { SplashScreen } from "@/components/ui/SplashScreen";
-import { DesignRulers } from "@/components/canvas/DesignRulers";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import { SiteChrome } from "@/components/SiteChrome";
 import "./globals.css";
@@ -17,6 +15,15 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+// Rebrand 2026: Instrument Serif itálica nos destaques ("conceito ao ar.", "alinhar?")
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -46,13 +53,8 @@ export const metadata: Metadata = {
   authors: [{ name: "Pedro Fernandes", url: "https://dropefernandes.com" }],
   creator: "Pedro Fernandes (Drope)",
   publisher: "Drope Fernandes",
-  alternates: {
-    canonical: "/",
-    languages: {
-      "pt-BR": "/",
-      en: "/en",
-    },
-  },
+  // Canonical fica em cada página (antes estava aqui e todas as páginas
+  // sem metadata própria herdavam canonical "/", apontando para a Home).
   openGraph: {
     type: "website",
     locale: "pt_BR",
@@ -210,7 +212,7 @@ const structuredData = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={inter.variable} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${inter.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
@@ -224,11 +226,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SiteChrome>
             {/* Splash de boas-vindas (1.4s + fade) — só no primeiro acesso da sessão */}
             <SplashScreen />
-            <ScrollProgressBar />
-            <DesignRulers />
             <Nav />
           </SiteChrome>
-          <main>{children}</main>
+          <main id="conteudo">{children}</main>
           <SiteChrome>
             <Footer />
           </SiteChrome>

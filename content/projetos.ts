@@ -63,6 +63,19 @@ export type ProjectCase = {
   sections: CaseSection[];
   /** Próximo projeto sugerido no final */
   next?: string;          // slug
+  /** Rebrand 2026: blocos extras da página de projeto (modelo Francielle Lima). Tudo opcional. */
+  rb?: {
+    headline?: string;
+    lead?: string;
+    resumo?: { problema: string; papel: string; solucao: string; resultado: string };
+    tabela?: { esquerda: string; direita: string; linhas: [string, string][] };
+    decisao?: { title: string; points: { title: string; body: string }[] };
+    aplicacoes?: { title: string; body: string };
+    wide?: { src: string; alt: string };
+    pair?: { src: string; alt: string }[];
+    resultados?: { label: string; title: string; body: string }[];
+    citacao?: { quote: string; author: string };
+  };
 };
 
 export type Projeto = {
@@ -420,58 +433,87 @@ export const projetos: Projeto[] = [
     image: "/projetos/go-trace.jpg",
     year: 2025,
     case: {
-      subtitle: "Plataforma de rastreamento ganha redesign completo de dashboard e fluxo de onboarding pra lojistas.",
+      subtitle: "Plataforma de rastreamento ganha redesign do dashboard e do fluxo de entrada, com marca, design system e site no mesmo projeto.",
       meta: {
         cliente: "GO Trace",
-        setor: "SaaS · Logística",
-        role: "UI/UX Design, Web design",
+        setor: "SaaS de rastreamento para e-commerce",
+        role: "Designer responsável pelo projeto inteiro",
         duracao: "10 semanas",
-        entregaveis: ["Design system", "Dashboard redesign", "Onboarding flow", "Site institucional"],
+        entregaveis: ["Marca", "design system", "dashboard", "onboarding", "site"],
       },
-      tags: ["UI/UX Design", "Web Design"],
+      tags: ["Branding", "Web design"],
       hero: {
-        src: "/projetos/go-trace.jpg",
-        alt: "GO Trace — dashboard em mockup escuro",
+        src: "/projetos/go-trace/06.jpg",
+        alt: "Painel da GO Trace numa estação de metrô",
       },
       stats: [
-        { value: "−42%", label: "Tempo médio de onboarding por lojista" },
-        { value: "8.4/10", label: "NPS pós-redesign (era 6.2, ~90 dias)" },
-        { value: "2.4K", label: "Lojistas ativos na plataforma" },
+        { value: "−42%", label: "tempo para configurar a primeira loja" },
+        { value: "8,4", label: "NPS depois do redesign (era 6,2)" },
+        { value: "2,4 mil", label: "lojistas ativos na plataforma" },
       ],
       gallery: [
-        { src: "/projetos/go-trace/01.jpg", alt: "Dashboard principal", aspect: "video" },
-        { src: "/projetos/go-trace/02.jpg", alt: "Tela de detalhe de pedido", aspect: "square" },
-        { src: "/projetos/go-trace/03.jpg", alt: "Mobile responsivo", aspect: "square" },
-        { src: "/projetos/go-trace/04.jpg", alt: "Site institucional", aspect: "video" },
-        { src: "/projetos/go-trace/05.jpg", alt: "Design system tokens", aspect: "square" },
-        { src: "/projetos/go-trace/06.jpg", alt: "Componentes de UI", aspect: "square" },
-        { src: "/projetos/go-trace/07.jpg", alt: "Fluxo de onboarding", aspect: "square" },
-        { src: "/projetos/go-trace/08.jpg", alt: "Filtros e estados vazios", aspect: "square" },
-        { src: "/projetos/go-trace/09.jpg", alt: "Landing page completa", aspect: "video" },
+        { src: "/projetos/go-trace/03.jpg", alt: "Mídia exterior" },
+        { src: "/projetos/go-trace/12.jpg", alt: "Chaveiros" },
+        { src: "/projetos/go-trace/11.jpg", alt: "Camiseta da equipe" },
+        { src: "/projetos/go-trace/13.jpg", alt: "App" },
+        { src: "/projetos/go-trace/04.jpg", alt: "Crachás" },
+        { src: "/projetos/go-trace/05.jpg", alt: "Cartão de visita" },
+        { src: "/projetos/go-trace/07.jpg", alt: "Telão em evento" },
+        { src: "/projetos/go-trace/08.jpg", alt: "Site no tablet" },
+        { src: "/projetos/go-trace/02.jpg", alt: "Widget no celular" },
       ],
       sections: [
         {
           eyebrow: "DESAFIO",
-          title: "Reduzir o atrito do onboarding sem perder funcionalidade técnica.",
-          body: "A GO Trace tinha um produto poderoso e uma curva de aprendizado ruim. Lojistas levavam em média 12 minutos pra configurar a primeira loja, e uma parcela considerável abandonava antes de terminar o onboarding — ou seja, o produto perdia gente justo no momento em que precisava provar valor.\n\nO desafio tinha um agravante: simplificar pra novato sem irritar o usuário técnico que já dominava o fluxo antigo e produzia em cima dele. Redesign que melhora pra um e piora pro outro não é redesign, é troca de problema.",
+          title: "Poderoso para quem já sabia usar. Difícil para quem estava chegando.",
+          body: "A GO Trace tinha um produto forte e uma curva de aprendizado ruim. Configurar a primeira loja levava em média 12 minutos, e uma parte dos lojistas desistia no meio, justo quando o produto precisava provar valor.\n\nHavia um agravante: simplificar para quem chega sem atrapalhar quem já dominava o fluxo antigo. Melhorar para um e piorar para o outro seria só trocar de problema.",
         },
         {
           eyebrow: "PROCESSO",
-          title: "Mapeamento, prototipação e testes com lojistas reais.",
-          body: "Mapeei o fluxo antigo inteiro e listei os pontos de fricção — foram 23. Em vez de atacar todos, prioriei os 7 que apareciam com mais frequência nos abandonos. Prototipei três fluxos alternativos no Figma e testei com 12 lojistas reais, misturando novatos e veteranos pra não otimizar só pra um lado.\n\nA decisão mais importante foi tornar avançado o que era obrigatório: configurações técnicas que travavam o novato viraram opcionais, recolhidas atrás de um \"avançado\" que o veterano encontra na hora. O fluxo essencial caiu pela metade no número de passos. O design system foi reconstruído com tokens reutilizáveis, o que reduz o custo de manutenção e mantém consistência entre dashboard, mobile e site.",
-          image: {
-            src: "/projetos/go-trace/06.jpg",
-            alt: "Fluxo de onboarding refeito",
-            aspect: "wide",
-          },
-        },
-        {
-          eyebrow: "RESULTADO",
-          title: "Onboarding ~42% mais rápido, NPS de 6.2 pra 8.4.",
-          body: "O tempo médio de configuração inicial caiu de 12 pra 7 minutos — cerca de 42% mais rápido. O NPS subiu de 6.2 pra 8.4 nos primeiros ~90 dias (amostra ainda crescendo, então tende a se estabilizar com mais volume), e o churn de novos lojistas caiu por volta de 27% no mesmo período.\n\nOs números vieram com uma mudança qualitativa: o time de suporte relatou queda nas dúvidas repetidas sobre o setup inicial, o que liberou atendimento pra problemas mais complexos. O site institucional foi refeito junto, alinhando a promessa externa ao que o produto entrega de fato.",
+          title: "23 pontos de atrito, 7 prioridades, 12 lojistas reais.",
+          body: "Mapeei o fluxo antigo inteiro e listei 23 pontos de atrito. Em vez de atacar todos, priorizei os 7 que mais apareciam nos abandonos.\n\nPrototipei três fluxos alternativos e testei com 12 lojistas reais, misturando novatos e veteranos para não otimizar só para um lado.",
         },
       ],
       next: "financas-ja",
+      rb: {
+        headline: "Simples para quem chega, completo para quem já domina.",
+        lead: "Redesign do dashboard e do fluxo de entrada de uma plataforma de rastreamento, com marca, design system e site no mesmo projeto.",
+        resumo: {
+          problema: "Configurar a primeira loja levava em média 12 minutos, e muitos lojistas desistiam antes de terminar.",
+          papel: "Cuidei do projeto inteiro: marca, design system, redesign do dashboard, fluxo de entrada e site.",
+          solucao: "Mapeei 23 pontos de atrito, ataquei os 7 que mais causavam abandono e testei três fluxos com 12 lojistas reais.",
+          resultado: "Onboarding cerca de 42% mais rápido e NPS de 6,2 para 8,4 nos primeiros 90 dias.",
+        },
+        tabela: {
+          esquerda: "O que já funcionava",
+          direita: "O que travava",
+          linhas: [
+            ["Produto completo e poderoso", "12 minutos até a primeira loja"],
+            ["Usuário técnico produzindo bem", "Configurações técnicas obrigatórias logo no início"],
+            ["Fluxo antigo dominado por quem já usava", "Abandono antes de ver valor"],
+          ],
+        },
+        decisao: {
+          title: "O que era obrigatório virou avançado.",
+          points: [
+            { title: "Menos passos", body: "O fluxo essencial caiu pela metade em número de passos." },
+            { title: "Avançado, não obrigatório", body: "As configurações técnicas saíram do caminho do novato e ficaram a um clique de quem já domina." },
+            { title: "Um sistema só", body: "Tokens reutilizáveis mantêm dashboard, celular e site coerentes e barateiam a manutenção." },
+          ],
+        },
+        aplicacoes: { title: "Do crachá à tela do celular.", body: "A marca nova chegou junto com o produto: mídia exterior, materiais da equipe, site e app falando a mesma língua." },
+        wide: { src: "/projetos/go-trace/10.jpg", alt: "Dashboard da GO Trace no notebook" },
+        pair: [
+          { src: "/projetos/go-trace/01.jpg", alt: "Dashboard no monitor" },
+          { src: "/projetos/go-trace/09.jpg", alt: "App no celular" },
+        ],
+        resultados: [
+          { label: "Velocidade", title: "Primeira loja em 7 minutos", body: "O tempo médio de configuração caiu de 12 para 7 minutos, cerca de 42% mais rápido." },
+          { label: "Satisfação", title: "NPS de 6,2 para 8,4", body: "Nos primeiros 90 dias. A amostra ainda está crescendo, então o número tende a se estabilizar." },
+          { label: "Retenção", title: "Cerca de 27% menos churn", body: "Entre os lojistas novos, no mesmo período. O suporte também passou a receber menos dúvidas repetidas sobre o primeiro acesso." },
+        ],
+        citacao: { quote: "[Frase do cliente da GO Trace sobre o projeto]", author: "[Nome · cargo na GO Trace]" },
+      },
     },
   },
 
@@ -878,6 +920,123 @@ export const projetos: Projeto[] = [
         },
       ],
       next: "bada-bing", // volta pro primeiro
+    },
+  },
+
+  // ====================================================================
+  // REBRAND 2026 — três projetos que só existiam no Figma/Instagram.
+  // Texto a partir das legendas do Instagram (17-INSTAGRAM-PORTFOLIO.md).
+  // Trechos entre colchetes esperam o Pedro.
+  // ====================================================================
+  {
+    slug: "aroeira",
+    title: "Aroeira",
+    description: "Identidade visual e embalagem para o Aroeira Studio.",
+    categorias: ["branding", "graphic-design"],
+    image: "/rb/covers/aroeira.jpg",
+    year: 2026,
+    case: {
+      subtitle: "Uma marca feita do próprio material: kraft, tecido, carimbo e linha.",
+      meta: {
+        cliente: "Aroeira Studio",
+        setor: "Produtos feitos à mão",
+        role: "Branding, Embalagem",
+        duracao: "[a confirmar]",
+        entregaveis: ["Identidade visual", "Tags e etiquetas", "Sacola e caixa de envio", "Papelaria"],
+      },
+      tags: ["Branding", "Embalagem"],
+      hero: { src: "/rb/covers/aroeira.jpg", alt: "Caixa de envio da Aroeira sobre papel de seda com a marca" },
+      gallery: [
+        { src: "/projetos/aroeira/01.jpg", alt: "Tag pendurada com a marca" },
+        { src: "/projetos/aroeira/04.jpg", alt: "Papelaria e peça editorial" },
+        { src: "/projetos/aroeira/06.jpg", alt: "Sacola de tecido na janela" },
+        { src: "/projetos/aroeira/02.jpg", alt: "Etiqueta bordada" },
+        { src: "/projetos/aroeira/07.jpg", alt: "Sacola entre folhagens" },
+        { src: "/projetos/aroeira/08.jpg", alt: "Cartão sobre papel kraft" },
+        { src: "/projetos/aroeira/03.jpg", alt: "Fita com a marca" },
+        { src: "/projetos/aroeira/09.jpg", alt: "Cartão de agradecimento" },
+        { src: "/projetos/aroeira/12.jpg", alt: "Sacola kraft com a marca" },
+      ],
+      sections: [
+        { eyebrow: "PONTO DE PARTIDA", title: "Uma marca com a textura do produto.", body: "A Aroeira trabalha com o feito à mão, e a marca precisava ter a mesma textura do que ela entrega. “Escolher o feito à mão é desacelerar o mundo um pouquinho.”" },
+        { eyebrow: "PROCESSO", title: "A identidade nasceu do material.", body: "Papel kraft, tecido, carimbo e linha viraram o vocabulário da marca. Cada ponto de contato usa o que o próprio ateliê usa no dia a dia." },
+        { eyebrow: "APLICAÇÃO", title: "Tag, etiqueta, sacola e caixa contam a mesma história.", body: "Da etiqueta costurada à caixa de envio, o sistema se repete sem cansar: a mesma assinatura, aplicada em materiais diferentes." },
+      ],
+      next: "use-duali",
+    },
+  },
+  {
+    slug: "espaco-equilibrio",
+    title: "Espaço Equilíbrio",
+    description: "Identidade visual e sinalização para um espaço de fisioterapia e psicologia.",
+    categorias: ["branding"],
+    image: "/rb/covers/espaco-equilibrio.jpg",
+    year: 2026,
+    case: {
+      subtitle: "Fisioterapia e psicologia sob a mesma marca, da fachada ao celular.",
+      meta: {
+        cliente: "Espaço Equilíbrio",
+        setor: "Saúde · Fisioterapia e psicologia",
+        role: "Branding, Sinalização",
+        duracao: "[a confirmar]",
+        entregaveis: ["Identidade visual", "Sinalização", "Papelaria", "Site e redes"],
+      },
+      tags: ["Branding", "Sinalização"],
+      hero: { src: "/rb/covers/espaco-equilibrio.jpg", alt: "Painéis do Espaço Equilíbrio numa parede de aço" },
+      gallery: [
+        { src: "/projetos/espaco-equilibrio/01.jpg", alt: "Outdoor com a marca" },
+        { src: "/projetos/espaco-equilibrio/04.jpg", alt: "Papelaria sobre fundo vinho" },
+        { src: "/projetos/espaco-equilibrio/05.jpg", alt: "Placa de fachada" },
+        { src: "/projetos/espaco-equilibrio/06.jpg", alt: "Site aberto no notebook" },
+        { src: "/projetos/espaco-equilibrio/09.jpg", alt: "Quadros na sala de espera" },
+        { src: "/projetos/espaco-equilibrio/03.jpg", alt: "Painel em ponto de ônibus" },
+        { src: "/projetos/espaco-equilibrio/10.jpg", alt: "Pasta de atendimento" },
+        { src: "/projetos/espaco-equilibrio/02.jpg", alt: "Placa na parede de tijolos" },
+        { src: "/projetos/espaco-equilibrio/12.jpg", alt: "Sinalização de sala" },
+      ],
+      sections: [
+        { eyebrow: "DESAFIO", title: "Duas áreas, uma marca só.", body: "O Espaço Equilíbrio reúne fisioterapia e psicologia. Três profissionais com uma base comum: atenção à pessoa, no cuidado físico e no emocional." },
+        { eyebrow: "PROCESSO", title: "A escuta veio antes de qualquer forma.", body: "O trabalho começou ouvindo as profissionais e quem é atendido por elas. Dessa escuta saiu a direção: uma marca que mostra a união dos cuidados, sem separar corpo e mente." },
+        { eyebrow: "APLICAÇÃO", title: "Da fachada ao celular.", body: "Sinalização, papelaria, painéis internos, site e redes seguem o mesmo sistema, com a calma que o espaço pede." },
+      ],
+      next: "aroeira",
+    },
+  },
+  {
+    slug: "marisco-filmes",
+    title: "Marisco Filmes",
+    description: "Identidade visual para uma produtora audiovisual da Bahia.",
+    categorias: ["branding", "graphic-design"],
+    image: "/rb/covers/marisco-filmes.jpg",
+    year: 2026,
+    case: {
+      subtitle: "Produtora audiovisual da Bahia com um sistema quente, direto e com sotaque.",
+      meta: {
+        cliente: "Marisco Filmes",
+        setor: "Audiovisual · Bahia",
+        role: "Branding, Direção de arte",
+        duracao: "[a confirmar]",
+        entregaveis: ["Identidade visual", "Papelaria", "Social media", "Peças de evento"],
+      },
+      tags: ["Branding", "Direção de arte"],
+      hero: { src: "/projetos/marisco-filmes/06.jpg", alt: "Painel de evento com “Histórias com sotaque.”" },
+      gallery: [
+        { src: "/projetos/marisco-filmes/02.jpg", alt: "Moletom “Nós somos Marisco”" },
+        { src: "/projetos/marisco-filmes/05.jpg", alt: "Cartões de visita" },
+        { src: "/projetos/marisco-filmes/03.jpg", alt: "Cartaz na parede" },
+        { src: "/projetos/marisco-filmes/07.jpg", alt: "Placa de fachada" },
+        { src: "/projetos/marisco-filmes/04.jpg", alt: "Crachá da equipe" },
+        { src: "/projetos/marisco-filmes/08.jpg", alt: "Site aberto no notebook" },
+        { src: "/projetos/marisco-filmes/09.jpg", alt: "Cartazes na rua" },
+        { src: "/projetos/marisco-filmes/10.jpg", alt: "Ecobag com a marca" },
+        { src: "/projetos/marisco-filmes/12.jpg", alt: "Adesivos no notebook" },
+      ],
+      sections: [
+        { eyebrow: "PONTO DE PARTIDA", title: "Histórias com sotaque.", body: "A Marisco Filmes é uma produtora audiovisual da Bahia, feita por Felipe e Isabela." },
+        { eyebrow: "PROCESSO", title: "Escuta primeiro, enquadra depois.", body: "A marca precisava ter o jeito do trabalho deles. O sistema saiu quente e direto, com o vermelho e o vinho segurando a identidade em qualquer formato." },
+        { eyebrow: "APLICAÇÃO", title: "Da claquete à camiseta.", body: "Crachás, cartões, painel de evento, site, cartazes, ecobag e moletom: a mesma voz em todos os pontos de contato." },
+      ],
+      next: "moneyfy",
     },
   },
 ];

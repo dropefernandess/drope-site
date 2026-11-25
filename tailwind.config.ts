@@ -58,6 +58,8 @@ const config: Config = {
       // ---- TYPOGRAPHY (Inter only, todos os pesos) ----
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        // Rebrand 2026: Instrument Serif itálica, só nos destaques (hero, CTA)
+        serif: ["var(--font-serif)", "Georgia", "serif"],
       },
 
       // ---- LAYOUT ----

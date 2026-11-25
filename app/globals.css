@@ -159,6 +159,91 @@
 }
 
 /* ============================================================
+   REBRAND 2026 — tipografia fluida (390px → 1440px), container,
+   botão da marca. Valores vêm do Figma (estilos Drope/* e
+   Drope/Celular/*). Escala: mínimo no celular, máximo no desktop.
+   ============================================================ */
+@layer components {
+  .t-display  { font-weight: 800; letter-spacing: -0.02em; line-height: 1;    font-size: clamp(56px, calc(45.26px + 6.857vw), 144px); }
+  .t-hero     { font-weight: 600; letter-spacing: -0.04em; line-height: 1.1;  font-size: clamp(40px, calc(22.17px + 4.571vw), 88px); }
+  .t-serif    { font-family: var(--font-serif), Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; line-height: 1; }
+  .t-hero-serif { font-size: clamp(44px, calc(24.69px + 4.952vw), 96px); }
+  .t-h1       { font-weight: 600; letter-spacing: -0.03em; line-height: 1.1;  font-size: clamp(36px, calc(25.6px + 2.667vw), 64px); }
+  .t-h2       { font-weight: 600; letter-spacing: -0.03em; line-height: 1.08; font-size: clamp(28px, calc(20.57px + 1.905vw), 48px); }
+  .t-h3       { font-weight: 500; letter-spacing: -0.03em; line-height: 1.15; font-size: clamp(24px, calc(19.54px + 1.143vw), 36px); }
+  .t-lead     { font-weight: 500; letter-spacing: -0.03em; line-height: 1.3;  font-size: clamp(20px, calc(17.03px + 0.762vw), 28px); }
+  .t-body     { font-weight: 500; letter-spacing: -0.03em; line-height: 1.32; font-size: clamp(18px, calc(15.77px + 0.571vw), 24px); }
+  .t-small    { font-weight: 500; letter-spacing: -0.02em; line-height: 1.35; font-size: clamp(16px, calc(14.51px + 0.381vw), 20px); }
+  .t-label    { font-weight: 600; letter-spacing: 0.03em;  line-height: 1.3;  font-size: clamp(14px, calc(13.26px + 0.19vw), 16px); text-transform: uppercase; }
+
+  .rb-container {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(24px, calc(3.2px + 5.333vw), 80px);
+  }
+  .rb-section { padding-block: clamp(72px, calc(45.26px + 6.857vw), 144px); }
+
+  /* Grade de fundo do hero (camada opcional do Figma) */
+  .rb-grid-bg {
+    background-image:
+      linear-gradient(to right, rgb(16 16 16 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(16 16 16 / 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .dark .rb-grid-bg {
+    background-image:
+      linear-gradient(to right, rgb(242 242 235 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(242 242 235 / 0.05) 1px, transparent 1px);
+  }
+
+  /* ---- Botão da marca: corpo com canto cortado + bloco da seta ----
+     Geometria do ASSETS: corpo 68px de altura, chanfro de 22×19px no canto
+     inferior direito; bloco 61×56 a 6px da borda, chanfro 18.3×15.65. */
+  .rb-btn {
+    --btn-body: #101010; --btn-fill: transparent; --btn-text: #F2F2EB; --btn-block: #DE2828; --btn-arrow: #F2F2EB;
+    position: relative; isolation: isolate;
+    display: inline-flex; align-items: center; justify-content: space-between;
+    height: 68px; padding: 0 95px 0 20px;
+    color: var(--btn-text);
+    font-weight: 500; letter-spacing: -0.03em; line-height: 1;
+    font-size: clamp(20px, calc(18.51px + 0.381vw), 24px);
+    white-space: nowrap;
+    transition: transform 200ms cubic-bezier(.22,1,.36,1);
+  }
+  .rb-btn::before, .rb-btn::after { content: ""; position: absolute; z-index: -1; }
+  .rb-btn::before {
+    inset: 0; background: var(--btn-body);
+    clip-path: polygon(0 0, 100% 0, 100% 49px, calc(100% - 22px) 100%, 0 100%);
+  }
+  .rb-btn::after {
+    inset: 0; background: var(--btn-fill);
+    clip-path: polygon(1.5px 1.5px, calc(100% - 1.5px) 1.5px, calc(100% - 1.5px) 48.4px, calc(100% - 22.6px) calc(100% - 1.5px), 1.5px calc(100% - 1.5px));
+  }
+  .rb-btn__block {
+    position: absolute; right: 6px; top: 6px; width: 61px; height: 56px;
+    display: grid; place-items: center; background: var(--btn-block); color: var(--btn-arrow);
+    clip-path: polygon(0 0, 100% 0, 100% 40.35px, 42.7px 100%, 0 100%);
+  }
+  .rb-btn__block svg { transition: transform 240ms cubic-bezier(.22,1,.36,1); }
+  .rb-btn:hover .rb-btn__block svg { transform: translateX(4px); }
+  .rb-btn:active { transform: scale(0.98); }
+  .rb-btn--escuro   { --btn-body: #101010; --btn-fill: #101010; --btn-text: #F2F2EB; --btn-block: #DE2828; }
+  .rb-btn--contorno { --btn-body: #101010; --btn-fill: rgb(var(--bg)); --btn-text: #101010; --btn-block: #101010; }
+  .rb-btn--contorno-vermelho { --btn-body: #101010; --btn-fill: #DE2828; --btn-text: #101010; --btn-block: #101010; }
+  .rb-btn--principal { --btn-body: #DE2828; --btn-fill: #DE2828; --btn-text: #F2F2EB; --btn-block: #73160E; }
+  .dark .rb-btn--contorno { --btn-body: #F2F2EB; --btn-text: #F2F2EB; --btn-block: #F2F2EB; --btn-arrow: #101010; }
+  .rb-btn--full { width: 100%; }
+}
+
+@keyframes rb-trail {
+  0%   { opacity: 0; transform: scale(0.85) rotate(-2deg); }
+  20%  { opacity: 1; transform: scale(1) rotate(0deg); }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(0.95) translateY(12px); }
+}
+
+/* ============================================================
    ANIMATIONS — sweep, marquee, blur reveal
    ============================================================ */
 @keyframes marquee {
@@ -298,6 +383,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
   /* loops infinitos a 0.01ms viram busy-repaint — desliga de vez */
   .ds-art, .ds-art * { animation: none !important; }
